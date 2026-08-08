@@ -7,7 +7,7 @@
 |---|---|
 | **Nombre** | GoVisor |
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
-| **Estado** | v0.1 — MVP funcional, capa de datos pendiente de poblar |
+| **Estado** | v0.2 — visor estratégico, gabinete verificado en fuente oficial |
 | **Repositorio** | https://github.com/oprbguitar/08082026ksfu |
 | **Inicio** | 8 de agosto de 2026 |
 | **Última actualización de este documento** | 8 de agosto de 2026 |
@@ -82,6 +82,9 @@ local, pero las noticias y YouTube vienen de terceros: se tratan como no confiab
 | Persistencia | `localStorage` (solo la API key de YouTube) | La clave nunca sale del navegador del usuario. |
 | Datos externos | YouTube Data API v3; RSS de Google Noticias vía lector JSON público | Titulares y video sin backend propio. |
 | Accesibilidad | `prefers-reduced-motion`, `aria-label`, foco visible, contraste AA | Portal público: debe ser usable por todos. |
+| Animación | `IntersectionObserver` (entradas al hacer scroll), `@keyframes` CSS con retardo escalonado, contador `requestAnimationFrame` con *easeOutCubic* | Movimiento sin librerías (ahorra ~30 KB de AOS/GSAP). |
+| Interacción | `<details>`/`<summary>` nativos para los acordeones | Plegado accesible con teclado y sin JavaScript. |
+| Rendimiento | Carga diferida de noticias (solo al abrir el acordeón), `backdrop-filter` en cabecera | Menos peticiones en el arranque; la página abre de inmediato. |
 | Extras | Hoja de impresión, favicon SVG embebido, `theme-color` | Detalles de producto terminado. |
 | Versionado | Git + GitHub | — |
 
@@ -104,20 +107,24 @@ documentación, entregadas y funcionales.
 | Integración de noticias y YouTube API | 5 |
 | Accesibilidad, seguridad de render y pruebas | 4 |
 | Documentación y puesta en repositorio | 3 |
-| **Total** | **34 h** |
+| Verificación documental en fuentes oficiales | 5 |
+| Rediseño compacto y sistema de animaciones | 7 |
+| Corrección de defectos y publicación | 2 |
+| **Total** | **48 h** |
 
 ### 5.2 Valuación por estándar de mercado
 
 | Estándar | Tarifa/hora | Valuación |
 |---|---:|---:|
-| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$850 – $1.530** |
-| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$2.040 – $3.230** |
-| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$3.740 – $5.440** |
-| Precio por producto (fixed-bid, entregable cerrado) | — | **$2.500 – $4.000** |
+| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$1.200 – $2.160** |
+| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$2.880 – $4.560** |
+| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$5.280 – $7.680** |
+| Precio por producto (fixed-bid, entregable cerrado) | — | **$3.800 – $5.500** |
 
-**Valuación de referencia recomendada: $3.200 USD.** Es el punto medio del rango
-fixed-bid internacional y refleja que se entrega un producto funcional, accesible,
-documentado y sin deuda técnica de dependencias.
+**Valuación de referencia recomendada: $4.500 USD.** Punto medio del rango
+fixed-bid internacional. Refleja un producto funcional, accesible, documentado,
+sin deuda técnica de dependencias y —lo que más pesa— **con sus datos
+contrastados contra fuente primaria**, no copiados de segunda mano.
 
 **Nota sobre el valor real:** el activo más valioso de un portal de fiscalización
 no es el código, es **la curaduría verificada de los datos**. El trabajo recurrente
@@ -168,3 +175,21 @@ valor más grande disponible, y su costo de infraestructura sigue siendo cero.
 |---|---|---|---|---:|---:|
 | 1 | 2026-08-08 | Portal visor del gobierno: contador presidencial, gabinete con resoluciones, normas al costado, viajes, noticias, YouTube API key, responsive naranja/blanco | `index.html`, `styles.css`, `data.js`, `app.js`, `README.md` | 31 | $2.900 |
 | 2 | 2026-08-08 | Versionado en GitHub + documento de proyecto con valuación como práctica permanente | Repositorio Git inicializado y publicado; `PROYECTO.md` | 3 | $3.200 |
+| 3 | 2026-08-08 | Validar los datos en fuentes oficiales; rediseño compacto tipo visor estratégico con animaciones; publicación en GitHub Pages | Verificación en El Peruano de la presidencia y las 19 R.S.; rediseño completo de las 3 capas; acordeones; animaciones; 3 defectos corregidos | 14 | **$4.500** |
+
+### Detalle de la petición 3
+
+**Verificación documental (5 h).** Se contrastaron con fuente primaria: la
+juramentación del 28/07/2026, la Resolución 1625-2026-JNE de proclamación, y las
+19 Resoluciones Supremas 223 a 241-2026-PCM. Se detectaron y corrigieron dos
+discrepancias entre las notas de prensa y el texto de las resoluciones
+(«Kosme» y «Gonzales»).
+
+**Rediseño (7 h).** Densidad: las fichas de ministro pasaron de tarjetas de tres
+bloques a filas de una línea. Las secciones secundarias se plegaron en
+acordeones. La página quedó **~40 % más corta** con la misma información.
+
+**Corrección de defectos (2 h).** Tres fallos detectados en verificación:
+contador y barra dependían de `requestAnimationFrame` (se quedaban en cero si la
+pestaña no componía), y dos frases con concordancia gramatical rota cuando un
+conteo era cero.

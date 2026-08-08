@@ -4,199 +4,152 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#E8590C">
-<meta name="description" content="GoVisor — visor ciudadano en tiempo real del gobierno peruano: gabinete, normas, viajes oficiales y noticias, con enlace a la fuente.">
-<title>GoVisor · Visor del gobierno del Peru</title>
+<meta name="description" content="GoVisor — visor estratégico del gobierno peruano: mandato, gabinete, normas y fuentes oficiales de un vistazo.">
+<title>GoVisor · Visor estratégico del gobierno del Perú</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8590C'/><text x='16' y='23' font-size='19' font-family='Georgia,serif' font-weight='bold' fill='white' text-anchor='middle'>G</text></svg>">
 </head>
 <body>
 
-<!-- ══════════ BARRA SUPERIOR: fecha y hora de Lima en vivo ══════════ -->
-<div class="reloj-bar">
-  <div class="wrap reloj-inner">
-    <span class="reloj-lugar"><span class="punto-vivo" aria-hidden="true"></span> Lima, Peru</span>
-    <span class="reloj-fecha" id="relojFecha">—</span>
-    <span class="reloj-hora" id="relojHora" aria-live="off">--:--:--</span>
+<!-- ══════════ BARRA SUPERIOR ══════════ -->
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span class="tb-lugar"><i class="dot"></i> Lima</span>
+    <span class="tb-fecha" id="tbFecha">—</span>
+    <span class="tb-hora" id="tbHora">--:--:--</span>
+    <span class="tb-dia">Día <b id="tbDia">—</b> de gobierno</span>
   </div>
 </div>
 
 <!-- ══════════ CABECERA ══════════ -->
-<header class="cabecera">
-  <div class="wrap cabecera-inner">
-    <a class="marca" href="#">
-      <span class="marca-logo" aria-hidden="true">G</span>
-      <span class="marca-txt">
-        <strong id="marcaTitulo">GoVisor</strong>
-        <small id="marcaSub">Visor ciudadano del gobierno</small>
-      </span>
+<header class="head">
+  <div class="wrap head-in">
+    <a class="marca" href="#top">
+      <span class="marca-logo">G</span>
+      <span class="marca-txt"><b id="marcaTitulo">GoVisor</b><small id="marcaSub"></small></span>
     </a>
-    <nav class="nav" aria-label="Secciones">
+    <nav class="nav">
       <a href="#gabinete">Gabinete</a>
       <a href="#normas">Normas</a>
-      <a href="#viajes">Viajes</a>
-      <a href="#noticias">Noticias</a>
-      <a href="#video">Video</a>
-      <a href="#fuentes">Fuentes</a>
+      <a href="#seguir">Seguimiento</a>
     </nav>
   </div>
 </header>
 
-<!-- Aviso de estado de verificacion (se oculta solo si meta.aviso == "") -->
 <div class="aviso" id="avisoBar" hidden>
-  <div class="wrap"><strong>Aviso ·</strong> <span id="avisoTxt"></span></div>
+  <div class="wrap"><b>Aviso ·</b> <span id="avisoTxt"></span></div>
 </div>
 
-<main class="wrap">
+<main class="wrap" id="top">
 
-  <!-- ══════════ MANDATO: contador de dias ══════════ -->
-  <section class="mandato" aria-labelledby="h-mandato">
-    <div class="mandato-perfil">
-      <div class="retrato" id="retrato" aria-hidden="true">KF</div>
-      <div>
-        <p class="etiqueta" id="cargoTxt">Presidenta de la Republica</p>
-        <h1 id="h-mandato" class="nombre-presidencia">—</h1>
-        <p class="periodo" id="periodoTxt"></p>
-        <div class="norma-chip" id="normaPresidencia"></div>
-      </div>
-    </div>
-
-    <div class="mandato-contador">
-      <p class="contador-rotulo">Tiempo en el cargo</p>
-      <p class="contador-cifra"><span id="diasMandato">—</span><span class="contador-unidad" id="diasUnidad">dias</span></p>
-      <p class="contador-detalle" id="detalleMandato"></p>
-      <div class="barra-periodo" title="Avance del periodo constitucional">
-        <div class="barra-fill" id="barraPeriodo"></div>
-      </div>
-      <p class="contador-pie" id="piePeriodo"></p>
-    </div>
-  </section>
-
-  <!-- ══════════ RESUMEN EN PALABRAS (estadistica con letras) ══════════ -->
-  <section class="resumen" aria-labelledby="h-resumen">
-    <h2 id="h-resumen" class="titulo-seccion">
-      El gobierno, en pocas palabras
-      <span class="sub-seccion">Lectura de lo registrado en el visor, sin cifras sueltas</span>
-    </h2>
-    <div class="resumen-grid" id="resumenGrid"></div>
-  </section>
-
-  <!-- ══════════ COLUMNAS: gabinete (izq) + normas (der) ══════════ -->
-  <div class="columnas">
-
-    <!-- ───── Columna izquierda ───── -->
-    <div class="col-izq">
-      <section id="gabinete" aria-labelledby="h-gab">
-        <h2 id="h-gab" class="titulo-seccion">
-          Consejo de Ministros
-          <span class="sub-seccion" id="subGabinete"></span>
-        </h2>
-
-        <div class="filtros" role="group" aria-label="Filtrar gabinete">
-          <button class="chip activo" data-fgab="todos">Todos</button>
-          <button class="chip" data-fgab="activo">En funciones</button>
-          <button class="chip" data-fgab="cesado">Cesados</button>
-          <button class="chip" data-fgab="pendiente">Sin datos</button>
+  <!-- ══════════ PANEL DE MANDO ══════════ -->
+  <section class="mando anim">
+    <div class="ficha">
+      <div class="ficha-top">
+        <div class="retrato" id="retrato"></div>
+        <div class="ficha-id">
+          <p class="rotulo" id="cargoTxt">—</p>
+          <h1 id="nombrePres">—</h1>
+          <p class="sub" id="periodoTxt"></p>
         </div>
-
-        <div class="ministros-grid" id="ministrosGrid"></div>
-      </section>
-
-      <section id="viajes" aria-labelledby="h-viajes">
-        <h2 id="h-viajes" class="titulo-seccion">
-          Viajes oficiales al exterior
-          <span class="sub-seccion">Autorizados por norma expresa</span>
-        </h2>
-        <div id="viajesLista"></div>
-      </section>
+      </div>
+      <div class="chips" id="normaPres"></div>
+      <dl class="hitos" id="hitos"></dl>
     </div>
 
-    <!-- ───── Columna derecha: normas ───── -->
-    <aside class="col-der" id="normas" aria-labelledby="h-normas">
-      <div class="panel-normas">
-        <h2 id="h-normas" class="titulo-seccion">
-          Normas del periodo
-          <span class="sub-seccion">Desde el inicio del mandato</span>
-        </h2>
+    <div class="contador">
+      <p class="rotulo">Tiempo en el cargo</p>
+      <p class="cifra"><span id="dias">0</span><i>días</i></p>
+      <p class="cifra-sub" id="diasTexto"></p>
+      <div class="barra"><span id="barraFill"></span></div>
+      <p class="barra-pie" id="barraPie"></p>
+    </div>
+  </section>
 
-        <div class="filtros" role="group" aria-label="Filtrar normas">
-          <button class="chip activo" data-fnorma="todos">Todas</button>
+  <!-- ══════════ LECTURA RÁPIDA (estadística con letras) ══════════ -->
+  <section class="lectura anim" id="lectura"></section>
+
+  <!-- ══════════ COLUMNAS ══════════ -->
+  <div class="cols">
+
+    <section class="col-a anim" id="gabinete">
+      <div class="titulo">
+        <h2>Consejo de Ministros</h2>
+        <span id="subGab"></span>
+      </div>
+      <div class="filtros">
+        <button class="chip on" data-fgab="todos">Todos</button>
+        <button class="chip" data-fgab="activo">En funciones</button>
+        <button class="chip" data-fgab="cesado">Cesados</button>
+        <button class="chip" data-fgab="pendiente">Sin datos</button>
+      </div>
+      <div class="tabla" id="tablaGab"></div>
+    </section>
+
+    <aside class="col-b anim" id="normas">
+      <div class="panel">
+        <div class="titulo">
+          <h2>Normas del periodo</h2>
+          <span>Desde el 28/07/2026</span>
+        </div>
+        <div class="filtros">
+          <button class="chip on" data-fnorma="todos">Todas</button>
           <button class="chip" data-fnorma="congreso">Congreso</button>
           <button class="chip" data-fnorma="ejecutivo">Ejecutivo</button>
           <button class="chip" data-fnorma="viaje">Viajes</button>
         </div>
-
-        <label class="buscador">
-          <span class="sr-only">Buscar norma</span>
-          <input type="search" id="buscarNorma" placeholder="Buscar por numero o sumilla...">
-        </label>
-
-        <div class="normas-lista" id="normasLista"></div>
+        <input type="search" id="buscar" class="buscar" placeholder="Buscar número o sumilla…">
+        <div class="normas" id="listaNormas"></div>
       </div>
     </aside>
   </div>
 
-  <!-- ══════════ NOTICIAS ══════════ -->
-  <section id="noticias" aria-labelledby="h-noticias">
-    <h2 id="h-noticias" class="titulo-seccion">
-      Portal de noticias
-      <span class="sub-seccion">Titulares publicos sobre el gobierno y el Estado peruano</span>
-    </h2>
-    <div class="filtros" id="filtrosNoticias" role="group" aria-label="Temas de noticias"></div>
-    <div class="noticias-grid" id="noticiasGrid">
-      <p class="vacio">Cargando titulares...</p>
-    </div>
-    <p class="nota-fuente">Los titulares provienen de agregadores publicos de noticias. GoVisor no edita ni respalda su contenido; siempre enlaza a la fuente original.</p>
-  </section>
+  <!-- ══════════ SEGUIMIENTO — todo plegado ══════════ -->
+  <section id="seguir" class="anim">
+    <div class="titulo"><h2>Seguimiento</h2><span>Despliega solo lo que necesites</span></div>
 
-  <!-- ══════════ YOUTUBE ══════════ -->
-  <section id="video" aria-labelledby="h-video">
-    <h2 id="h-video" class="titulo-seccion">
-      Video · YouTube
-      <span class="sub-seccion">Requiere tu propia API key de YouTube Data API v3</span>
-    </h2>
+    <details class="acor">
+      <summary><b>Viajes oficiales al exterior</b><span id="cntViajes"></span></summary>
+      <div class="acor-in" id="viajes"></div>
+    </details>
 
-    <div class="yt-panel">
-      <div class="yt-config">
-        <label for="ytKey">Tu API key</label>
-        <div class="yt-inputrow">
-          <input type="password" id="ytKey" placeholder="Pega aqui tu YouTube Data API key" autocomplete="off" spellcheck="false">
-          <button class="btn" id="ytGuardar">Guardar</button>
-          <button class="btn btn-lineal" id="ytBorrar">Borrar</button>
+    <details class="acor">
+      <summary><b>Noticias</b><span>Titulares públicos</span></summary>
+      <div class="acor-in">
+        <div class="filtros" id="fNoticias"></div>
+        <div class="grid-n" id="noticias"></div>
+      </div>
+    </details>
+
+    <details class="acor">
+      <summary><b>Video</b><span>Requiere tu API key de YouTube</span></summary>
+      <div class="acor-in">
+        <div class="ytbox">
+          <div class="yt-row">
+            <input type="password" id="ytKey" placeholder="Pega tu YouTube Data API key" autocomplete="off">
+            <button class="btn" id="ytGuardar">Guardar</button>
+            <button class="btn ghost" id="ytBorrar">Borrar</button>
+          </div>
+          <p class="fine">La clave se guarda <b>solo en este navegador</b> (localStorage). No se envía a ningún servidor de GoVisor ni se versiona en el repositorio.</p>
+          <p class="yt-estado" id="ytEstado"></p>
         </div>
-        <p class="yt-privacidad">
-          La clave se guarda <strong>solo en este navegador</strong> (localStorage). No se envia a GoVisor
-          ni a ningun servidor propio: el navegador consulta directamente a la API de YouTube.
-          Recomendacion: en Google Cloud, restringe la clave por referente HTTP y solo a la API de YouTube Data v3.
-        </p>
-        <p class="yt-estado" id="ytEstado"></p>
+        <div class="filtros" id="fYt"></div>
+        <div class="grid-n" id="ytGrid"></div>
       </div>
+    </details>
 
-      <div class="filtros" id="ytFiltros" role="group" aria-label="Consultas de video"></div>
-      <div class="yt-grid" id="ytGrid">
-        <p class="vacio">Ingresa tu API key para cargar videos.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════ FUENTES ══════════ -->
-  <section id="fuentes" aria-labelledby="h-fuentes">
-    <h2 id="h-fuentes" class="titulo-seccion">
-      Fuentes oficiales
-      <span class="sub-seccion">Donde verificar cada dato de este visor</span>
-    </h2>
-    <div class="fuentes-grid" id="fuentesGrid"></div>
+    <details class="acor">
+      <summary><b>Fuentes oficiales</b><span>Verifica cada dato</span></summary>
+      <div class="acor-in"><div class="grid-f" id="fuentes"></div></div>
+    </details>
   </section>
 
 </main>
 
 <footer class="pie">
   <div class="wrap">
-    <p><strong>GoVisor</strong> — visor ciudadano de seguimiento gubernamental.</p>
-    <p class="pie-legal">
-      Proyecto informativo y de fiscalizacion ciudadana. Los datos deben contrastarse siempre
-      con el Diario Oficial El Peruano y el Congreso de la Republica.
-      Ultima actualizacion de datos: <span id="pieActualizacion">—</span>.
-    </p>
+    <b>GoVisor</b> — visor ciudadano de seguimiento gubernamental.
+    <span class="fine">Proyecto informativo, sin afiliación al Estado peruano ni a organización política. Contrasta siempre con El Peruano y el Congreso. Datos al <span id="pieAct">—</span>.</span>
   </div>
 </footer>
 

@@ -2,165 +2,171 @@
    GoVisor — CAPA DE DATOS
    ----------------------------------------------------------------------------
    ESTE ES EL UNICO ARCHIVO QUE NECESITAS EDITAR.
-   Todo lo que aparece en el portal sale de aqui.
 
-   REGLA DE ORO: cada registro tiene un campo `verificado`.
-     verificado: true   -> lo comprobaste en El Peruano / Congreso / PCM
-     verificado: false  -> se muestra con el sello naranja "POR VERIFICAR"
+   Estado de verificacion (8 de agosto de 2026):
+   - Presidencia y los 19 ministros: CONTRASTADOS con El Peruano.
+     Los nombres se transcriben tal como figuran en la Resolucion Suprema,
+     que es la fuente primaria (no como aparecen en notas de prensa).
+   - Normas del periodo: en registro.
 
-   No inventes numeros de resolucion. Deja "" y el portal lo mostrara
-   como pendiente, que es informacion honesta y util.
+   REGLA DE ORO: `verificado: true` solo cuando lo comprobaste en la fuente.
+   No inventes numeros de resolucion; deja "" y el portal lo marca pendiente.
    ========================================================================== */
 
 const GOVISOR = {
 
-  /* --------------------------------------------------------------------
-     1. METADATOS DEL PORTAL
-     ------------------------------------------------------------------ */
+  /* 1. METADATOS ------------------------------------------------------- */
   meta: {
     titulo: "GoVisor",
-    subtitulo: "Visor ciudadano del gobierno · Republica del Peru",
+    subtitulo: "Visor estrategico del gobierno · Peru",
     ultimaActualizacion: "2026-08-08",
-    // Nota que aparece en el banner superior. Dejala en "" cuando ya
-    // hayas verificado todo el contenido de este archivo.
-    aviso: "Portal en configuracion. Los datos marcados POR VERIFICAR aun no han sido contrastados con fuentes oficiales."
+    aviso: ""   // vacio = sin banner de advertencia
   },
 
-  /* --------------------------------------------------------------------
-     2. PRESIDENCIA
+  /* 2. PRESIDENCIA ------------------------------------------------------
+     Nota juridica: la Presidencia es cargo de eleccion popular, no se
+     "nombra" por Resolucion Suprema. El acto formal es la proclamacion
+     del JNE (Resolucion 1625-2026-JNE) y luego el juramento ante el
+     Congreso el 28 de julio de 2026.
      ------------------------------------------------------------------ */
   presidencia: {
     nombre: "Keiko Sofia Fujimori Higuchi",
     cargo: "Presidenta de la Republica del Peru",
-    // Formato estricto: "AAAA-MM-DD". El contador de dias parte de aqui.
-    // En el Peru el mandato presidencial se inicia el 28 de julio.
     fechaAsuncion: "2026-07-28",
     periodo: "2026 - 2031",
-    partido: "",
-    foto: "", // opcional: ruta o URL de imagen. Si esta vacia se usa un monograma.
-    verificado: false,
-    // Norma que formaliza el cargo (acta de juramentacion / resolucion).
+    partido: "Fuerza Popular",
+    foto: "",
+    verificado: true,
     norma: {
-      tipo: "",        // ej. "Resolucion Suprema"
-      numero: "",      // ej. "001-2026-PCM"
-      fecha: "",       // "AAAA-MM-DD"
-      enlace: "",      // URL directa a El Peruano
-      verificado: false
-    }
+      tipo: "Resolucion",
+      numero: "1625-2026-JNE",
+      fecha: "2026-07-05",
+      enlace: "https://elperuano.pe/noticia/299509-elecciones-2026-jne-oficializa-proclamacion-de-keiko-fujimori-como-presidenta-electa",
+      verificado: true
+    },
+    // Datos de contexto que se muestran en la ficha compacta.
+    hitos: [
+      { rotulo: "Votos validos",          valor: "9 223 396  ·  50,135 %" },
+      { rotulo: "Participacion",          valor: "19 683 383  ·  72,03 %" },
+      { rotulo: "Primer vicepresidente",  valor: "Luis Fernando Galarreta Velarde" },
+      { rotulo: "Segundo vicepresidente", valor: "Miguel Angel Torres Morales" }
+    ]
   },
 
-  /* --------------------------------------------------------------------
-     3. CONSEJO DE MINISTROS
-     ------------------------------------------------------------------
-     Las 19 carteras que componen el Consejo de Ministros del Peru ya
-     estan listadas (esto si es informacion estructural verificable).
-     Falta completar: ministro, norma de nombramiento y fecha.
-
-     estado: "activo" | "cesado"
-     Si un ministro cesa, pon estado:"cesado" y llena fechaCese: el
-     contador se congela y la tarjeta pasa a gris.
+  /* 3. CONSEJO DE MINISTROS --------------------------------------------
+     Gabinete Galarreta. Juramentacion: 28 de julio de 2026, Palacio de
+     Gobierno. Resoluciones Supremas correlativas 223 a 241-2026-PCM,
+     publicadas por El Peruano.
+     Enlace individual: busquedas.elperuano.pe/dispositivo/EX/2538529-N
+     donde N = (numero de R.S.) - 222.
      ------------------------------------------------------------------ */
   ministerios: [
-    { sigla:"PCM",      cartera:"Presidencia del Consejo de Ministros",  ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"RREE",     cartera:"Relaciones Exteriores",                 ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MEF",      cartera:"Economia y Finanzas",                   ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINDEF",   cartera:"Defensa",                               ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MININTER", cartera:"Interior",                              ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINJUSDH", cartera:"Justicia y Derechos Humanos",           ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINEDU",   cartera:"Educacion",                             ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINSA",    cartera:"Salud",                                 ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MIDAGRI",  cartera:"Desarrollo Agrario y Riego",            ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MTPE",     cartera:"Trabajo y Promocion del Empleo",        ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"PRODUCE",  cartera:"Produccion",                            ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINCETUR", cartera:"Comercio Exterior y Turismo",           ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINEM",    cartera:"Energia y Minas",                       ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MTC",      cartera:"Transportes y Comunicaciones",          ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MVCS",     cartera:"Vivienda, Construccion y Saneamiento",  ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MIMP",     cartera:"Mujer y Poblaciones Vulnerables",       ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINAM",    cartera:"Ambiente",                              ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MINCUL",   cartera:"Cultura",                               ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } },
-    { sigla:"MIDIS",    cartera:"Desarrollo e Inclusion Social",         ministro:"", estado:"activo", fechaNombramiento:"", fechaCese:"", verificado:false, norma:{ tipo:"", numero:"", fecha:"", enlace:"" } }
+    { sigla:"PCM", cartera:"Presidencia del Consejo de Ministros", ministro:"Luis Fernando Galarreta Velarde", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"223-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-1" } },
+
+    { sigla:"RREE", cartera:"Relaciones Exteriores", ministro:"Alfonso Carlos Espa y Garces-Alvear", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"224-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-2" } },
+
+    { sigla:"MINDEF", cartera:"Defensa", ministro:"Rafael Jorge Belaunde Llosa", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"225-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-3" } },
+
+    { sigla:"MEF", cartera:"Economia y Finanzas", ministro:"Elmer Rafael Cuba Bustinza", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"226-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-4" } },
+
+    { sigla:"MININTER", cartera:"Interior", ministro:"Cesar Augusto Astudillo Salcedo", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"227-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-5" } },
+
+    { sigla:"MINJUSDH", cartera:"Justicia y Derechos Humanos", ministro:"Ernesto Julio Alvarez Miranda", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"228-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-6" } },
+
+    { sigla:"MINEDU", cartera:"Educacion", ministro:"Jose Antonio Chang Escobedo", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"229-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-7" } },
+
+    { sigla:"MINSA", cartera:"Salud", ministro:"Luis Williams Dyer Fernandez", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"230-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-8" } },
+
+    { sigla:"MIDAGRI", cartera:"Desarrollo Agrario y Riego", ministro:"Marco Antonio Vinelli Ruiz", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"231-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-9" } },
+
+    // El texto de la R.S. consigna "Kosme" (con K); las notas de prensa
+    // publicaron "Cosme". Se transcribe la resolucion, fuente primaria.
+    { sigla:"MTPE", cartera:"Trabajo y Promocion del Empleo", ministro:"Juan Manuel Kosme Sheput Moore", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"232-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-10" } },
+
+    { sigla:"PRODUCE", cartera:"Produccion", ministro:"Juan Carlos Requejo Aleman", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"233-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-11" } },
+
+    { sigla:"MINCETUR", cartera:"Comercio Exterior y Turismo", ministro:"Rogers Martin Valencia Espinoza", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"234-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-12" } },
+
+    { sigla:"MINEM", cartera:"Energia y Minas", ministro:"Guillermo Shinno Huamani", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"235-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-13" } },
+
+    { sigla:"MTC", cartera:"Transportes y Comunicaciones", ministro:"Rafael Rey Rey", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"236-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-14" } },
+
+    // El Peruano consigna "Gonzales" (con s) en la relacion oficial.
+    { sigla:"MVCS", cartera:"Vivienda, Construccion y Saneamiento", ministro:"Mauricio Fernando Arnillas Gonzales", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"237-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-15" } },
+
+    { sigla:"MIMP", cartera:"Mujer y Poblaciones Vulnerables", ministro:"Maria Magdalena Seminario Maron", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"238-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-16" } },
+
+    { sigla:"MINAM", cartera:"Ambiente", ministro:"Vladimiro Huaroc Portocarrero", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"239-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-17" } },
+
+    { sigla:"MINCUL", cartera:"Cultura", ministro:"Alberto Ismael Beingolea Delgado", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"240-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-18" } },
+
+    { sigla:"MIDIS", cartera:"Desarrollo e Inclusion Social", ministro:"Maritza Ivonne Canales Martinez", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true,
+      norma:{ tipo:"Resolucion Suprema", numero:"241-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-19" } }
   ],
 
-  /* --------------------------------------------------------------------
-     4. NORMAS (columna derecha, la que se ve al costado)
-     ------------------------------------------------------------------
-     origen:  "congreso"  -> Leyes aprobadas por el Poder Legislativo
-              "ejecutivo" -> Decretos Supremos, Decretos Legislativos,
-                             Decretos de Urgencia (Presidencia / Consejo
-                             de Ministros)
-              "viaje"     -> Resoluciones Legislativas / Supremas que
-                             autorizan viajes al exterior
-
-     accion:  "promulgada" | "derogada" | "observada" | "modificada"
-
-     Ejemplo de un registro ya verificado (estructura de referencia):
-     {
-       tipo:"Ley", numero:"00000",
-       sumilla:"Sumilla breve de la norma",
-       fecha:"2026-08-05", origen:"congreso", accion:"promulgada",
-       enlace:"https://busquedas.elperuano.pe/...", verificado:true
-     }
+  /* 4. NORMAS DEL PERIODO -----------------------------------------------
+     origen: "congreso" | "ejecutivo" | "viaje"
+     accion: "promulgada" | "derogada" | "observada" | "modificada"
      ------------------------------------------------------------------ */
   normas: [
-    // Vacio a proposito. Agrega registros aqui conforme los verifiques.
+    { tipo:"Resolucion Suprema", numero:"242-2026-PCM",
+      sumilla:"Encarga el Despacho de Justicia y Derechos Humanos al ministro de Desarrollo Agrario y Riego durante la licencia del titular (28/07 al 05/08).",
+      fecha:"2026-07-28", origen:"ejecutivo", accion:"promulgada",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-20",
+      verificado:false }
   ],
 
-  /* --------------------------------------------------------------------
-     5. VIAJES OFICIALES
-     ------------------------------------------------------------------
-     quien: "Presidenta" o el nombre del ministro.
-     ------------------------------------------------------------------ */
+  /* 5. VIAJES OFICIALES -------------------------------------------------- */
   viajes: [
     // { quien:"Presidenta", destino:"", motivo:"", desde:"", hasta:"",
-    //   norma:{ tipo:"Resolucion Legislativa", numero:"", enlace:"" },
-    //   verificado:false }
+    //   norma:{ tipo:"Resolucion Legislativa", numero:"", enlace:"" }, verificado:false }
   ],
 
-  /* --------------------------------------------------------------------
-     6. FUENTES OFICIALES (bloque de verificacion)
-     ------------------------------------------------------------------ */
+  /* 6. FUENTES OFICIALES ------------------------------------------------- */
   fuentes: [
-    { nombre:"Diario Oficial El Peruano — Normas Legales",    url:"https://busquedas.elperuano.pe/", nota:"Buscador oficial de normas. Fuente primaria para resoluciones y leyes." },
-    { nombre:"Congreso de la Republica — Leyes aprobadas",    url:"https://www.congreso.gob.pe/leyes/", nota:"Listado oficial de leyes por periodo legislativo." },
-    { nombre:"Sistema Peruano de Informacion Juridica (SPIJ)", url:"https://spij.minjus.gob.pe/", nota:"Texto vigente y concordado de las normas." },
-    { nombre:"Presidencia del Consejo de Ministros",          url:"https://www.gob.pe/pcm", nota:"Composicion del gabinete y comunicados oficiales." },
-    { nombre:"Plataforma unica del Estado — gob.pe",          url:"https://www.gob.pe/", nota:"Directorio de ministerios y autoridades." },
-    { nombre:"Jurado Nacional de Elecciones",                 url:"https://www.jne.gob.pe/", nota:"Resultados electorales y credenciales." }
+    { nombre:"El Peruano — Normas Legales",         url:"https://busquedas.elperuano.pe/",    nota:"Fuente primaria de resoluciones y leyes." },
+    { nombre:"Congreso — Leyes aprobadas",          url:"https://www.congreso.gob.pe/leyes/", nota:"Listado oficial por periodo legislativo." },
+    { nombre:"SPIJ — Ministerio de Justicia",       url:"https://spij.minjus.gob.pe/",        nota:"Texto vigente y concordado de las normas." },
+    { nombre:"Presidencia del Consejo de Ministros", url:"https://www.gob.pe/pcm",            nota:"Gabinete y comunicados oficiales." },
+    { nombre:"Plataforma del Estado — gob.pe",      url:"https://www.gob.pe/",                nota:"Directorio de ministerios y autoridades." },
+    { nombre:"Jurado Nacional de Elecciones",       url:"https://portal.jne.gob.pe/",         nota:"Proclamacion y resultados electorales." }
   ],
 
-  /* --------------------------------------------------------------------
-     7. NOTICIAS — feeds RSS
-     ------------------------------------------------------------------
-     El portal es 100% estatico (no hay servidor), y los navegadores
-     bloquean la lectura directa de RSS por CORS. Por eso se usa un
-     lector publico intermediario, configurable aqui abajo.
-
-     Si prefieres no depender de terceros: pon proxy:"" y el portal
-     mostrara los feeds como enlaces directos para abrir en otra pestana.
-     ------------------------------------------------------------------ */
+  /* 7. NOTICIAS ---------------------------------------------------------- */
   noticias: {
     proxy: "https://api.rss2json.com/v1/api.json?rss_url=",
     feeds: [
-      { nombre:"Gobierno",             query:"Keiko Fujimori gobierno Peru" },
-      { nombre:"Consejo de Ministros", query:"Consejo de Ministros Peru gabinete" },
-      { nombre:"Congreso",             query:"Congreso de la Republica Peru ley" },
-      { nombre:"El Peruano",           query:"El Peruano normas legales decreto supremo" }
+      { nombre:"Gobierno",   query:"Keiko Fujimori gobierno Peru" },
+      { nombre:"Gabinete",   query:"Consejo de Ministros Peru Galarreta gabinete" },
+      { nombre:"Congreso",   query:"Congreso de la Republica Peru ley" },
+      { nombre:"El Peruano", query:"El Peruano normas legales decreto supremo" }
     ],
-    // Plantilla de Google Noticias en espanol / edicion Peru.
     plantilla: "https://news.google.com/rss/search?q={Q}&hl=es-419&gl=PE&ceid=PE:es-419"
   },
 
-  /* --------------------------------------------------------------------
-     8. YOUTUBE
-     ------------------------------------------------------------------
-     La API key NO se guarda aqui. Se ingresa desde el portal y queda
-     unicamente en el navegador (localStorage) de quien la escribe.
-     ------------------------------------------------------------------ */
+  /* 8. YOUTUBE ----------------------------------------------------------- */
   youtube: {
     consultas: [
       "Keiko Fujimori presidenta",
-      "Consejo de Ministros Peru",
+      "gabinete Galarreta Consejo de Ministros",
       "Congreso de la Republica Peru",
       "gobierno del Peru politica"
     ]

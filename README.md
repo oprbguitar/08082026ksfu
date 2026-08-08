@@ -9,18 +9,24 @@ viajes oficiales, y un panel de noticias y video.
 
 ---
 
-## ⚠️ Antes de usarlo: lee esto
+**En línea:** https://oprbguitar.github.io/08082026ksfu/
 
-Este repositorio contiene **el visor, no los datos**. La capa de datos
-(`data.js`) viene con:
+## Estado de verificación
 
-- ✅ **Las 19 carteras reales** del Consejo de Ministros del Perú (dato estructural).
-- ⬜ **Nombres, fechas y resoluciones vacíos**, marcados `POR VERIFICAR`.
+| Dato | Estado | Fuente |
+|---|---|---|
+| Juramentación presidencial (28/07/2026) | ✅ Verificado | Congreso de la República |
+| Proclamación — Resolución 1625-2026-JNE | ✅ Verificado | El Peruano / JNE |
+| Los 19 ministros y sus R.S. 223 a 241-2026-PCM | ✅ Verificado | El Peruano, dispositivo por dispositivo |
+| Leyes y decretos del periodo | ⬜ En registro | — |
 
-Los nombres, fechas de nombramiento y números de resolución **deben ser
-verificados por ti** en el Diario Oficial El Peruano y el Congreso de la República
-antes de publicarse. El portal está diseñado para mostrar vacíos honestos en lugar
-de datos sin respaldo.
+Los nombres se transcriben **tal como figuran en la Resolución Suprema**, que es
+la fuente primaria. Dos difieren de las notas de prensa: la R.S. 232-2026-PCM dice
+«Juan Manuel **Kosme** Sheput Moore» (no «Cosme»), y El Peruano consigna
+«Arnillas **Gonzales**» (no «González»).
+
+Todo registro no contrastado se muestra con el sello `POR VERIFICAR`. El portal
+prefiere un vacío honesto antes que un dato sin respaldo documental.
 
 ## Cómo ejecutarlo
 

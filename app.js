@@ -1,27 +1,25 @@
 /* ============================================================================
-   GoVisor — logica del visor
-   Lee la constante global GOVISOR (definida en data.js) y pinta el portal.
-   Sin frameworks ni dependencias externas.
+   GoVisor — lógica del visor estratégico
+   Lee la global GOVISOR (data.js) y pinta el portal. Sin dependencias.
    ========================================================================== */
 (function () {
   "use strict";
 
   const ZONA = "America/Lima";
   const CLAVE_YT = "govisor.youtube.key";
+  const TOTAL_PERIODO = 1826;              // 5 años ≈ 1826 días
   const $ = (id) => document.getElementById(id);
+  const menosMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ══════════════════════════════════════════════════════════════════════
-     UTILIDADES
-     ══════════════════════════════════════════════════════════════════ */
+  /* ══════════ UTILIDADES ══════════ */
 
-  /** Escapa texto antes de inyectarlo como HTML. */
   function esc(v) {
     return String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
     })[c]);
   }
 
-  /** Solo se aceptan URLs http/https; cualquier otra cosa se descarta. */
+  /** Solo http/https; cualquier otro esquema se descarta. */
   function urlSegura(u) {
     if (!u) return "";
     try {
@@ -30,7 +28,7 @@
     } catch { return ""; }
   }
 
-  /** "AAAA-MM-DD" -> Date en mediodia UTC (evita corrimientos por zona horaria). */
+  /** "AAAA-MM-DD" -> Date a mediodía UTC (evita corrimiento por zona). */
   function fecha(iso) {
     if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
     const [a, m, d] = iso.split("-").map(Number);
@@ -38,78 +36,74 @@
     return isNaN(f) ? null : f;
   }
 
-  /** Hoy en Lima, normalizado a mediodia UTC para restar dias sin error. */
   function hoyLima() {
-    const partes = new Intl.DateTimeFormat("en-CA", {
+    return fecha(new Intl.DateTimeFormat("en-CA", {
       timeZone: ZONA, year: "numeric", month: "2-digit", day: "2-digit"
-    }).format(new Date());
-    return fecha(partes);
+    }).format(new Date()));
   }
 
-  /** Dias transcurridos entre dos fechas. */
-  function diasEntre(desde, hasta) {
-    if (!desde || !hasta) return null;
-    return Math.floor((hasta - desde) / 86400000);
-  }
+  const diasEntre = (a, b) => (a && b) ? Math.floor((b - a) / 86400000) : null;
 
   function fechaLarga(iso) {
     const f = fecha(iso);
-    if (!f) return "";
-    return new Intl.DateTimeFormat("es-PE", {
+    return f ? new Intl.DateTimeFormat("es-PE", {
       day: "numeric", month: "long", year: "numeric", timeZone: "UTC"
-    }).format(f);
+    }).format(f) : "";
   }
 
-  /** Convierte un numero de dias a una frase legible en anios/meses/dias. */
-  function enPalabras(dias) {
-    if (dias == null) return "";
-    if (dias === 0) return "hoy mismo";
-    if (dias === 1) return "un dia";
-    const anios = Math.floor(dias / 365);
-    const resto = dias % 365;
-    const meses = Math.floor(resto / 30);
-    const d = resto % 30;
+  function fechaCorta(iso) {
+    const f = fecha(iso);
+    return f ? new Intl.DateTimeFormat("es-PE", {
+      day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC"
+    }).format(f) : "";
+  }
+
+  /** Días -> frase legible. */
+  function enPalabras(d) {
+    if (d == null) return "";
+    if (d === 0) return "hoy mismo";
+    if (d === 1) return "un día";
+    const a = Math.floor(d / 365), r = d % 365, m = Math.floor(r / 30), x = r % 30;
     const p = [];
-    if (anios) p.push(anios === 1 ? "1 anio" : anios + " anios");
-    if (meses) p.push(meses === 1 ? "1 mes" : meses + " meses");
-    if (d && !anios) p.push(d === 1 ? "1 dia" : d + " dias");
-    return p.join(", ") || dias + " dias";
+    if (a) p.push(a === 1 ? "1 año" : a + " años");
+    if (m) p.push(m === 1 ? "1 mes" : m + " meses");
+    if (x && !a) p.push(x === 1 ? "1 día" : x + " días");
+    return p.join(", ") || d + " días";
   }
 
-  /** Numero a palabra, para la seccion de "estadistica con letras". */
-  const PALABRAS = ["ninguna", "una", "dos", "tres", "cuatro", "cinco", "seis",
-    "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce",
-    "quince", "dieciseis", "diecisiete", "dieciocho", "diecinueve", "veinte"];
-  function palabra(n) {
-    return (n >= 0 && n < PALABRAS.length) ? PALABRAS[n] : String(n);
-  }
+  const PALABRAS = ["ninguna","una","dos","tres","cuatro","cinco","seis","siete",
+    "ocho","nueve","diez","once","doce","trece","catorce","quince","dieciséis",
+    "diecisiete","dieciocho","diecinueve","veinte"];
+  const palabra = (n) => (n >= 0 && n < PALABRAS.length) ? PALABRAS[n] : String(n);
 
-  function iniciales(nombre) {
-    const p = String(nombre || "").trim().split(/\s+/).filter(Boolean);
-    if (!p.length) return "??";
-    return ((p[0][0] || "") + (p[1] ? p[1][0] : "")).toUpperCase();
+  function iniciales(n) {
+    const p = String(n || "").trim().split(/\s+/).filter(Boolean);
+    return p.length ? ((p[0][0] || "") + (p[1] ? p[1][0] : "")).toUpperCase() : "··";
   }
 
   const sello = (ok) => ok
-    ? '<span class="badge badge-ok">Verificado</span>'
-    : '<span class="badge badge-pendiente">Por verificar</span>';
+    ? '<span class="b b-ok">Verificado</span>'
+    : '<span class="b b-pend">Por verificar</span>';
 
-  /** Chip de norma: enlace si hay URL, texto plano si solo hay numero. */
-  function chipNorma(n) {
-    if (!n || (!n.numero && !n.tipo)) {
-      return '<span class="norma-texto">Resolucion pendiente de registro</span>';
-    }
-    const txt = esc([n.tipo, n.numero].filter(Boolean).join(" N.o "));
-    const f = n.fecha ? " · " + esc(fechaLarga(n.fecha)) : "";
+  /** Chip de norma: enlace si hay URL, texto plano si solo hay número. */
+  function chipNorma(n, corto) {
+    if (!n || (!n.numero && !n.tipo)) return '<span class="rs-txt">Sin resolución</span>';
+    const txt = esc(corto ? (n.numero || n.tipo)
+                          : [n.tipo, n.numero].filter(Boolean).join(" N.º "));
     const url = urlSegura(n.enlace);
     return url
-      ? `<a class="norma-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${txt}${f} &#8599;</a>`
-      : `<span class="norma-texto">${txt}${f}</span>`;
+      ? `<a class="rs" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${txt} &#8599;</a>`
+      : `<span class="rs-txt">${txt}</span>`;
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     RELOJ DE LIMA — se actualiza cada segundo
-     ══════════════════════════════════════════════════════════════════ */
+  /** Marca los hijos para que entren escalonados. */
+  function escalonar(cont) {
+    if (menosMovimiento) return;
+    cont.classList.add("stagger");
+    [...cont.children].forEach((el, i) => el.style.setProperty("--i", i));
+  }
+
+  /* ══════════ RELOJ ══════════ */
   const fmtFecha = new Intl.DateTimeFormat("es-PE", {
     timeZone: ZONA, weekday: "long", day: "numeric", month: "long", year: "numeric"
   });
@@ -121,156 +115,143 @@
   function ticTac() {
     const ahora = new Date();
     const dia = fmtFecha.format(ahora);
-    if (dia !== ultimoDia) {           // solo repinta la fecha si cambio
+    if (dia !== ultimoDia) {          // el día cambió en Lima: repintar contadores
       ultimoDia = dia;
-      $("relojFecha").textContent = dia.charAt(0).toUpperCase() + dia.slice(1);
-      pintarMandato();                 // el contador de dias avanza a medianoche
+      $("tbFecha").textContent = dia.charAt(0).toUpperCase() + dia.slice(1);
+      pintarMandato();
       pintarGabinete();
-      pintarResumen();
+      pintarLectura();
     }
-    $("relojHora").textContent = fmtHora.format(ahora);
+    $("tbHora").textContent = fmtHora.format(ahora);
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     MANDATO PRESIDENCIAL
-     ══════════════════════════════════════════════════════════════════ */
+  /* ══════════ CONTADOR ANIMADO ══════════ */
+  function contarHasta(el, destino, ms) {
+    // El valor final se escribe SIEMPRE primero: si la pestaña está en
+    // segundo plano requestAnimationFrame no corre, y el contador debe
+    // mostrar el dato correcto aunque la animación nunca se ejecute.
+    el.textContent = Math.max(0, destino).toLocaleString("es-PE");
+    if (menosMovimiento || destino <= 0) return;
+
+    const t0 = performance.now();
+    requestAnimationFrame(function paso(t) {
+      const p = Math.min(1, (t - t0) / ms);
+      const eased = 1 - Math.pow(1 - p, 3);          // easeOutCubic
+      el.textContent = Math.round(destino * eased).toLocaleString("es-PE");
+      if (p < 1) requestAnimationFrame(paso);
+    });
+  }
+
+  /* ══════════ MANDATO ══════════ */
   function pintarMandato() {
     const p = GOVISOR.presidencia;
-    const inicio = fecha(p.fechaAsuncion);
-    const hoy = hoyLima();
-    const dias = diasEntre(inicio, hoy);
+    const dias = diasEntre(fecha(p.fechaAsuncion), hoyLima());
 
-    $("cargoTxt").textContent = p.cargo || "Presidencia de la Republica";
-    $("h-mandato").textContent = p.nombre || "Sin registrar";
-    $("periodoTxt").textContent = p.periodo
-      ? `Periodo constitucional ${p.periodo}` : "";
+    $("cargoTxt").textContent = p.cargo || "Presidencia de la República";
+    $("nombrePres").textContent = p.nombre || "Sin registrar";
+    $("periodoTxt").textContent = [
+      p.periodo ? "Periodo " + p.periodo : "",
+      p.partido || ""
+    ].filter(Boolean).join("  ·  ");
 
     const retrato = $("retrato");
     const foto = urlSegura(p.foto);
-    if (foto) {
-      retrato.style.backgroundImage = `url("${foto}")`;
-      retrato.textContent = "";
-    } else {
-      retrato.textContent = iniciales(p.nombre);
-    }
+    if (foto) { retrato.style.backgroundImage = `url("${foto}")`; retrato.textContent = ""; }
+    else { retrato.textContent = iniciales(p.nombre); }
 
-    $("normaPresidencia").innerHTML = chipNorma(p.norma) + sello(!!p.verificado);
+    $("normaPres").innerHTML = chipNorma(p.norma) + sello(!!p.verificado);
+
+    // Hitos de contexto
+    const hitos = p.hitos || [];
+    $("hitos").innerHTML = hitos.map((h) =>
+      `<div><dt>${esc(h.rotulo)}</dt><dd>${esc(h.valor)}</dd></div>`).join("");
 
     if (dias == null || dias < 0) {
-      $("diasMandato").textContent = "—";
-      $("diasUnidad").textContent = "";
-      $("detalleMandato").textContent = (dias != null && dias < 0)
-        ? "La fecha de asuncion registrada aun no ocurre."
-        : "Falta registrar la fecha de asuncion en data.js";
-      $("piePeriodo").textContent = "";
+      $("dias").textContent = "—";
+      $("tbDia").textContent = "—";
+      $("diasTexto").textContent = "Falta registrar la fecha de asunción.";
+      $("barraPie").textContent = "";
       return;
     }
 
-    $("diasMandato").textContent = dias.toLocaleString("es-PE");
-    $("diasUnidad").textContent = dias === 1 ? "dia" : "dias";
-    $("detalleMandato").innerHTML =
-      `Equivale a <strong>${esc(enPalabras(dias))}</strong> desde el ${esc(fechaLarga(p.fechaAsuncion))}.`;
+    contarHasta($("dias"), dias, 1100);
+    $("tbDia").textContent = dias.toLocaleString("es-PE");
+    $("diasTexto").innerHTML =
+      `<b>${esc(enPalabras(dias))}</b> desde el ${esc(fechaLarga(p.fechaAsuncion))}`;
 
-    // Avance del periodo constitucional (5 anios ~ 1826 dias)
-    const TOTAL = 1826;
-    const pct = Math.max(0, Math.min(100, (dias / TOTAL) * 100));
-    requestAnimationFrame(() => { $("barraPeriodo").style.width = pct.toFixed(2) + "%"; });
-    $("piePeriodo").textContent =
-      `Avance del periodo: ${pct.toFixed(1)} %  ·  restan ${Math.max(0, TOTAL - dias).toLocaleString("es-PE")} dias`;
+    // Se asigna directamente: la transición CSS hace la animación, y así
+    // el ancho es correcto aunque la pestaña esté en segundo plano.
+    const pct = Math.max(0, Math.min(100, (dias / TOTAL_PERIODO) * 100));
+    $("barraFill").style.width = pct.toFixed(2) + "%";
+    $("barraPie").textContent =
+      `${pct.toFixed(1)} % del periodo · restan ${Math.max(0, TOTAL_PERIODO - dias).toLocaleString("es-PE")} días`;
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     GABINETE
-     ══════════════════════════════════════════════════════════════════ */
+  /* ══════════ GABINETE ══════════ */
   let filtroGab = "todos";
-
-  function claseMinistro(m) {
-    if (!m.ministro) return "pendiente";
-    return m.estado === "cesado" ? "cesado" : "activo";
-  }
 
   function pintarGabinete() {
     const hoy = hoyLima();
-    const cont = $("ministrosGrid");
-    const lista = GOVISOR.ministerios.filter((m) => {
+    const cont = $("tablaGab");
+    const todos = GOVISOR.ministerios;
+
+    const lista = todos.filter((m) => {
       if (filtroGab === "todos") return true;
       if (filtroGab === "pendiente") return !m.ministro;
       return m.ministro && m.estado === filtroGab;
     });
 
-    const conNombre = GOVISOR.ministerios.filter((m) => m.ministro).length;
-    $("subGabinete").textContent =
-      `${conNombre} de ${GOVISOR.ministerios.length} carteras con titular registrado`;
+    const activos = todos.filter((m) => m.ministro && m.estado === "activo").length;
+    $("subGab").textContent = `${activos} de ${todos.length} carteras en funciones`;
 
     if (!lista.length) {
-      cont.innerHTML = '<p class="vacio"><strong>Sin resultados</strong>No hay carteras que coincidan con este filtro.</p>';
+      cont.innerHTML = '<p class="vac"><b>Sin resultados</b>Ninguna cartera coincide con este filtro.</p>';
       return;
     }
 
     cont.innerHTML = lista.map((m) => {
-      const clase = claseMinistro(m);
-      const inicio = fecha(m.fechaNombramiento);
+      const clase = !m.ministro ? "pendiente" : (m.estado === "cesado" ? "cesado" : "activo");
       const fin = m.estado === "cesado" ? fecha(m.fechaCese) : hoy;
-      const dias = diasEntre(inicio, fin);
+      const dias = diasEntre(fecha(m.fechaNombramiento), fin);
 
-      let contador;
-      if (dias == null) {
-        contador = '<span class="badge badge-neutro">Sin fecha</span>';
-      } else if (m.estado === "cesado") {
-        contador = `<span class="badge badge-dias congelado">${dias.toLocaleString("es-PE")} dias en el cargo</span>`;
-      } else {
-        contador = `<span class="badge badge-dias">Dia ${dias.toLocaleString("es-PE")}</span>`;
-      }
+      let badge;
+      if (dias == null)               badge = '<span class="dias nulo">sin fecha</span>';
+      else if (m.estado === "cesado") badge = `<span class="dias frio">${dias} d · cesó</span>`;
+      else                            badge = `<span class="dias">día ${dias}</span>`;
 
-      const nombre = m.ministro
-        ? `<p class="ministro-nombre">${esc(m.ministro)}</p>`
-        : `<p class="ministro-nombre sin-dato">Titular por registrar</p>`;
-
-      const cese = (m.estado === "cesado" && m.fechaCese)
-        ? `<p class="ministro-cartera">Ceso el ${esc(fechaLarga(m.fechaCese))}</p>` : "";
-
-      const desde = m.fechaNombramiento
-        ? `<p class="ministro-cartera">Desde el ${esc(fechaLarga(m.fechaNombramiento))}</p>` : "";
-
-      return `<article class="ministro ${clase}">
-        <div class="ministro-top">
-          <span class="sigla">${esc(m.sigla)}</span>
-          <div>
-            <h3>${esc(m.cartera)}</h3>
-            ${nombre}
-            ${desde}${cese}
-          </div>
-        </div>
-        <div class="ministro-meta">${contador}${sello(!!m.verificado)}</div>
-        <div class="ministro-meta">${chipNorma(m.norma)}</div>
-      </article>`;
+      return `<div class="fila ${clase}">
+        <span class="sig">${esc(m.sigla)}</span>
+        <span>
+          <span class="quien">${esc(m.ministro || "Titular por registrar")}</span>
+          <span class="cart">${esc(m.cartera)}</span>
+        </span>
+        ${badge}
+        ${chipNorma(m.norma, true)}
+      </div>`;
     }).join("");
+
+    escalonar(cont);
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     NORMAS
-     ══════════════════════════════════════════════════════════════════ */
-  let filtroNorma = "todos";
-  let busqueda = "";
-
-  const ETIQUETA_ORIGEN = {
-    congreso:  ["et-congreso",  "Congreso"],
-    ejecutivo: ["et-ejecutivo", "Ejecutivo"],
-    viaje:     ["et-viaje",     "Viaje oficial"]
+  /* ══════════ NORMAS ══════════ */
+  let filtroNorma = "todos", busqueda = "";
+  const ORIGEN = {
+    congreso:  ["b-con", "Congreso"],
+    ejecutivo: ["b-eje", "Ejecutivo"],
+    viaje:     ["b-via", "Viaje"]
   };
 
   function pintarNormas() {
-    const cont = $("normasLista");
-    const q = busqueda.trim().toLowerCase();
+    const cont = $("listaNormas");
 
     if (!GOVISOR.normas.length) {
-      cont.innerHTML = `<p class="vacio">
-        <strong>Aun no hay normas registradas</strong>
-        Agrega los registros verificados en el arreglo <code>normas</code> de data.js.
-        Cada uno aparecera aqui con su enlace directo a la fuente.</p>`;
+      cont.innerHTML = `<p class="vac"><b>Aún no hay normas registradas</b>
+        Agrégalas en el arreglo <code>normas</code> de data.js y aparecerán aquí
+        con su enlace directo a la fuente.</p>`;
       return;
     }
 
+    const q = busqueda.trim().toLowerCase();
     const lista = GOVISOR.normas
       .filter((n) => filtroNorma === "todos" || n.origen === filtroNorma)
       .filter((n) => !q || `${n.tipo} ${n.numero} ${n.sumilla}`.toLowerCase().includes(q))
@@ -278,186 +259,161 @@
       .sort((a, b) => String(b.fecha || "").localeCompare(String(a.fecha || "")));
 
     if (!lista.length) {
-      cont.innerHTML = '<p class="vacio"><strong>Sin coincidencias</strong>Prueba con otro filtro o termino de busqueda.</p>';
+      cont.innerHTML = '<p class="vac"><b>Sin coincidencias</b>Prueba otro filtro o término.</p>';
       return;
     }
 
     cont.innerHTML = lista.map((n) => {
-      const [cls, txt] = ETIQUETA_ORIGEN[n.origen] || ["badge-neutro", "Otro"];
-      const derogada = n.accion === "derogada"
-        ? '<span class="badge et-derogada">Derogada</span>' : "";
-      const accion = (n.accion && n.accion !== "derogada")
-        ? `<span class="badge badge-neutro">${esc(n.accion)}</span>` : "";
-
-      const cuerpo = `<div class="norma-cab">
-          <span class="norma-num">${esc([n.tipo, n.numero].filter(Boolean).join(" N.o "))}</span>
-          <span class="badge ${cls}">${txt}</span>${derogada}${accion}
+      const [cls, txt] = ORIGEN[n.origen] || ["b-neu", "Otro"];
+      const der = n.accion === "derogada" ? '<span class="b b-der">Derogada</span>' : "";
+      const cuerpo = `
+        <div class="n-cab">
+          <span class="n-num">${esc([n.tipo, n.numero].filter(Boolean).join(" N.º "))}</span>
+          <span class="b ${cls}">${txt}</span>${der}
         </div>
-        <p class="norma-sumilla">${esc(n.sumilla || "Sin sumilla registrada")}</p>
-        <p class="norma-pie">
-          <span>${esc(fechaLarga(n.fecha) || "Sin fecha")}</span>
-          <span>${n.verificado ? "Verificada" : "Por verificar"}</span>
-        </p>`;
-
+        <p class="n-sum">${esc(n.sumilla || "Sin sumilla registrada")}</p>
+        <p class="n-pie">${esc(fechaCorta(n.fecha) || "sin fecha")} · ${n.verificado ? "verificada" : "por verificar"}</p>`;
       const url = urlSegura(n.enlace);
       return url
         ? `<a class="norma" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${cuerpo}</a>`
         : `<div class="norma">${cuerpo}</div>`;
     }).join("");
+
+    escalonar(cont);
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     VIAJES
-     ══════════════════════════════════════════════════════════════════ */
-  function pintarViajes() {
-    const cont = $("viajesLista");
-    if (!GOVISOR.viajes.length) {
-      cont.innerHTML = `<p class="vacio">
-        <strong>Sin viajes registrados</strong>
-        Los viajes al exterior de la Presidencia requieren autorizacion del Congreso
-        mediante Resolucion Legislativa. Registralos en <code>viajes</code> de data.js.</p>`;
-      return;
-    }
-    cont.innerHTML = GOVISOR.viajes.map((v) => `
-      <article class="viaje">
-        <h3>${esc(v.destino || "Destino por registrar")}</h3>
-        <p><strong>${esc(v.quien || "—")}</strong> · ${esc(v.motivo || "Motivo no registrado")}</p>
-        <p>${esc(fechaLarga(v.desde))}${v.hasta ? " al " + esc(fechaLarga(v.hasta)) : ""}</p>
-        <div class="ministro-meta">${chipNorma(v.norma)}${sello(!!v.verificado)}</div>
-      </article>`).join("");
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     RESUMEN EN PALABRAS  (la "estadistica con letras")
-     ══════════════════════════════════════════════════════════════════ */
-  function pintarResumen() {
+  /* ══════════ LECTURA RÁPIDA (estadística con letras) ══════════ */
+  function pintarLectura() {
     const p = GOVISOR.presidencia;
     const dias = diasEntre(fecha(p.fechaAsuncion), hoyLima());
     const mins = GOVISOR.ministerios;
     const conNombre = mins.filter((m) => m.ministro).length;
     const cesados = mins.filter((m) => m.estado === "cesado").length;
-    const pendientes = mins.length - conNombre;
 
     const leyes = GOVISOR.normas.filter((n) => n.origen === "congreso").length;
-    const ejec = GOVISOR.normas.filter((n) => n.origen === "ejecutivo").length;
-    const derog = GOVISOR.normas.filter((n) => n.accion === "derogada").length;
+    const ejec  = GOVISOR.normas.filter((n) => n.origen === "ejecutivo").length;
     const verif = GOVISOR.normas.filter((n) => n.verificado).length;
+    const totalN = GOVISOR.normas.length;
 
     const tarjetas = [
-      ["Tiempo de gobierno", (dias == null || dias < 0)
-        ? "La fecha de inicio del mandato aun no esta confirmada en el visor."
-        : `El mandato lleva <strong>${esc(enPalabras(dias))}</strong> en curso desde su instalacion.`],
+      ["Mandato", (dias == null || dias < 0)
+        ? "La fecha de inicio aún no está registrada."
+        : `Lleva <b>${esc(enPalabras(dias))}</b> en el cargo, sobre un periodo de cinco años.`],
 
-      ["Gabinete", pendientes === mins.length
-        ? "Ninguna cartera tiene todavia un titular registrado en el visor."
-        : `De las diecinueve carteras, <strong>${palabra(conNombre)}</strong> ${conNombre === 1 ? "tiene" : "tienen"} titular registrado` +
-          (cesados ? `, y <strong>${palabra(cesados)}</strong> ${cesados === 1 ? "ha cesado" : "han cesado"}` : "") +
-          (pendientes ? `. Quedan <strong>${palabra(pendientes)}</strong> por completar.` : ".")],
+      ["Gabinete", cesados
+        ? `<b>${palabra(conNombre - cesados)}</b> carteras en funciones y <b>${palabra(cesados)}</b> con cambio de titular.`
+        : `Las <b>${palabra(conNombre)}</b> carteras mantienen a su titular original, sin cambios desde la juramentación.`],
 
-      ["Actividad legislativa", (leyes + ejec) === 0
-        ? "Todavia no se ha registrado ninguna norma del periodo en el visor."
-        : `Se han registrado <strong>${palabra(leyes)}</strong> ${leyes === 1 ? "norma" : "normas"} de origen parlamentario y ` +
-          `<strong>${palabra(ejec)}</strong> del Poder Ejecutivo` +
-          (derog ? `, de las cuales <strong>${palabra(derog)}</strong> ${derog === 1 ? "fue derogada" : "fueron derogadas"}.` : ".")],
+      // Frases sin verbo entre las cifras: evita problemas de concordancia
+      // cuando alguno de los conteos es cero.
+      ["Producción normativa", (leyes + ejec) === 0
+        ? "Todavía no se registran normas del periodo."
+        : `Normas registradas: <b>${palabra(leyes)}</b> del Congreso y <b>${palabra(ejec)}</b> del Ejecutivo.`],
 
-      ["Trazabilidad", GOVISOR.normas.length === 0
-        ? "Cada registro que agregues llevara su enlace directo a la fuente oficial."
-        : verif === GOVISOR.normas.length
-          ? "Todas las normas registradas estan contrastadas con su fuente oficial."
-          : `<strong>${palabra(verif)}</strong> de ${palabra(GOVISOR.normas.length)} normas han sido contrastadas con la fuente oficial.`]
+      ["Trazabilidad", totalN === 0
+        ? "Cada registro llevará su enlace directo a la fuente oficial."
+        : verif === 0
+          ? `Ninguna de las ${totalN === 1 ? "normas" : palabra(totalN) + " normas"} registradas ha sido contrastada todavía.`
+          : verif === totalN
+            ? "Todas las normas registradas están contrastadas con su fuente."
+            : `<b>${palabra(verif)}</b> de ${palabra(totalN)} normas contrastadas con la fuente oficial.`]
     ];
 
-    $("resumenGrid").innerHTML = tarjetas.map(([t, txt]) =>
-      `<article class="resumen-tarjeta"><h3>${esc(t)}</h3><p>${txt}</p></article>`).join("");
+    const cont = $("lectura");
+    cont.innerHTML = tarjetas.map(([t, x]) =>
+      `<article class="lec"><h3>${esc(t)}</h3><p>${x}</p></article>`).join("");
+    escalonar(cont);
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     FUENTES
-     ══════════════════════════════════════════════════════════════════ */
+  /* ══════════ VIAJES ══════════ */
+  function pintarViajes() {
+    const cont = $("viajes");
+    $("cntViajes").textContent = GOVISOR.viajes.length
+      ? `${GOVISOR.viajes.length} registrado(s)` : "Sin registros";
+
+    if (!GOVISOR.viajes.length) {
+      cont.innerHTML = `<p class="vac"><b>Sin viajes registrados</b>
+        Las salidas al exterior de la Presidencia requieren autorización del
+        Congreso mediante Resolución Legislativa.</p>`;
+      return;
+    }
+    cont.innerHTML = GOVISOR.viajes.map((v) => `
+      <article class="viaje">
+        <h3>${esc(v.destino || "Destino por registrar")}</h3>
+        <p><b>${esc(v.quien || "—")}</b> · ${esc(v.motivo || "Motivo no registrado")}</p>
+        <p>${esc(fechaCorta(v.desde))}${v.hasta ? " al " + esc(fechaCorta(v.hasta)) : ""}</p>
+        <div class="chips">${chipNorma(v.norma)}${sello(!!v.verificado)}</div>
+      </article>`).join("");
+  }
+
+  /* ══════════ FUENTES ══════════ */
   function pintarFuentes() {
-    $("fuentesGrid").innerHTML = GOVISOR.fuentes.map((f) => {
+    $("fuentes").innerHTML = GOVISOR.fuentes.map((f) => {
       const url = urlSegura(f.url);
-      if (!url) return "";
-      return `<a class="fuente" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
-        <strong>${esc(f.nombre)} &#8599;</strong><span>${esc(f.nota || "")}</span></a>`;
+      return url ? `<a class="fuente" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
+        <b>${esc(f.nombre)} &#8599;</b><span>${esc(f.nota || "")}</span></a>` : "";
     }).join("");
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     NOTICIAS
-     ══════════════════════════════════════════════════════════════════ */
-  let feedActivo = 0;
-
-  function urlFeed(query) {
-    return GOVISOR.noticias.plantilla.replace("{Q}", encodeURIComponent(query));
-  }
+  /* ══════════ NOTICIAS ══════════ */
+  let feedActivo = 0, noticiasCargadas = false;
+  const urlFeed = (q) => GOVISOR.noticias.plantilla.replace("{Q}", encodeURIComponent(q));
 
   function pintarFiltrosNoticias() {
-    $("filtrosNoticias").innerHTML = GOVISOR.noticias.feeds.map((f, i) =>
-      `<button class="chip ${i === feedActivo ? "activo" : ""}" data-feed="${i}">${esc(f.nombre)}</button>`
-    ).join("");
+    $("fNoticias").innerHTML = GOVISOR.noticias.feeds.map((f, i) =>
+      `<button class="chip ${i === feedActivo ? "on" : ""}" data-feed="${i}">${esc(f.nombre)}</button>`).join("");
   }
 
   async function cargarNoticias() {
-    const cont = $("noticiasGrid");
+    const cont = $("noticias");
     const feed = GOVISOR.noticias.feeds[feedActivo];
     if (!feed) return;
+    noticiasCargadas = true;
 
     const rss = urlFeed(feed.query);
     const proxy = GOVISOR.noticias.proxy;
 
-    // Sin proxy configurado: se ofrece el enlace directo, sin fingir que carga.
     if (!proxy) {
-      cont.innerHTML = `<p class="vacio">
-        <strong>Lectura directa desactivada</strong>
+      cont.innerHTML = `<p class="vac"><b>Lectura directa desactivada</b>
         <a href="${esc(rss)}" target="_blank" rel="noopener noreferrer">Abrir "${esc(feed.nombre)}" en Google Noticias &#8599;</a></p>`;
       return;
     }
 
-    cont.innerHTML = '<p class="vacio">Cargando titulares...</p>';
+    cont.innerHTML = '<p class="vac">Cargando titulares…</p>';
     try {
       const r = await fetch(proxy + encodeURIComponent(rss));
       if (!r.ok) throw new Error("HTTP " + r.status);
       const data = await r.json();
       const items = data.items || [];
-      if (!items.length) throw new Error("el agregador no devolvio titulares");
+      if (!items.length) throw new Error("el agregador no devolvió titulares");
 
-      cont.innerHTML = items.slice(0, 12).map((it) => {
+      cont.innerHTML = items.slice(0, 9).map((it) => {
         const url = urlSegura(it.link);
-        // Google Noticias formatea el titulo como "Titular - Medio".
         const corte = String(it.title || "").lastIndexOf(" - ");
-        const titular = corte > 0 ? it.title.slice(0, corte) : (it.title || "Sin titulo");
+        const titular = corte > 0 ? it.title.slice(0, corte) : (it.title || "Sin título");
         const medio = corte > 0 ? it.title.slice(corte + 3) : (it.author || "");
         const cuando = it.pubDate
           ? new Intl.DateTimeFormat("es-PE", {
-              timeZone: ZONA, day: "numeric", month: "short",
-              hour: "2-digit", minute: "2-digit"
-            }).format(new Date(it.pubDate.replace(" ", "T") + "Z"))
+              timeZone: ZONA, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"
+            }).format(new Date(String(it.pubDate).replace(" ", "T") + "Z"))
           : "";
         const cuerpo = `<h3>${esc(titular)}</h3>
-          <div class="noticia-meta">
-            <span class="noticia-medio">${esc(medio)}</span><span>${esc(cuando)}</span>
-          </div>`;
+          <p class="nota-meta"><b>${esc(medio)}</b> ${esc(cuando)}</p>`;
         return url
-          ? `<a class="noticia" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${cuerpo}</a>`
-          : `<div class="noticia">${cuerpo}</div>`;
+          ? `<a class="nota" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${cuerpo}</a>`
+          : `<div class="nota">${cuerpo}</div>`;
       }).join("");
+      escalonar(cont);
     } catch (e) {
-      cont.innerHTML = `<p class="vacio">
-        <strong>No se pudieron cargar los titulares</strong>
-        ${esc(e.message)}. Puedes abrir el feed directamente:
+      cont.innerHTML = `<p class="vac"><b>No se pudieron cargar los titulares</b>
+        ${esc(e.message)}. Abre el feed directamente:
         <a href="${esc(rss)}" target="_blank" rel="noopener noreferrer">${esc(feed.nombre)} &#8599;</a></p>`;
     }
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     YOUTUBE
-     ══════════════════════════════════════════════════════════════════ */
+  /* ══════════ YOUTUBE ══════════ */
   let ytConsulta = 0;
-
-  function leerClave() {
-    try { return localStorage.getItem(CLAVE_YT) || ""; } catch { return ""; }
-  }
+  const leerClave = () => { try { return localStorage.getItem(CLAVE_YT) || ""; } catch { return ""; } };
 
   function estadoYT(msg, tipo) {
     const el = $("ytEstado");
@@ -466,21 +422,20 @@
   }
 
   function pintarFiltrosYT() {
-    $("ytFiltros").innerHTML = GOVISOR.youtube.consultas.map((q, i) =>
-      `<button class="chip ${i === ytConsulta ? "activo" : ""}" data-yt="${i}">${esc(q)}</button>`
-    ).join("");
+    $("fYt").innerHTML = GOVISOR.youtube.consultas.map((q, i) =>
+      `<button class="chip ${i === ytConsulta ? "on" : ""}" data-yt="${i}">${esc(q)}</button>`).join("");
   }
 
   async function cargarYouTube() {
     const key = leerClave();
     const cont = $("ytGrid");
     if (!key) {
-      cont.innerHTML = '<p class="vacio">Ingresa tu API key para cargar videos.</p>';
+      cont.innerHTML = '<p class="vac">Ingresa tu API key para cargar videos.</p>';
       return;
     }
 
     const q = GOVISOR.youtube.consultas[ytConsulta] || "";
-    cont.innerHTML = '<p class="vacio">Buscando videos...</p>';
+    cont.innerHTML = '<p class="vac">Buscando videos…</p>';
 
     const url = "https://www.googleapis.com/youtube/v3/search"
       + "?part=snippet&type=video&maxResults=9&order=date&relevanceLanguage=es&regionCode=PE"
@@ -489,142 +444,130 @@
     try {
       const r = await fetch(url);
       const data = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(data?.error?.message || ("HTTP " + r.status));
+      if (!r.ok) throw new Error((data.error && data.error.message) || ("HTTP " + r.status));
 
       const items = data.items || [];
       if (!items.length) {
         estadoYT("Consulta sin resultados.", "");
-        cont.innerHTML = '<p class="vacio">Sin videos para esta consulta.</p>';
+        cont.innerHTML = '<p class="vac">Sin videos para esta consulta.</p>';
         return;
       }
-      estadoYT(`Clave activa. ${items.length} videos cargados.`, "ok");
+      estadoYT(`Clave activa · ${items.length} videos.`, "ok");
       cont.innerHTML = items.map((it) => {
         const id = it.id && it.id.videoId;
         if (!id) return "";
-        const s = it.snippet || {};
-        const th = s.thumbnails || {};
+        const s = it.snippet || {}, th = s.thumbnails || {};
         const thumb = urlSegura((th.medium && th.medium.url) || (th.default && th.default.url));
         const cuando = s.publishedAt
-          ? new Intl.DateTimeFormat("es-PE", {
-              timeZone: ZONA, day: "numeric", month: "short", year: "numeric"
-            }).format(new Date(s.publishedAt))
+          ? new Intl.DateTimeFormat("es-PE", { timeZone: ZONA, day: "numeric", month: "short", year: "numeric" })
+              .format(new Date(s.publishedAt))
           : "";
-        return `<a class="yt-card" href="https://www.youtube.com/watch?v=${encodeURIComponent(id)}"
+        return `<a class="vid" href="https://www.youtube.com/watch?v=${encodeURIComponent(id)}"
                    target="_blank" rel="noopener noreferrer">
           ${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy">` : ""}
-          <div class="yt-card-body">
-            <h3>${esc(s.title || "Sin titulo")}</h3>
-            <p>${esc(s.channelTitle || "")} · ${esc(cuando)}</p>
-          </div></a>`;
+          <div><h3>${esc(s.title || "Sin título")}</h3>
+          <p>${esc(s.channelTitle || "")} · ${esc(cuando)}</p></div></a>`;
       }).join("");
+      escalonar(cont);
     } catch (e) {
-      estadoYT("Error: " + e.message, "error");
-      cont.innerHTML = `<p class="vacio"><strong>No se pudo consultar YouTube</strong>
-        ${esc(e.message)}<br>Revisa que la clave tenga habilitada la YouTube Data API v3
-        y que las restricciones de referente permitan este sitio.</p>`;
+      estadoYT("Error: " + e.message, "err");
+      cont.innerHTML = `<p class="vac"><b>No se pudo consultar YouTube</b>
+        ${esc(e.message)}<br>Verifica que la clave tenga habilitada la YouTube Data API v3
+        y que sus restricciones de referente permitan este sitio.</p>`;
     }
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     EVENTOS
-     ══════════════════════════════════════════════════════════════════ */
-  function marcarActivo(grupo, btn) {
-    grupo.querySelectorAll(".chip").forEach((c) => c.classList.remove("activo"));
-    btn.classList.add("activo");
+  /* ══════════ EVENTOS ══════════ */
+  function marcar(grupo, btn) {
+    grupo.querySelectorAll(".chip").forEach((c) => c.classList.remove("on"));
+    btn.classList.add("on");
   }
 
-  function conectarEventos() {
+  function conectar() {
     document.addEventListener("click", (ev) => {
       const btn = ev.target.closest(".chip");
       if (!btn) return;
-
-      if (btn.dataset.fgab) {
-        filtroGab = btn.dataset.fgab;
-        marcarActivo(btn.parentElement, btn);
-        pintarGabinete();
-      } else if (btn.dataset.fnorma) {
-        filtroNorma = btn.dataset.fnorma;
-        marcarActivo(btn.parentElement, btn);
-        pintarNormas();
-      } else if (btn.dataset.feed) {
-        feedActivo = Number(btn.dataset.feed);
-        marcarActivo(btn.parentElement, btn);
-        cargarNoticias();
-      } else if (btn.dataset.yt) {
-        ytConsulta = Number(btn.dataset.yt);
-        marcarActivo(btn.parentElement, btn);
-        cargarYouTube();
-      }
+      const d = btn.dataset;
+      if (d.fgab)        { filtroGab = d.fgab;     marcar(btn.parentElement, btn); pintarGabinete(); }
+      else if (d.fnorma) { filtroNorma = d.fnorma; marcar(btn.parentElement, btn); pintarNormas(); }
+      else if (d.feed)   { feedActivo = +d.feed;   marcar(btn.parentElement, btn); cargarNoticias(); }
+      else if (d.yt)     { ytConsulta = +d.yt;     marcar(btn.parentElement, btn); cargarYouTube(); }
     });
 
-    let temporizador;
-    $("buscarNorma").addEventListener("input", (ev) => {
-      clearTimeout(temporizador);
+    let temp;
+    $("buscar").addEventListener("input", (ev) => {
+      clearTimeout(temp);
       const v = ev.target.value;
-      temporizador = setTimeout(() => { busqueda = v; pintarNormas(); }, 180);
+      temp = setTimeout(() => { busqueda = v; pintarNormas(); }, 170);
     });
 
     $("ytGuardar").addEventListener("click", () => {
       const v = $("ytKey").value.trim();
-      if (!v) { estadoYT("Escribe una clave antes de guardar.", "error"); return; }
+      if (!v) { estadoYT("Escribe una clave antes de guardar.", "err"); return; }
       try {
         localStorage.setItem(CLAVE_YT, v);
-        estadoYT("Clave guardada en este navegador. Consultando...", "ok");
+        estadoYT("Clave guardada en este navegador. Consultando…", "ok");
         cargarYouTube();
-      } catch {
-        estadoYT("Este navegador bloquea el almacenamiento local.", "error");
-      }
+      } catch { estadoYT("Este navegador bloquea el almacenamiento local.", "err"); }
     });
 
     $("ytBorrar").addEventListener("click", () => {
-      try { localStorage.removeItem(CLAVE_YT); } catch { /* nada que hacer */ }
+      try { localStorage.removeItem(CLAVE_YT); } catch { /* sin acción */ }
       $("ytKey").value = "";
       estadoYT("Clave borrada de este navegador.", "");
-      $("ytGrid").innerHTML = '<p class="vacio">Ingresa tu API key para cargar videos.</p>';
+      $("ytGrid").innerHTML = '<p class="vac">Ingresa tu API key para cargar videos.</p>';
+    });
+
+    // Las noticias solo se piden cuando el usuario abre el acordeón.
+    document.querySelectorAll(".acor").forEach((ac) => {
+      ac.addEventListener("toggle", () => {
+        if (ac.open && ac.querySelector("#noticias") && !noticiasCargadas) cargarNoticias();
+      });
     });
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     ARRANQUE
-     ══════════════════════════════════════════════════════════════════ */
+  /* ══════════ ANIMACIÓN AL ENTRAR EN PANTALLA ══════════ */
+  function observarEntradas() {
+    const secciones = document.querySelectorAll(".anim");
+    if (menosMovimiento || !("IntersectionObserver" in window)) {
+      secciones.forEach((s) => s.classList.add("in"));
+      return;
+    }
+    const obs = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+    secciones.forEach((s) => obs.observe(s));
+  }
+
+  /* ══════════ ARRANQUE ══════════ */
   function iniciar() {
     const m = GOVISOR.meta;
-    document.title = `${m.titulo} · Visor del gobierno del Peru`;
     $("marcaTitulo").textContent = m.titulo;
     $("marcaSub").textContent = m.subtitulo;
-    $("pieActualizacion").textContent = fechaLarga(m.ultimaActualizacion) || "—";
-
-    if (m.aviso) {
-      $("avisoTxt").textContent = m.aviso;
-      $("avisoBar").hidden = false;
-    }
+    $("pieAct").textContent = fechaLarga(m.ultimaActualizacion) || "—";
+    if (m.aviso) { $("avisoTxt").textContent = m.aviso; $("avisoBar").hidden = false; }
 
     pintarMandato();
-    pintarResumen();
+    pintarLectura();
     pintarGabinete();
     pintarNormas();
     pintarViajes();
     pintarFuentes();
-
     pintarFiltrosNoticias();
-    cargarNoticias();
-
     pintarFiltrosYT();
-    const key = leerClave();
-    if (key) {
-      $("ytKey").value = key;
-      estadoYT("Clave cargada desde este navegador.", "ok");
-      cargarYouTube();
-    }
 
-    conectarEventos();
+    const key = leerClave();
+    if (key) { $("ytKey").value = key; estadoYT("Clave cargada desde este navegador.", "ok"); }
+
+    conectar();
+    observarEntradas();
     ticTac();
     setInterval(ticTac, 1000);
   }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", iniciar);
-  } else {
-    iniciar();
-  }
+  } else { iniciar(); }
 })();
