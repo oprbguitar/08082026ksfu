@@ -284,12 +284,50 @@
         <p class="n-sum">${esc(n.sumilla || "Sin sumilla registrada")}</p>
         <p class="n-pie">${esc(fechaCorta(n.fecha) || "sin fecha")} · ${n.verificado ? "verificada" : "por verificar"}</p>`;
       const url = urlSegura(n.enlace);
-      return url
-        ? `<a class="norma" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${cuerpo}</a>`
-        : `<div class="norma">${cuerpo}</div>`;
+      if (!url) return `<div class="norma">${cuerpo}</div>`;
+      // Tarjeta clicable: abre la resolucion DENTRO de la app.
+      // Ctrl/Cmd + clic sigue abriendo en pestana nueva (ver conectar()).
+      return `<a class="norma" href="${esc(url)}" rel="noopener noreferrer"
+                 data-visor="${esc(url)}"
+                 data-titulo="${esc([n.tipo, n.numero].filter(Boolean).join(" N.º "))}"
+                 data-sumilla="${esc(n.sumilla || "")}">
+        <span class="lupa">ver aquí</span>${cuerpo}</a>`;
     }).join("");
 
     escalonar(cont);
+  }
+
+  /* ── Visor de resoluciones ─────────────────────────────────────────
+     El Peruano no envia X-Frame-Options ni CSP frame-ancestors, asi que
+     el documento oficial puede leerse incrustado. Si el iframe falla, el
+     boton "Abrir en El Peruano" siempre queda disponible como salida.
+     ------------------------------------------------------------------ */
+  let ultimoFoco = null;
+
+  function abrirVisor(url, titulo, sumilla) {
+    const seguro = urlSegura(url);
+    if (!seguro) return;
+
+    ultimoFoco = document.activeElement;
+    $("visorTitulo").textContent = titulo || "Documento oficial";
+    $("visorSumilla").textContent = sumilla || "";
+    $("visorAbrir").href = seguro;
+    $("visorCargando").classList.remove("oculto");
+
+    const frame = $("visorFrame");
+    frame.src = seguro;
+    frame.onload = () => $("visorCargando").classList.add("oculto");
+
+    $("visor").hidden = false;
+    document.body.classList.add("sin-scroll");
+    $("visorAbrir").focus();
+  }
+
+  function cerrarVisor() {
+    $("visor").hidden = true;
+    $("visorFrame").src = "about:blank";   // detiene la carga y libera memoria
+    document.body.classList.remove("sin-scroll");
+    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
   }
 
   /* ══════════ LECTURA RÁPIDA (estadística con letras) ══════════ */
@@ -1003,6 +1041,31 @@
   }
 
   function conectar() {
+    // ── Visor: abrir/cerrar ──
+    document.addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-cerrar-visor]")) { cerrarVisor(); return; }
+
+      // Ctrl/Cmd/medio: respetar el comportamiento normal de abrir pestana.
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button === 1) return;
+
+      const enNorma = ev.target.closest("[data-visor]");
+      if (enNorma) {
+        ev.preventDefault();
+        abrirVisor(enNorma.dataset.visor, enNorma.dataset.titulo, enNorma.dataset.sumilla);
+        return;
+      }
+      // Chips de Resolucion Suprema en gabinete, viajes y radar de cargos.
+      const enRS = ev.target.closest("a.rs");
+      if (enRS && enRS.href) {
+        ev.preventDefault();
+        abrirVisor(enRS.href, enRS.textContent.replace(/[↗\s]+$/, "").trim(), "");
+      }
+    });
+
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape" && !$("visor").hidden) cerrarVisor();
+    });
+
     document.addEventListener("click", (ev) => {
       const btn = ev.target.closest(".chip");
       if (!btn) return;

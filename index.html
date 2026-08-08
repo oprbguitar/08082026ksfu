@@ -227,6 +227,31 @@
   </div>
 </footer>
 
+<!-- ══════════ VISOR DE RESOLUCIONES (caja dentro de la app) ══════════ -->
+<div class="visor" id="visor" hidden>
+  <div class="visor-fondo" data-cerrar-visor></div>
+  <div class="visor-caja" role="dialog" aria-modal="true" aria-labelledby="visorTitulo">
+    <header class="visor-cab">
+      <div>
+        <p class="rotulo" id="visorEtiqueta">Resolución</p>
+        <h2 id="visorTitulo">—</h2>
+        <p class="visor-sum" id="visorSumilla"></p>
+      </div>
+      <div class="visor-acciones">
+        <a class="btn ghost" id="visorAbrir" target="_blank" rel="noopener noreferrer">Abrir en El Peruano ↗</a>
+        <button class="btn" data-cerrar-visor aria-label="Cerrar">Cerrar</button>
+      </div>
+    </header>
+    <div class="visor-cuerpo">
+      <div class="visor-cargando" id="visorCargando">Cargando el documento oficial…</div>
+      <iframe id="visorFrame" title="Documento oficial en El Peruano"
+              referrerpolicy="no-referrer" loading="lazy"
+              sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+    </div>
+    <p class="visor-pie">Contenido servido por el Diario Oficial El Peruano. GoVisor no lo modifica ni lo almacena.</p>
+  </div>
+</div>
+
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>
