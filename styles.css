@@ -385,6 +385,170 @@ section{ margin:18px 0; scroll-margin-top:62px; }
   .fila{ grid-template-columns:auto 1fr auto auto; }
 }
 
+/* ════════════════════════════════════════════════════════════════════════
+   MÓDULOS DEL OBSERVATORIO
+   ════════════════════════════════════════════════════════════════════ */
+
+.tarjeta{
+  background:var(--w); border:1px solid var(--ln);
+  border-radius:var(--r); box-shadow:var(--sh); padding:13px;
+}
+.doble{ display:grid; grid-template-columns:1fr; gap:12px; margin:14px 0; }
+
+/* ── ¿Qué cambió? ── */
+.cambios-lista{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.cambios-lista li{
+  display:flex; align-items:flex-start; gap:8px;
+  font-size:.81rem; padding:7px 9px; border-radius:var(--rs);
+  background:var(--bg); border:1px solid var(--ln);
+  transition:.16s var(--ease);
+}
+.cambios-lista li:hover{ background:var(--o-bg); border-color:var(--o-bd); transform:translateX(3px); }
+.cambios-lista .pip{ width:8px; height:8px; border-radius:50%; flex:0 0 8px; margin-top:5px; }
+.pip-rojo{ background:var(--rd); } .pip-ambar{ background:#F59F00; }
+.pip-verde{ background:var(--ok); } .pip-azul{ background:#1864AB; }
+.pip-naranja{ background:var(--o); }
+.cambios-lista time{ display:block; font-size:.68rem; color:var(--t3); }
+
+/* ── Reloj constitucional (art. 130) ── */
+.reloj130{ background:linear-gradient(160deg,#FFF8F3,#fff 65%); border-color:var(--o-bd); }
+.r130-cab{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-bottom:7px; }
+.r130-cab h2{ font-size:.98rem; }
+.r130-cifra{
+  margin:2px 0; font-size:2.5rem; font-weight:800; line-height:1; color:var(--o);
+  font-variant-numeric:tabular-nums; display:flex; align-items:baseline; gap:7px;
+}
+.r130-cifra i{ font-size:.82rem; font-style:normal; font-weight:700; color:var(--o-dk); }
+.r130-cifra.vencido{ color:var(--rd); }
+.r130-txt{ margin:5px 0 0; font-size:.78rem; color:var(--t2); }
+.r130-base{ margin:7px 0 0; font-size:.68rem; color:var(--t3); border-top:1px solid var(--ln); padding-top:6px; }
+
+/* ── Primeros 100 días ── */
+.d100-cab{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:9px; }
+.d100-cifra{
+  margin:0; display:flex; align-items:baseline; gap:7px;
+  font-size:2.4rem; font-weight:800; line-height:1; color:var(--o);
+  font-variant-numeric:tabular-nums;
+}
+.d100-cifra i{ font-size:.8rem; font-style:normal; font-weight:700; color:var(--t3); }
+.d100-semaforo{ display:flex; gap:6px; flex-wrap:wrap; }
+.sem{
+  display:inline-flex; align-items:center; gap:5px;
+  font:700 .68rem/1 var(--f); padding:6px 10px; border-radius:99px;
+  border:1px solid var(--ln); background:var(--bg);
+}
+.sem b{ font-variant-numeric:tabular-nums; }
+.sem-verde{ background:#EBFBEE; border-color:#C3E6CB; color:var(--ok); }
+.sem-ambar{ background:#FFF9DB; border-color:#FFE066; color:#A6791E; }
+.sem-rojo { background:#FFF5F5; border-color:#FFC9C9; color:var(--rd); }
+.barra-100 span{ background:linear-gradient(90deg,#F59F00,var(--o)); }
+
+.medidas{ display:grid; gap:6px; margin-top:11px; }
+.medida{
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:9px;
+  padding:8px 9px; border-radius:var(--rs); background:var(--bg);
+  border:1px solid var(--ln); border-left:3px solid var(--ln);
+  transition:.16s var(--ease);
+}
+.medida:hover{ transform:translateX(3px); border-color:var(--o-bd); }
+.medida.ejecutada  { border-left-color:var(--ok); }
+.medida.en_proceso { border-left-color:#F59F00; }
+.medida.no_iniciada{ border-left-color:var(--rd); }
+.medida-t{ font-size:.82rem; font-weight:600; }
+.medida-d{ font-size:.7rem; color:var(--t3); }
+
+/* ── Promesas vs. realidad ── */
+.promesas-lista{ display:grid; grid-template-columns:1fr; gap:9px; }
+.promesa{
+  background:var(--w); border:1px solid var(--ln); border-left:4px solid var(--ln);
+  border-radius:var(--rs); padding:11px 13px; box-shadow:var(--sh);
+  transition:.18s var(--ease);
+}
+.promesa:hover{ transform:translateY(-2px); box-shadow:var(--shx); }
+.promesa.cumplida   { border-left-color:var(--ok); }
+.promesa.en_proceso { border-left-color:#F59F00; }
+.promesa.no_iniciada{ border-left-color:var(--t3); }
+.promesa.incumplida { border-left-color:var(--rd); }
+.promesa h3{ font-size:.88rem; margin-bottom:5px; }
+.cadena{ display:grid; grid-template-columns:1fr; gap:5px; margin-top:8px; font-size:.74rem; }
+.eslabon{
+  display:flex; gap:7px; align-items:baseline;
+  padding:5px 8px; border-radius:6px; background:var(--bg); border:1px solid var(--ln);
+}
+.eslabon b{ font-size:.63rem; text-transform:uppercase; letter-spacing:.06em; color:var(--t3); min-width:72px; }
+.eslabon.vacio{ opacity:.6; font-style:italic; }
+
+/* ── Línea de tiempo ── */
+.timeline{ list-style:none; margin:0; padding:0 0 0 20px; position:relative; }
+.timeline::before{
+  content:""; position:absolute; left:5px; top:4px; bottom:4px; width:2px;
+  background:linear-gradient(180deg,var(--o),var(--o-bd)); border-radius:2px;
+}
+.tl{ position:relative; padding:0 0 13px 4px; }
+.tl::before{
+  content:""; position:absolute; left:-19px; top:5px;
+  width:9px; height:9px; border-radius:50%;
+  background:var(--o); border:2px solid #fff; box-shadow:0 0 0 2px var(--o-bd);
+}
+.tl.t-norma::before{ background:#1864AB; box-shadow:0 0 0 2px #A5D8FF; }
+.tl.t-cese::before { background:var(--rd); box-shadow:0 0 0 2px #FFC9C9; }
+.tl.t-viaje::before{ background:#5F3DC4; box-shadow:0 0 0 2px #D0BFFF; }
+.tl.t-hito::before { background:var(--ok); box-shadow:0 0 0 2px #C3E6CB; }
+.tl-fecha{ font-size:.66rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--t3); }
+.tl-fecha b{ color:var(--o-dk); }
+.tl-t{ font-size:.85rem; font-weight:700; margin:1px 0 2px; }
+.tl-d{ font-size:.75rem; color:var(--t2); margin:0; }
+.tl-agrupado{
+  display:inline-block; margin-top:4px; font-size:.68rem; font-weight:700;
+  background:var(--o-bg); color:var(--o-dk); border:1px solid var(--o-bd);
+  border-radius:99px; padding:3px 8px;
+}
+
+/* ── Índice de estabilidad ── */
+.estabilidad{ display:grid; grid-template-columns:repeat(2,1fr); gap:7px; margin-bottom:10px; }
+.est{
+  background:var(--w); border:1px solid var(--ln); border-radius:var(--rs);
+  padding:8px 10px; box-shadow:var(--sh); transition:.18s var(--ease);
+}
+.est:hover{ border-color:var(--o-bd); transform:translateY(-2px); }
+.est dt{ font-size:.6rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--t3); }
+.est dd{ margin:2px 0 0; font-size:1.05rem; font-weight:800; color:var(--o); font-variant-numeric:tabular-nums; }
+.est dd small{ font-size:.68rem; font-weight:600; color:var(--t2); }
+
+/* ── Niveles de evidencia ── */
+.ev{
+  display:inline-flex; align-items:center; gap:4px; white-space:nowrap;
+  font:800 .58rem/1 var(--f); letter-spacing:.05em; text-transform:uppercase;
+  padding:4px 7px; border-radius:5px;
+}
+.ev-oficial      { background:#EBFBEE; color:var(--ok);  border:1px solid #C3E6CB; }
+.ev-verificado   { background:#E7F5FF; color:#1864AB;    border:1px solid #A5D8FF; }
+.ev-preliminar   { background:#FFF9DB; color:#A6791E;    border:1px solid #FFE066; }
+.ev-investigacion{ background:#FFF5F5; color:var(--rd);  border:1px solid #FFC9C9; }
+
+/* ── Tabla mini (congreso / cargos / presupuesto) ── */
+.mini{ width:100%; border-collapse:collapse; font-size:.78rem; }
+.mini th{
+  text-align:left; font-size:.62rem; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--t3); padding:6px 8px; border-bottom:1px solid var(--ln);
+}
+.mini td{ padding:7px 8px; border-bottom:1px solid var(--ln); }
+.mini tr:last-child td{ border-bottom:none; }
+.mini tbody tr:hover{ background:var(--o-bg); }
+.mini-wrap{ overflow-x:auto; }
+
+.meto{ font-size:.79rem; color:var(--t2); }
+.meto h4{ font-size:.8rem; margin:11px 0 4px; color:var(--t); }
+.meto ul{ margin:4px 0; padding-left:18px; }
+.meto li{ margin-bottom:3px; }
+
+@media (min-width:620px){
+  .doble{ grid-template-columns:1.35fr 1fr; }
+  .promesas-lista{ grid-template-columns:repeat(2,1fr); }
+  .cadena{ grid-template-columns:repeat(2,1fr); }
+  .estabilidad{ grid-template-columns:repeat(4,1fr); }
+}
+
 /* ══════════ ACCESIBILIDAD ══════════ */
 @media (prefers-reduced-motion:reduce){
   *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }

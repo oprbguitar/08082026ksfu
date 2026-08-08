@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#E8590C">
-<meta name="description" content="GoVisor — visor estratégico del gobierno peruano: mandato, gabinete, normas y fuentes oficiales de un vistazo.">
-<title>GoVisor · Visor estratégico del gobierno del Perú</title>
+<meta name="description" content="GoVisor — observatorio del Gobierno peruano 2026-2031: primeros 100 días, promesas vs. cumplimiento, línea de tiempo, estabilidad del gabinete y normas, con fuente oficial.">
+<title>GoVisor · Observatorio del Gobierno del Perú</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8590C'/><text x='16' y='23' font-size='19' font-family='Georgia,serif' font-weight='bold' fill='white' text-anchor='middle'>G</text></svg>">
 </head>
@@ -29,9 +29,12 @@
       <span class="marca-txt"><b id="marcaTitulo">GoVisor</b><small id="marcaSub"></small></span>
     </a>
     <nav class="nav">
+      <a href="#d100">100 días</a>
+      <a href="#promesas">Promesas</a>
+      <a href="#linea">Timeline</a>
       <a href="#gabinete">Gabinete</a>
       <a href="#normas">Normas</a>
-      <a href="#seguir">Seguimiento</a>
+      <a href="#seguir">Más</a>
     </nav>
   </div>
 </header>
@@ -69,7 +72,54 @@
   <!-- ══════════ LECTURA RÁPIDA (estadística con letras) ══════════ -->
   <section class="lectura anim" id="lectura"></section>
 
-  <!-- ══════════ COLUMNAS ══════════ -->
+  <!-- ══════════ QUÉ CAMBIÓ / RELOJ CONSTITUCIONAL ══════════ -->
+  <section class="doble anim">
+    <div class="tarjeta">
+      <div class="titulo"><h2>¿Qué cambió?</h2><span id="cambiosVentana"></span></div>
+      <ul class="cambios-lista" id="cambios24"></ul>
+    </div>
+
+    <div class="tarjeta reloj130" id="reloj130"></div>
+  </section>
+
+  <!-- ══════════ PRIMEROS 100 DÍAS ══════════ -->
+  <section class="anim" id="d100">
+    <div class="titulo">
+      <h2>Primeros 100 días</h2>
+      <span id="d100Sub"></span>
+    </div>
+    <div class="tarjeta">
+      <div class="d100-cab">
+        <p class="d100-cifra"><span id="d100Dia">—</span><i>de 100</i></p>
+        <div class="d100-semaforo" id="d100Semaforo"></div>
+      </div>
+      <div class="barra barra-100"><span id="d100Fill"></span></div>
+      <p class="barra-pie" id="d100Pie"></p>
+      <div class="medidas" id="medidas100"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ PROMESAS vs. REALIDAD ══════════ -->
+  <section class="anim" id="promesas">
+    <div class="titulo">
+      <h2>Promesas vs. realidad</h2>
+      <span>Lo que dijo · lo que normó · lo que ejecutó</span>
+    </div>
+    <div class="filtros" id="fPromesas"></div>
+    <div class="promesas-lista" id="listaPromesas"></div>
+  </section>
+
+  <!-- ══════════ LÍNEA DE TIEMPO ══════════ -->
+  <section class="anim" id="linea">
+    <div class="titulo">
+      <h2>Línea de tiempo</h2>
+      <span id="lineaSub"></span>
+    </div>
+    <div class="filtros" id="fLinea"></div>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <!-- ══════════ COLUMNAS: GABINETE + NORMAS ══════════ -->
   <div class="cols">
 
     <section class="col-a anim" id="gabinete">
@@ -77,6 +127,10 @@
         <h2>Consejo de Ministros</h2>
         <span id="subGab"></span>
       </div>
+
+      <!-- Índice de estabilidad -->
+      <div class="estabilidad" id="estabilidad"></div>
+
       <div class="filtros">
         <button class="chip on" data-fgab="todos">Todos</button>
         <button class="chip" data-fgab="activo">En funciones</button>
@@ -104,9 +158,24 @@
     </aside>
   </div>
 
-  <!-- ══════════ SEGUIMIENTO — todo plegado ══════════ -->
+  <!-- ══════════ SEGUIMIENTO — plegado ══════════ -->
   <section id="seguir" class="anim">
     <div class="titulo"><h2>Seguimiento</h2><span>Despliega solo lo que necesites</span></div>
+
+    <details class="acor">
+      <summary><b>Gobierno y Congreso</b><span id="cntCongreso"></span></summary>
+      <div class="acor-in" id="congresoBox"></div>
+    </details>
+
+    <details class="acor">
+      <summary><b>Radar de nombramientos</b><span id="cntCargos"></span></summary>
+      <div class="acor-in" id="cargosBox"></div>
+    </details>
+
+    <details class="acor">
+      <summary><b>Presupuesto y ejecución</b><span id="cntPpto"></span></summary>
+      <div class="acor-in" id="pptoBox"></div>
+    </details>
 
     <details class="acor">
       <summary><b>Viajes oficiales al exterior</b><span id="cntViajes"></span></summary>
@@ -142,14 +211,19 @@
       <summary><b>Fuentes oficiales</b><span>Verifica cada dato</span></summary>
       <div class="acor-in"><div class="grid-f" id="fuentes"></div></div>
     </details>
+
+    <details class="acor">
+      <summary><b>Metodología y niveles de evidencia</b><span>Cómo leer este visor</span></summary>
+      <div class="acor-in" id="metodologia"></div>
+    </details>
   </section>
 
 </main>
 
 <footer class="pie">
   <div class="wrap">
-    <b>GoVisor</b> — visor ciudadano de seguimiento gubernamental.
-    <span class="fine">Proyecto informativo, sin afiliación al Estado peruano ni a organización política. Contrasta siempre con El Peruano y el Congreso. Datos al <span id="pieAct">—</span>.</span>
+    <b>GoVisor</b> — observatorio ciudadano del Gobierno del Perú.
+    <span class="fine">Proyecto informativo, sin afiliación al Estado peruano ni a organización política. Cada dato enlaza a su fuente; contrasta siempre con El Peruano y el Congreso. Datos al <span id="pieAct">—</span>.</span>
   </div>
 </footer>
 

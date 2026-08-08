@@ -7,7 +7,7 @@
 |---|---|
 | **Nombre** | GoVisor |
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
-| **Estado** | v0.2 — visor estratégico, gabinete verificado en fuente oficial |
+| **Estado** | v0.3 — observatorio: 100 días, promesas, timeline, estabilidad |
 | **Repositorio** | https://github.com/oprbguitar/08082026ksfu |
 | **Inicio** | 8 de agosto de 2026 |
 | **Última actualización de este documento** | 8 de agosto de 2026 |
@@ -110,21 +110,29 @@ documentación, entregadas y funcionales.
 | Verificación documental en fuentes oficiales | 5 |
 | Rediseño compacto y sistema de animaciones | 7 |
 | Corrección de defectos y publicación | 2 |
-| **Total** | **48 h** |
+| Módulos del observatorio (cálculo en vivo + esquemas) | 18 |
+| **Total** | **66 h** |
 
 ### 5.2 Valuación por estándar de mercado
 
 | Estándar | Tarifa/hora | Valuación |
 |---|---:|---:|
-| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$1.200 – $2.160** |
-| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$2.880 – $4.560** |
-| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$5.280 – $7.680** |
-| Precio por producto (fixed-bid, entregable cerrado) | — | **$3.800 – $5.500** |
+| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$1.650 – $2.970** |
+| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$3.960 – $6.270** |
+| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$7.260 – $10.560** |
+| Precio por producto (fixed-bid, entregable cerrado) | — | **$5.200 – $7.500** |
 
-**Valuación de referencia recomendada: $4.500 USD.** Punto medio del rango
+**Valuación de referencia recomendada: $6.200 USD.** Punto medio del rango
 fixed-bid internacional. Refleja un producto funcional, accesible, documentado,
 sin deuda técnica de dependencias y —lo que más pesa— **con sus datos
 contrastados contra fuente primaria**, no copiados de segunda mano.
+
+**Advertencia sobre esta cifra.** Valúa el *software*, no el observatorio. Un
+observatorio sin promesas cargadas, sin presupuesto y sin indicadores es un
+motor sin combustible: la arquitectura está, el análisis no. El trabajo de
+curaduría que falta —transcribir promesas de la fuente, cargar el presupuesto
+del MEF, seguir al Congreso— vale **$400 – $900 mensuales** de forma sostenida y
+es lo que convierte esto en un producto con valor real.
 
 **Nota sobre el valor real:** el activo más valioso de un portal de fiscalización
 no es el código, es **la curaduría verificada de los datos**. El trabajo recurrente
@@ -175,7 +183,47 @@ valor más grande disponible, y su costo de infraestructura sigue siendo cero.
 |---|---|---|---|---:|---:|
 | 1 | 2026-08-08 | Portal visor del gobierno: contador presidencial, gabinete con resoluciones, normas al costado, viajes, noticias, YouTube API key, responsive naranja/blanco | `index.html`, `styles.css`, `data.js`, `app.js`, `README.md` | 31 | $2.900 |
 | 2 | 2026-08-08 | Versionado en GitHub + documento de proyecto con valuación como práctica permanente | Repositorio Git inicializado y publicado; `PROYECTO.md` | 3 | $3.200 |
-| 3 | 2026-08-08 | Validar los datos en fuentes oficiales; rediseño compacto tipo visor estratégico con animaciones; publicación en GitHub Pages | Verificación en El Peruano de la presidencia y las 19 R.S.; rediseño completo de las 3 capas; acordeones; animaciones; 3 defectos corregidos | 14 | **$4.500** |
+| 3 | 2026-08-08 | Validar los datos en fuentes oficiales; rediseño compacto tipo visor estratégico con animaciones; publicación en GitHub Pages | Verificación en El Peruano de la presidencia y las 19 R.S.; rediseño completo de las 3 capas; acordeones; animaciones; 3 defectos corregidos | 14 | $4.500 |
+| 4 | 2026-08-08 | Convertirlo en observatorio: 30 módulos propuestos, priorizando promesas, 100 días, timeline, nombramientos/estabilidad y presupuesto | 6 módulos calculados en vivo + 5 con esquema y estado vacío honesto; niveles de evidencia; metodología publicada; 1 defecto corregido | 18 | **$6.200** |
+
+### Detalle de la petición 4
+
+Se propusieron 30 módulos. La restricción no fue el esfuerzo de programación
+sino **la disponibilidad de datos verificables**, y esa distinción define lo
+entregado.
+
+**Calculados en vivo (6)** — derivan de datos ya contrastados, sin intervención
+manual, y se repintan solos al cambiar el día en Lima:
+
+| Módulo | Cómo se calcula |
+|---|---|
+| Primeros 100 días | Día N sobre la fecha real de asunción |
+| Reloj constitucional art. 130 | Asunción + 30 días → vence el 27/08/2026 |
+| Línea de tiempo | Derivada de asunción + nombramientos + ceses + normas + viajes |
+| Índice de estabilidad | Titulares originales, relevos, permanencia media, mayor rotación |
+| ¿Qué cambió? | Ventana de 7 días sobre la línea derivada |
+| Permanencia por ministro | Ya existente, ahora alimenta el índice |
+
+**Con esquema y estado vacío (5)** — promesas, medidas de los 100 días,
+presupuesto, actos del Congreso y altos cargos. Cada uno explica en pantalla qué
+fuente lo alimenta. **No se cargaron cifras porque no se pudieron verificar.**
+
+**No implementados (19)** — PBI, inflación, homicidios, conflictos, encuestas,
+mapa departamental, análisis de discurso, resumen con IA y comparador histórico.
+Todos requieren series de datos externas (INEI, BCRP, Defensoría, encuestadoras)
+o procesamiento de lenguaje sobre transcripciones. Construir la interfaz sin la
+fuente produciría tableros vistosos con números inventados: exactamente lo
+contrario al propósito del proyecto.
+
+**Añadido transversal:** niveles de evidencia (`oficial` · `verificado` ·
+`preliminar` · `en investigación`) y una sección de metodología que declara qué
+se calcula, qué se carga a mano y qué no hace el visor.
+
+**Defecto corregido:** al reestructurar el HTML se eliminó el contenedor
+`#lectura` mientras `pintarLectura()` seguía escribiendo en él —
+`TypeError: Cannot set properties of null`, detectado en consola. Se restituyó la
+sección en lugar de borrar la función, porque la «estadística con letras» es un
+requisito vigente del usuario.
 
 ### Detalle de la petición 3
 
