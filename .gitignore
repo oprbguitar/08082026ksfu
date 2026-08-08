@@ -1,0 +1,24 @@
+# Sistema operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# OneDrive
+*.tmp
+*.laccdb
+~$*
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Secretos — nunca versionar claves de API
+.env
+.env.*
+secrets.js
+*.key
