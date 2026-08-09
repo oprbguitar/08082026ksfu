@@ -38,7 +38,7 @@
   <div class="wrap head-in">
     <a class="marca" href="#top" aria-label="GoVisor, inicio">
       <span class="marca-logo" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="14" fill="#005C59"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="16" cy="16" r="3.2" fill="#fff"/></svg>
+        <svg viewBox="0 0 32 32" width="30" height="30"><circle cx="16" cy="16" r="14.5" fill="rgba(255,255,255,.13)"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="16" cy="16" r="3.2" fill="#fff"/></svg>
       </span>
       <span class="marca-txt">
         <b id="marcaTitulo">GoVisor</b>
@@ -404,7 +404,7 @@
     <nav class="pie-nav" aria-label="Enlaces del pie">
       <a href="#meto-b">Metodología</a>
       <a href="#fuentes-b">Fuentes</a>
-      <a href="#top">Acerca de GoVisor</a>
+      <button class="pie-btn" id="acercaBtn" aria-haspopup="dialog">Acerca de GoVisor</button>
     </nav>
   </div>
   <div class="wrap pie-legal">
@@ -412,7 +412,36 @@
     Cada dato enlaza a su fuente; contrasta siempre con El Peruano y el Congreso.
     Datos al <span id="pieAct">—</span>.
   </div>
+  <div class="wrap pie-autor">
+    Creado por
+    <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">
+      Andesnova.solutions <span aria-hidden="true">↗</span></a>
+  </div>
 </footer>
+
+<!-- ══════════════════ ACERCA DE ══════════════════ -->
+<div class="visor acerca" id="acerca" hidden>
+  <div class="visor-fondo" data-cerrar-acerca></div>
+  <div class="acerca-caja" role="dialog" aria-modal="true" aria-labelledby="acercaTitulo">
+    <h2 id="acercaTitulo">Acerca de GoVisor</h2>
+    <p><b>GoVisor es una página informativa</b> que da seguimiento a la gestión del
+    Gobierno del Perú: el gabinete, las normas publicadas, las promesas anunciadas
+    y los plazos constitucionales.</p>
+    <p>No es un sitio oficial del Estado ni está afiliado a organización política
+    alguna. Cada dato que se muestra enlaza a su fuente —El Peruano, el Congreso,
+    el JNE— para que cualquiera pueda comprobarlo. Cuando un dato no está
+    contrastado, el visor lo dice en lugar de rellenarlo.</p>
+    <p class="acerca-autor">Creado por
+      <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">
+        Andesnova.solutions <span aria-hidden="true">↗</span></a>
+    </p>
+    <div class="acerca-pie">
+      <a class="btn" href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">
+        Visitar Andesnova ↗</a>
+      <button class="btn ghost" data-cerrar-acerca>Cerrar</button>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════ VISOR DE RESOLUCIONES ══════════════════ -->
 <div class="visor" id="visor" hidden>

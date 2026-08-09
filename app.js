@@ -1306,7 +1306,32 @@
     secciones.forEach((s) => obs.observe(s));
   }
 
+  /* ── Diálogo "Acerca de" ───────────────────────────────────────────── */
+  let focoAcerca = null;
+
+  function abrirAcerca() {
+    focoAcerca = document.activeElement;
+    $("acerca").hidden = false;
+    document.body.classList.add("sin-scroll");
+    const b = document.querySelector("#acerca .btn");
+    if (b) b.focus();
+  }
+  function cerrarAcerca() {
+    $("acerca").hidden = true;
+    document.body.classList.remove("sin-scroll");
+    if (focoAcerca && focoAcerca.focus) focoAcerca.focus();
+  }
+
   function conectar() {
+    // ── Acerca de ──
+    document.addEventListener("click", (ev) => {
+      if (ev.target.closest("#acercaBtn")) { ev.preventDefault(); abrirAcerca(); return; }
+      if (ev.target.closest("[data-cerrar-acerca]")) { cerrarAcerca(); }
+    });
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape" && !$("acerca").hidden) cerrarAcerca();
+    });
+
     // ── Visor: abrir/cerrar ──
     document.addEventListener("click", (ev) => {
       if (ev.target.closest("[data-cerrar-visor]")) { cerrarVisor(); return; }

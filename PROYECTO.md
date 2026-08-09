@@ -7,7 +7,7 @@
 |---|---|
 | **Nombre** | GoVisor |
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
-| **Estado** | v0.5 — rediseño institucional teal, portada tipo observatorio |
+| **Estado** | v0.6 — cabecera verde, banner del Perú, autoría Andesnova |
 | **Repositorio** | https://github.com/oprbguitar/08082026ksfu |
 | **Inicio** | 8 de agosto de 2026 |
 | **Última actualización de este documento** | 8 de agosto de 2026 |
@@ -113,7 +113,8 @@ documentación, entregadas y funcionales.
 | Módulos del observatorio (cálculo en vivo + esquemas) | 18 |
 | Scraper de El Peruano, promesas y visor incrustado | 16 |
 | Rediseño institucional, accesibilidad y responsive | 20 |
-| **Total** | **102 h** |
+| Banner, encaje tipográfico y cabecera verde | 8 |
+| **Total** | **110 h** |
 
 ### 5.2 Valuación por estándar de mercado
 
@@ -124,7 +125,7 @@ documentación, entregadas y funcionales.
 | Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$11.220 – $16.320** |
 | Precio por producto (fixed-bid, entregable cerrado) | — | **$8.000 – $11.500** |
 
-**Valuación de referencia recomendada: $9.600 USD.** Punto medio del rango
+**Valuación de referencia recomendada: $10.400 USD.** Punto medio del rango
 fixed-bid internacional. Refleja un producto funcional, accesible, documentado,
 sin deuda técnica de dependencias y —lo que más pesa— **con sus datos
 contrastados contra fuente primaria**, no copiados de segunda mano.
@@ -188,7 +189,8 @@ valor más grande disponible, y su costo de infraestructura sigue siendo cero.
 | 3 | 2026-08-08 | Validar los datos en fuentes oficiales; rediseño compacto tipo visor estratégico con animaciones; publicación en GitHub Pages | Verificación en El Peruano de la presidencia y las 19 R.S.; rediseño completo de las 3 capas; acordeones; animaciones; 3 defectos corregidos | 14 | $4.500 |
 | 4 | 2026-08-08 | Convertirlo en observatorio: 30 módulos propuestos, priorizando promesas, 100 días, timeline, nombramientos/estabilidad y presupuesto | 6 módulos calculados en vivo + 5 con esquema y estado vacío honesto; niveles de evidencia; metodología publicada; 1 defecto corregido | 18 | $6.200 |
 | 5 | 2026-08-08 | Cargar promesas del Mensaje a la Nación; scraping de El Peruano con filtro Congreso/Consejo de Ministros; visor de resoluciones dentro de la app; arreglar enlaces rotos | Scraper de 161 normas con 0 enlaces rotos; 17 promesas; visor incrustado; 3 URLs 404 corregidas; 3 defectos del scraper corregidos | 16 | $7.800 |
-| 6 | 2026-08-08 | Rediseño institucional siguiendo referencia visual, preservando funcionalidad, IDs y datos | Identidad teal; héroe panorámico; 4 KPI derivados; tablero de 4 columnas; tabla de normas; cabecera con «Más»; accesibilidad y responsive verificados; 1 defecto corregido | 20 | **$9.600** |
+| 6 | 2026-08-08 | Rediseño institucional siguiendo referencia visual, preservando funcionalidad, IDs y datos | Identidad teal; héroe panorámico; 4 KPI derivados; tablero de 4 columnas; tabla de normas; cabecera con «Más»; accesibilidad y responsive verificados; 1 defecto corregido | 20 | $9.600 |
+| 7 | 2026-08-08 | Banner del Perú; encaje tipográfico; cabecera verde y compacta; iniciales centradas con colores alternos; autoría y diálogo «Acerca de» con enlace a Andesnova | 4 variantes WebP (61–242 KB); 4 defectos de CSS corregidos; diálogo accesible; contraste AAA verificado | 8 | **$10.400** |
 
 ### Detalle de la petición 6
 
