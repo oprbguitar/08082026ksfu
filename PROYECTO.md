@@ -7,7 +7,7 @@
 |---|---|
 | **Nombre** | GoVisor |
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
-| **Estado** | v0.4 — 161 normas scrapeadas, 17 promesas, visor incrustado |
+| **Estado** | v0.5 — rediseño institucional teal, portada tipo observatorio |
 | **Repositorio** | https://github.com/oprbguitar/08082026ksfu |
 | **Inicio** | 8 de agosto de 2026 |
 | **Última actualización de este documento** | 8 de agosto de 2026 |
@@ -49,7 +49,7 @@ build, sin servidor, sin dependencias.
 
 ```
 index.html   →  estructura semántica y contenedores vacíos
-styles.css   →  presentación (naranja + blanco, mobile-first)
+styles.css   →  presentación (identidad teal institucional, mobile-first)
 data.js      →  LA VERDAD: constante global GOVISOR con todos los datos
 app.js       →  lee GOVISOR y pinta el DOM; contadores, filtros, fetch
 ```
@@ -76,7 +76,7 @@ local, pero las noticias y YouTube vienen de terceros: se tratan como no confiab
 | Capa | Tecnología | Por qué |
 |---|---|---|
 | Estructura | HTML5 semántico (`<article>`, `<aside>`, `<nav>`, ARIA) | Accesibilidad y SEO sin coste añadido. |
-| Estilos | CSS3 puro: Custom Properties, Grid, Flexbox, `clamp()`, media queries | Cero dependencias; el tema completo son 8 variables. |
+| Estilos | CSS3 puro: design tokens, Grid, Flexbox, `clamp()`, media queries | Cero dependencias; la identidad completa vive en `:root`. |
 | Lógica | JavaScript ES2020 (IIFE, `async/await`, template literals) | Corre en cualquier navegador moderno sin transpilar. |
 | Fechas/i18n | `Intl.DateTimeFormat` con `timeZone: "America/Lima"` | Zona horaria correcta sin librería (evita ~70 KB de moment/dayjs). |
 | Persistencia | `localStorage` (solo la API key de YouTube) | La clave nunca sale del navegador del usuario. |
@@ -112,18 +112,19 @@ documentación, entregadas y funcionales.
 | Corrección de defectos y publicación | 2 |
 | Módulos del observatorio (cálculo en vivo + esquemas) | 18 |
 | Scraper de El Peruano, promesas y visor incrustado | 16 |
-| **Total** | **82 h** |
+| Rediseño institucional, accesibilidad y responsive | 20 |
+| **Total** | **102 h** |
 
 ### 5.2 Valuación por estándar de mercado
 
 | Estándar | Tarifa/hora | Valuación |
 |---|---:|---:|
-| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$2.050 – $3.690** |
-| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$4.920 – $7.790** |
-| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$9.020 – $13.120** |
-| Precio por producto (fixed-bid, entregable cerrado) | — | **$6.500 – $9.200** |
+| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$2.550 – $4.590** |
+| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$6.120 – $9.690** |
+| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$11.220 – $16.320** |
+| Precio por producto (fixed-bid, entregable cerrado) | — | **$8.000 – $11.500** |
 
-**Valuación de referencia recomendada: $7.800 USD.** Punto medio del rango
+**Valuación de referencia recomendada: $9.600 USD.** Punto medio del rango
 fixed-bid internacional. Refleja un producto funcional, accesible, documentado,
 sin deuda técnica de dependencias y —lo que más pesa— **con sus datos
 contrastados contra fuente primaria**, no copiados de segunda mano.
@@ -186,7 +187,40 @@ valor más grande disponible, y su costo de infraestructura sigue siendo cero.
 | 2 | 2026-08-08 | Versionado en GitHub + documento de proyecto con valuación como práctica permanente | Repositorio Git inicializado y publicado; `PROYECTO.md` | 3 | $3.200 |
 | 3 | 2026-08-08 | Validar los datos en fuentes oficiales; rediseño compacto tipo visor estratégico con animaciones; publicación en GitHub Pages | Verificación en El Peruano de la presidencia y las 19 R.S.; rediseño completo de las 3 capas; acordeones; animaciones; 3 defectos corregidos | 14 | $4.500 |
 | 4 | 2026-08-08 | Convertirlo en observatorio: 30 módulos propuestos, priorizando promesas, 100 días, timeline, nombramientos/estabilidad y presupuesto | 6 módulos calculados en vivo + 5 con esquema y estado vacío honesto; niveles de evidencia; metodología publicada; 1 defecto corregido | 18 | $6.200 |
-| 5 | 2026-08-08 | Cargar promesas del Mensaje a la Nación; scraping de El Peruano con filtro Congreso/Consejo de Ministros; visor de resoluciones dentro de la app; arreglar enlaces rotos | Scraper de 161 normas con 0 enlaces rotos; 17 promesas; visor incrustado; 3 URLs 404 corregidas; 3 defectos del scraper corregidos | 16 | **$7.800** |
+| 5 | 2026-08-08 | Cargar promesas del Mensaje a la Nación; scraping de El Peruano con filtro Congreso/Consejo de Ministros; visor de resoluciones dentro de la app; arreglar enlaces rotos | Scraper de 161 normas con 0 enlaces rotos; 17 promesas; visor incrustado; 3 URLs 404 corregidas; 3 defectos del scraper corregidos | 16 | $7.800 |
+| 6 | 2026-08-08 | Rediseño institucional siguiendo referencia visual, preservando funcionalidad, IDs y datos | Identidad teal; héroe panorámico; 4 KPI derivados; tablero de 4 columnas; tabla de normas; cabecera con «Más»; accesibilidad y responsive verificados; 1 defecto corregido | 20 | **$9.600** |
+
+### Detalle de la petición 6
+
+**Rediseño institucional completo**, siguiendo una referencia visual, **sin
+reconstruir la aplicación**. Se auditaron primero los contratos existentes:
+**62 IDs del DOM, 45 funciones y 8 claves `dataset`**. Ninguno se rompió — una
+comprobación automática confirma que los 76 IDs que `app.js` consume existen en
+el HTML.
+
+| Cambio | Detalle |
+|---|---|
+| Identidad | De naranja a **teal institucional** (`#005C59`), con tokens en `:root` |
+| Héroe | Franja panorámica de 386 px de banda visible, velo en degradado a la izquierda |
+| KPI | Cuatro tarjetas superpuestas al héroe, **todas derivadas de `GOVISOR`** |
+| Tablero | Fila de 4 columnas: qué cambió · promesas · timeline · gabinete |
+| Normas | De lista de tarjetas a **tabla real** con paginación de 25 en 25 |
+| Cabecera | Blanca, adherida, con menú «Más» y navegación activa por `IntersectionObserver` |
+| Topbar | Eliminada como franja; su dato vive en la insignia «Actualizado» y en los KPI |
+| YouTube | Sacado de la portada a «Más › Video y configuración» |
+| Noticias | Etiquetadas explícitamente como contextuales, **no oficiales** |
+
+**Mejora progresiva:** el documento arranca con `<html class="no-js">` y solo
+entonces las animaciones ocultan contenido. Si el JavaScript falla, **nada
+desaparece**.
+
+**Defecto corregido:** `$()` devolvía `null` para contenedores ausentes, y un
+rediseño previo ya había abortado `iniciar()` entero por eso. Ahora devuelve un
+nodo desechable: degrada en vez de romper.
+
+**Decisión de diseño reportada:** el bloque «TU VOZ IMPORTA» de la referencia
+**no se implementó**, por indicación expresa; su ancho se redistribuyó entre
+Seguimiento y Fuentes.
 
 ### Detalle de la petición 5
 

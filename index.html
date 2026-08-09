@@ -1,40 +1,70 @@
 <!DOCTYPE html>
-<html lang="es-PE">
+<html lang="es-PE" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#E8590C">
-<meta name="description" content="GoVisor — observatorio del Gobierno peruano 2026-2031: primeros 100 días, promesas vs. cumplimiento, línea de tiempo, estabilidad del gabinete y normas, con fuente oficial.">
-<title>GoVisor · Observatorio del Gobierno del Perú</title>
+<meta name="theme-color" content="#005C59">
+<title>GoVisor · Observatorio ciudadano del Gobierno del Perú</title>
+<meta name="description" content="Observatorio ciudadano independiente del Gobierno del Perú 2026-2031: primeros 100 días, promesas vs. realidad, gabinete, normas oficiales y evidencia trazable a la fuente.">
+<link rel="canonical" href="https://oprbguitar.github.io/08082026ksfu/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GoVisor">
+<meta property="og:title" content="GoVisor · Observatorio ciudadano del Gobierno del Perú">
+<meta property="og:description" content="Datos, evidencia y seguimiento para entender la gestión del Gobierno del Perú. Cada dato enlaza a su fuente oficial.">
+<meta property="og:url" content="https://oprbguitar.github.io/08082026ksfu/">
+<meta property="og:locale" content="es_PE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GoVisor · Observatorio ciudadano del Gobierno del Perú">
+<meta name="twitter:description" content="Datos, evidencia y seguimiento del Gobierno del Perú, con trazabilidad a la fuente oficial.">
+
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E8590C'/><text x='16' y='23' font-size='19' font-family='Georgia,serif' font-weight='bold' fill='white' text-anchor='middle'>G</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23005C59'/><circle cx='16' cy='16' r='9' fill='none' stroke='white' stroke-width='2.4'/><circle cx='16' cy='16' r='3.4' fill='white'/></svg>">
+<script>document.documentElement.className = "js";</script>
 </head>
 <body>
 
-<!-- ══════════ BARRA SUPERIOR ══════════ -->
-<div class="topbar">
-  <div class="wrap topbar-in">
-    <span class="tb-lugar"><i class="dot"></i> Lima</span>
-    <span class="tb-fecha" id="tbFecha">—</span>
-    <span class="tb-hora" id="tbHora">--:--:--</span>
-    <span class="tb-dia">Día <b id="tbDia">—</b> de gobierno</span>
-  </div>
-</div>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
-<!-- ══════════ CABECERA ══════════ -->
+<!-- ══════════════════ CABECERA ══════════════════ -->
 <header class="head">
   <div class="wrap head-in">
-    <a class="marca" href="#top">
-      <span class="marca-logo">G</span>
-      <span class="marca-txt"><b id="marcaTitulo">GoVisor</b><small id="marcaSub"></small></span>
+    <a class="marca" href="#top" aria-label="GoVisor, inicio">
+      <span class="marca-logo" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="14" fill="#005C59"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="16" cy="16" r="3.2" fill="#fff"/></svg>
+      </span>
+      <span class="marca-txt">
+        <b id="marcaTitulo">GoVisor</b>
+        <small id="marcaSub">Observatorio ciudadano del Gobierno del Perú</small>
+      </span>
     </a>
-    <nav class="nav">
-      <a href="#d100">100 días</a>
-      <a href="#promesas">Promesas</a>
-      <a href="#linea">Timeline</a>
-      <a href="#gabinete">Gabinete</a>
-      <a href="#normas">Normas</a>
-      <a href="#seguir">Más</a>
+
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navPral">
+      <span class="menu-ico" aria-hidden="true"></span><span class="sr-only">Abrir menú</span>
+    </button>
+
+    <nav class="nav" id="navPral" aria-label="Secciones principales">
+      <a href="#d100" data-nav="d100">100 días</a>
+      <a href="#promesas" data-nav="promesas">Promesas</a>
+      <a href="#linea" data-nav="linea">Timeline</a>
+      <a href="#gabinete" data-nav="gabinete">Gabinete</a>
+      <a href="#normas" data-nav="normas">Normas</a>
+
+      <div class="mas">
+        <button class="mas-btn" id="masBtn" aria-expanded="false" aria-controls="masMenu">Más <span aria-hidden="true">▾</span></button>
+        <div class="mas-menu" id="masMenu" hidden>
+          <a href="#congreso-b">Gobierno y Congreso</a>
+          <a href="#cargos-b">Radar de nombramientos</a>
+          <a href="#ppto-b">Presupuesto y ejecución</a>
+          <a href="#viajes-b">Viajes oficiales</a>
+          <a href="#noticias-b">Noticias</a>
+          <a href="#video-b">Video y configuración</a>
+          <a href="#fuentes-b">Fuentes oficiales</a>
+          <a href="#meto-b">Metodología</a>
+        </div>
+      </div>
+
+      <a class="cta" href="#normas">Explorar datos</a>
     </nav>
   </div>
 </header>
@@ -43,203 +73,347 @@
   <div class="wrap"><b>Aviso ·</b> <span id="avisoTxt"></span></div>
 </div>
 
-<main class="wrap" id="top">
+<main id="contenido">
 
-  <!-- ══════════ PANEL DE MANDO ══════════ -->
-  <section class="mando anim">
-    <div class="ficha">
+<!-- ══════════════════ HÉROE ══════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-img" role="img"
+       aria-label="Panorámica del Perú: Palacio de Gobierno, los Andes y la costa de Lima"></div>
+  <div class="hero-velo" aria-hidden="true"></div>
+
+  <div class="wrap hero-in">
+    <div class="hero-txt">
+      <h1>La ciudadanía observa.<br><span>El país avanza.</span></h1>
+      <p class="hero-sub">Datos, evidencia y seguimiento para entender la gestión del Gobierno del Perú.</p>
+      <p class="hero-nota">
+        <span aria-hidden="true">ⓘ</span>
+        Proyecto informativo, independiente y sin afiliación al Estado ni a organización política.
+      </p>
+    </div>
+
+    <div class="actualizado">
+      <span class="punto" aria-hidden="true"></span>
+      <span>
+        <b>Actualizado</b>
+        <span id="tbFecha">—</span>
+        <span class="act-hora"><span id="tbHora">--:--:--</span> (UTC−5)</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ KPI ══════════════════ -->
+<div class="wrap">
+  <section class="kpis" aria-label="Indicadores principales">
+
+    <article class="kpi">
+      <span class="kpi-ico" aria-hidden="true">🗓</span>
+      <div class="kpi-cuerpo">
+        <p class="kpi-rot">Día del Gobierno</p>
+        <p class="kpi-val"><span id="dias">0</span></p>
+        <p class="kpi-sub" id="diasTexto">—</p>
+        <p class="sr-only">Día <span id="tbDia">—</span> de gobierno</p>
+      </div>
+    </article>
+
+    <article class="kpi">
+      <span class="kpi-ico" aria-hidden="true">◷</span>
+      <div class="kpi-cuerpo">
+        <p class="kpi-rot">Primeros 100 días</p>
+        <p class="kpi-val"><span id="d100Dia">—</span><i>de 100</i></p>
+        <p class="kpi-sub" id="d100Sub">—</p>
+      </div>
+      <div class="anillo" aria-hidden="true">
+        <svg viewBox="0 0 44 44"><circle class="ani-b" cx="22" cy="22" r="18"/><circle class="ani-f" id="anilloFill" cx="22" cy="22" r="18"/></svg>
+        <b id="anilloPct">—</b>
+      </div>
+    </article>
+
+    <article class="kpi">
+      <span class="kpi-ico" aria-hidden="true">👥</span>
+      <div class="kpi-cuerpo">
+        <p class="kpi-rot">Consejo de Ministros</p>
+        <p class="kpi-val"><span id="kpiGab">—</span></p>
+        <p class="kpi-sub" id="kpiGabSub">—</p>
+      </div>
+    </article>
+
+    <article class="kpi">
+      <span class="kpi-ico" aria-hidden="true">📄</span>
+      <div class="kpi-cuerpo">
+        <p class="kpi-rot">Normas del periodo</p>
+        <p class="kpi-val kpi-val-sm"><span id="kpiNormas">—</span></p>
+        <p class="kpi-sub" id="kpiNormasSub">—</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ══════════════════ TABLERO ══════════════════ -->
+  <section class="tablero" aria-label="Resumen del gobierno">
+
+    <article class="card anim" aria-labelledby="h-cambio">
+      <header class="card-cab">
+        <div><h2 id="h-cambio">¿Qué cambió?</h2><p id="cambiosVentana">—</p></div>
+      </header>
+      <ul class="cambios-lista" id="cambios24"></ul>
+      <a class="card-mas" href="#linea">Ver timeline completo →</a>
+    </article>
+
+    <article class="card anim" aria-labelledby="h-prom-r">
+      <header class="card-cab">
+        <div><h2 id="h-prom-r">Promesas vs. realidad</h2><p>Lo que dijo · lo que normó · lo que ejecutó</p></div>
+        <a class="card-ver" href="#promesas">Ver todas</a>
+      </header>
+      <div class="cadena3" id="promesasResumen"></div>
+      <p class="card-pie" id="promesasNota"></p>
+    </article>
+
+    <article class="card anim" aria-labelledby="h-tl-r">
+      <header class="card-cab">
+        <div><h2 id="h-tl-r">Timeline del Gobierno</h2></div>
+        <a class="card-ver" href="#linea">Ver todo</a>
+      </header>
+      <ol class="tl-mini" id="timelineMini"></ol>
+    </article>
+
+    <article class="card anim" aria-labelledby="h-gab-r">
+      <header class="card-cab">
+        <div><h2 id="h-gab-r">Consejo de Ministros</h2></div>
+        <a class="card-ver" href="#gabinete">Ver gabinete</a>
+      </header>
+      <ul class="min-mini" id="gabineteResumen"></ul>
+      <a class="card-mas" href="#gabinete">Ver los 19 ministros y carteras →</a>
+    </article>
+
+  </section>
+
+  <!-- ══════════════════ PRIMEROS 100 DÍAS ══════════════════ -->
+  <section class="anim" id="d100" aria-labelledby="h-d100">
+    <div class="sec-cab">
+      <h2 id="h-d100">Primeros 100 días</h2>
+      <span>Semáforo de las medidas anunciadas</span>
+    </div>
+    <div class="dos">
+      <div class="card">
+        <div class="d100-semaforo" id="d100Semaforo"></div>
+        <div class="barra barra-100"><span id="d100Fill"></span></div>
+        <p class="barra-pie" id="d100Pie"></p>
+        <div class="medidas" id="medidas100"></div>
+      </div>
+      <div class="card reloj130" id="reloj130"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PROMESAS ══════════════════ -->
+  <section class="anim" id="promesas" aria-labelledby="h-prom">
+    <div class="sec-cab">
+      <h2 id="h-prom">Promesas vs. realidad</h2>
+      <span>Cada promesa, con su cadena de evidencia</span>
+    </div>
+    <div class="filtros" id="fPromesas" role="group" aria-label="Filtrar promesas"></div>
+    <div class="promesas-lista" id="listaPromesas"></div>
+  </section>
+
+  <!-- ══════════════════ TIMELINE ══════════════════ -->
+  <section class="anim" id="linea" aria-labelledby="h-linea">
+    <div class="sec-cab">
+      <h2 id="h-linea">Línea de tiempo</h2>
+      <span id="lineaSub"></span>
+    </div>
+    <div class="filtros" id="fLinea" role="group" aria-label="Filtrar la línea de tiempo"></div>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <!-- ══════════════════ GABINETE ══════════════════ -->
+  <section class="anim" id="gabinete" aria-labelledby="h-gab">
+    <div class="sec-cab">
+      <h2 id="h-gab">Consejo de Ministros</h2>
+      <span id="subGab"></span>
+    </div>
+
+    <div class="card ficha-pres">
       <div class="ficha-top">
-        <div class="retrato" id="retrato"></div>
-        <div class="ficha-id">
+        <div class="retrato" id="retrato" aria-hidden="true"></div>
+        <div>
           <p class="rotulo" id="cargoTxt">—</p>
-          <h1 id="nombrePres">—</h1>
+          <h3 id="nombrePres">—</h3>
           <p class="sub" id="periodoTxt"></p>
         </div>
       </div>
       <div class="chips" id="normaPres"></div>
       <dl class="hitos" id="hitos"></dl>
-    </div>
-
-    <div class="contador">
-      <p class="rotulo">Tiempo en el cargo</p>
-      <p class="cifra"><span id="dias">0</span><i>días</i></p>
-      <p class="cifra-sub" id="diasTexto"></p>
       <div class="barra"><span id="barraFill"></span></div>
       <p class="barra-pie" id="barraPie"></p>
     </div>
+
+    <div class="estabilidad" id="estabilidad"></div>
+
+    <div class="filtros" role="group" aria-label="Filtrar gabinete">
+      <button class="chip on" data-fgab="todos" aria-pressed="true">Todos</button>
+      <button class="chip" data-fgab="activo" aria-pressed="false">En funciones</button>
+      <button class="chip" data-fgab="cesado" aria-pressed="false">Cesados</button>
+      <button class="chip" data-fgab="pendiente" aria-pressed="false">Sin datos</button>
+    </div>
+    <div class="tabla" id="tablaGab"></div>
   </section>
 
-  <!-- ══════════ LECTURA RÁPIDA (estadística con letras) ══════════ -->
-  <section class="lectura anim" id="lectura"></section>
-
-  <!-- ══════════ QUÉ CAMBIÓ / RELOJ CONSTITUCIONAL ══════════ -->
-  <section class="doble anim">
-    <div class="tarjeta">
-      <div class="titulo"><h2>¿Qué cambió?</h2><span id="cambiosVentana"></span></div>
-      <ul class="cambios-lista" id="cambios24"></ul>
+  <!-- ══════════════════ NORMAS ══════════════════ -->
+  <section class="anim" id="normas" aria-labelledby="h-norm">
+    <div class="sec-cab">
+      <h2 id="h-norm">Normas del periodo</h2>
+      <span>Publicadas en El Peruano desde el 28/07/2026</span>
     </div>
-
-    <div class="tarjeta reloj130" id="reloj130"></div>
-  </section>
-
-  <!-- ══════════ PRIMEROS 100 DÍAS ══════════ -->
-  <section class="anim" id="d100">
-    <div class="titulo">
-      <h2>Primeros 100 días</h2>
-      <span id="d100Sub"></span>
-    </div>
-    <div class="tarjeta">
-      <div class="d100-cab">
-        <p class="d100-cifra"><span id="d100Dia">—</span><i>de 100</i></p>
-        <div class="d100-semaforo" id="d100Semaforo"></div>
-      </div>
-      <div class="barra barra-100"><span id="d100Fill"></span></div>
-      <p class="barra-pie" id="d100Pie"></p>
-      <div class="medidas" id="medidas100"></div>
-    </div>
-  </section>
-
-  <!-- ══════════ PROMESAS vs. REALIDAD ══════════ -->
-  <section class="anim" id="promesas">
-    <div class="titulo">
-      <h2>Promesas vs. realidad</h2>
-      <span>Lo que dijo · lo que normó · lo que ejecutó</span>
-    </div>
-    <div class="filtros" id="fPromesas"></div>
-    <div class="promesas-lista" id="listaPromesas"></div>
-  </section>
-
-  <!-- ══════════ LÍNEA DE TIEMPO ══════════ -->
-  <section class="anim" id="linea">
-    <div class="titulo">
-      <h2>Línea de tiempo</h2>
-      <span id="lineaSub"></span>
-    </div>
-    <div class="filtros" id="fLinea"></div>
-    <ol class="timeline" id="timeline"></ol>
-  </section>
-
-  <!-- ══════════ COLUMNAS: GABINETE + NORMAS ══════════ -->
-  <div class="cols">
-
-    <section class="col-a anim" id="gabinete">
-      <div class="titulo">
-        <h2>Consejo de Ministros</h2>
-        <span id="subGab"></span>
-      </div>
-
-      <!-- Índice de estabilidad -->
-      <div class="estabilidad" id="estabilidad"></div>
-
-      <div class="filtros">
-        <button class="chip on" data-fgab="todos">Todos</button>
-        <button class="chip" data-fgab="activo">En funciones</button>
-        <button class="chip" data-fgab="cesado">Cesados</button>
-        <button class="chip" data-fgab="pendiente">Sin datos</button>
-      </div>
-      <div class="tabla" id="tablaGab"></div>
-    </section>
-
-    <aside class="col-b anim" id="normas">
-      <div class="panel">
-        <div class="titulo">
-          <h2>Normas del periodo</h2>
-          <span>Desde el 28/07/2026</span>
+    <div class="card">
+      <div class="norm-ctl">
+        <div class="filtros" role="group" aria-label="Filtrar normas">
+          <button class="chip on" data-fnorma="todos" aria-pressed="true">Todas</button>
+          <button class="chip" data-fnorma="congreso" aria-pressed="false">Congreso</button>
+          <button class="chip" data-fnorma="ejecutivo" aria-pressed="false">Ejecutivo</button>
+          <button class="chip" data-fnorma="viaje" aria-pressed="false">Viajes</button>
         </div>
-        <div class="filtros">
-          <button class="chip on" data-fnorma="todos">Todas</button>
-          <button class="chip" data-fnorma="congreso">Congreso</button>
-          <button class="chip" data-fnorma="ejecutivo">Ejecutivo</button>
-          <button class="chip" data-fnorma="viaje">Viajes</button>
-        </div>
-        <input type="search" id="buscar" class="buscar" placeholder="Buscar número o sumilla…">
-        <div class="normas" id="listaNormas"></div>
+        <label class="busca">
+          <span class="sr-only">Buscar norma por número, título o palabra clave</span>
+          <input type="search" id="buscar" placeholder="Buscar por número, título o palabra clave…">
+        </label>
       </div>
-    </aside>
-  </div>
+      <div class="normas" id="listaNormas"></div>
+    </div>
+  </section>
 
-  <!-- ══════════ SEGUIMIENTO — plegado ══════════ -->
-  <section id="seguir" class="anim">
-    <div class="titulo"><h2>Seguimiento</h2><span>Despliega solo lo que necesites</span></div>
+  <!-- ══════════════════ LECTURA RÁPIDA ══════════════════ -->
+  <section class="anim" aria-labelledby="h-lect">
+    <div class="sec-cab">
+      <h2 id="h-lect">El gobierno, en pocas palabras</h2>
+      <span>Lectura de lo registrado, sin cifras sueltas</span>
+    </div>
+    <div class="lectura" id="lectura"></div>
+  </section>
 
-    <details class="acor">
-      <summary><b>Gobierno y Congreso</b><span id="cntCongreso"></span></summary>
-      <div class="acor-in" id="congresoBox"></div>
-    </details>
+  <!-- ══════════════════ SEGUIMIENTO + FUENTES ══════════════════ -->
+  <section class="anim" id="seguir" aria-labelledby="h-seg">
+    <div class="sec-cab">
+      <h2 id="h-seg">Seguimiento</h2>
+      <span>Módulos de seguimiento activo</span>
+    </div>
 
-    <details class="acor">
-      <summary><b>Radar de nombramientos</b><span id="cntCargos"></span></summary>
-      <div class="acor-in" id="cargosBox"></div>
-    </details>
+    <div class="seg-grid">
+      <div class="seg-col">
+        <details class="acor" id="congreso-b">
+          <summary><span class="seg-ico" aria-hidden="true">🏛</span>
+            <span class="seg-t"><b>Gobierno y Congreso</b><small>Interacciones y control político</small></span>
+            <span class="seg-cnt" id="cntCongreso"></span></summary>
+          <div class="acor-in" id="congresoBox"></div>
+        </details>
 
-    <details class="acor">
-      <summary><b>Presupuesto y ejecución</b><span id="cntPpto"></span></summary>
-      <div class="acor-in" id="pptoBox"></div>
-    </details>
+        <details class="acor" id="cargos-b">
+          <summary><span class="seg-ico" aria-hidden="true">◎</span>
+            <span class="seg-t"><b>Radar de nombramientos</b><small>Designaciones y ceses en el Estado</small></span>
+            <span class="seg-cnt" id="cntCargos"></span></summary>
+          <div class="acor-in" id="cargosBox"></div>
+        </details>
 
-    <details class="acor">
-      <summary><b>Viajes oficiales al exterior</b><span id="cntViajes"></span></summary>
-      <div class="acor-in" id="viajes"></div>
-    </details>
+        <details class="acor" id="ppto-b">
+          <summary><span class="seg-ico" aria-hidden="true">▣</span>
+            <span class="seg-t"><b>Presupuesto y ejecución</b><small>PIA, PIM y devengado por pliego</small></span>
+            <span class="seg-cnt" id="cntPpto"></span></summary>
+          <div class="acor-in" id="pptoBox"></div>
+        </details>
 
-    <details class="acor">
-      <summary><b>Noticias</b><span>Titulares públicos</span></summary>
-      <div class="acor-in">
-        <div class="filtros" id="fNoticias"></div>
-        <div class="grid-n" id="noticias"></div>
-      </div>
-    </details>
+        <details class="acor" id="viajes-b">
+          <summary><span class="seg-ico" aria-hidden="true">✈</span>
+            <span class="seg-t"><b>Viajes oficiales al exterior</b><small>Autorizaciones y comisiones</small></span>
+            <span class="seg-cnt" id="cntViajes"></span></summary>
+          <div class="acor-in" id="viajes"></div>
+        </details>
 
-    <details class="acor">
-      <summary><b>Video</b><span>Requiere tu API key de YouTube</span></summary>
-      <div class="acor-in">
-        <div class="ytbox">
-          <div class="yt-row">
-            <input type="password" id="ytKey" placeholder="Pega tu YouTube Data API key" autocomplete="off">
-            <button class="btn" id="ytGuardar">Guardar</button>
-            <button class="btn ghost" id="ytBorrar">Borrar</button>
+        <details class="acor" id="noticias-b">
+          <summary><span class="seg-ico" aria-hidden="true">📰</span>
+            <span class="seg-t"><b>Noticias</b><small>Información contextual externa, no oficial</small></span></summary>
+          <div class="acor-in">
+            <p class="ctx">Titulares de agregadores públicos. <b>No son fuente oficial</b> y GoVisor no respalda su contenido.</p>
+            <div class="filtros" id="fNoticias" role="group" aria-label="Temas de noticias"></div>
+            <div class="grid-n" id="noticias"></div>
           </div>
-          <p class="fine">La clave se guarda <b>solo en este navegador</b> (localStorage). No se envía a ningún servidor de GoVisor ni se versiona en el repositorio.</p>
-          <p class="yt-estado" id="ytEstado"></p>
-        </div>
-        <div class="filtros" id="fYt"></div>
-        <div class="grid-n" id="ytGrid"></div>
+        </details>
+
+        <details class="acor" id="video-b">
+          <summary><span class="seg-ico" aria-hidden="true">▶</span>
+            <span class="seg-t"><b>Video y configuración</b><small>Requiere tu propia API key de YouTube</small></span></summary>
+          <div class="acor-in">
+            <div class="ytbox">
+              <label class="yt-lab" for="ytKey">Tu API key de YouTube Data API v3</label>
+              <div class="yt-row">
+                <input type="password" id="ytKey" placeholder="Pega aquí tu API key" autocomplete="off">
+                <button class="btn" id="ytGuardar">Guardar</button>
+                <button class="btn ghost" id="ytBorrar">Borrar</button>
+              </div>
+              <p class="fine">La clave se guarda <b>solo en este navegador</b> (localStorage). No se envía a ningún servidor de GoVisor ni se versiona en el repositorio.</p>
+              <p class="yt-estado" id="ytEstado" role="status"></p>
+            </div>
+            <div class="filtros" id="fYt" role="group" aria-label="Consultas de video"></div>
+            <div class="grid-n" id="ytGrid"></div>
+          </div>
+        </details>
       </div>
-    </details>
 
-    <details class="acor">
-      <summary><b>Fuentes oficiales</b><span>Verifica cada dato</span></summary>
-      <div class="acor-in"><div class="grid-f" id="fuentes"></div></div>
-    </details>
+      <aside class="seg-col">
+        <div class="card fuentes-card" id="fuentes-b">
+          <header class="card-cab">
+            <div><h3>Fuentes oficiales</h3><p>Evidencia y transparencia</p></div>
+          </header>
+          <div class="grid-f" id="fuentes"></div>
+        </div>
 
-    <details class="acor">
-      <summary><b>Metodología y niveles de evidencia</b><span>Cómo leer este visor</span></summary>
-      <div class="acor-in" id="metodologia"></div>
-    </details>
+        <details class="acor" id="meto-b">
+          <summary><span class="seg-ico" aria-hidden="true">⚖</span>
+            <span class="seg-t"><b>Metodología</b><small>Cómo leer este visor</small></span></summary>
+          <div class="acor-in" id="metodologia"></div>
+        </details>
+      </aside>
+    </div>
   </section>
 
+</div><!-- /wrap -->
 </main>
 
+<!-- ══════════════════ PIE ══════════════════ -->
 <footer class="pie">
-  <div class="wrap">
-    <b>GoVisor</b> — observatorio ciudadano del Gobierno del Perú.
-    <span class="fine">Proyecto informativo, sin afiliación al Estado peruano ni a organización política. Cada dato enlaza a su fuente; contrasta siempre con El Peruano y el Congreso. Datos al <span id="pieAct">—</span>.</span>
+  <div class="wrap pie-in">
+    <div class="pie-marca">
+      <b>GoVisor</b>
+      <span>Observatorio ciudadano del Gobierno del Perú</span>
+    </div>
+    <div class="pie-centro">
+      <b>Transparencia que genera confianza.</b>
+      <span>Datos abiertos · Evidencia oficial · Seguimiento continuo</span>
+    </div>
+    <nav class="pie-nav" aria-label="Enlaces del pie">
+      <a href="#meto-b">Metodología</a>
+      <a href="#fuentes-b">Fuentes</a>
+      <a href="#top">Acerca de GoVisor</a>
+    </nav>
+  </div>
+  <div class="wrap pie-legal">
+    Proyecto informativo, independiente y sin afiliación al Estado peruano ni a organización política.
+    Cada dato enlaza a su fuente; contrasta siempre con El Peruano y el Congreso.
+    Datos al <span id="pieAct">—</span>.
   </div>
 </footer>
 
-<!-- ══════════ VISOR DE RESOLUCIONES (caja dentro de la app) ══════════ -->
+<!-- ══════════════════ VISOR DE RESOLUCIONES ══════════════════ -->
 <div class="visor" id="visor" hidden>
   <div class="visor-fondo" data-cerrar-visor></div>
   <div class="visor-caja" role="dialog" aria-modal="true" aria-labelledby="visorTitulo">
     <header class="visor-cab">
       <div>
-        <p class="rotulo" id="visorEtiqueta">Resolución</p>
+        <p class="rotulo">Documento oficial</p>
         <h2 id="visorTitulo">—</h2>
         <p class="visor-sum" id="visorSumilla"></p>
       </div>
       <div class="visor-acciones">
         <a class="btn ghost" id="visorAbrir" target="_blank" rel="noopener noreferrer">Abrir en El Peruano ↗</a>
-        <button class="btn" data-cerrar-visor aria-label="Cerrar">Cerrar</button>
+        <button class="btn" data-cerrar-visor>Cerrar</button>
       </div>
     </header>
     <div class="visor-cuerpo">

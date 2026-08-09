@@ -102,7 +102,9 @@ unidades/día ≈ 100 búsquedas) es más que suficiente.
 
 ```
 index.html    estructura y contenedores
-styles.css    presentación — naranja/blanco, mobile-first
+styles.css    presentación — identidad teal institucional, mobile-first
+assets/       imagen del héroe (ver assets/README.md)
+scripts/      scraper de El Peruano
 data.js       ← EDITA SOLO ESTE ARCHIVO
 app.js        render, contadores, filtros y llamadas externas
 PROYECTO.md   qué es, cómo funciona, tecnologías y valuación
@@ -110,7 +112,7 @@ PROYECTO.md   qué es, cómo funciona, tecnologías y valuación
 
 ## Tecnologías
 
-HTML5 semántico · CSS3 (Grid, Flexbox, Custom Properties) · JavaScript ES2020 ·
+HTML5 semántico · CSS3 (Grid, Flexbox, design tokens) · JavaScript ES2020 ·
 `Intl.DateTimeFormat` con zona `America/Lima` · YouTube Data API v3 · RSS.
 
 **Sin frameworks. Sin dependencias. Sin build.** Menos de 60 KB en total.
@@ -120,10 +122,11 @@ Detalle completo, costos y hoja de ruta técnica en [PROYECTO.md](PROYECTO.md).
 ## Fuentes oficiales
 
 - [El Peruano — Normas Legales](https://busquedas.elperuano.pe/)
-- [Congreso de la República — Leyes](https://www.congreso.gob.pe/leyes/)
+- [El Peruano — Normas del día](https://diariooficial.elperuano.pe/Normas)
+- [Congreso de la República](https://www.congreso.gob.pe/)
 - [SPIJ — Sistema Peruano de Información Jurídica](https://spij.minjus.gob.pe/)
 - [Presidencia del Consejo de Ministros](https://www.gob.pe/pcm)
-- [Jurado Nacional de Elecciones](https://www.jne.gob.pe/)
+- [Jurado Nacional de Elecciones](https://portal.jne.gob.pe/)
 
 ## Licencia y propósito
 

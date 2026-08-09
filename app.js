@@ -8,7 +8,12 @@
   const ZONA = "America/Lima";
   const CLAVE_YT = "govisor.youtube.key";
   const TOTAL_PERIODO = 1826;              // 5 años ≈ 1826 días
-  const $ = (id) => document.getElementById(id);
+  /* Si un contenedor no existe, se devuelve un nodo desechable en vez de
+     null. Un rediseno anterior elimino #lectura y el TypeError resultante
+     abortaba iniciar() entero; esto degrada en lugar de romper. */
+  const HUERFANO = document.createElement("div");
+  const $ = (id) => document.getElementById(id) || HUERFANO;
+
   const menosMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ══════════ UTILIDADES ══════════ */
@@ -125,10 +130,12 @@
       // Modulos que dependen del dia actual (arrancan como no-op en el
       // primer tic, porque iniciar() aun no ha creado el DOM de todos).
       if (arrancado) {
+        pintarKPIs();
         pintarCambios();
         pintarReloj130();
         pintar100();
         pintarTimeline();
+        pintarTimelineMini();
         pintarEstabilidad();
       }
     }
@@ -245,6 +252,8 @@
 
   /* ══════════ NORMAS ══════════ */
   let filtroNorma = "todos", busqueda = "";
+  const PASO_NORMAS = 25;              // cuántas normas se añaden por clic
+  let normasVisibles = PASO_NORMAS;
   const ORIGEN = {
     congreso:  ["b-con", "Congreso"],
     ejecutivo: ["b-eje", "Ejecutivo"],
@@ -273,28 +282,38 @@
       return;
     }
 
-    cont.innerHTML = lista.map((n) => {
+    // Tabla en escritorio; el CSS la convierte en tarjetas apiladas en movil.
+    const visibles = lista.slice(0, normasVisibles);
+    const filas = visibles.map((n) => {
       const [cls, txt] = ORIGEN[n.origen] || ["b-neu", "Otro"];
       const der = n.accion === "derogada" ? '<span class="b b-der">Derogada</span>' : "";
-      const cuerpo = `
-        <div class="n-cab">
-          <span class="n-num">${esc([n.tipo, n.numero].filter(Boolean).join(" N.º "))}</span>
-          <span class="b ${cls}">${txt}</span>${der}
-        </div>
-        <p class="n-sum">${esc(n.sumilla || "Sin sumilla registrada")}</p>
-        <p class="n-pie">${esc(fechaCorta(n.fecha) || "sin fecha")} · ${n.verificado ? "verificada" : "por verificar"}</p>`;
+      const titulo = [n.tipo, n.numero].filter(Boolean).join(" N.º ");
       const url = urlSegura(n.enlace);
-      if (!url) return `<div class="norma">${cuerpo}</div>`;
-      // Tarjeta clicable: abre la resolucion DENTRO de la app.
-      // Ctrl/Cmd + clic sigue abriendo en pestana nueva (ver conectar()).
-      return `<a class="norma" href="${esc(url)}" rel="noopener noreferrer"
-                 data-visor="${esc(url)}"
-                 data-titulo="${esc([n.tipo, n.numero].filter(Boolean).join(" N.º "))}"
-                 data-sumilla="${esc(n.sumilla || "")}">
-        <span class="lupa">ver aquí</span>${cuerpo}</a>`;
+      const estado = n.verificado
+        ? '<span class="b b-ok">Verificado</span>'
+        : '<span class="b b-pend">Por verificar</span>';
+
+      const attrs = url
+        ? ` data-visor="${esc(url)}" data-titulo="${esc(titulo)}" data-sumilla="${esc(n.sumilla || "")}" tabindex="0" role="link"`
+        : "";
+
+      return `<tr${attrs}>
+        <td class="n-fec" data-r="Fecha">${esc(fechaCorta(n.fecha) || "—")}</td>
+        <td data-r="Tipo"><span class="b ${cls}">${txt}</span></td>
+        <td class="n-num" data-r="Número">${esc(n.numero || "—")}</td>
+        <td class="n-sum" data-r="Título">${esc(n.sumilla || "Sin sumilla registrada")}${der}</td>
+        <td class="n-est" data-r="Estado">${estado}</td>
+      </tr>`;
     }).join("");
 
-    escalonar(cont);
+    const restan = lista.length - visibles.length;
+    cont.innerHTML = `<table class="ntab">
+      <thead><tr><th>Fecha</th><th>Tipo</th><th>Número</th><th>Título / sumilla</th><th>Estado</th></tr></thead>
+      <tbody>${filas}</tbody></table>
+      <div class="normas-pie">
+        <span class="normas-cnt">Mostrando ${visibles.length} de ${lista.length} normas</span>
+        ${restan > 0 ? `<button class="btn-mas" id="masNormas">Ver ${Math.min(restan, PASO_NORMAS)} más</button>` : ""}
+      </div>`;
   }
 
   /* ── Visor de resoluciones ─────────────────────────────────────────
@@ -328,6 +347,18 @@
     $("visorFrame").src = "about:blank";   // detiene la carga y libera memoria
     document.body.classList.remove("sin-scroll");
     if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+  }
+
+  /** El foco no debe escaparse del diálogo mientras está abierto. */
+  function atraparFoco(ev) {
+    if (ev.key !== "Tab" || $("visor").hidden) return;
+    const caja = document.querySelector(".visor-caja");
+    if (!caja) return;
+    const foco = caja.querySelectorAll('a[href],button,input,iframe,[tabindex]:not([tabindex="-1"])');
+    if (!foco.length) return;
+    const primero = foco[0], ultimo = foco[foco.length - 1];
+    if (ev.shiftKey && document.activeElement === primero) { ev.preventDefault(); ultimo.focus(); }
+    else if (!ev.shiftKey && document.activeElement === ultimo) { ev.preventDefault(); primero.focus(); }
   }
 
   /* ══════════ LECTURA RÁPIDA (estadística con letras) ══════════ */
@@ -395,11 +426,31 @@
   }
 
   /* ══════════ FUENTES ══════════ */
+  /** Siglas cortas para el icono de cada fuente, derivadas del nombre. */
+  function siglaFuente(nombre) {
+    const n = String(nombre).toUpperCase();
+    if (n.includes("PERUANO")) return "EP";
+    if (n.includes("CONGRESO")) return "CR";
+    if (n.includes("SPIJ")) return "SP";
+    if (n.includes("CONSEJO DE MINISTROS")) return "PCM";
+    if (n.includes("ELECCIONES")) return "JNE";
+    if (n.includes("MEF")) return "MEF";
+    if (n.includes("INEI")) return "INEI";
+    if (n.includes("BCRP")) return "BCR";
+    if (n.includes("DEFENSOR")) return "DP";
+    if (n.includes("GOB.PE")) return "PE";
+    return n.slice(0, 2);
+  }
+
   function pintarFuentes() {
     $("fuentes").innerHTML = GOVISOR.fuentes.map((f) => {
       const url = urlSegura(f.url);
-      return url ? `<a class="fuente" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
-        <b>${esc(f.nombre)} &#8599;</b><span>${esc(f.nota || "")}</span></a>` : "";
+      if (!url) return "";
+      return `<a class="fuente" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
+        <span class="fuente-ico" aria-hidden="true">${esc(siglaFuente(f.nombre))}</span>
+        <span><b>${esc(f.nombre)}</b><span>${esc(f.nota || "")}</span></span>
+        <span class="fuente-ext" aria-hidden="true">↗</span>
+        <span class="sr-only">(se abre en una pestaña nueva)</span></a>`;
     }).join("");
   }
 
@@ -644,12 +695,23 @@
       viaje: "verde", hito: "verde", crisis: "rojo", anuncio: "ambar"
     };
 
+    // Icono ademas del color: el estado no se comunica solo con color.
+    const ICO = {
+      nombramiento:"👤", cese:"⨯", norma:"📄", viaje:"✈",
+      hito:"🏛", crisis:"!", anuncio:"◆", otro:"•"
+    };
     const fila = (i) => {
       const d = diasEntre(fecha(i.fecha), hoy);
       const cuando = d === 0 ? "hoy" : d === 1 ? "ayer" : `hace ${d} días`;
+      const url = urlSegura(i.enlace);
+      const tit = url
+        ? `<a href="${esc(url)}" data-visor="${esc(url)}" data-titulo="${esc(i.titulo)}" data-sumilla="${esc(i.detalle || "")}">${esc(i.titulo)}</a>`
+        : esc(i.titulo);
       return `<li>
-        <span class="pip pip-${PIP[i.tipo] || "naranja"}"></span>
-        <span><b>${esc(i.titulo)}</b><time>${cuando} · ${esc(fechaCorta(i.fecha))}</time></span>
+        <span class="pip pip-${PIP[i.tipo] || "naranja"}" aria-hidden="true">${ICO[i.tipo] || "•"}</span>
+        <span class="cambio-t"><b>${tit}</b>
+        <time>${cuando} · ${esc(fechaCorta(i.fecha))}</time></span>
+        ${sellEv(i.ev)}
       </li>`;
     };
 
@@ -738,6 +800,7 @@
 
     const pct = Math.min(100, (dias / 100) * 100);
     $("d100Fill").style.width = pct.toFixed(1) + "%";
+    pintarAnillo(pct);
     $("d100Pie").textContent = enCurso
       ? `${pct.toFixed(0)} % de la etapa transcurrido.`
       : `La etapa de los primeros 100 días concluyó; el Gobierno lleva ${dias} días.`;
@@ -1034,10 +1097,197 @@
     </div>`;
   }
 
+  /* ══════════════════════════════════════════════════════════════════════
+     SELECTORES DERIVADOS
+     La portada NO duplica valores en el HTML: los deriva de GOVISOR.
+     ══════════════════════════════════════════════════════════════════ */
+  const sel = {
+    diaGobierno: () => diasEntre(fecha(GOVISOR.presidencia.fechaAsuncion), hoyLima()),
+    avance100:   () => { const d = sel.diaGobierno();
+                         return d == null ? null : Math.min(100, Math.max(0, d)); },
+    ministrosActivos: () => GOVISOR.ministerios.filter((m) => m.ministro && m.estado === "activo"),
+    ministrosVerificados: () => GOVISOR.ministerios.filter((m) => m.verificado).length,
+    normas:      () => GOVISOR.normas || [],
+    normasVerificadas: () => sel.normas().filter((n) => n.verificado).length,
+    promesas:    () => GOVISOR.promesas || [],
+    promesasConNorma: () => sel.promesas().filter((p) => p.norma && p.norma.numero).length,
+    promesasConEvidencia: () => sel.promesas().filter((p) => p.evidencia && p.evidencia.length).length
+  };
+
+  /* ── Tarjetas KPI del héroe ────────────────────────────────────────── */
+  function pintarKPIs() {
+    // 1) Día del Gobierno y 2) 100 días los pinta pintarMandato()/pintar100().
+
+    // 3) Consejo de Ministros
+    const act = sel.ministrosActivos().length;
+    const ver = sel.ministrosVerificados();
+    $("kpiGab").textContent = act || "—";
+    $("kpiGabSub").textContent = act
+      ? `${ver} titulares verificados` : "Sin titulares registrados";
+
+    // 4) Normas del periodo — nunca se inventa una cifra.
+    const n = sel.normas().length;
+    const kn = $("kpiNormas");
+    if (n) {
+      kn.textContent = n.toLocaleString("es-PE");
+      kn.parentElement.classList.remove("kpi-val-sm");
+      $("kpiNormasSub").textContent = `${sel.normasVerificadas()} con enlace verificado`;
+    } else {
+      kn.textContent = "En registro";
+      kn.parentElement.classList.add("kpi-val-sm");
+      $("kpiNormasSub").textContent = "Sin normas cargadas todavía";
+    }
+  }
+
+  /** Anillo de avance de los 100 días (SVG, r=18 → circunferencia ≈113). */
+  function pintarAnillo(pct) {
+    const CIRC = 2 * Math.PI * 18;
+    const p = Math.max(0, Math.min(100, pct || 0));
+    $("anilloFill").style.strokeDashoffset = String(CIRC - (CIRC * p) / 100);
+    $("anilloPct").textContent = Math.round(p) + "%";
+  }
+
+  /* ── Resumen de promesas (tres eslabones) ──────────────────────────── */
+  function pintarPromesasResumen() {
+    const t = sel.promesas().length;
+    const cont = $("promesasResumen");
+
+    const bloque = (icono, rotulo, valor, sub) =>
+      `<div class="c3"><p class="c3-rot"><span aria-hidden="true">${icono}</span> ${rotulo}</p>
+       <p class="c3-val">${esc(valor)}</p><p class="c3-sub">${esc(sub)}</p></div>`;
+
+    if (!t) {
+      cont.innerHTML =
+        bloque("💬", "Lo que dijo", "En registro", "Compromisos del Mensaje a la Nación") +
+        bloque("📋", "Lo que normó", "En registro", "Normas ligadas a compromisos") +
+        bloque("✓", "Lo que ejecutó", "En registro", "Acciones y resultados");
+      $("promesasNota").textContent = "Información en construcción. Sin datos inventados.";
+      return;
+    }
+
+    const conNorma = sel.promesasConNorma();
+    const conEv = sel.promesasConEvidencia();
+    cont.innerHTML =
+      bloque("💬", "Lo que dijo", t, t === 1 ? "compromiso registrado" : "compromisos registrados") +
+      bloque("📋", "Lo que normó", conNorma || "Sin evidencia", conNorma ? "con norma publicada" : "ninguna norma vinculada aún") +
+      bloque("✓", "Lo que ejecutó", conEv || "Sin evidencia", conEv ? "con acción verificada" : "sin evidencia suficiente");
+
+    $("promesasNota").textContent = conEv
+      ? `${conEv} de ${t} promesas tienen evidencia de ejecución registrada.`
+      : `Las ${t} promesas están registradas; aún no hay evidencia de ejecución.`;
+  }
+
+  /* ── Timeline compacto de portada ──────────────────────────────────── */
+  function pintarTimelineMini() {
+    const items = construirLinea().slice(0, 4);
+    const cont = $("timelineMini");
+    if (!items.length) {
+      cont.innerHTML = '<li class="t">Sin hitos registrados.</li>';
+      return;
+    }
+    const filas = items.map((i) =>
+      `<li><span class="f">${esc(fechaCorta(i.fecha))}</span>
+       <span class="t">${esc(i.titulo)}</span></li>`).join("");
+
+    // Estado en curso: solo si los 100 días siguen corriendo (dato real).
+    const d = sel.diaGobierno();
+    const curso = (d != null && d >= 0 && d <= 100)
+      ? `<li class="curso"><span class="f">En curso</span>
+         <span class="t">Primeros 100 días de gestión</span></li>` : "";
+    cont.innerHTML = filas + curso;
+  }
+
+  /* ── Consejo de Ministros: 3 representativos ───────────────────────── */
+  function pintarGabineteResumen() {
+    const cont = $("gabineteResumen");
+    // PCM primero, luego MEF e Interior si existen; si no, los tres primeros.
+    const orden = ["PCM", "MEF", "MININTER"];
+    const activos = sel.ministrosActivos();
+    const elegidos = orden
+      .map((s) => activos.find((m) => m.sigla === s))
+      .filter(Boolean);
+    while (elegidos.length < 3 && activos.length > elegidos.length) {
+      const sig = activos.find((m) => !elegidos.includes(m));
+      if (!sig) break;
+      elegidos.push(sig);
+    }
+
+    if (!elegidos.length) {
+      cont.innerHTML = '<li><span class="t">Sin titulares registrados.</span></li>';
+      return;
+    }
+
+    cont.innerHTML = elegidos.map((m) => {
+      const foto = urlSegura(m.foto);
+      // Sin foto oficial se usan iniciales: no se fabrican retratos.
+      const av = foto
+        ? `<span class="avatar" style="background-image:url('${esc(foto)}')" aria-hidden="true"></span>`
+        : `<span class="avatar" aria-hidden="true">${esc(iniciales(m.ministro))}</span>`;
+      return `<li>${av}<span><b>${esc(m.ministro)}</b>
+        <span>${esc(m.cartera)}</span></span></li>`;
+    }).join("");
+  }
+
   /* ══════════ EVENTOS ══════════ */
   function marcar(grupo, btn) {
-    grupo.querySelectorAll(".chip").forEach((c) => c.classList.remove("on"));
+    grupo.querySelectorAll(".chip").forEach((c) => {
+      c.classList.remove("on");
+      if (c.hasAttribute("aria-pressed")) c.setAttribute("aria-pressed", "false");
+    });
     btn.classList.add("on");
+    if (btn.hasAttribute("aria-pressed")) btn.setAttribute("aria-pressed", "true");
+  }
+
+  /* ── Cabecera: menú móvil, desplegable "Más" y navegación activa ───── */
+  function conectarCabecera() {
+    const menuBtn = $("menuBtn"), nav = $("navPral");
+    const masBtn = $("masBtn"), masMenu = $("masMenu");
+
+    menuBtn.addEventListener("click", () => {
+      const abierto = nav.classList.toggle("abierto");
+      menuBtn.setAttribute("aria-expanded", String(abierto));
+    });
+
+    masBtn.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      const abierto = masMenu.hidden;
+      masMenu.hidden = !abierto;
+      masBtn.setAttribute("aria-expanded", String(abierto));
+    });
+
+    document.addEventListener("click", (ev) => {
+      if (!masMenu.hidden && !ev.target.closest(".mas")) {
+        masMenu.hidden = true;
+        masBtn.setAttribute("aria-expanded", "false");
+      }
+      // Al elegir una sección en móvil, se cierra el menú.
+      const enlace = ev.target.closest(".nav a");
+      if (enlace && nav.classList.contains("abierto")) {
+        nav.classList.remove("abierto");
+        menuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key !== "Escape") return;
+      if (!masMenu.hidden) { masMenu.hidden = true; masBtn.setAttribute("aria-expanded", "false"); }
+      if (nav.classList.contains("abierto")) {
+        nav.classList.remove("abierto"); menuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Navegación activa según la sección visible.
+    const enlaces = [...document.querySelectorAll(".nav a[data-nav]")];
+    const secciones = enlaces.map((a) => document.getElementById(a.dataset.nav)).filter(Boolean);
+    if (!secciones.length || !("IntersectionObserver" in window)) return;
+
+    const obs = new IntersectionObserver((ent) => {
+      ent.forEach((e) => {
+        if (!e.isIntersecting) return;
+        enlaces.forEach((a) => a.classList.toggle("activo", a.dataset.nav === e.target.id));
+      });
+    }, { rootMargin: "-88px 0px -62% 0px", threshold: 0 });
+    secciones.forEach((s) => obs.observe(s));
   }
 
   function conectar() {
@@ -1064,6 +1314,23 @@
 
     document.addEventListener("keydown", (ev) => {
       if (ev.key === "Escape" && !$("visor").hidden) cerrarVisor();
+      atraparFoco(ev);
+    });
+
+    // Las filas de la tabla de normas son "enlaces": Enter debe activarlas.
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key !== "Enter") return;
+      const fila = ev.target.closest("tr[data-visor]");
+      if (!fila) return;
+      ev.preventDefault();
+      abrirVisor(fila.dataset.visor, fila.dataset.titulo, fila.dataset.sumilla);
+    });
+
+    // Paginación de la tabla de normas.
+    document.addEventListener("click", (ev) => {
+      if (!ev.target.closest("#masNormas")) return;
+      normasVisibles += PASO_NORMAS;
+      pintarNormas();
     });
 
     document.addEventListener("click", (ev) => {
@@ -1071,7 +1338,8 @@
       if (!btn) return;
       const d = btn.dataset;
       if (d.fgab)        { filtroGab = d.fgab;     marcar(btn.parentElement, btn); pintarGabinete(); }
-      else if (d.fnorma) { filtroNorma = d.fnorma; marcar(btn.parentElement, btn); pintarNormas(); }
+      else if (d.fnorma) { filtroNorma = d.fnorma; normasVisibles = PASO_NORMAS;
+                           marcar(btn.parentElement, btn); pintarNormas(); }
       else if (d.fprom)  { filtroPromesa = d.fprom; marcar(btn.parentElement, btn); pintarPromesas(); }
       else if (d.flinea) { filtroLinea = d.flinea; marcar(btn.parentElement, btn); pintarTimeline(); }
       else if (d.feed)   { feedActivo = +d.feed;   marcar(btn.parentElement, btn); cargarNoticias(); }
@@ -1082,7 +1350,7 @@
     $("buscar").addEventListener("input", (ev) => {
       clearTimeout(temp);
       const v = ev.target.value;
-      temp = setTimeout(() => { busqueda = v; pintarNormas(); }, 170);
+      temp = setTimeout(() => { busqueda = v; normasVisibles = PASO_NORMAS; pintarNormas(); }, 170);
     });
 
     $("ytGuardar").addEventListener("click", () => {
@@ -1140,6 +1408,12 @@
     pintarViajes();
     pintarFuentes();
 
+    // Portada: KPIs y tablero, todo derivado de GOVISOR
+    pintarKPIs();
+    pintarPromesasResumen();
+    pintarTimelineMini();
+    pintarGabineteResumen();
+
     // Módulos del observatorio
     pintarCambios();
     pintarReloj130();
@@ -1161,6 +1435,7 @@
     if (key) { $("ytKey").value = key; estadoYT("Clave cargada desde este navegador.", "ok"); }
 
     conectar();
+    conectarCabecera();
     observarEntradas();
     arrancado = true;
     ticTac();
