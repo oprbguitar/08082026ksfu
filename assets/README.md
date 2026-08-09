@@ -1,53 +1,45 @@
 # assets/
 
-## `govisor-peru-banner.webp` — imagen del héroe
+## Imagen del héroe — ya incorporada
 
-**Este archivo todavía no está en el repositorio.** El sitio funciona sin él:
-`styles.css` declara un degradado teal de respaldo detrás de la imagen, así que
-el héroe se ve correcto y el texto sigue siendo legible. Al colocar el archivo
-aquí, aparece automáticamente. No hay que tocar código.
+| Archivo | Dimensiones | Peso | Se sirve en |
+|---|---|---:|---|
+| `govisor-peru-banner.webp` | 1717 × 693 | 242 KB | ≥ 1600 px |
+| `govisor-peru-banner-1600.webp` | 1600 × 646 | 219 KB | 1200–1599 px |
+| `govisor-peru-banner-1200.webp` | 1200 × 484 | 141 KB | 768–1199 px |
+| `govisor-peru-banner-768.webp` | 768 × 310 | 61 KB | ≤ 767 px |
 
-### Qué debe contener
+Panorámica del Perú en un solo plano: **Palacio de Gobierno** a la izquierda,
+**Machu Picchu y los Andes** al centro, **Costa Verde y Lima moderna** a la
+derecha. Sin texto incrustado: todos los titulares del héroe son HTML real.
 
-Panorámica del Perú en un solo plano, de izquierda a derecha:
+### Cómo se procesó
 
-| Zona | Contenido |
-|---|---|
-| Izquierda | Palacio de Gobierno / Lima institucional |
-| Centro | Machu Picchu y los Andes |
-| Derecha | Acantilados de la Costa Verde / Lima moderna |
+El original (PNG, 1717 × 916, 2,3 MB) traía franjas blancas arriba y abajo. Se
+detectó el recuadro útil y se recortó a **1717 × 693** (relación 2,48:1), luego
+se generaron las cuatro variantes en WebP con Pillow (calidad 78–80, `method=6`).
 
-**La imagen no debe llevar texto incrustado.** Todos los titulares del héroe son
-HTML real, para que sean seleccionables, traducibles y accesibles.
+**No se amplió a 2400 px**: el original mide 1717 de ancho y escalar hacia
+arriba solo habría degradado la imagen sin ganar detalle.
 
-### Especificaciones
-
-- Formato: **WebP** (mejor compresión que JPEG a igual calidad).
-- Ancho: **2400 px** aproximadamente; relación ~21:9.
-- Peso: **por debajo de 500–700 KB**. No subir un archivo de 8–15 MB.
-- El texto del héroe se apoya sobre el tercio izquierdo: deja esa zona sin
-  detalle crítico, porque un velo blanco en degradado la cubre parcialmente.
-
-### Variantes opcionales
-
-Si quieres servir tamaños distintos por dispositivo, añade también:
-
-```
-govisor-peru-banner-1600.webp
-govisor-peru-banner-1200.webp
-govisor-peru-banner-768.webp
-```
-
-y declara las reglas `@media` correspondientes en `styles.css`, junto a la regla
-`.hero-img`.
-
-### Cómo convertir y optimizar
-
-Con [`cwebp`](https://developers.google.com/speed/webp/download):
+### Cómo regenerarlas
 
 ```bash
-cwebp -q 82 -resize 2400 0 panorama-original.jpg -o govisor-peru-banner.webp
+python - <<'EOF'
+from PIL import Image, ImageChops
+im = Image.open('origen.png').convert('RGB')
+fondo = Image.new('RGB', im.size, (255,255,255))
+im = im.crop(ImageChops.difference(im, fondo).convert('L').point(lambda p: 255 if p>12 else 0).getbbox())
+for ancho, suf, q in [(2400,'',80),(1600,'-1600',80),(1200,'-1200',80),(768,'-768',78)]:
+    w = min(ancho, im.size[0]); h = round(im.size[1]*w/im.size[0])
+    im.resize((w,h), Image.LANCZOS).save(f'assets/govisor-peru-banner{suf}.webp','WEBP',quality=q,method=6)
+EOF
 ```
+
+### Respaldo
+
+`styles.css` mantiene un degradado teal **debajo** de la imagen. Si un archivo
+faltara, el héroe se sigue viendo correcto y el titular sigue siendo legible.
 
 ### Derechos
 

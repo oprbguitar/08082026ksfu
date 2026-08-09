@@ -84,7 +84,7 @@ local, pero las noticias y YouTube vienen de terceros: se tratan como no confiab
 | Accesibilidad | `prefers-reduced-motion`, `aria-label`, foco visible, contraste AA | Portal público: debe ser usable por todos. |
 | Animación | `IntersectionObserver` (entradas al hacer scroll), `@keyframes` CSS con retardo escalonado, contador `requestAnimationFrame` con *easeOutCubic* | Movimiento sin librerías (ahorra ~30 KB de AOS/GSAP). |
 | Interacción | `<details>`/`<summary>` nativos para los acordeones | Plegado accesible con teclado y sin JavaScript. |
-| Rendimiento | Carga diferida de noticias (solo al abrir el acordeón), `backdrop-filter` en cabecera | Menos peticiones en el arranque; la página abre de inmediato. |
+| Rendimiento | Carga diferida de noticias; héroe en **WebP con 4 variantes** (61–242 KB) y `preload` selectivo por `media` | Cada pantalla descarga solo su imagen; la portada abre de inmediato. |
 | Extras | Hoja de impresión, favicon SVG embebido, `theme-color` | Detalles de producto terminado. |
 | Versionado | Git + GitHub | — |
 

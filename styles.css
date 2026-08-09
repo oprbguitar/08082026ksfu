@@ -142,19 +142,36 @@ img{ max-width:100%; }
 
 /* ══════════════════ HÉROE ══════════════════ */
 .hero{ position:relative; overflow:hidden; background:var(--brand-900); }
+/* Panorámica del Perú: Palacio de Gobierno · Andes · Costa Verde.
+   El degradado teal queda DEBAJO como respaldo: si la imagen faltara, el
+   héroe se sigue viendo correcto y el titular sigue siendo legible. */
 .hero-img{
   position:absolute; inset:0;
-  /* Si assets/govisor-peru-banner.webp no existe, queda el degradado teal y
-     el layout NO se rompe. Basta con soltar el archivo en esa ruta. */
   background-color:var(--brand-900);
   background-image:
-    radial-gradient(1100px 380px at 78% 18%, rgba(255,255,255,.16), transparent 62%),
-    linear-gradient(115deg, var(--brand-900) 0%, var(--brand-700) 48%, var(--brand-500) 100%),
-    url("assets/govisor-peru-banner.webp");
-  background-size:cover, cover, cover;
-  background-position:center, center, center;
+    linear-gradient(115deg, var(--brand-900) 0%, var(--brand-700) 48%, var(--brand-500) 100%);
+  background-size:cover;
+  background-position:center;
   background-repeat:no-repeat;
 }
+/* Se sirve el ancho más pequeño que cubra cada pantalla. */
+@media (max-width:767px){
+  .hero-img{ background-image:url("assets/govisor-peru-banner-768.webp"),
+    linear-gradient(115deg,var(--brand-900),var(--brand-500)); }
+}
+@media (min-width:768px) and (max-width:1199px){
+  .hero-img{ background-image:url("assets/govisor-peru-banner-1200.webp"),
+    linear-gradient(115deg,var(--brand-900),var(--brand-500)); }
+}
+@media (min-width:1200px) and (max-width:1599px){
+  .hero-img{ background-image:url("assets/govisor-peru-banner-1600.webp"),
+    linear-gradient(115deg,var(--brand-900),var(--brand-500)); }
+}
+@media (min-width:1600px){
+  .hero-img{ background-image:url("assets/govisor-peru-banner.webp"),
+    linear-gradient(115deg,var(--brand-900),var(--brand-500)); }
+}
+.hero-img{ background-size:cover, cover; background-position:center, center; }
 .hero-velo{
   position:absolute; inset:0;
   background:linear-gradient(90deg,
