@@ -193,8 +193,11 @@
 
     contarHasta($("dias"), dias, 1100);
     $("tbDia").textContent = dias.toLocaleString("es-PE");
-    $("diasTexto").innerHTML =
-      `<b>${esc(enPalabras(dias))}</b> desde el ${esc(fechaLarga(p.fechaAsuncion))}`;
+    // Rótulo y pie cortos: la tarjeta KPI no admite frases largas sin
+    // desencajarse. El detalle en palabras vive en «El gobierno, en pocas
+    // palabras» y en la ficha presidencial.
+    $("kpiDiaRot").textContent = `Día ${dias} del Gobierno`;
+    $("diasTexto").textContent = `Desde el ${esc(fechaCorta(p.fechaAsuncion))}`;
 
     // Se asigna directamente: la transición CSS hace la animación, y así
     // el ancho es correcto aunque la pestaña esté en segundo plano.
@@ -794,9 +797,7 @@
 
     const enCurso = dias <= 100;
     $("d100Dia").textContent = Math.min(dias, 100);
-    $("d100Sub").textContent = enCurso
-      ? `Faltan ${100 - dias} días para cerrar el hito`
-      : "Etapa concluida";
+    $("d100Sub").textContent = enCurso ? "Días transcurridos" : "Etapa concluida";
 
     const pct = Math.min(100, (dias / 100) * 100);
     $("d100Fill").style.width = pct.toFixed(1) + "%";
@@ -1118,12 +1119,26 @@
   function pintarKPIs() {
     // 1) Día del Gobierno y 2) 100 días los pinta pintarMandato()/pintar100().
 
-    // 3) Consejo de Ministros
+    // 3) Consejo de Ministros — con el rango real de R.S. de nombramiento.
     const act = sel.ministrosActivos().length;
     const ver = sel.ministrosVerificados();
     $("kpiGab").textContent = act || "—";
-    $("kpiGabSub").textContent = act
-      ? `${ver} titulares verificados` : "Sin titulares registrados";
+
+    const nums = GOVISOR.ministerios
+      .map((m) => m.norma && m.norma.numero)
+      .filter(Boolean)
+      .map((s) => ({ n: parseInt(s, 10), s }))
+      .filter((x) => !isNaN(x.n))
+      .sort((a, b) => a.n - b.n);
+    const rango = nums.length
+      ? (nums.length > 1
+          ? `R.S. ${nums[0].n}–${nums[nums.length - 1].s}`
+          : `R.S. ${nums[0].s}`)
+      : "";
+
+    $("kpiGabSub").innerHTML = act
+      ? `${ver} titulares verificados${rango ? `<br>${esc(rango)}` : ""}`
+      : "Sin titulares registrados";
 
     // 4) Normas del periodo — nunca se inventa una cifra.
     const n = sel.normas().length;
@@ -1131,11 +1146,12 @@
     if (n) {
       kn.textContent = n.toLocaleString("es-PE");
       kn.parentElement.classList.remove("kpi-val-sm");
-      $("kpiNormasSub").textContent = `${sel.normasVerificadas()} con enlace verificado`;
+      $("kpiNormasSub").innerHTML =
+        `${sel.normasVerificadas()} con enlace verificado<br><a href="#normas">Ver sección de normas</a>`;
     } else {
       kn.textContent = "En registro";
       kn.parentElement.classList.add("kpi-val-sm");
-      $("kpiNormasSub").textContent = "Sin normas cargadas todavía";
+      $("kpiNormasSub").innerHTML = '<a href="#normas">Ver sección de normas</a>';
     }
   }
 

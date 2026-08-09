@@ -105,6 +105,18 @@ img{ max-width:100%; }
 .nav .cta:hover{ background:var(--brand-700); color:#fff; }
 .nav .cta.activo::after{ display:none; }
 
+.icono-btn{
+  width:40px; height:40px; display:grid; place-items:center; margin-left:6px;
+  background:none; border:0; border-radius:9px; color:var(--ink-500); cursor:pointer;
+  transition:.18s;
+}
+.icono-btn:hover{ background:var(--brand-025); color:var(--brand-900); }
+.idioma{
+  display:inline-flex; align-items:center; gap:4px; margin-left:10px;
+  font-size:.85rem; font-weight:700; color:var(--ink-500); white-space:nowrap;
+}
+.idioma::after{ content:"▾"; font-size:.72rem; }
+
 .mas{ position:relative; }
 .mas-btn{
   font:600 .92rem/1 var(--font); color:var(--ink-700); background:none;
@@ -178,20 +190,27 @@ img{ max-width:100%; }
     rgba(255,255,255,.96) 0%, rgba(255,255,255,.88) 24%,
     rgba(255,255,255,.34) 48%, rgba(255,255,255,0) 70%);
 }
-/* Altura objetivo en escritorio ≈340–390 px de banda visible: la franja mide
-   ~400 px y las tarjetas KPI suben 68 px sobre ella. */
+/* `min-height` incluye el padding (box-sizing:border-box), así que este
+   valor ES la altura total de la franja. Menos los 68 px que suben las
+   tarjetas KPI, la banda visible queda en ~352 px (objetivo: 340–390). */
 .hero-in{
-  position:relative; min-height:246px;
+  position:relative; min-height:420px;
   display:flex; align-items:flex-start; justify-content:space-between;
   gap:20px; padding-top:26px; padding-bottom:76px;
 }
-.hero-txt{ max-width:44ch; }
+/* OJO: `ch` se calcula sobre la fuente del CONTENEDOR (15 px), no sobre la
+   del titular. Con 44ch el bloque quedaba en 356 px y el h1 de 54 px caía a
+   cuatro líneas. Se fija en píxeles para que el titular respire. */
+/* En escritorio el bloque se limita para no invadir la imagen; en móvil
+   ocupa todo el ancho (48vw dejaba el titular en 187 px, ilegible). */
+.hero-txt{ max-width:560px; }
+@media (min-width:768px){ .hero-txt{ max-width:min(560px, 52vw); } }
 .hero h1{
-  font-size:clamp(2.1rem,4.4vw,3.4rem); letter-spacing:-.03em; line-height:1.08;
+  font-size:clamp(2rem,3.4vw,2.9rem); letter-spacing:-.03em; line-height:1.1;
   color:var(--brand-900); font-weight:800;
 }
 .hero h1 span{ color:var(--ink-900); }
-.hero-sub{ margin-top:11px; font-size:1.02rem; color:var(--ink-700); max-width:40ch; }
+.hero-sub{ margin-top:12px; font-size:1rem; color:var(--ink-700); max-width:400px; }
 .hero-nota{
   margin-top:12px; display:inline-flex; align-items:center; gap:7px;
   font-size:.73rem; line-height:1.35; color:var(--ink-500); background:rgba(255,255,255,.85);
@@ -704,7 +723,7 @@ body.sin-scroll{ overflow:hidden; }
   .mas-btn{ width:100%; text-align:left; padding:13px 12px; font-size:1rem; }
   .mas-menu{ position:static; box-shadow:none; border:0; padding:0 0 0 12px; min-width:0; }
 
-  .hero-in{ min-height:auto; padding-top:26px; padding-bottom:90px; flex-direction:column; }
+  .hero-in{ min-height:440px; padding-top:26px; padding-bottom:90px; flex-direction:column; }
   .hero-img{ background-position:62% center; }
   .hero-velo{
     background:linear-gradient(180deg,
