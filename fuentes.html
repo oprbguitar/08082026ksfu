@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es-PE" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#005C59">
+<title>Fuentes oficiales · GoVisor</title>
+<meta name="description" content="Fuentes oficiales que respaldan cada dato de GoVisor: El Peruano, Congreso de la República, SPIJ, PCM, MEF, INEI, BCRP, Defensoría y JNE.">
+<link rel="canonical" href="https://oprbguitar.github.io/08082026ksfu/fuentes.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fuentes oficiales · GoVisor">
+<meta property="og:description" content="Dónde verificar cada dato del observatorio.">
+<meta property="og:url" content="https://oprbguitar.github.io/08082026ksfu/fuentes.html">
+
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23005C59'/><circle cx='16' cy='16' r='9' fill='none' stroke='white' stroke-width='2.4'/><circle cx='16' cy='16' r='3.4' fill='white'/></svg>">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<a class="saltar" href="#contenido" data-i18n="saltar">Saltar al contenido</a>
+
+<header class="head">
+  <div class="wrap head-in">
+    <a class="marca" href="index.html" aria-label="GoVisor">
+      <span class="marca-logo" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="30" height="30"><circle cx="16" cy="16" r="14.5" fill="rgba(255,255,255,.13)"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="16" cy="16" r="3.2" fill="#fff"/></svg>
+      </span>
+      <span class="marca-txt">
+        <b id="marcaTitulo">GoVisor</b>
+        <small id="marcaSub" data-i18n="marca.sub">Observatorio del Gobierno · Perú 2026-2031</small>
+      </span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navPral"
+            data-i18n-attr="aria-label:nav.menu">
+      <span class="menu-ico" aria-hidden="true"></span>
+    </button>
+
+    <nav class="nav" id="navPral" aria-label="GoVisor">
+      <a href="index.html#d100" data-i18n="nav.100">100 días</a>
+      <a href="index.html#promesas" data-i18n="nav.promesas">Promesas</a>
+      <a href="index.html#linea" data-i18n="nav.timeline">Timeline</a>
+      <a href="index.html#gabinete" data-i18n="nav.gabinete">Gabinete</a>
+      <a href="index.html#normas" data-i18n="nav.normas">Normas</a>
+      <a href="fuentes.html" class="activo" data-i18n="mas.fuentes">Fuentes oficiales</a>
+      <a class="cta" href="index.html" data-i18n="nav.explorar">Explorar datos</a>
+      <button class="idioma" id="idiomaBtn" data-i18n-attr="aria-label:nav.idioma,title:nav.idioma">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none"
+             stroke="currentColor" stroke-width="1.9">
+          <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/>
+          <path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg>
+        <b id="idiomaTxt">ES</b>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido" class="wrap pagina">
+  <div class="sec-cab">
+    <h1 data-i18n="mas.fuentes">Fuentes oficiales</h1>
+    <span data-i18n="s.fuentesSub">Evidencia y transparencia</span>
+  </div>
+
+  <p class="pagina-intro" data-i18n="fu.intro">
+    Todo dato de GoVisor procede de alguna de estas fuentes.
+  </p>
+
+  <div class="grid-f grid-f-3" id="fuentes"></div>
+
+  <div class="card pagina-nota">
+    <h2 data-i18n="fu.comoTitulo">Cómo verificar un dato</h2>
+    <ol class="pasos">
+      <li data-i18n="fu.paso1">Busca el número de la resolución en El Peruano.</li>
+      <li data-i18n="fu.paso2">Compara el nombre con el del texto de la norma.</li>
+      <li data-i18n="fu.paso3">Si difieren, la resolución manda.</li>
+    </ol>
+    <p class="fine" data-i18n="fu.nota">GoVisor no aloja documentos: los enlaza.</p>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="wrap pie-in">
+    <div class="pie-marca">
+      <b>GoVisor</b>
+      <span data-i18n="pie.sub">Observatorio ciudadano del Gobierno del Perú</span>
+    </div>
+    <nav class="pie-nav" aria-label="GoVisor">
+      <a href="index.html#meto-b" data-i18n="pie.meto">Metodología</a>
+      <a href="index.html" data-i18n="nav.explorar">Explorar datos</a>
+    </nav>
+  </div>
+  <div class="wrap pie-autor">
+    <span data-i18n="pie.creado">Creado por</span>
+    <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">
+      Andesnova.solutions <span aria-hidden="true">↗</span></a>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -49,37 +49,50 @@
 
   const diasEntre = (a, b) => (a && b) ? Math.floor((b - a) / 86400000) : null;
 
+  /* Los formateadores se construyen en cada llamada porque el locale
+     depende del idioma activo. La zona horaria siempre es Lima. */
   function fechaLarga(iso) {
     const f = fecha(iso);
-    return f ? new Intl.DateTimeFormat("es-PE", {
+    return f ? new Intl.DateTimeFormat(I18N.locale, {
       day: "numeric", month: "long", year: "numeric", timeZone: "UTC"
     }).format(f) : "";
   }
 
   function fechaCorta(iso) {
     const f = fecha(iso);
-    return f ? new Intl.DateTimeFormat("es-PE", {
+    return f ? new Intl.DateTimeFormat(I18N.locale, {
       day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC"
     }).format(f) : "";
   }
 
+  const numero = (n) => Number(n).toLocaleString(I18N.locale);
+
   /** Días -> frase legible. */
   function enPalabras(d) {
     if (d == null) return "";
-    if (d === 0) return "hoy mismo";
-    if (d === 1) return "un día";
+    if (d === 0) return t("t.hoyMismo");
+    if (d === 1) return t("t.unDia");
     const a = Math.floor(d / 365), r = d % 365, m = Math.floor(r / 30), x = r % 30;
     const p = [];
-    if (a) p.push(a === 1 ? "1 año" : a + " años");
-    if (m) p.push(m === 1 ? "1 mes" : m + " meses");
-    if (x && !a) p.push(x === 1 ? "1 día" : x + " días");
-    return p.join(", ") || d + " días";
+    if (a) p.push(a === 1 ? t("t.anio") : t("t.anios", { n: a }));
+    if (m) p.push(m === 1 ? t("t.mes") : t("t.meses", { n: m }));
+    if (x && !a) p.push(x === 1 ? t("t.unDiaN") : t("t.diasN", { n: x }));
+    return p.join(", ") || t("t.diasN", { n: d });
   }
 
-  const PALABRAS = ["ninguna","una","dos","tres","cuatro","cinco","seis","siete",
-    "ocho","nueve","diez","once","doce","trece","catorce","quince","dieciséis",
-    "diecisiete","dieciocho","diecinueve","veinte"];
-  const palabra = (n) => (n >= 0 && n < PALABRAS.length) ? PALABRAS[n] : String(n);
+  // Numeros en letra, para la seccion "en pocas palabras".
+  const PALABRAS = {
+    es: ["ninguna","una","dos","tres","cuatro","cinco","seis","siete","ocho","nueve",
+         "diez","once","doce","trece","catorce","quince","dieciséis","diecisiete",
+         "dieciocho","diecinueve","veinte"],
+    en: ["none","one","two","three","four","five","six","seven","eight","nine",
+         "ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen",
+         "seventeen","eighteen","nineteen","twenty"]
+  };
+  function palabra(n) {
+    const L = PALABRAS[I18N.idioma] || PALABRAS.es;
+    return (n >= 0 && n < L.length) ? L[n] : String(n);
+  }
 
   function iniciales(n) {
     const p = String(n || "").trim().split(/\s+/).filter(Boolean);
@@ -87,12 +100,12 @@
   }
 
   const sello = (ok) => ok
-    ? '<span class="b b-ok">Verificado</span>'
-    : '<span class="b b-pend">Por verificar</span>';
+    ? `<span class="b b-ok">${t("b.verificado")}</span>`
+    : `<span class="b b-pend">${t("b.porVerificar")}</span>`;
 
   /** Chip de norma: enlace si hay URL, texto plano si solo hay número. */
   function chipNorma(n, corto) {
-    if (!n || (!n.numero && !n.tipo)) return '<span class="rs-txt">Sin resolución</span>';
+    if (!n || (!n.numero && !n.tipo)) return `<span class="rs-txt">${t("n.sinResolucion")}</span>`;
     const txt = esc(corto ? (n.numero || n.tipo)
                           : [n.tipo, n.numero].filter(Boolean).join(" N.º "));
     const url = urlSegura(n.enlace);
@@ -109,10 +122,10 @@
   }
 
   /* ══════════ RELOJ ══════════ */
-  const fmtFecha = new Intl.DateTimeFormat("es-PE", {
+  const fmtFecha = () => new Intl.DateTimeFormat(I18N.locale, {
     timeZone: ZONA, weekday: "long", day: "numeric", month: "long", year: "numeric"
   });
-  const fmtHora = new Intl.DateTimeFormat("es-PE", {
+  const fmtHora = () => new Intl.DateTimeFormat(I18N.locale, {
     timeZone: ZONA, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
   });
 
@@ -120,7 +133,7 @@
   let arrancado = false;   // iniciar() ya pinto todo al menos una vez
   function ticTac() {
     const ahora = new Date();
-    const dia = fmtFecha.format(ahora);
+    const dia = fmtFecha().format(ahora);
     if (dia !== ultimoDia) {          // el día cambió en Lima: repintar contadores
       ultimoDia = dia;
       $("tbFecha").textContent = dia.charAt(0).toUpperCase() + dia.slice(1);
@@ -139,7 +152,7 @@
         pintarEstabilidad();
       }
     }
-    $("tbHora").textContent = fmtHora.format(ahora);
+    $("tbHora").textContent = fmtHora().format(ahora);
   }
 
   /* ══════════ CONTADOR ANIMADO ══════════ */
@@ -164,10 +177,10 @@
     const p = GOVISOR.presidencia;
     const dias = diasEntre(fecha(p.fechaAsuncion), hoyLima());
 
-    $("cargoTxt").textContent = p.cargo || "Presidencia de la República";
+    $("cargoTxt").textContent = p.cargo || "";
     $("nombrePres").textContent = p.nombre || "Sin registrar";
     $("periodoTxt").textContent = [
-      p.periodo ? "Periodo " + p.periodo : "",
+      p.periodo || "",
       p.partido || ""
     ].filter(Boolean).join("  ·  ");
 
@@ -186,7 +199,7 @@
     if (dias == null || dias < 0) {
       $("dias").textContent = "—";
       $("tbDia").textContent = "—";
-      $("diasTexto").textContent = "Falta registrar la fecha de asunción.";
+      $("diasTexto").textContent = t("d.faltaFecha");
       $("barraPie").textContent = "";
       return;
     }
@@ -196,8 +209,8 @@
     // Rótulo y pie cortos: la tarjeta KPI no admite frases largas sin
     // desencajarse. El detalle en palabras vive en «El gobierno, en pocas
     // palabras» y en la ficha presidencial.
-    $("kpiDiaRot").textContent = `Día ${dias} del Gobierno`;
-    $("diasTexto").textContent = `Desde el ${esc(fechaCorta(p.fechaAsuncion))}`;
+    $("kpiDiaRot").textContent = t("kpi.diaN", { n: dias });
+    $("diasTexto").textContent = t("kpi.desde", { f: fechaCorta(p.fechaAsuncion) });
 
     // Se asigna directamente: la transición CSS hace la animación, y así
     // el ancho es correcto aunque la pestaña esté en segundo plano.
@@ -222,10 +235,10 @@
     });
 
     const activos = todos.filter((m) => m.ministro && m.estado === "activo").length;
-    $("subGab").textContent = `${activos} de ${todos.length} carteras en funciones`;
+    $("subGab").textContent = t("sec.carteras", { a: activos, b: todos.length });
 
     if (!lista.length) {
-      cont.innerHTML = '<p class="vac"><b>Sin resultados</b>Ninguna cartera coincide con este filtro.</p>';
+      cont.innerHTML = `<p class="vac"><b>${t("tn.sinResultados")}</b>${t("tn.ningunaCartera")}</p>`;
       return;
     }
 
@@ -235,14 +248,14 @@
       const dias = diasEntre(fecha(m.fechaNombramiento), fin);
 
       let badge;
-      if (dias == null)               badge = '<span class="dias nulo">sin fecha</span>';
-      else if (m.estado === "cesado") badge = `<span class="dias frio">${dias} d · cesó</span>`;
-      else                            badge = `<span class="dias">día ${dias}</span>`;
+      if (dias == null)               badge = `<span class="dias nulo">${t("e.sinFecha")}</span>`;
+      else if (m.estado === "cesado") badge = `<span class="dias frio">${t("e.enCargo", { n: dias })}</span>`;
+      else                            badge = `<span class="dias">${t("e.diaN", { n: dias })}</span>`;
 
       return `<div class="fila ${clase}">
         <span class="sig">${esc(m.sigla)}</span>
         <span>
-          <span class="quien">${esc(m.ministro || "Titular por registrar")}</span>
+          <span class="quien">${esc(m.ministro || t("n.titularSR"))}</span>
           <span class="cart">${esc(m.cartera)}</span>
         </span>
         ${badge}
@@ -258,18 +271,16 @@
   const PASO_NORMAS = 25;              // cuántas normas se añaden por clic
   let normasVisibles = PASO_NORMAS;
   const ORIGEN = {
-    congreso:  ["b-con", "Congreso"],
-    ejecutivo: ["b-eje", "Ejecutivo"],
-    viaje:     ["b-via", "Viaje"]
+    congreso:  ["b-con", "f.congreso"],
+    ejecutivo: ["b-eje", "f.ejecutivo"],
+    viaje:     ["b-via", "f.viajes"]
   };
 
   function pintarNormas() {
     const cont = $("listaNormas");
 
     if (!GOVISOR.normas.length) {
-      cont.innerHTML = `<p class="vac"><b>Aún no hay normas registradas</b>
-        Agrégalas en el arreglo <code>normas</code> de data.js y aparecerán aquí
-        con su enlace directo a la fuente.</p>`;
+      cont.innerHTML = `<p class="vac"><b>${t("tn.sinNormas")}</b>${t("tn.sinNormasTxt")}</p>`;
       return;
     }
 
@@ -281,41 +292,40 @@
       .sort((a, b) => String(b.fecha || "").localeCompare(String(a.fecha || "")));
 
     if (!lista.length) {
-      cont.innerHTML = '<p class="vac"><b>Sin coincidencias</b>Prueba otro filtro o término.</p>';
+      cont.innerHTML = `<p class="vac"><b>${t("tn.sinCoincidencias")}</b>${t("tn.otroFiltro")}</p>`;
       return;
     }
 
     // Tabla en escritorio; el CSS la convierte en tarjetas apiladas en movil.
     const visibles = lista.slice(0, normasVisibles);
     const filas = visibles.map((n) => {
-      const [cls, txt] = ORIGEN[n.origen] || ["b-neu", "Otro"];
-      const der = n.accion === "derogada" ? '<span class="b b-der">Derogada</span>' : "";
+      const [cls, clave] = ORIGEN[n.origen] || ["b-neu", "b.otro"];
+      const txt = t(clave);
+      const der = n.accion === "derogada" ? `<span class="b b-der">${t("b.derogada")}</span>` : "";
       const titulo = [n.tipo, n.numero].filter(Boolean).join(" N.º ");
       const url = urlSegura(n.enlace);
-      const estado = n.verificado
-        ? '<span class="b b-ok">Verificado</span>'
-        : '<span class="b b-pend">Por verificar</span>';
+      const estado = sello(!!n.verificado);
 
       const attrs = url
         ? ` data-visor="${esc(url)}" data-titulo="${esc(titulo)}" data-sumilla="${esc(n.sumilla || "")}" tabindex="0" role="link"`
         : "";
 
       return `<tr${attrs}>
-        <td class="n-fec" data-r="Fecha">${esc(fechaCorta(n.fecha) || "—")}</td>
-        <td data-r="Tipo"><span class="b ${cls}">${txt}</span></td>
-        <td class="n-num" data-r="Número">${esc(n.numero || "—")}</td>
-        <td class="n-sum" data-r="Título">${esc(n.sumilla || "Sin sumilla registrada")}${der}</td>
-        <td class="n-est" data-r="Estado">${estado}</td>
+        <td class="n-fec" data-r="${esc(t("tn.fecha"))}">${esc(fechaCorta(n.fecha) || "—")}</td>
+        <td data-r="${esc(t("tn.tipo"))}"><span class="b ${cls}">${esc(txt)}</span></td>
+        <td class="n-num" data-r="${esc(t("tn.numero"))}">${esc(n.numero || "—")}</td>
+        <td class="n-sum" data-r="${esc(t("tn.titulo"))}">${esc(n.sumilla || t("n.sinSumilla"))}${der}</td>
+        <td class="n-est" data-r="${esc(t("tn.estado"))}">${estado}</td>
       </tr>`;
     }).join("");
 
     const restan = lista.length - visibles.length;
     cont.innerHTML = `<table class="ntab">
-      <thead><tr><th>Fecha</th><th>Tipo</th><th>Número</th><th>Título / sumilla</th><th>Estado</th></tr></thead>
+      <thead><tr><th>${t("tn.fecha")}</th><th>${t("tn.tipo")}</th><th>${t("tn.numero")}</th><th>${t("tn.titulo")}</th><th>${t("tn.estado")}</th></tr></thead>
       <tbody>${filas}</tbody></table>
       <div class="normas-pie">
-        <span class="normas-cnt">Mostrando ${visibles.length} de ${lista.length} normas</span>
-        ${restan > 0 ? `<button class="btn-mas" id="masNormas">Ver ${Math.min(restan, PASO_NORMAS)} más</button>` : ""}
+        <span class="normas-cnt">${t("tn.mostrando", { a: visibles.length, b: lista.length })}</span>
+        ${restan > 0 ? `<button class="btn-mas" id="masNormas">${t("tn.verMas", { n: Math.min(restan, PASO_NORMAS) })}</button>` : ""}
       </div>`;
   }
 
@@ -331,7 +341,7 @@
     if (!seguro) return;
 
     ultimoFoco = document.activeElement;
-    $("visorTitulo").textContent = titulo || "Documento oficial";
+    $("visorTitulo").textContent = titulo || t("v.documento");
     $("visorSumilla").textContent = sumilla || "";
     $("visorAbrir").href = seguro;
     $("visorCargando").classList.remove("oculto");
@@ -378,27 +388,27 @@
     const totalN = GOVISOR.normas.length;
 
     const tarjetas = [
-      ["Mandato", (dias == null || dias < 0)
-        ? "La fecha de inicio aún no está registrada."
-        : `Lleva <b>${esc(enPalabras(dias))}</b> en el cargo, sobre un periodo de cinco años.`],
+      [t("l.mandato"), (dias == null || dias < 0)
+        ? t("l.mandatoSF")
+        : t("l.mandatoTxt", { t: esc(enPalabras(dias)) })],
 
-      ["Gabinete", cesados
-        ? `<b>${palabra(conNombre - cesados)}</b> carteras en funciones y <b>${palabra(cesados)}</b> con cambio de titular.`
-        : `Las <b>${palabra(conNombre)}</b> carteras mantienen a su titular original, sin cambios desde la juramentación.`],
+      [t("l.gabinete"), cesados
+        ? t("l.gabineteCon", { a: palabra(conNombre - cesados), b: palabra(cesados) })
+        : t("l.gabineteSin", { n: palabra(conNombre) })],
 
       // Frases sin verbo entre las cifras: evita problemas de concordancia
       // cuando alguno de los conteos es cero.
-      ["Producción normativa", (leyes + ejec) === 0
-        ? "Todavía no se registran normas del periodo."
-        : `Normas registradas: <b>${palabra(leyes)}</b> del Congreso y <b>${palabra(ejec)}</b> del Ejecutivo.`],
+      [t("l.produccion"), (leyes + ejec) === 0
+        ? t("l.produccionSin")
+        : t("l.produccionCon", { a: palabra(leyes), b: palabra(ejec) })],
 
-      ["Trazabilidad", totalN === 0
-        ? "Cada registro llevará su enlace directo a la fuente oficial."
+      [t("l.trazabilidad"), totalN === 0
+        ? t("l.trazaVacio")
         : verif === 0
-          ? `Ninguna de las ${totalN === 1 ? "normas" : palabra(totalN) + " normas"} registradas ha sido contrastada todavía.`
+          ? t("l.trazaCero", { n: palabra(totalN) })
           : verif === totalN
-            ? "Todas las normas registradas están contrastadas con su fuente."
-            : `<b>${palabra(verif)}</b> de ${palabra(totalN)} normas contrastadas con la fuente oficial.`]
+            ? t("l.trazaTodas")
+            : t("l.trazaParte", { a: palabra(verif), b: palabra(totalN) })]
     ];
 
     const cont = $("lectura");
@@ -411,19 +421,17 @@
   function pintarViajes() {
     const cont = $("viajes");
     $("cntViajes").textContent = GOVISOR.viajes.length
-      ? `${GOVISOR.viajes.length} registrado(s)` : "Sin registros";
+      ? t("s.registros", { n: GOVISOR.viajes.length }) : t("s.sinRegistros");
 
     if (!GOVISOR.viajes.length) {
-      cont.innerHTML = `<p class="vac"><b>Sin viajes registrados</b>
-        Las salidas al exterior de la Presidencia requieren autorización del
-        Congreso mediante Resolución Legislativa.</p>`;
+      cont.innerHTML = `<p class="vac"><b>${t("sv.sinViajes")}</b>${t("sv.txt")}</p>`;
       return;
     }
     cont.innerHTML = GOVISOR.viajes.map((v) => `
       <article class="viaje">
-        <h3>${esc(v.destino || "Destino por registrar")}</h3>
-        <p><b>${esc(v.quien || "—")}</b> · ${esc(v.motivo || "Motivo no registrado")}</p>
-        <p>${esc(fechaCorta(v.desde))}${v.hasta ? " al " + esc(fechaCorta(v.hasta)) : ""}</p>
+        <h3>${esc(v.destino || t("sv.destinoSR"))}</h3>
+        <p><b>${esc(v.quien || "—")}</b> · ${esc(v.motivo || t("sv.motivoSR"))}</p>
+        <p>${esc(fechaCorta(v.desde))}${v.hasta ? t("sv.al") + esc(fechaCorta(v.hasta)) : ""}</p>
         <div class="chips">${chipNorma(v.norma)}${sello(!!v.verificado)}</div>
       </article>`).join("");
   }
@@ -481,18 +489,18 @@
       return;
     }
 
-    cont.innerHTML = '<p class="vac">Cargando titulares…</p>';
+    cont.innerHTML = `<p class="vac">${t("nt.cargando")}</p>`;
     try {
       const r = await fetch(proxy + encodeURIComponent(rss));
       if (!r.ok) throw new Error("HTTP " + r.status);
       const data = await r.json();
       const items = data.items || [];
-      if (!items.length) throw new Error("el agregador no devolvió titulares");
+      if (!items.length) throw new Error(t("nt.sinItems"));
 
       cont.innerHTML = items.slice(0, 9).map((it) => {
         const url = urlSegura(it.link);
         const corte = String(it.title || "").lastIndexOf(" - ");
-        const titular = corte > 0 ? it.title.slice(0, corte) : (it.title || "Sin título");
+        const titular = corte > 0 ? it.title.slice(0, corte) : (it.title || t("nt.sinTitulo"));
         const medio = corte > 0 ? it.title.slice(corte + 3) : (it.author || "");
         const cuando = it.pubDate
           ? new Intl.DateTimeFormat("es-PE", {
@@ -532,12 +540,12 @@
     const key = leerClave();
     const cont = $("ytGrid");
     if (!key) {
-      cont.innerHTML = '<p class="vac">Ingresa tu API key para cargar videos.</p>';
+      cont.innerHTML = `<p class="vac">${t("yt.ingresa")}</p>`;
       return;
     }
 
     const q = GOVISOR.youtube.consultas[ytConsulta] || "";
-    cont.innerHTML = '<p class="vac">Buscando videos…</p>';
+    cont.innerHTML = `<p class="vac">${t("yt.buscando")}</p>`;
 
     const url = "https://www.googleapis.com/youtube/v3/search"
       + "?part=snippet&type=video&maxResults=9&order=date&relevanceLanguage=es&regionCode=PE"
@@ -550,11 +558,11 @@
 
       const items = data.items || [];
       if (!items.length) {
-        estadoYT("Consulta sin resultados.", "");
-        cont.innerHTML = '<p class="vac">Sin videos para esta consulta.</p>';
+        estadoYT(t("yt.sinResultados"), "");
+        cont.innerHTML = `<p class="vac">${t("yt.sinVideos")}</p>`;
         return;
       }
-      estadoYT(`Clave activa · ${items.length} videos.`, "ok");
+      estadoYT(t("yt.activa", { n: items.length }), "ok");
       cont.innerHTML = items.map((it) => {
         const id = it.id && it.id.videoId;
         if (!id) return "";
@@ -573,9 +581,8 @@
       escalonar(cont);
     } catch (e) {
       estadoYT("Error: " + e.message, "err");
-      cont.innerHTML = `<p class="vac"><b>No se pudo consultar YouTube</b>
-        ${esc(e.message)}<br>Verifica que la clave tenga habilitada la YouTube Data API v3
-        y que sus restricciones de referente permitan este sitio.</p>`;
+      cont.innerHTML = `<p class="vac"><b>${t("yt.errorTit")}</b>
+        ${esc(e.message)}<br>${t("yt.errorTxt")}</p>`;
     }
   }
 
@@ -585,14 +592,11 @@
      Ninguna cifra se estima: si el dato no está cargado, el módulo lo dice.
      ══════════════════════════════════════════════════════════════════ */
 
-  const EV_ROTULO = {
-    oficial: "Oficial", verificado: "Verificado",
-    preliminar: "Preliminar", investigacion: "En investigación"
-  };
+  const EV_CLAVES = ["oficial", "verificado", "preliminar", "investigacion"];
   /** Etiqueta de nivel de evidencia. Sin nivel declarado, no se inventa. */
   function sellEv(nivel) {
-    if (!nivel || !EV_ROTULO[nivel]) return "";
-    return `<span class="ev ev-${esc(nivel)}">${EV_ROTULO[nivel]}</span>`;
+    if (!nivel || EV_CLAVES.indexOf(nivel) < 0) return "";
+    return `<span class="ev ev-${esc(nivel)}">${t("ev." + nivel)}</span>`;
   }
 
   /** Igual que fechaLarga pero recibe un Date ya construido. */
@@ -614,8 +618,8 @@
     if (p.fechaAsuncion) {
       items.push({
         fecha: p.fechaAsuncion, tipo: "hito",
-        titulo: "Asunción del mando",
-        detalle: `${p.nombre} juramenta como ${p.cargo}.`,
+        titulo: t("tl.asuncion"),
+        detalle: t("tl.juraTxt", { n: p.nombre, c: p.cargo }),
         enlace: p.norma && p.norma.enlace, ev: p.evidencia
       });
     }
@@ -632,8 +636,8 @@
       items.push({
         fecha: f, tipo: "nombramiento",
         titulo: g.length > 1
-          ? `Juramentación de ${g.length} ministros`
-          : `Nombramiento en ${g[0].cartera}`,
+          ? t("tl.juraN", { n: g.length })
+          : t("tl.nombraEn", { c: g[0].cartera }),
         detalle: g.length > 1 ? g.map((x) => x.sigla).join(" · ") : g[0].ministro,
         grupo: g.length > 1 ? g.length : 0,
         ev: "oficial"
@@ -645,7 +649,7 @@
       .filter((m) => m.estado === "cesado" && m.fechaCese)
       .forEach((m) => items.push({
         fecha: m.fechaCese, tipo: "cese",
-        titulo: `Cese en ${m.cartera}`, detalle: m.ministro, ev: m.evidencia
+        titulo: t("tl.ceseEn", { c: m.cartera }), detalle: m.ministro, ev: m.evidencia
       }));
 
     // Normas
@@ -663,7 +667,7 @@
       if (!v.desde) return;
       items.push({
         fecha: v.desde, tipo: "viaje",
-        titulo: `Viaje oficial · ${v.destino || "destino por registrar"}`,
+        titulo: t("tl.viajeA", { d: v.destino || t("tl.destinoSR") }),
         detalle: v.motivo, ev: v.evidencia
       });
     });
@@ -705,7 +709,7 @@
     };
     const fila = (i) => {
       const d = diasEntre(fecha(i.fecha), hoy);
-      const cuando = d === 0 ? "hoy" : d === 1 ? "ayer" : `hace ${d} días`;
+      const cuando = d === 0 ? t("t.hoy") : d === 1 ? t("t.ayer") : t("t.haceN", { n: d });
       const url = urlSegura(i.enlace);
       const tit = url
         ? `<a href="${esc(url)}" data-visor="${esc(url)}" data-titulo="${esc(i.titulo)}" data-sumilla="${esc(i.detalle || "")}">${esc(i.titulo)}</a>`
@@ -719,14 +723,14 @@
     };
 
     if (recientes.length) {
-      $("cambiosVentana").textContent = `Últimos ${VENTANA_DIAS} días`;
+      $("cambiosVentana").textContent = t("c.ventana", { n: VENTANA_DIAS });
       cont.innerHTML = recientes.slice(0, 6).map(fila).join("");
     } else {
       // Sin movimientos en la ventana: se dice, y se muestra lo último real.
-      $("cambiosVentana").textContent = "Sin movimientos recientes";
+      $("cambiosVentana").textContent = t("c.sinMov");
       cont.innerHTML = `<li><span class="pip pip-ambar"></span>
-        <span><b>Sin cambios registrados en los últimos ${VENTANA_DIAS} días.</b>
-        <time>Lo más reciente en el visor:</time></span></li>` +
+        <span class="cambio-t"><b>${t("c.sinCambios", { n: VENTANA_DIAS })}</b>
+        <time>${t("c.loMasReciente")}</time></span></li>` +
         linea.slice(0, 3).map(fila).join("");
     }
     escalonar(cont);
@@ -743,26 +747,26 @@
     const box = $("reloj130");
     const inicio = fecha(GOVISOR.presidencia.fechaAsuncion);
     const inv = (GOVISOR.congreso && GOVISOR.congreso.investidura) || {};
-    const base = `<p class="r130-base">Constitución, art. 130 — plazo de ${PLAZO_ART130} días desde la asunción.</p>`;
+    const base = `<p class="r130-base">${t("r130.base", { n: PLAZO_ART130 })}</p>`;
 
     if (!inicio) {
-      box.innerHTML = `<div class="r130-cab"><h2>Cuestión de confianza</h2></div>
-        <p class="r130-txt">Falta registrar la fecha de asunción.</p>${base}`;
+      box.innerHTML = `<div class="r130-cab"><h2>${t("r130.titulo")}</h2></div>
+        <p class="r130-txt">${t("d.faltaFecha")}</p>${base}`;
       return;
     }
 
     // Ya ocurrió la investidura: el reloj se detiene y muestra el resultado.
     if (inv.fecha) {
-      const res = inv.resultado === "confianza_otorgada" ? "Confianza otorgada"
-                : inv.resultado === "confianza_rehusada" ? "Confianza rehusada"
-                : "Resultado por registrar";
+      const res = inv.resultado === "confianza_otorgada" ? t("r130.otorgada")
+                : inv.resultado === "confianza_rehusada" ? t("r130.rehusada")
+                : t("r130.porRegistrar");
       const v = inv.votos || {};
       const votos = (v.si != null || v.no != null)
-        ? `<p class="r130-txt">Votación: ${esc(v.si)} a favor · ${esc(v.no)} en contra · ${esc(v.abstenciones)} abstenciones.</p>`
+        ? `<p class="r130-txt">${t("r130.votacion", { a: esc(v.si), b: esc(v.no), c: esc(v.abstenciones) })}</p>`
         : "";
-      box.innerHTML = `<div class="r130-cab"><h2>Cuestión de confianza</h2>${sellEv(inv.evidencia)}</div>
+      box.innerHTML = `<div class="r130-cab"><h2>${t("r130.titulo")}</h2>${sellEv(inv.evidencia)}</div>
         <p class="r130-cifra" style="font-size:1.5rem">${esc(res)}</p>
-        <p class="r130-txt">Exposición ante el Pleno el ${esc(fechaLarga(inv.fecha))}.</p>${votos}${base}`;
+        <p class="r130-txt">${t("r130.exposicion", { f: esc(fechaLarga(inv.fecha)) })}</p>${votos}${base}`;
       return;
     }
 
@@ -770,18 +774,15 @@
     const restan = diasEntre(hoyLima(), limite);
 
     if (restan < 0) {
-      box.innerHTML = `<div class="r130-cab"><h2>Cuestión de confianza</h2></div>
-        <p class="r130-cifra vencido">${Math.abs(restan)}<i>días vencido</i></p>
-        <p class="r130-txt">El plazo constitucional venció el ${esc(fechaLargaD(limite))}
-        y el visor aún no registra la exposición ante el Congreso.</p>${base}`;
+      box.innerHTML = `<div class="r130-cab"><h2>${t("r130.titulo")}</h2></div>
+        <p class="r130-cifra vencido">${Math.abs(restan)}<i>${t("r130.vencido")}</i></p>
+        <p class="r130-txt">${t("r130.vencidoTxt", { f: esc(fechaLargaD(limite)) })}</p>${base}`;
       return;
     }
 
-    box.innerHTML = `<div class="r130-cab"><h2>Cuestión de confianza</h2></div>
-      <p class="r130-cifra">${restan}<i>${restan === 1 ? "día restante" : "días restantes"}</i></p>
-      <p class="r130-txt">El Presidente del Consejo de Ministros debe exponer la política
-      general del Gobierno ante el Congreso, a más tardar el
-      <b>${esc(fechaLargaD(limite))}</b>.</p>${base}`;
+    box.innerHTML = `<div class="r130-cab"><h2>${t("r130.titulo")}</h2></div>
+      <p class="r130-cifra">${restan}<i>${restan === 1 ? t("r130.restante") : t("r130.restantes")}</i></p>
+      <p class="r130-txt">${t("r130.txt", { f: esc(fechaLargaD(limite)) })}</p>${base}`;
   }
 
   /* ── Primeros 100 días ─────────────────────────────────────────────── */
@@ -791,27 +792,27 @@
 
     if (dias == null || dias < 0) {
       $("d100Dia").textContent = "—";
-      $("d100Pie").textContent = "Falta registrar la fecha de asunción.";
+      $("d100Pie").textContent = t("d.faltaFecha");
       return;
     }
 
     const enCurso = dias <= 100;
     $("d100Dia").textContent = Math.min(dias, 100);
-    $("d100Sub").textContent = enCurso ? "Días transcurridos" : "Etapa concluida";
+    $("d100Sub").textContent = enCurso ? t("kpi.transcurridos") : t("kpi.concluida");
 
     const pct = Math.min(100, (dias / 100) * 100);
     $("d100Fill").style.width = pct.toFixed(1) + "%";
     pintarAnillo(pct);
     $("d100Pie").textContent = enCurso
-      ? `${pct.toFixed(0)} % de la etapa transcurrido.`
-      : `La etapa de los primeros 100 días concluyó; el Gobierno lleva ${dias} días.`;
+      ? t("d.pct", { p: pct.toFixed(0) })
+      : t("d.concluida", { n: dias });
 
     const cuenta = (e) => med.filter((m) => m.estado === e).length;
     $("d100Semaforo").innerHTML = med.length
-      ? `<span class="sem sem-verde">🟢 <b>${cuenta("ejecutada")}</b> ejecutadas</span>
-         <span class="sem sem-ambar">🟡 <b>${cuenta("en_proceso")}</b> en proceso</span>
-         <span class="sem sem-rojo">🔴 <b>${cuenta("no_iniciada")}</b> no iniciadas</span>`
-      : `<span class="sem">Sin medidas registradas</span>`;
+      ? `<span class="sem sem-verde">🟢 <b>${cuenta("ejecutada")}</b> ${t("d.ejecutadas")}</span>
+         <span class="sem sem-ambar">🟡 <b>${cuenta("en_proceso")}</b> ${t("d.enProceso")}</span>
+         <span class="sem sem-rojo">🔴 <b>${cuenta("no_iniciada")}</b> ${t("d.noIniciadas")}</span>`
+      : `<span class="sem">${t("d.sinMedidas")}</span>`;
 
     $("medidas100").innerHTML = med.length
       ? med.map((m) => `<div class="medida ${esc(m.estado || "")}">
@@ -820,24 +821,19 @@
           <span class="medida-d">${esc(m.detalle || "")}</span></span>
           ${sellEv(m.evidencia)}
         </div>`).join("")
-      : `<p class="vac"><b>Sin medidas cargadas</b>
-         Este bloque necesita la lista de medidas efectivamente anunciadas para los
-         primeros 100 días. Cárgalas en <code>medidas100</code> de data.js y el
-         semáforo se calcula solo. El contador de días ya es real.</p>`;
+      : `<p class="vac"><b>${t("d.sinMedidasT")}</b>${t("d.sinMedidasTxt")}</p>`;
   }
 
   /* ── Promesas vs. realidad ─────────────────────────────────────────── */
   let filtroPromesa = "todos";
-  const EST_PROMESA = {
-    cumplida: "Cumplida", en_proceso: "En proceso",
-    no_iniciada: "No iniciada", incumplida: "Incumplida"
-  };
+  const EST_PROMESA = ["cumplida", "en_proceso", "no_iniciada", "incumplida"];
 
   function pintarFiltrosPromesas() {
-    const claves = ["todos"].concat(Object.keys(EST_PROMESA));
+    const claves = ["todos"].concat(EST_PROMESA);
     $("fPromesas").innerHTML = claves.map((k) =>
-      `<button class="chip ${k === filtroPromesa ? "on" : ""}" data-fprom="${k}">${
-        k === "todos" ? "Todas" : EST_PROMESA[k]}</button>`).join("");
+      `<button class="chip ${k === filtroPromesa ? "on" : ""}" data-fprom="${k}"
+        aria-pressed="${k === filtroPromesa}">${
+        k === "todos" ? t("f.todas") : t("p." + k)}</button>`).join("");
   }
 
   function pintarPromesas() {
@@ -845,13 +841,7 @@
     const todas = GOVISOR.promesas || [];
 
     if (!todas.length) {
-      cont.innerHTML = `<p class="vac"><b>Sin promesas registradas todavía</b>
-        Este es el módulo central del observatorio y exige contrastar cinco cosas por
-        cada promesa: qué se prometió, qué se anunció, qué norma se publicó, qué
-        presupuesto se asignó y qué resultado se verificó.<br><br>
-        Se alimenta del plan de gobierno inscrito ante el JNE, del Mensaje a la Nación
-        del 28/07/2026 y de la exposición de política general del PCM ante el Congreso.
-        GoVisor no infiere promesas: deben transcribirse de la fuente.</p>`;
+      cont.innerHTML = `<p class="vac"><b>${t("pv.titulo")}</b>${t("pv.txt")}</p>`;
       return;
     }
 
@@ -859,12 +849,12 @@
       ? todas : todas.filter((p) => p.estado === filtroPromesa);
 
     if (!lista.length) {
-      cont.innerHTML = '<p class="vac"><b>Sin coincidencias</b>No hay promesas en ese estado.</p>';
+      cont.innerHTML = `<p class="vac"><b>${t("tn.sinCoincidencias")}</b>${t("pv.sinCoincidencias")}</p>`;
       return;
     }
 
     const eslabon = (rotulo, valor, url) => {
-      if (!valor) return `<div class="eslabon vacio"><b>${rotulo}</b><span>sin registro</span></div>`;
+      if (!valor) return `<div class="eslabon vacio"><b>${rotulo}</b><span>${t("p.sinRegistro")}</span></div>`;
       const u = urlSegura(url);
       const txt = u
         ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(valor)} &#8599;</a>`
@@ -878,17 +868,17 @@
         ? [p.norma.tipo, p.norma.numero].filter(Boolean).join(" N.º ") : "";
       return `<article class="promesa ${esc(p.estado || "")}">
         <div class="n-cab">
-          <span class="b b-neu">${esc(EST_PROMESA[p.estado] || "Sin estado")}</span>
+          <span class="b b-neu">${esc(p.estado ? t("p." + p.estado) : t("p.sinEstado"))}</span>
           <span class="sig">${esc(p.sector || "—")}</span>
           ${sellEv(p.nivel)}
         </div>
         <h3>${esc(p.promesa)}</h3>
         <div class="cadena">
-          ${eslabon("Dijo", p.origen && p.origen.tipo, p.origen && p.origen.enlace)}
-          ${eslabon("Hizo", ev && ev.que, ev && ev.enlace)}
-          ${eslabon("Normó", norma, p.norma && p.norma.enlace)}
-          ${eslabon("Presupuestó", p.presupuesto)}
-          ${eslabon("Resultado", p.resultado)}
+          ${eslabon(t("p.dijo"), p.origen && p.origen.tipo, p.origen && p.origen.enlace)}
+          ${eslabon(t("p.hizo"), ev && ev.que, ev && ev.enlace)}
+          ${eslabon(t("p.normo"), norma, p.norma && p.norma.enlace)}
+          ${eslabon(t("p.presupuesto"), p.presupuesto)}
+          ${eslabon(t("p.resultado"), p.resultado)}
         </div>
       </article>`;
     }).join("");
@@ -897,37 +887,35 @@
 
   /* ── Línea de tiempo ───────────────────────────────────────────────── */
   let filtroLinea = "todos";
-  const TIPOS_LINEA = {
-    todos: "Todo", nombramiento: "Nombramientos", norma: "Normas",
-    cese: "Ceses", viaje: "Viajes", hito: "Hitos"
-  };
+  const TIPOS_LINEA = ["todos", "nombramiento", "norma", "cese", "viaje", "hito"];
 
   function pintarFiltrosLinea() {
-    $("fLinea").innerHTML = Object.keys(TIPOS_LINEA).map((k) =>
-      `<button class="chip ${k === filtroLinea ? "on" : ""}" data-flinea="${k}">${TIPOS_LINEA[k]}</button>`).join("");
+    $("fLinea").innerHTML = TIPOS_LINEA.map((k) =>
+      `<button class="chip ${k === filtroLinea ? "on" : ""}" data-flinea="${k}"
+        aria-pressed="${k === filtroLinea}">${t("tl." + k)}</button>`).join("");
   }
 
   function pintarTimeline() {
     const cont = $("timeline");
     const todos = construirLinea();
-    $("lineaSub").textContent = `${todos.length} hitos desde el inicio del mandato`;
+    $("lineaSub").textContent = t("sec.hitos", { n: todos.length });
 
     const lista = filtroLinea === "todos"
       ? todos : todos.filter((i) => i.tipo === filtroLinea);
 
     if (!lista.length) {
-      cont.innerHTML = '<li class="vac"><b>Sin hitos</b>No hay eventos de ese tipo registrados.</li>';
+      cont.innerHTML = `<li class="vac"><b>${t("tl.sinHitos")}</b>${t("tl.sinTipo")}</li>`;
       return;
     }
 
     cont.innerHTML = lista.slice(0, 40).map((i) => {
       const d = diasEntre(fecha(GOVISOR.presidencia.fechaAsuncion), fecha(i.fecha));
-      const dia = (d != null && d >= 0) ? `<b>Día ${d}</b> · ` : "";
+      const dia = (d != null && d >= 0) ? `<b>${t("tl.dia", { n: d })}</b> · ` : "";
       const url = urlSegura(i.enlace);
       const titulo = url
         ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(i.titulo)} &#8599;</a>`
         : esc(i.titulo);
-      const grupo = i.grupo ? `<span class="tl-agrupado">${i.grupo} resoluciones</span>` : "";
+      const grupo = i.grupo ? `<span class="tl-agrupado">${t("tl.resoluciones", { n: i.grupo })}</span>` : "";
       return `<li class="tl t-${esc(i.tipo)}">
         <p class="tl-fecha">${dia}${esc(fechaCorta(i.fecha))} ${sellEv(i.ev)}</p>
         <p class="tl-t">${titulo}</p>
@@ -968,14 +956,14 @@
   function pintarEstabilidad() {
     const e = calcEstabilidad();
     const rotTxt = e.max > 1
-      ? `${esc(e.peor)} <small>${e.max} titulares</small>`
-      : `Ninguna <small>sin relevos</small>`;
+      ? `${esc(e.peor)} <small>${t("e.titulares", { n: e.max })}</small>`
+      : `${t("e.ninguna")} <small>${t("e.sinRelevos")}</small>`;
 
     $("estabilidad").innerHTML = `
-      <div class="est"><dt>Titulares originales</dt><dd>${e.originales}<small> / ${e.carteras}</small></dd></div>
-      <div class="est"><dt>Relevos</dt><dd>${e.cesados}</dd></div>
-      <div class="est"><dt>Permanencia media</dt><dd>${e.prom == null ? "—" : e.prom}<small> días</small></dd></div>
-      <div class="est"><dt>Mayor rotación</dt><dd style="font-size:.85rem">${rotTxt}</dd></div>`;
+      <div class="est"><dt>${t("e.originales")}</dt><dd>${e.originales}<small> / ${e.carteras}</small></dd></div>
+      <div class="est"><dt>${t("e.relevos")}</dt><dd>${e.cesados}</dd></div>
+      <div class="est"><dt>${t("e.permanencia")}</dt><dd>${e.prom == null ? "—" : e.prom}<small> ${t("t.dias")}</small></dd></div>
+      <div class="est"><dt>${t("e.rotacion")}</dt><dd style="font-size:.85rem">${rotTxt}</dd></div>`;
   }
 
   /* ── Gobierno y Congreso ───────────────────────────────────────────── */
@@ -984,12 +972,12 @@
     const total = (c.interpelaciones || []).length + (c.censuras || []).length
       + (c.confianza || []).length + (c.facultades || []).length
       + (c.proyectosEjecutivo || []).length;
-    $("cntCongreso").textContent = total ? `${total} registro(s)` : "Sin registros";
+    $("cntCongreso").textContent = total ? t("s.registros", { n: total }) : t("s.sinRegistros");
 
     const bloque = (titulo, arr, cols, fila) => {
       if (!arr || !arr.length) {
         return `<h4 style="font-size:.78rem;margin:10px 0 4px">${titulo}</h4>
-          <p class="fine">Sin registros.</p>`;
+          <p class="fine">${t("sc.sinRegistros")}</p>`;
       }
       return `<h4 style="font-size:.78rem;margin:10px 0 4px">${titulo}</h4>
         <div class="mini-wrap"><table class="mini"><thead><tr>${
@@ -998,36 +986,30 @@
     };
 
     $("congresoBox").innerHTML =
-      `<p class="fine">La Constitución (art. 130) obliga al Presidente del Consejo de
-       Ministros a exponer la política general ante el Congreso dentro de los 30 días de
-       asumir, y a plantear cuestión de confianza. El reloj de ese plazo está arriba.</p>` +
-      bloque("Interpelaciones", c.interpelaciones, ["Ministro", "Sector", "Fecha", "Resultado"],
+      `<p class="fine">${t("sc.art130")}</p>` +
+      bloque(t("sc.interpelaciones"), c.interpelaciones, [t("sc.ministro"), t("sc.sector"), t("tn.fecha"), t("sc.resultado")],
         (x) => `<tr><td>${esc(x.ministro)}</td><td>${esc(x.sector)}</td><td>${esc(fechaCorta(x.fecha))}</td><td>${esc(x.resultado || "—")}</td></tr>`) +
-      bloque("Mociones de censura", c.censuras, ["Ministro", "Fecha", "Votos", "Resultado"],
+      bloque(t("sc.censuras"), c.censuras, [t("sc.ministro"), t("tn.fecha"), t("sc.votos"), t("sc.resultado")],
         (x) => `<tr><td>${esc(x.ministro)}</td><td>${esc(fechaCorta(x.fecha))}</td><td>${esc(x.votos || "—")}</td><td>${esc(x.resultado || "—")}</td></tr>`) +
-      bloque("Facultades legislativas", c.facultades, ["Materia", "Plazo", "Otorgada"],
-        (x) => `<tr><td>${esc(x.materia)}</td><td>${esc(x.plazo || "—")}</td><td>${x.otorgada ? "Sí" : "No"}</td></tr>`) +
-      bloque("Proyectos del Ejecutivo", c.proyectosEjecutivo, ["N.º", "Título", "Sector", "Estado"],
+      bloque(t("sc.facultades"), c.facultades, [t("sc.materia"), t("sc.plazo"), t("sc.otorgada")],
+        (x) => `<tr><td>${esc(x.materia)}</td><td>${esc(x.plazo || "—")}</td><td>${x.otorgada ? t("sc.si") : t("sc.no")}</td></tr>`) +
+      bloque(t("sc.proyectos"), c.proyectosEjecutivo, [t("sc.nro"), t("sc.tituloCol"), t("sc.sector"), t("sc.estado")],
         (x) => `<tr><td>${esc(x.numero)}</td><td>${esc(x.titulo)}</td><td>${esc(x.sector)}</td><td>${esc(x.estado || "—")}</td></tr>`);
   }
 
   /* ── Radar de nombramientos (más allá del gabinete) ────────────────── */
   function pintarCargos() {
     const cargos = GOVISOR.altosCargos || [];
-    $("cntCargos").textContent = cargos.length ? `${cargos.length} cargo(s)` : "Solo gabinete";
+    $("cntCargos").textContent = cargos.length ? t("s.cargosN", { n: cargos.length }) : t("s.soloGabinete");
 
     if (!cargos.length) {
-      $("cargosBox").innerHTML = `<p class="vac"><b>Solo el gabinete está cargado</b>
-        El radar cubre viceministros, secretarios generales, jefes de organismos y
-        titulares de empresas públicas. Esos nombramientos se publican como R.M. y R.S.
-        en El Peruano; cárgalos en <code>altosCargos</code> de data.js. Las 19 carteras
-        ministeriales ya están en la sección Gabinete.</p>`;
+      $("cargosBox").innerHTML = `<p class="vac"><b>${t("sr.soloGab")}</b>${t("sr.txt")}</p>`;
       return;
     }
 
     const hoy = hoyLima();
     $("cargosBox").innerHTML = `<div class="mini-wrap"><table class="mini">
-      <thead><tr><th>Nombre</th><th>Cargo</th><th>Entidad</th><th>Días</th><th>Norma</th></tr></thead>
+      <thead><tr><th>${t("sr.nombre")}</th><th>${t("sr.cargo")}</th><th>${t("sr.entidad")}</th><th>${t("sr.dias")}</th><th>${t("sr.norma")}</th></tr></thead>
       <tbody>${cargos.map((c) => {
         const d = diasEntre(fecha(c.desde), c.hasta ? fecha(c.hasta) : hoy);
         return `<tr><td>${esc(c.nombre)}</td><td>${esc(c.cargo)}</td>
@@ -1040,61 +1022,51 @@
   function pintarPpto() {
     const p = GOVISOR.presupuesto || {};
     const sec = p.sectores || [];
-    $("cntPpto").textContent = sec.length ? `${sec.length} sector(es)` : "Sin datos";
+    $("cntPpto").textContent = sec.length ? t("s.sectores", { n: sec.length }) : t("s.sinDatos");
 
     const u = urlSegura(p.url);
     const fuente = u
-      ? `<p class="fine">Fuente: <a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(p.fuente)} &#8599;</a></p>`
+      ? `<p class="fine">${t("sp.fuente")}<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(p.fuente)} &#8599;</a></p>`
       : "";
 
     if (!sec.length) {
-      $("pptoBox").innerHTML = `<p class="vac"><b>Sin cifras presupuestales cargadas</b>
-        GoVisor no estima presupuesto: las cifras de PIA, PIM y devengado deben tomarse
-        de la Consulta Amigable del MEF y actualizarse periódicamente. Una cifra
-        inventada aquí sería peor que un vacío.</p>${fuente}`;
+      $("pptoBox").innerHTML = `<p class="vac"><b>${t("sp.sinCifras")}</b>${t("sp.txt")}</p>${fuente}`;
       return;
     }
 
     const fmt = (n) => n == null ? "—" : "S/ " + Number(n).toLocaleString("es-PE");
     $("pptoBox").innerHTML = `<div class="mini-wrap"><table class="mini">
-      <thead><tr><th>Sector</th><th>PIA</th><th>PIM</th><th>Devengado</th><th>% ejec.</th></tr></thead>
+      <thead><tr><th>${t("sp.sector")}</th><th>PIA</th><th>PIM</th><th>Devengado</th><th>${t("sp.ejec")}</th></tr></thead>
       <tbody>${sec.map((s) => {
         const pct = (s.pim && s.devengado != null) ? (s.devengado / s.pim * 100) : null;
         return `<tr><td><b>${esc(s.sigla)}</b></td><td>${fmt(s.pia)}</td>
           <td>${fmt(s.pim)}</td><td>${fmt(s.devengado)}</td>
           <td>${pct == null ? "—" : pct.toFixed(1) + " %"}</td></tr>`;
       }).join("")}</tbody></table></div>
-      ${p.actualizado ? `<p class="fine">Actualizado al ${esc(fechaLarga(p.actualizado))}.</p>` : ""}${fuente}`;
+      ${p.actualizado ? `<p class="fine">${t("sp.actualizado", { f: fechaLarga(p.actualizado) })}</p>` : ""}${fuente}`;
   }
 
   /* ── Metodología ───────────────────────────────────────────────────── */
   function pintarMetodologia() {
     $("metodologia").innerHTML = `<div class="meto">
-      <p>GoVisor distingue entre lo que está probado documentalmente y lo que no.
-      Cada registro lleva una etiqueta de nivel de evidencia:</p>
+      <p>${t("m.intro")}</p>
       <p style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">
         ${sellEv("oficial")} ${sellEv("verificado")} ${sellEv("preliminar")} ${sellEv("investigacion")}
       </p>
       <ul>
-        <li><b>Oficial</b> — publicado en El Peruano, el Congreso o una entidad del Estado.</li>
-        <li><b>Verificado</b> — contrastado con dos fuentes independientes.</li>
-        <li><b>Preliminar</b> — reportado por prensa, sin documento oficial todavía.</li>
-        <li><b>En investigación</b> — denuncia o proceso en curso. <b>No es un hecho probado.</b></li>
+        <li>${t("m.oficial")}</li>
+        <li>${t("m.verificado")}</li>
+        <li>${t("m.preliminar")}</li>
+        <li>${t("m.investigacion")}</li>
       </ul>
-      <h4>Qué se calcula y qué se carga a mano</h4>
-      <ul>
-        <li><b>Se calcula en vivo</b> desde los datos verificados: días de mandato, día
-        de los primeros 100, plazo del artículo 130, línea de tiempo, índice de
-        estabilidad, permanencia por ministro y «qué cambió».</li>
-        <li><b>Se carga a mano</b>, porque exige contrastar fuente por fuente: promesas,
-        medidas de los 100 días, presupuesto, actos del Congreso y altos cargos.</li>
-      </ul>
-      <h4>Nombres propios</h4>
-      <p>Se transcriben tal como figuran en la resolución, no como aparecen en la prensa.
-      Por eso el visor dice «Kosme Sheput» y «Arnillas Gonzales».</p>
-      <h4>Lo que este visor no hace</h4>
-      <p>No estima cifras, no infiere promesas y no publica denuncias como si fueran
-      hechos. Cuando un dato falta, lo dice.</p>
+      <h4>${t("m.queCalcula")}</h4>
+      <ul><li>${t("m.calcula")}</li><li>${t("m.mano")}</li></ul>
+      <h4>${t("m.nombres")}</h4>
+      <p>${t("m.nombresTxt")}</p>
+      <h4>${t("m.idioma")}</h4>
+      <p>${t("m.idiomaTxt")}</p>
+      <h4>${t("m.noHace")}</h4>
+      <p>${t("m.noHaceTxt")}</p>
     </div>`;
   }
 
@@ -1137,21 +1109,24 @@
       : "";
 
     $("kpiGabSub").innerHTML = act
-      ? `${ver} titulares verificados${rango ? `<br>${esc(rango)}` : ""}`
-      : "Sin titulares registrados";
+      ? `${t("kpi.verificados", { n: ver })}${rango ? `<br>${esc(rango)}` : ""}`
+      : t("kpi.sinTitulares");
 
     // 4) Normas del periodo — nunca se inventa una cifra.
     const n = sel.normas().length;
     const kn = $("kpiNormas");
+    // El nodo huerfano no tiene padre: en paginas sin KPI (fuentes.html)
+    // esto seria un TypeError que abortaria iniciar() entero.
+    const knPadre = kn.parentElement || document.createElement("div");
     if (n) {
-      kn.textContent = n.toLocaleString("es-PE");
-      kn.parentElement.classList.remove("kpi-val-sm");
+      kn.textContent = numero(n);
+      knPadre.classList.remove("kpi-val-sm");
       $("kpiNormasSub").innerHTML =
-        `${sel.normasVerificadas()} con enlace verificado<br><a href="#normas">Ver sección de normas</a>`;
+        `${t("kpi.conEnlace", { n: sel.normasVerificadas() })}<br><a href="#normas">${t("kpi.verNormas")}</a>`;
     } else {
-      kn.textContent = "En registro";
-      kn.parentElement.classList.add("kpi-val-sm");
-      $("kpiNormasSub").innerHTML = '<a href="#normas">Ver sección de normas</a>';
+      kn.textContent = t("kpi.enRegistro");
+      knPadre.classList.add("kpi-val-sm");
+      $("kpiNormasSub").innerHTML = `<a href="#normas">${t("kpi.verNormas")}</a>`;
     }
   }
 
@@ -1165,32 +1140,32 @@
 
   /* ── Resumen de promesas (tres eslabones) ──────────────────────────── */
   function pintarPromesasResumen() {
-    const t = sel.promesas().length;
+    const total = sel.promesas().length;
     const cont = $("promesasResumen");
 
     const bloque = (icono, rotulo, valor, sub) =>
       `<div class="c3"><p class="c3-rot"><span aria-hidden="true">${icono}</span> ${rotulo}</p>
        <p class="c3-val">${esc(valor)}</p><p class="c3-sub">${esc(sub)}</p></div>`;
 
-    if (!t) {
+    if (!total) {
       cont.innerHTML =
-        bloque("💬", "Lo que dijo", "En registro", "Compromisos del Mensaje a la Nación") +
-        bloque("📋", "Lo que normó", "En registro", "Normas ligadas a compromisos") +
-        bloque("✓", "Lo que ejecutó", "En registro", "Acciones y resultados");
-      $("promesasNota").textContent = "Información en construcción. Sin datos inventados.";
+        bloque("💬", t("tab.dijo"), t("kpi.enRegistro"), t("tab.compromisos")) +
+        bloque("📋", t("tab.normo"), t("kpi.enRegistro"), t("tab.normasRel")) +
+        bloque("✓", t("tab.ejecuto"), t("kpi.enRegistro"), t("tab.acciones"));
+      $("promesasNota").textContent = t("tab.construccion");
       return;
     }
 
     const conNorma = sel.promesasConNorma();
     const conEv = sel.promesasConEvidencia();
     cont.innerHTML =
-      bloque("💬", "Lo que dijo", t, t === 1 ? "compromiso registrado" : "compromisos registrados") +
-      bloque("📋", "Lo que normó", conNorma || "Sin evidencia", conNorma ? "con norma publicada" : "ninguna norma vinculada aún") +
-      bloque("✓", "Lo que ejecutó", conEv || "Sin evidencia", conEv ? "con acción verificada" : "sin evidencia suficiente");
+      bloque("💬", t("tab.dijo"), total, total === 1 ? t("tab.compromisoN") : t("tab.compromisosN")) +
+      bloque("📋", t("tab.normo"), conNorma || t("tab.sinEv"), conNorma ? t("tab.conNorma") : t("tab.sinNorma")) +
+      bloque("✓", t("tab.ejecuto"), conEv || t("tab.sinEv"), conEv ? t("tab.conAccion") : t("tab.sinEvidencia"));
 
     $("promesasNota").textContent = conEv
-      ? `${conEv} de ${t} promesas tienen evidencia de ejecución registrada.`
-      : `Las ${t} promesas están registradas; aún no hay evidencia de ejecución.`;
+      ? t("tab.notaEv", { a: conEv, b: total })
+      : t("tab.notaSinEv", { n: total });
   }
 
   /* ── Timeline compacto de portada ──────────────────────────────────── */
@@ -1198,7 +1173,7 @@
     const items = construirLinea().slice(0, 4);
     const cont = $("timelineMini");
     if (!items.length) {
-      cont.innerHTML = '<li class="t">Sin hitos registrados.</li>';
+      cont.innerHTML = `<li class="t">${t("tab.sinHitos")}</li>`;
       return;
     }
     const filas = items.map((i) =>
@@ -1208,8 +1183,8 @@
     // Estado en curso: solo si los 100 días siguen corriendo (dato real).
     const d = sel.diaGobierno();
     const curso = (d != null && d >= 0 && d <= 100)
-      ? `<li class="curso"><span class="f">En curso</span>
-         <span class="t">Primeros 100 días de gestión</span></li>` : "";
+      ? `<li class="curso"><span class="f">${t("tab.enCurso")}</span>
+         <span class="t">${t("tab.primeros100")}</span></li>` : "";
     cont.innerHTML = filas + curso;
   }
 
@@ -1229,7 +1204,7 @@
     }
 
     if (!elegidos.length) {
-      cont.innerHTML = '<li><span class="t">Sin titulares registrados.</span></li>';
+      cont.innerHTML = `<li><span class="t">${t("tab.sinTitulares")}</span></li>`;
       return;
     }
 
@@ -1242,6 +1217,56 @@
       return `<li>${av}<span><b>${esc(m.ministro)}</b>
         <span>${esc(m.cartera)}</span></span></li>`;
     }).join("");
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     IDIOMA
+     ══════════════════════════════════════════════════════════════════ */
+
+  /** Repinta todo lo que genera JavaScript. El HTML estatico lo traduce
+      I18N.aplicarEstaticos() con los atributos data-i18n. */
+  function repintar() {
+    pintarMandato();
+    pintarLectura();
+    pintarGabinete();
+    pintarNormas();
+    pintarViajes();
+    pintarFuentes();
+    pintarKPIs();
+    pintarPromesasResumen();
+    pintarTimelineMini();
+    pintarGabineteResumen();
+    pintarCambios();
+    pintarReloj130();
+    pintar100();
+    pintarFiltrosPromesas();
+    pintarPromesas();
+    pintarFiltrosLinea();
+    pintarTimeline();
+    pintarEstabilidad();
+    pintarCongreso();
+    pintarCargos();
+    pintarPpto();
+    pintarMetodologia();
+    pintarFiltrosNoticias();
+    pintarFiltrosYT();
+    ultimoDia = "";            // fuerza el refresco de la fecha en el reloj
+    ticTac();
+  }
+
+  function conectarIdioma() {
+    const btn = $("idiomaBtn");
+    const marca = () => { $("idiomaTxt").textContent = I18N.idioma.toUpperCase(); };
+
+    marca();
+    btn.addEventListener("click", () => I18N.alternar());
+
+    I18N.alCambiar(() => {
+      marca();
+      repintar();
+      if (noticiasCargadas) cargarNoticias();
+      if (leerClave()) estadoYT(t("yt.cargada"), "ok");
+    });
   }
 
   /* ══════════ EVENTOS ══════════ */
@@ -1289,6 +1314,21 @@
       if (!masMenu.hidden) { masMenu.hidden = true; masBtn.setAttribute("aria-expanded", "false"); }
       if (nav.classList.contains("abierto")) {
         nav.classList.remove("abierto"); menuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Al elegir una sección en el menú, su bloque se abre solo: de otro
+    // modo el enlace saltaría a un acordeón cerrado y parecería roto.
+    document.addEventListener("click", (ev) => {
+      const a = ev.target.closest('a[href^="#"]');
+      if (!a) return;
+      const destino = document.getElementById(a.getAttribute("href").slice(1));
+      if (!destino) return;
+      const bloque = destino.closest("details") || (destino.tagName === "DETAILS" ? destino : null);
+      if (bloque) {
+        bloque.open = true;
+        const padre = bloque.parentElement && bloque.parentElement.closest("details");
+        if (padre) padre.open = true;
       }
     });
 
@@ -1396,19 +1436,19 @@
 
     $("ytGuardar").addEventListener("click", () => {
       const v = $("ytKey").value.trim();
-      if (!v) { estadoYT("Escribe una clave antes de guardar.", "err"); return; }
+      if (!v) { estadoYT(t("yt.escribe"), "err"); return; }
       try {
         localStorage.setItem(CLAVE_YT, v);
-        estadoYT("Clave guardada en este navegador. Consultando…", "ok");
+        estadoYT(t("yt.guardada"), "ok");
         cargarYouTube();
-      } catch { estadoYT("Este navegador bloquea el almacenamiento local.", "err"); }
+      } catch { estadoYT(t("yt.bloqueado"), "err"); }
     });
 
     $("ytBorrar").addEventListener("click", () => {
       try { localStorage.removeItem(CLAVE_YT); } catch { /* sin acción */ }
       $("ytKey").value = "";
-      estadoYT("Clave borrada de este navegador.", "");
-      $("ytGrid").innerHTML = '<p class="vac">Ingresa tu API key para cargar videos.</p>';
+      estadoYT(t("yt.borrada"), "");
+      $("ytGrid").innerHTML = `<p class="vac">${t("yt.ingresa")}</p>`;
     });
 
     // Las noticias solo se piden cuando el usuario abre el acordeón.
@@ -1436,9 +1476,10 @@
 
   /* ══════════ ARRANQUE ══════════ */
   function iniciar() {
+    I18N.aplicarEstaticos();
+
     const m = GOVISOR.meta;
     $("marcaTitulo").textContent = m.titulo;
-    $("marcaSub").textContent = m.subtitulo;
     $("pieAct").textContent = fechaLarga(m.ultimaActualizacion) || "—";
     if (m.aviso) { $("avisoTxt").textContent = m.aviso; $("avisoBar").hidden = false; }
 
@@ -1473,10 +1514,11 @@
     pintarFiltrosYT();
 
     const key = leerClave();
-    if (key) { $("ytKey").value = key; estadoYT("Clave cargada desde este navegador.", "ok"); }
+    if (key) { $("ytKey").value = key; estadoYT(t("yt.cargada"), "ok"); }
 
     conectar();
     conectarCabecera();
+    conectarIdioma();
     observarEntradas();
     arrancado = true;
     ticTac();

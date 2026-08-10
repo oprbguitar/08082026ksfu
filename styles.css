@@ -117,11 +117,15 @@ img{ max-width:100%; }
   cursor:pointer; transition:.18s;
 }
 .icono-btn:hover{ background:rgba(255,255,255,.14); color:#fff; }
+/* Selector de idioma: globo blanco + código del idioma activo. */
 .idioma{
-  display:inline-flex; align-items:center; gap:4px; margin-left:9px;
-  font-size:.82rem; font-weight:700; color:rgba(255,255,255,.82); white-space:nowrap;
+  display:inline-flex; align-items:center; gap:6px; margin-left:9px;
+  padding:7px 11px; border-radius:8px; cursor:pointer;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.26);
+  font:700 .8rem/1 var(--font); color:#fff; white-space:nowrap; transition:.18s;
 }
-.idioma::after{ content:"▾"; font-size:.7rem; }
+.idioma:hover{ background:rgba(255,255,255,.2); }
+.idioma b{ font-weight:800; letter-spacing:.04em; }
 
 .mas{ position:relative; }
 .mas-btn{
@@ -564,6 +568,44 @@ section{ margin:34px 0; scroll-margin-top:86px; }
 }
 .lec h3{ font-size:.68rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--brand-700); margin-bottom:6px; }
 .lec p{ font-size:.88rem; }
+
+/* ══════════════════ BLOQUES PLEGABLES ══════════════════
+   Cada sección grande se abre y cierra con su flecha, para que la portada
+   entre en pantalla sin obligar a un desplazamiento largo. */
+.bloque{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-md); box-shadow:var(--shadow-card);
+  margin-bottom:12px; overflow:hidden; scroll-margin-top:86px;
+}
+.bloque > summary{
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  cursor:pointer; padding:17px 20px; list-style:none;
+  transition:background .18s;
+}
+.bloque > summary::-webkit-details-marker{ display:none; }
+.bloque > summary::after{
+  content:"›"; margin-left:auto; font-size:1.5rem; line-height:1;
+  color:var(--brand-700); transition:transform .28s var(--ease); align-self:center;
+}
+.bloque[open] > summary::after{ transform:rotate(90deg); }
+.bloque > summary:hover{ background:var(--brand-025); }
+.bloque[open] > summary{ border-bottom:1px solid var(--border); }
+.bq-t{ font-size:1.12rem; font-weight:700; letter-spacing:-.02em; color:var(--ink-900); }
+.bq-s{ font-size:.8rem; color:var(--ink-500); }
+.bq-in{ padding:18px 20px 20px; animation:desplegar .3s var(--ease); }
+.bloque .card{ box-shadow:none; }
+
+/* ══════════════════ PÁGINAS SECUNDARIAS ══════════════════ */
+.pagina{ padding-top:34px; padding-bottom:34px; }
+.pagina h1{ font-size:1.7rem; letter-spacing:-.025em; }
+.pagina-intro{ font-size:.92rem; color:var(--ink-500); max-width:74ch; margin-bottom:20px; }
+.pagina-nota{ margin-top:22px; }
+.pagina-nota h2{ font-size:1.02rem; margin-bottom:9px; }
+.pasos{ margin:0 0 11px; padding-left:20px; font-size:.87rem; color:var(--ink-500); }
+.pasos li{ margin-bottom:5px; }
+.grid-f-3{ grid-template-columns:1fr; }
+@media (min-width:768px){ .grid-f-3{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1200px){ .grid-f-3{ grid-template-columns:repeat(3,1fr); } }
 
 /* ══════════════════ SEGUIMIENTO ══════════════════ */
 .seg-grid{ display:grid; grid-template-columns:1.6fr 1fr; gap:var(--gap); align-items:start; }
