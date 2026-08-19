@@ -50,6 +50,23 @@ Después, en **Settings → Pages** del repositorio, poner `gobierno.quest` como
 *Custom domain* y marcar **Enforce HTTPS** cuando GitHub termine de emitir el
 certificado (tarda unos minutos tras propagar el DNS).
 
+### La URL `github.io` no debe verse
+
+Tres capas se encargan de ello, de la más fuerte a la más débil:
+
+1. **`CNAME`** — con el dominio configurado, GitHub Pages responde **301** desde
+   `oprbguitar.github.io/08082026ksfu/*` hacia `gobierno.quest/*`. Es la
+   redirección real, del lado del servidor.
+2. **Guardia en el `<head>`** de `index.html` y `fuentes.html` — un script
+   inline que corre antes de pintar o descargar nada: si el host termina en
+   `.github.io`, salta al dominio propio conservando ruta, query y ancla. Cubre
+   el rato en que Pages aún no aplicó el `CNAME` y las páginas que el navegador
+   sirva desde su caché. No toca `localhost` ni ningún otro host, así que el
+   desarrollo local sigue funcionando igual.
+3. **`404.html`** — Pages la sirve ante cualquier ruta desconocida. Lleva el
+   mismo guardia más un `meta refresh`, para que un enlace roto tampoco deje al
+   visitante en el 404 genérico de `github.io`.
+
 ## Promesas: cómo se contrastan
 
 Las 17 promesas registradas se cotejaron una por una contra fuentes publicadas
@@ -185,6 +202,8 @@ styles.css    presentación — identidad teal institucional, mobile-first
 assets/       imagen del héroe (ver assets/README.md)
 scripts/      scraper de El Peruano y publicador del sello de versión
 version.json  sello de publicación — dispara el refresco del visor
+CNAME         dominio propio que sirve GitHub Pages
+404.html      ruta desconocida → redirige al dominio propio
 data.js       ← EDITA SOLO ESTE ARCHIVO
 app.js        render, contadores, filtros y llamadas externas
 PROYECTO.md   qué es, cómo funciona, tecnologías y valuación
