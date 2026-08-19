@@ -9,7 +9,7 @@ viajes oficiales, y un panel de noticias y video.
 
 ---
 
-**En línea:** https://oprbguitar.github.io/08082026ksfu/
+**En línea:** https://gobierno.quest/
 
 ## Estado de verificación
 
@@ -29,6 +29,26 @@ la fuente primaria. Dos difieren de las notas de prensa: la R.S. 232-2026-PCM di
 
 Todo registro no contrastado se muestra con el sello `POR VERIFICAR`. El portal
 prefiere un vacío honesto antes que un dato sin respaldo documental.
+
+## Dominio
+
+El sitio se publica en **https://gobierno.quest** (dominio propio, registrado en Porkbun).
+El archivo `CNAME` de la raíz es lo que le dice a GitHub Pages qué dominio
+servir: si se borra, Pages vuelve a la URL `github.io`.
+
+En Porkbun, con los nameservers de Porkbun ya activos, los registros DNS son:
+
+| Tipo | Host | Valor |
+|---|---|---|
+| A | *(vacío / raíz)* | `185.199.108.153` |
+| A | *(vacío / raíz)* | `185.199.109.153` |
+| A | *(vacío / raíz)* | `185.199.110.153` |
+| A | *(vacío / raíz)* | `185.199.111.153` |
+| CNAME | `www` | `oprbguitar.github.io.` |
+
+Después, en **Settings → Pages** del repositorio, poner `gobierno.quest` como
+*Custom domain* y marcar **Enforce HTTPS** cuando GitHub termine de emitir el
+certificado (tarda unos minutos tras propagar el DNS).
 
 ## Promesas: cómo se contrastan
 

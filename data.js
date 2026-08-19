@@ -23,7 +23,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260819",          // <- debe coincidir con version.json
+    version: "20260819.1",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-08-19",
     aviso: ""
   },

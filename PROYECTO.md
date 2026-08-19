@@ -9,6 +9,7 @@
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
 | **Estado** | v0.7 — promesas contrastadas, semáforo de los 100 días y refresco automático |
 | **Repositorio** | https://github.com/oprbguitar/08082026ksfu |
+| **Dominio** | https://gobierno.quest — registrado en Porkbun, servido por GitHub Pages (archivo `CNAME`) |
 | **Inicio** | 8 de agosto de 2026 |
 | **Última actualización de este documento** | 19 de agosto de 2026 |
 

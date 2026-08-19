@@ -829,7 +829,7 @@
           ${sellEv(m.evidencia)}
         </div>`;
         }).join("")
-      : `<p class="vac"><b>${t("d.sinMedidasT")}</b>${t("d.sinMedidasTxt")}</p>`;
+      : `<p class="vac"><b>${t("d.sinMedidasT")}</b></p>`;
   }
 
   /* ── Promesas vs. realidad ─────────────────────────────────────────── */
