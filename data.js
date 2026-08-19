@@ -23,7 +23,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    ultimaActualizacion: "2026-08-08",
+    version: "20260819",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-08-19",
     aviso: ""
   },
 
@@ -1294,112 +1295,247 @@ const GOVISOR = {
        —"respetar la independencia de poderes"— no se listan: no son
        verificables y ensuciarian el tablero de cumplimiento.
 
-       estado: arranca en "no_iniciada". Cuando aparezca la norma o el acto
-       que la ejecute, se cambia a "en_proceso" o "cumplida" y se agrega la
-       entrada correspondiente en `evidencia`.
+       CONTRASTE DOCUMENTAL — 19/08/2026. Cada promesa se cotejo contra
+       fuentes publicadas y se le asigno un nivel de evidencia:
 
-       nivel "preliminar": el contenido del discurso esta reportado por
-       prensa; falta contrastarlo con la transcripcion oficial del Congreso.
-       Al hacerlo, subir a "oficial". */
+         "oficial"    el anuncio consta en un medio del Estado —Diario
+                      Oficial El Peruano o TV Peru—, que actua como registro
+                      publico del discurso.
+         "verificado" lo consignan al menos dos medios independientes entre si.
+         "preliminar" lo reporta una sola fuente, o las fuentes discrepan
+                      sobre la cifra. Se mantiene el sello hasta contrastarlo
+                      con la transcripcion oficial del Congreso.
 
-    { id:"seg-01", promesa:"Elevar la remuneracion minima vital a S/ 1 300", sector:"MTPE",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
+       El campo `fuentes` lista esa documentacion; el visor la muestra bajo
+       cada promesa para que cualquiera pueda comprobarla.
 
+       ESTADO: nadie sube de "no_iniciada" sin una entrada en `evidencia`.
+       Al 19/08/2026 (dia 22 de 100) solo dos promesas tienen acto de
+       gobierno documentado; el resto sigue siendo anuncio. */
+    { id:"seg-01", promesa:"Elevar la remuneracion minima vital de S/ 1 130 a S/ 1 300", sector:"MTPE",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"en_proceso", evidencia:[ { fecha:"2026-07-29", que:"El MEF confirma que prepara el alza y evalua aplicarla por tramos; falta convocar al Consejo Nacional de Trabajo y emitir el Decreto Supremo.", enlace:"https://www.infobae.com/peru/2026/07/29/gobierno-ya-se-alista-para-el-incremento-del-sueldo-minimo-en-peru-y-buscara-preparar-a-las-mypes/" } ], norma:{}, presupuesto:"",
+      resultado:"Sin Decreto Supremo publicado en El Peruano al 19/08/2026: la RMV vigente sigue en S/ 1 130.",
+      fuentes:[ { n:"El Peruano", u:"https://www.elperuano.pe/noticia/301268-gobierno-anuncia-aumento-de-la-remuneracion-minima-vital-a-s-1300-y-bono-para-las-mypes" }, { n:"El Peruano", u:"https://elperuano.pe/noticia/301314-gobierno-subira-a-s-1300-la-remuneracion-minima-vital" }, { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/29/gobierno-ya-se-alista-para-el-incremento-del-sueldo-minimo-en-peru-y-buscara-preparar-a-las-mypes/" }, { n:"El Comercio", u:"https://elcomercio.pe/respuestas/cuanto/aumento-de-sueldo-minimo-2026-en-peru-nuevo-monto-y-que-anuncio-el-mef-sobre-la-rmv-tdpe-noticia/" }, { n:"La Republica", u:"https://larepublica.pe/economia/2026/08/18/aumento-del-sueldo-minimo-que-pasara-con-los-trabajadores-que-ya-ganan-mas-de-s1300-hnews-741546" } ],
+      nivel:"oficial", verificado:true },
     { id:"soc-01", promesa:"Duplicar Pension 65: de S/ 350 a S/ 700 bimestrales", sector:"MIDIS",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"en_proceso", evidencia:[ { fecha:"2026-08-01", que:"El Gobierno ratifica el alza a S/ 700 bimestrales, de aplicacion progresiva y sin fecha de inicio anunciada.", enlace:"https://elcomercio.pe/respuestas/quien/aumento-de-pension-65-quienes-accederan-a-los-s-700-y-cuando-estara-disponible-tdpe-noticia/" } ], norma:{}, presupuesto:"",
+      resultado:"Sin norma de aprobacion ni cronograma de pago con el nuevo monto al 19/08/2026.",
+      fuentes:[ { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"TV Peru", u:"https://www.tvperu.gob.pe/noticias/politica/mensaje-a-la-nacion-pension-65-subira-a-s700-para-adultos-mayores-en-pobreza-extrema" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/28/pension-65-keiko-fujimori-anuncia-entrega-de-s700-bimestrales-para-adultos-mayores-en-situacion-de-pobreza-extrema/" }, { n:"El Comercio", u:"https://elcomercio.pe/respuestas/quien/aumento-de-pension-65-quienes-accederan-a-los-s-700-y-cuando-estara-disponible-tdpe-noticia/" } ],
+      nivel:"oficial", verificado:true },
     { id:"emp-01", promesa:"Programa \"Jovenes con Futuro\": reducir a la mitad el desempleo juvenil", sector:"MTPE",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
-    { id:"emp-02", promesa:"Reactivar Promype dentro de los primeros cien dias", sector:"PRODUCE",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/29/las-5-claves-del-primer-mensaje-a-la-nacion-de-keiko-fujimori-seguridad-sueldo-minimo-y-reforma-del-estado/" }, { n:"Altavoz", u:"https://altavoz.pe/politica/keiko-fujimori-horizonte-laboral-plantea-17-medidas-para-los-primeros-100-dias-de-gobierno-en-materia-laboral/" } ],
+      nivel:"verificado", verificado:true },
+    { id:"emp-02", promesa:"Reactivar Promype via Cofide dentro de los primeros cien dias", sector:"PRODUCE",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"Compromiso con plazo explicito: primeros cien dias (vence el 05/11/2026).",
+      fuentes:[ { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"PQS", u:"https://pqs.pe/actualidad/keiko-fujimori-los-principales-anuncios-de-su-primer-mensaje-a-la-nacion/" }, { n:"Diario El Pueblo", u:"https://diarioelpueblo.com.pe/2026/07/29/mensaje-a-la-nacion-de-la-presidenta-keiko-fujimori/" } ],
+      nivel:"oficial", verificado:true },
     { id:"emp-03", promesa:"Bono compensatorio por unica vez para micro y pequenas empresas", sector:"PRODUCE",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"Ligado al alza de la RMV: sin norma que lo cree al 19/08/2026.",
+      fuentes:[ { n:"El Peruano", u:"https://www.elperuano.pe/noticia/301268-gobierno-anuncia-aumento-de-la-remuneracion-minima-vital-a-s-1300-y-bono-para-las-mypes" }, { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/29/gobierno-ya-se-alista-para-el-incremento-del-sueldo-minimo-en-peru-y-buscara-preparar-a-las-mypes/" } ],
+      nivel:"oficial", verificado:true },
+    { id:"soc-02", promesa:"Reducir a la mitad la desnutricion cronica y la anemia infantil", sector:"MIDIS",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"Las fuentes difieren entre desnutricion cronica y anemia: falta contrastar con la transcripcion oficial.",
+      fuentes:[ { n:"Diario Correo", u:"https://diariocorreo.pe/politica/keiko-fujimori-plantea-siete-objetivos-de-gobierno-en-su-primer-mensaje-a-la-nacion-noticia/" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/29/las-5-claves-del-primer-mensaje-a-la-nacion-de-keiko-fujimori-seguridad-sueldo-minimo-y-reforma-del-estado/" } ],
       nivel:"preliminar", verificado:false },
-
-    { id:"soc-02", promesa:"Reducir a la mitad la desnutricion cronica en menores de cinco anos", sector:"MIDIS",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
     { id:"edu-01", promesa:"Relanzar el PRONAA para la alimentacion en colegios publicos", sector:"MINEDU",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
-    { id:"edu-02", promesa:"Ampliar Beca 18", sector:"MINEDU",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"Caretas", u:"https://caretas.pe/politica/que-es-el-pronaa-el-programa-que-keiko-fujimori-busca-relanzar-en-el-peru-a-mas-de-una-decada-de-su-cierre-noticia" }, { n:"PQS", u:"https://pqs.pe/actualidad/keiko-fujimori-los-principales-anuncios-de-su-primer-mensaje-a-la-nacion/" } ],
+      nivel:"oficial", verificado:true },
+    { id:"edu-02", promesa:"Ampliar Beca 18 dentro del programa \"Jovenes con Futuro\"", sector:"MINEDU",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/29/las-5-claves-del-primer-mensaje-a-la-nacion-de-keiko-fujimori-seguridad-sueldo-minimo-y-reforma-del-estado/" }, { n:"Diario Correo", u:"https://diariocorreo.pe/politica/keiko-fujimori-plantea-siete-objetivos-de-gobierno-en-su-primer-mensaje-a-la-nacion-noticia/" } ],
+      nivel:"verificado", verificado:true },
     { id:"inf-01", promesa:"Culminar la Linea 2 del Metro de Lima", sector:"MTC",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"El Comercio", u:"https://elcomercio.pe/economia/peru/keiko-fujimori-promete-culminar-la-linea-2-del-metro-de-lima-y-sistemas-de-metro-en-arequipa-piura-y-trujillo-noticia/" }, { n:"La Republica", u:"https://larepublica.pe/sociedad/2026/07/28/culminacion-de-las-lineas-2-3-4-5-y-6-del-metro-de-lima-tren-de-cercanias-a-ica-y-barranca-y-trenes-para-arequipa-piura-y-trujillo-las-obras-viales-que-anuncio-keiko-fujimori-en-su-mensaje-a-la-nacion-2118116" }, { n:"Energiminas", u:"https://energiminas.com/2026/07/28/keiko-fujimori-se-propone-culminar-linea-2-del-metro-de-lima-y-ejecutar-las-lineas-3-4-5-y-6-durante-su-gestion/" } ],
+      nivel:"verificado", verificado:true },
     { id:"inf-02", promesa:"Ejecutar las Lineas 3, 4, 5 y 6 del Metro de Lima", sector:"MTC",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"Energiminas", u:"https://energiminas.com/2026/07/28/keiko-fujimori-se-propone-culminar-linea-2-del-metro-de-lima-y-ejecutar-las-lineas-3-4-5-y-6-durante-su-gestion/" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/28/keiko-fujimori-anuncia-las-lineas-3-4-5-y-6-del-metro-de-lima-y-metros-para-arequipa-piura-y-trujillo-en-su-primer-mensaje-a-la-nacion/" }, { n:"La Republica", u:"https://larepublica.pe/sociedad/2026/07/28/culminacion-de-las-lineas-2-3-4-5-y-6-del-metro-de-lima-tren-de-cercanias-a-ica-y-barranca-y-trenes-para-arequipa-piura-y-trujillo-las-obras-viales-que-anuncio-keiko-fujimori-en-su-mensaje-a-la-nacion-2118116" } ],
+      nivel:"verificado", verificado:true },
     { id:"inf-03", promesa:"Culminar la Nueva Carretera Central", sector:"MTC",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"TV Peru", u:"https://www.tvperu.gob.pe/noticias/politica/presidenta-fujimori-anuncia-que-culminara-la-nueva-carretera-central" }, { n:"Peru Construye", u:"https://peruconstruye.net/2026/07/28/presidenta-keiko-fujimori-apunta-como-obra-prioritaria-la-culminacion-de-la-nueva-carretera-central/" }, { n:"Caretas", u:"https://caretas.pe/politica/estas-son-las-obras-y-carreteras-que-anuncio-keiko-fujimori" } ],
+      nivel:"oficial", verificado:true },
     { id:"inf-04", promesa:"Sistemas de metro en Arequipa, Piura y Trujillo", sector:"MTC",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"El Comercio", u:"https://elcomercio.pe/economia/peru/keiko-fujimori-promete-culminar-la-linea-2-del-metro-de-lima-y-sistemas-de-metro-en-arequipa-piura-y-trujillo-noticia/" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/28/keiko-fujimori-anuncia-las-lineas-3-4-5-y-6-del-metro-de-lima-y-metros-para-arequipa-piura-y-trujillo-en-su-primer-mensaje-a-la-nacion/" }, { n:"La Republica", u:"https://larepublica.pe/sociedad/2026/07/28/culminacion-de-las-lineas-2-3-4-5-y-6-del-metro-de-lima-tren-de-cercanias-a-ica-y-barranca-y-trenes-para-arequipa-piura-y-trujillo-las-obras-viales-que-anuncio-keiko-fujimori-en-su-mensaje-a-la-nacion-2118116" } ],
+      nivel:"verificado", verificado:true },
     { id:"inf-05", promesa:"Trenes de cercanias Lima-Ica y Lima-Barranca", sector:"MTC",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"Trome", u:"https://trome.com/actualidad/politica/keiko-fujimori-promete-trenes-lima-ica-y-lima-barranca-anuncia-expansion-del-metro-y-megaplan-vial-para-conectar-el-peru-video-mensaje-noticia/" }, { n:"La Republica", u:"https://larepublica.pe/sociedad/2026/07/28/culminacion-de-las-lineas-2-3-4-5-y-6-del-metro-de-lima-tren-de-cercanias-a-ica-y-barranca-y-trenes-para-arequipa-piura-y-trujillo-las-obras-viales-que-anuncio-keiko-fujimori-en-su-mensaje-a-la-nacion-2118116" }, { n:"Caretas", u:"https://caretas.pe/politica/estas-son-las-obras-y-carreteras-que-anuncio-keiko-fujimori" } ],
+      nivel:"verificado", verificado:true },
     { id:"seg-02", promesa:"Videovigilancia nacional interconectada y plataformas de IA para mapear el delito", sector:"MININTER",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"El plan de gobierno cifra 10 000 camaras interconectadas; el mensaje del 28/07 no repitio la cifra.",
+      fuentes:[ { n:"El Comercio", u:"https://elcomercio.pe/peru/seguridad-bajo-el-gobierno-de-keiko-fujimori-las-medidas-contra-el-crimen-organizado-y-los-vacios-de-su-primer-mensaje-noticia/" }, { n:"Caretas", u:"https://caretas.pe/politica/seguridad-y-prevencion-marcaran-los-primeros-100-dias-de-keiko-fujimori" }, { n:"TV Peru", u:"https://www.tvperu.gob.pe/noticias/politica/tu-decision-2026-planes-de-gobierno-de-keiko-fujimori-de-fuerza-popular" } ],
       nivel:"preliminar", verificado:false },
-
     { id:"seg-03", promesa:"Reforma penitenciaria para evitar que las carceles operen como centros del crimen", sector:"MINJUSDH",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"El Comercio", u:"https://elcomercio.pe/peru/seguridad-bajo-el-gobierno-de-keiko-fujimori-las-medidas-contra-el-crimen-organizado-y-los-vacios-de-su-primer-mensaje-noticia/" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/28/keiko-fujimori-anuncia-que-las-fuerzas-armadas-lideraran-operativos-durante-estados-de-emergencia/" } ],
       nivel:"preliminar", verificado:false },
-
     { id:"nin-01", promesa:"Plan de contingencia nacional frente al fenomeno El Nino", sector:"PCM",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
-      nivel:"preliminar", verificado:false },
-
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"Declarado eje de los primeros cien dias junto con la seguridad ciudadana.",
+      fuentes:[ { n:"Diario Correo", u:"https://diariocorreo.pe/politica/keiko-fujimori-anuncia-que-sus-primeros-100-dias-estaran-enfocados-en-seguridad-y-fenomeno-el-nino-noticia/" }, { n:"Caretas", u:"https://caretas.pe/politica/seguridad-y-prevencion-marcaran-los-primeros-100-dias-de-keiko-fujimori" } ],
+      nivel:"verificado", verificado:true },
     { id:"dig-01", promesa:"Crear la Autoridad Nacional Digital y otorgar identidad digital a cada ciudadano", sector:"PCM",
-      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elcomercio.pe/politica/keiko-fujimori-asume-la-presidencia-los-siete-ejes-de-su-primer-mensaje-a-la-nacion-por-28-de-julio-noticia/" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"", resultado:"",
+      origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"",
+      fuentes:[ { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/29/las-5-claves-del-primer-mensaje-a-la-nacion-de-keiko-fujimori-seguridad-sueldo-minimo-y-reforma-del-estado/" }, { n:"Diario Correo", u:"https://diariocorreo.pe/politica/keiko-fujimori-plantea-siete-objetivos-de-gobierno-en-su-primer-mensaje-a-la-nacion-noticia/" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/29/el-mensaje-de-keiko-fujimori-en-1826-dias-alcanzara-el-tiempo-para-cumplir-lo-prometido/" } ],
       nivel:"preliminar", verificado:false }
   ],
 
   /* 6. PRIMEROS 100 DIAS -------------------------------------------------
      Medidas anunciadas para el arranque, con semaforo.
-     estado: "ejecutada" (verde) | "en_proceso" (ambar) | "no_iniciada" (rojo)
 
-     PENDIENTE DE CARGA: requiere la lista de medidas efectivamente
-     anunciadas. El contador Dia 1 -> Dia 100 ya funciona, calculado sobre
-     la fecha real de asuncion.
+       estado: "ejecutada"   VERDE  — hay acto de gobierno consumado
+                             (norma publicada, programa operando, obra entregada).
+               "en_proceso"  AMBAR  — hay acto formal de tramite verificable
+                             (convocatoria, solicitud, anuncio con fecha), pero
+                             el entregable todavia no existe.
+               "no_iniciada" ROJO   — solo el anuncio; ningun acto documentado.
 
-     { titulo:"...", sector:"MEF", estado:"en_proceso",
-       detalle:"...", enlace:"", verificado:false }
+     Recuento levantado el 19/08/2026 (dia 22 de 100) a partir del Mensaje a
+     la Nacion del 28/07/2026, del plan de gobierno "Peru con Orden" y de la
+     cobertura contrastada. Cada medida enlaza a la fuente que la documenta.
+
+     REGLA: ninguna medida sube de rojo sin enlace que lo pruebe. Si la
+     fuente es una sola nota de prensa, el sello queda en "preliminar".
      ------------------------------------------------------------------ */
-  medidas100: [],
+  medidas100: [
+    { titulo:"Exponer la politica general del Gobierno ante la Camara de Diputados",
+      sector:"PCM", estado:"en_proceso",
+      detalle:"Art. 130 de la Constitucion. El premier Galarreta pidio el pleno del 20/08/2026; con el Congreso bicameral la cuestion de confianza ya no es obligatoria.",
+      enlace:"https://www.infobae.com/peru/2026/08/17/luis-galarreta-y-su-gabinete-se-presentan-este-jueves-ante-la-camara-de-diputados-expondran-la-politica-general-del-gobierno/",
+      evidencia:"verificado", verificado:true,
+      nota:"Plazo constitucional: 30 dias desde la asuncion." },
+
+    { titulo:"Desplegar a las Fuerzas Armadas en apoyo a la Policia",
+      sector:"MINDEF", estado:"en_proceso",
+      detalle:"Anunciado el 03/08/2026: personal militar a las calles para reforzar el control policial durante los estados de emergencia.",
+      enlace:"https://www.diariolasamericas.com/america-latina/keiko-fujimori-ordena-el-despliegue-militares-enfrentar-la-inseguridad-n5399920",
+      evidencia:"preliminar", verificado:false,
+      nota:"Sin decreto supremo propio del nuevo Gobierno publicado al 19/08/2026." },
+
+    { titulo:"Elevar la remuneracion minima vital a S/ 1 300",
+      sector:"MTPE", estado:"en_proceso",
+      detalle:"El MEF prepara el alza y evalua aplicarla por tramos; requiere convocar al Consejo Nacional de Trabajo antes del Decreto Supremo.",
+      enlace:"https://www.infobae.com/peru/2026/07/29/gobierno-ya-se-alista-para-el-incremento-del-sueldo-minimo-en-peru-y-buscara-preparar-a-las-mypes/",
+      evidencia:"oficial", verificado:true,
+      nota:"La RMV vigente sigue en S/ 1 130 (D.S. 006-2024-TR)." },
+
+    { titulo:"Duplicar Pension 65 a S/ 700 bimestrales",
+      sector:"MIDIS", estado:"en_proceso",
+      detalle:"Confirmado por el Gobierno como aplicacion progresiva; aun sin fecha de inicio ni cronograma con el nuevo monto.",
+      enlace:"https://elcomercio.pe/respuestas/quien/aumento-de-pension-65-quienes-accederan-a-los-s-700-y-cuando-estara-disponible-tdpe-noticia/",
+      evidencia:"oficial", verificado:true },
+
+    { titulo:"Reactivar Promype: creditos para la micro y pequena empresa via Cofide",
+      sector:"PRODUCE", estado:"no_iniciada",
+      detalle:"Unica medida del mensaje con plazo explicito de cien dias. Vence el 05/11/2026.",
+      enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso",
+      evidencia:"oficial", verificado:true },
+
+    { titulo:"Reactivar las compras estatales MYPeru",
+      sector:"PRODUCE", estado:"no_iniciada",
+      detalle:"Anunciada en el mismo bloque de los cien dias que Promype.",
+      enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso",
+      evidencia:"oficial", verificado:true },
+
+    { titulo:"Impulsar el factoring para dar liquidez a las MYPE",
+      sector:"PRODUCE", estado:"no_iniciada",
+      detalle:"Tercer componente del paquete MYPE de los cien dias.",
+      enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso",
+      evidencia:"oficial", verificado:true },
+
+    { titulo:"Bono compensatorio por unica vez para las MYPE",
+      sector:"PRODUCE", estado:"no_iniciada",
+      detalle:"Contrapeso al alza de la RMV para no golpear el empleo formal. Sin norma que lo cree.",
+      enlace:"https://www.elperuano.pe/noticia/301268-gobierno-anuncia-aumento-de-la-remuneracion-minima-vital-a-s-1300-y-bono-para-las-mypes",
+      evidencia:"oficial", verificado:true },
+
+    { titulo:"Poner en operacion el sistema C5i en Lima y Callao",
+      sector:"MININTER", estado:"no_iniciada",
+      detalle:"Centro de comando, control, comunicaciones, computo, ciberseguridad e inteligencia previsto para el arranque del Gobierno.",
+      enlace:"https://caretas.pe/politica/seguridad-y-prevencion-marcaran-los-primeros-100-dias-de-keiko-fujimori",
+      evidencia:"verificado", verificado:true },
+
+    { titulo:"Fortalecer las Unidades de Flagrancia Express en Lima, Piura y Trujillo",
+      sector:"MINJUSDH", estado:"no_iniciada",
+      detalle:"Medida de los cien dias para acortar el tiempo entre detencion y sentencia.",
+      enlace:"https://caretas.pe/politica/seguridad-y-prevencion-marcaran-los-primeros-100-dias-de-keiko-fujimori",
+      evidencia:"verificado", verificado:true },
+
+    { titulo:"Intervencion conjunta FF.AA. y PNP en Tumbes para el control fronterizo",
+      sector:"MINDEF", estado:"no_iniciada",
+      detalle:"Operacion prevista para el arranque, orientada a la frontera norte.",
+      enlace:"https://caretas.pe/politica/seguridad-y-prevencion-marcaran-los-primeros-100-dias-de-keiko-fujimori",
+      evidencia:"verificado", verificado:true },
+
+    { titulo:"Decretos de urgencia: 1 000 patrulleros, 10 000 camaras y 200 comisarias",
+      sector:"MININTER", estado:"no_iniciada",
+      detalle:"El plan de gobierno cifra la compra de 1 000 patrulleros inteligentes, 10 000 camaras interconectadas y la modernizacion de 200 comisarias.",
+      enlace:"https://www.tvperu.gob.pe/noticias/politica/tu-decision-2026-planes-de-gobierno-de-keiko-fujimori-de-fuerza-popular",
+      evidencia:"verificado", verificado:true,
+      nota:"Ningun decreto de urgencia con este objeto al 19/08/2026." },
+
+    { titulo:"Plan de contingencia nacional frente al fenomeno El Nino",
+      sector:"PCM", estado:"no_iniciada",
+      detalle:"Declarado, junto con la seguridad, eje de los primeros cien dias.",
+      enlace:"https://diariocorreo.pe/politica/keiko-fujimori-anuncia-que-sus-primeros-100-dias-estaran-enfocados-en-seguridad-y-fenomeno-el-nino-noticia/",
+      evidencia:"verificado", verificado:true },
+
+    { titulo:"Recuperar el orden interno y la capacidad operativa del Estado",
+      sector:"PCM", estado:"no_iniciada",
+      detalle:"\"Lo mas importante en los proximos 100 dias es recuperar el orden\", dijo la mandataria antes de asumir.",
+      enlace:"https://elcomercio.pe/politica/keiko-fujimori-lo-mas-importante-en-los-proximos-100-dias-es-recuperar-el-orden-ultimas-noticia/",
+      evidencia:"preliminar", verificado:false,
+      nota:"Objetivo declarativo: se seguira por sus medidas concretas, no por el enunciado." },
+
+    { titulo:"Relanzar el PRONAA para la alimentacion escolar",
+      sector:"MINEDU", estado:"no_iniciada",
+      detalle:"Anunciado en el mensaje del 28/07; su relanzamiento exige norma de creacion y presupuesto.",
+      enlace:"https://caretas.pe/politica/que-es-el-pronaa-el-programa-que-keiko-fujimori-busca-relanzar-en-el-peru-a-mas-de-una-decada-de-su-cierre-noticia",
+      evidencia:"oficial", verificado:true },
+
+    { titulo:"Agenda laboral de los primeros cien dias (17 medidas)",
+      sector:"MTPE", estado:"no_iniciada",
+      detalle:"Horizonte Laboral planteo 17 medidas para el arranque, con EsSalud y la formalizacion como prioridades.",
+      enlace:"https://altavoz.pe/politica/keiko-fujimori-horizonte-laboral-plantea-17-medidas-para-los-primeros-100-dias-de-gobierno-en-materia-laboral/",
+      evidencia:"preliminar", verificado:false,
+      nota:"Propuesta de un colectivo tecnico, no compromiso formal del Ejecutivo." }
+  ],
 
   /* 7. RELACION GOBIERNO - CONGRESO --------------------------------------
      Constitucion, art. 130: dentro de los treinta dias de haber asumido,
@@ -1443,7 +1579,19 @@ const GOVISOR = {
      { fecha:"AAAA-MM-DD", tipo:"anuncio", titulo:"...", detalle:"",
        enlace:"", evidencia:"preliminar", verificado:false }
      ------------------------------------------------------------------ */
-  eventos: [],
+  eventos: [
+    { fecha:"2026-08-03", tipo:"hito",
+      titulo:"Se anuncia el despliegue militar en apoyo a la Policia",
+      detalle:"La presidenta informa que en los proximos dias saldran a las calles efectivos de las Fuerzas Armadas.",
+      enlace:"https://www.diariolasamericas.com/america-latina/keiko-fujimori-ordena-el-despliegue-militares-enfrentar-la-inseguridad-n5399920",
+      evidencia:"preliminar", verificado:false },
+
+    { fecha:"2026-08-17", tipo:"hito",
+      titulo:"El gabinete pide exponer la politica general ante Diputados",
+      detalle:"Galarreta solicita el pleno del 20/08/2026. Con el Congreso bicameral la cuestion de confianza ya no es obligatoria.",
+      enlace:"https://diariocorreo.pe/politica/galarreta-solicito-a-camara-de-diputados-acudir-al-pleno-este-20-de-agosto-para-exponer-politica-general-del-gobierno-noticia/",
+      evidencia:"verificado", verificado:true }
+  ],
 
   /* 10. VIAJES OFICIALES ------------------------------------------------- */
   viajes: [],

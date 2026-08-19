@@ -782,7 +782,8 @@
 
     box.innerHTML = `<div class="r130-cab"><h2>${t("r130.titulo")}</h2></div>
       <p class="r130-cifra">${restan}<i>${restan === 1 ? t("r130.restante") : t("r130.restantes")}</i></p>
-      <p class="r130-txt">${t("r130.txt", { f: esc(fechaLargaD(limite)) })}</p>${base}`;
+      <p class="r130-txt">${t("r130.txt", { f: esc(fechaLargaD(limite)) })}</p>
+      <p class="r130-txt">${t("r130.bicameral")}</p>${base}`;
   }
 
   /* ── Primeros 100 días ─────────────────────────────────────────────── */
@@ -815,12 +816,19 @@
       : `<span class="sem">${t("d.sinMedidas")}</span>`;
 
     $("medidas100").innerHTML = med.length
-      ? med.map((m) => `<div class="medida ${esc(m.estado || "")}">
+      ? med.map((m) => {
+          const u = urlSegura(m.enlace);
+          const titulo = u
+            ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(m.titulo)} &#8599;</a>`
+            : esc(m.titulo);
+          const nota = m.nota ? `<span class="medida-n">${esc(m.nota)}</span>` : "";
+          return `<div class="medida ${esc(m.estado || "")}">
           <span class="sig">${esc(m.sector || "—")}</span>
-          <span><span class="medida-t">${esc(m.titulo)}</span>
-          <span class="medida-d">${esc(m.detalle || "")}</span></span>
+          <span><span class="medida-t">${titulo}</span>
+          <span class="medida-d">${esc(m.detalle || "")}</span>${nota}</span>
           ${sellEv(m.evidencia)}
-        </div>`).join("")
+        </div>`;
+        }).join("")
       : `<p class="vac"><b>${t("d.sinMedidasT")}</b>${t("d.sinMedidasTxt")}</p>`;
   }
 
@@ -853,6 +861,21 @@
       return;
     }
 
+    /* Documentación que valida el anuncio: se contrasto una por una y se
+       lista aqui para que el lector pueda comprobarlo sin salir del visor. */
+    const docFuentes = (fs) => {
+      if (!Array.isArray(fs) || !fs.length) return "";
+      const links = fs.map((f) => {
+        const u = urlSegura(f && f.u);
+        return u
+          ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(f.n || u)} &#8599;</a>`
+          : "";
+      }).filter(Boolean).join("");
+      return links
+        ? `<p class="prom-doc"><b>${t("p.documentacion", { n: fs.length })}</b>${links}</p>`
+        : "";
+    };
+
     const eslabon = (rotulo, valor, url) => {
       if (!valor) return `<div class="eslabon vacio"><b>${rotulo}</b><span>${t("p.sinRegistro")}</span></div>`;
       const u = urlSegura(url);
@@ -880,6 +903,7 @@
           ${eslabon(t("p.presupuesto"), p.presupuesto)}
           ${eslabon(t("p.resultado"), p.resultado)}
         </div>
+        ${docFuentes(p.fuentes)}
       </article>`;
     }).join("");
     escalonar(cont);
@@ -1525,7 +1549,88 @@
     setInterval(ticTac, 1000);
   }
 
+  /* ── Frescura: el visor se refresca al entrar ───────────────────────
+     GitHub Pages sirve los archivos con cache de navegador, asi que una
+     visita posterior puede quedarse con datos viejos. `version.json` se
+     pide siempre con `cache:"no-store"` —nunca sale del cache— y lleva el
+     mismo sello que `GOVISOR.meta.version`. Si los dos dejan de coincidir,
+     lo cargado es antiguo y se recarga la pagina con un sello nuevo en la
+     URL, lo que obliga a traer HTML, CSS y datos frescos del servidor.
+
+     Se comprueba: al entrar (arranque de sesion), al volver a la pestana,
+     al restaurar desde el cache de retroceso, y cada 5 minutos si la
+     pestana queda abierta.
+     ------------------------------------------------------------------ */
+  const VERSION_URL = "version.json";
+  const CHEQUEO_MS  = 5 * 60 * 1000;   // pestana abierta
+  const MIN_ENTRE   = 30 * 1000;       // no repreguntar antes de 30 s
+  let ultimoChequeo = 0;
+  let recargando    = false;
+
+  function nuevaSesion() {
+    try {
+      if (sessionStorage.getItem("govisor.sesion")) return false;
+      sessionStorage.setItem("govisor.sesion", String(Date.now()));
+      return true;
+    } catch (_) { return true; }   // sin sessionStorage: se trata como nueva
+  }
+
+  /** Sello que ya trae la URL, si esta pagina es fruto de una recarga. */
+  function selloEnURL() {
+    try { return new URL(location.href).searchParams.get("v") || ""; }
+    catch (_) { return ""; }
+  }
+
+  function recargarLimpio(version) {
+    if (recargando) return;
+    // Cortafuegos: si ya venimos recargados con este mismo sello y los
+    // archivos siguen siendo viejos, es que version.json se publico sin
+    // acompanarlo de data.js/index.html. Recargar otra vez no lo arreglaria
+    // y dejaria al visitante en un bucle: mejor avisar y seguir sirviendo.
+    if (selloEnURL() === String(version)) {
+      console.warn(
+        "GoVisor: version.json anuncia " + version + " pero los archivos " +
+        "cargados son " + ((GOVISOR.meta && GOVISOR.meta.version) || "?") +
+        ". Publica el sello con scripts/publicar.mjs para que coincidan.");
+      return;
+    }
+    recargando = true;
+    try {
+      const u = new URL(location.href);
+      u.searchParams.set("v", version || String(Date.now()));
+      location.replace(u.toString());
+    } catch (_) { location.reload(); }
+  }
+
+  function vigilarFrescura(forzar) {
+    const ahora = Date.now();
+    if (!forzar && ahora - ultimoChequeo < MIN_ENTRE) return;
+    ultimoChequeo = ahora;
+
+    fetch(VERSION_URL + "?t=" + ahora, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const remota = j && j.version ? String(j.version) : "";
+        const local  = (GOVISOR.meta && GOVISOR.meta.version) || "";
+        if (remota && local && remota !== local) recargarLimpio(remota);
+      })
+      .catch(() => { /* sin red: se sigue con lo ya cargado */ });
+  }
+
+  function iniciarFrescura() {
+    nuevaSesion();                               // marca el inicio de sesion
+    vigilarFrescura(true);                       // y comprueba de inmediato
+    setInterval(() => vigilarFrescura(false), CHEQUEO_MS);
+    window.addEventListener("pageshow", (e) => {
+      // Vuelta desde el cache de retroceso: la pagina puede llevar horas ahi.
+      if (e.persisted) vigilarFrescura(true);
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) vigilarFrescura(false);
+    });
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", iniciar);
-  } else { iniciar(); }
+    document.addEventListener("DOMContentLoaded", () => { iniciar(); iniciarFrescura(); });
+  } else { iniciar(); iniciarFrescura(); }
 })();

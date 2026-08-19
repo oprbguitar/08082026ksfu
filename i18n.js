@@ -235,6 +235,7 @@ const I18N = (function () {
     "d.enProceso":   { es:"en proceso", en:"in progress" },
     "d.noIniciadas": { es:"no iniciadas", en:"not started" },
     "d.sinMedidas":  { es:"Sin medidas registradas", en:"No measures on record" },
+    "p.documentacion":{ es:"Documentación que lo respalda ({n})", en:"Supporting documentation ({n})" },
     "d.sinMedidasT": { es:"Sin medidas cargadas", en:"No measures loaded" },
     "d.sinMedidasTxt":{ es:"Este bloque necesita la lista de medidas efectivamente anunciadas para los primeros 100 días. Cárgalas en <code>medidas100</code> de data.js y el semáforo se calcula solo. El contador de días ya es real.",
                         en:"This block needs the list of measures actually announced for the first 100 days. Load them into <code>medidas100</code> in data.js and the traffic light computes itself. The day counter is already real." },
@@ -244,7 +245,9 @@ const I18N = (function () {
     "d.faltaFecha":  { es:"Falta registrar la fecha de asunción.", en:"The date of assumption of office is missing." },
 
     /* ── Reloj constitucional ──────────────────────────────────────── */
-    "r130.titulo":  { es:"Cuestión de confianza", en:"Vote of confidence" },
+    "r130.titulo":  { es:"Exposición de la política general", en:"Presentation of general policy" },
+    "r130.bicameral":{ es:"Con el Congreso bicameral la cuestión de confianza dejó de ser obligatoria: el Consejo de Ministros expone su política general sin plantearla.",
+                       en:"Under the bicameral Congress the vote of confidence is no longer mandatory: the Council of Ministers presents its general policy without calling one." },
     "r130.base":    { es:"Constitución, art. 130 — plazo de {n} días desde la asunción.",
                       en:"Constitution, art. 130 — {n}-day deadline from assumption of office." },
     "r130.restante":{ es:"día restante", en:"day left" },
