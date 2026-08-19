@@ -7,10 +7,11 @@
 |---|---|
 | **Nombre** | GoVisor |
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
-| **Estado** | v0.6 — cabecera verde, banner del Perú, autoría Andesnova |
+| **Estado** | v0.7 — promesas contrastadas, semáforo de los 100 días y refresco automático |
 | **Repositorio** | https://github.com/oprbguitar/08082026ksfu |
+| **Dominio** | https://gobierno.quest — registrado en Porkbun, servido por GitHub Pages (`CNAME`). La URL `github.io` redirige al dominio propio: 301 de Pages, guardia inline en el `<head>` y `404.html` |
 | **Inicio** | 8 de agosto de 2026 |
-| **Última actualización de este documento** | 8 de agosto de 2026 |
+| **Última actualización de este documento** | 19 de agosto de 2026 |
 
 ---
 
@@ -41,6 +42,9 @@ inventado.
 | **Portal de noticias** | Titulares públicos por tema, con enlace a la fuente original. |
 | **Video (YouTube)** | Búsqueda de videos por tema usando la API key que el usuario ingresa y que queda solo en su navegador. |
 | **Fuentes oficiales** | Bloque de enlaces a El Peruano, Congreso, SPIJ, PCM, gob.pe y JNE para verificar cada dato. |
+| **Promesas contrastadas** | Las 17 promesas del Mensaje a la Nación, cada una con su nivel de evidencia y la lista de enlaces que la respaldan, visible bajo la promesa. |
+| **Semáforo de los 100 días** | Las 16 medidas anunciadas para el arranque, clasificadas en verde / ámbar / rojo según haya acto consumado, trámite verificable o solo anuncio. |
+| **Refresco automático** | `version.json` se pide sin caché al entrar a la sesión, al volver a la pestaña y cada 5 minutos; si el sello cambió, el visor se recarga con datos frescos. |
 
 ## 3. Cómo funciona
 
@@ -52,7 +56,15 @@ index.html   →  estructura semántica y contenedores vacíos
 styles.css   →  presentación (identidad teal institucional, mobile-first)
 data.js      →  LA VERDAD: constante global GOVISOR con todos los datos
 app.js       →  lee GOVISOR y pinta el DOM; contadores, filtros, fetch
+version.json →  sello de publicación; dispara el refresco del visor
 ```
+
+**Refresco:** `version.json` se pide con `cache:"no-store"` al entrar a la
+sesión, al volver a la pestaña, al restaurar desde la caché de retroceso y cada
+cinco minutos. Si su sello difiere de `GOVISOR.meta.version`, el visor recarga
+la página con un sello nuevo en la URL y trae HTML, CSS y datos frescos. Un
+cortafuegos corta el bucle si `version.json` se publicó sin acompañarlo de los
+demás archivos. `scripts/publicar.mjs` deja el sello igual en los cuatro sitios.
 
 **Flujo:** el navegador carga `data.js` (define `GOVISOR`), luego `app.js` ejecuta
 `iniciar()`, que pinta cada sección. Un `setInterval` de 1 segundo actualiza el
@@ -114,7 +126,10 @@ documentación, entregadas y funcionales.
 | Scraper de El Peruano, promesas y visor incrustado | 16 |
 | Rediseño institucional, accesibilidad y responsive | 20 |
 | Banner, encaje tipográfico y cabecera verde | 8 |
-| **Total** | **110 h** |
+| Contraste documental de las 17 promesas en fuentes publicadas | 9 |
+| Semáforo de los primeros 100 días: 16 medidas con evidencia | 7 |
+| Refresco automático por sello de versión y publicador | 5 |
+| **Total** | **131 h** |
 
 ### 5.2 Valuación por estándar de mercado
 

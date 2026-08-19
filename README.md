@@ -9,7 +9,7 @@ viajes oficiales, y un panel de noticias y video.
 
 ---
 
-**En línea:** https://oprbguitar.github.io/08082026ksfu/
+**En línea:** https://gobierno.quest/
 
 ## Estado de verificación
 
@@ -19,6 +19,8 @@ viajes oficiales, y un panel de noticias y video.
 | Proclamación — Resolución 1625-2026-JNE | ✅ Verificado | El Peruano / JNE |
 | Los 19 ministros y sus R.S. 223 a 241-2026-PCM | ✅ Verificado | El Peruano, dispositivo por dispositivo |
 | Leyes y decretos del periodo | ⬜ En registro | — |
+| Las 17 promesas del Mensaje a la Nación (28/07/2026) | ✅ Contrastadas | El Peruano, TV Perú y prensa nacional |
+| Las 16 medidas de los primeros 100 días, con semáforo | ✅ Contrastadas | El Peruano, TV Perú, plan «Perú con Orden» |
 
 Los nombres se transcriben **tal como figuran en la Resolución Suprema**, que es
 la fuente primaria. Dos difieren de las notas de prensa: la R.S. 232-2026-PCM dice
@@ -27,6 +29,100 @@ la fuente primaria. Dos difieren de las notas de prensa: la R.S. 232-2026-PCM di
 
 Todo registro no contrastado se muestra con el sello `POR VERIFICAR`. El portal
 prefiere un vacío honesto antes que un dato sin respaldo documental.
+
+## Dominio
+
+El sitio se publica en **https://gobierno.quest** (dominio propio, registrado en Porkbun).
+El archivo `CNAME` de la raíz es lo que le dice a GitHub Pages qué dominio
+servir: si se borra, Pages vuelve a la URL `github.io`.
+
+En Porkbun, con los nameservers de Porkbun ya activos, los registros DNS son:
+
+| Tipo | Host | Valor |
+|---|---|---|
+| A | *(vacío / raíz)* | `185.199.108.153` |
+| A | *(vacío / raíz)* | `185.199.109.153` |
+| A | *(vacío / raíz)* | `185.199.110.153` |
+| A | *(vacío / raíz)* | `185.199.111.153` |
+| CNAME | `www` | `oprbguitar.github.io.` |
+
+Después, en **Settings → Pages** del repositorio, poner `gobierno.quest` como
+*Custom domain* y marcar **Enforce HTTPS** cuando GitHub termine de emitir el
+certificado (tarda unos minutos tras propagar el DNS).
+
+### La URL `github.io` no debe verse
+
+Tres capas se encargan de ello, de la más fuerte a la más débil:
+
+1. **`CNAME`** — con el dominio configurado, GitHub Pages responde **301** desde
+   `oprbguitar.github.io/08082026ksfu/*` hacia `gobierno.quest/*`. Es la
+   redirección real, del lado del servidor.
+2. **Guardia en el `<head>`** de `index.html` y `fuentes.html` — un script
+   inline que corre antes de pintar o descargar nada: si el host termina en
+   `.github.io`, salta al dominio propio conservando ruta, query y ancla. Cubre
+   el rato en que Pages aún no aplicó el `CNAME` y las páginas que el navegador
+   sirva desde su caché. No toca `localhost` ni ningún otro host, así que el
+   desarrollo local sigue funcionando igual.
+3. **`404.html`** — Pages la sirve ante cualquier ruta desconocida. Lleva el
+   mismo guardia más un `meta refresh`, para que un enlace roto tampoco deje al
+   visitante en el 404 genérico de `github.io`.
+
+## Promesas: cómo se contrastan
+
+Las 17 promesas registradas se cotejaron una por una contra fuentes publicadas
+(19/08/2026). Cada una lleva un **nivel de evidencia** y la lista de enlaces que
+la respaldan, visible bajo la promesa en el propio visor:
+
+| Nivel | Qué significa |
+|---|---|
+| `oficial` | El anuncio consta en un medio del Estado — El Peruano o TV Perú. |
+| `verificado` | Lo consignan al menos dos medios independientes entre sí. |
+| `preliminar` | Lo reporta una sola fuente, o las fuentes discrepan sobre la cifra. |
+
+Ninguna promesa sube de `no_iniciada` sin una entrada en `evidencia` que
+enlace al acto de gobierno que la ejecuta.
+
+## Primeros 100 días: el semáforo
+
+`medidas100` en `data.js` lleva las medidas anunciadas para el arranque, con
+tres estados:
+
+| Semáforo | Estado | Criterio |
+|---|---|---|
+| 🟢 | `ejecutada` | Acto de gobierno consumado: norma publicada, programa operando, obra entregada. |
+| 🟡 | `en_proceso` | Acto formal de trámite verificable, pero el entregable aún no existe. |
+| 🔴 | `no_iniciada` | Solo el anuncio; ningún acto documentado. |
+
+El contador Día N / 100 se calcula en vivo sobre la fecha real de asunción; el
+semáforo se cuenta solo a partir de `medidas100`.
+
+## Refresco automático
+
+GitHub Pages sirve los archivos con caché de navegador, así que una visita
+posterior podría quedarse con datos viejos. El visor lo resuelve así:
+
+1. `version.json` se pide siempre con `cache: "no-store"` — nunca sale de la
+   caché — y lleva el mismo sello que `GOVISOR.meta.version`.
+2. Si los dos dejan de coincidir, lo cargado es antiguo y la página se recarga
+   con un sello nuevo en la URL, lo que obliga a traer HTML, CSS y datos
+   frescos del servidor.
+3. Se comprueba **al entrar** (arranque de sesión), al volver a la pestaña, al
+   restaurar desde la caché de retroceso y cada 5 minutos si la pestaña queda
+   abierta.
+
+Un cortafuegos evita el bucle: si la URL ya trae ese mismo sello y los archivos
+siguen siendo viejos, avisa por consola en vez de recargar otra vez.
+
+**Al publicar, corre siempre:**
+
+```bash
+node scripts/publicar.mjs          # sello de hoy (AAAAMMDD), zona de Lima
+node scripts/publicar.mjs 20260901 # o un sello explícito
+```
+
+Deja el mismo sello en `version.json`, en `GOVISOR.meta.version` y en los
+`?v=` de `index.html` y `fuentes.html`. Si se editan a mano y quedan
+descoordinados, el refresco no funciona.
 
 ## Cómo ejecutarlo
 
@@ -104,7 +200,10 @@ unidades/día ≈ 100 búsquedas) es más que suficiente.
 index.html    estructura y contenedores
 styles.css    presentación — identidad teal institucional, mobile-first
 assets/       imagen del héroe (ver assets/README.md)
-scripts/      scraper de El Peruano
+scripts/      scraper de El Peruano y publicador del sello de versión
+version.json  sello de publicación — dispara el refresco del visor
+CNAME         dominio propio que sirve GitHub Pages
+404.html      ruta desconocida → redirige al dominio propio
 data.js       ← EDITA SOLO ESTE ARCHIVO
 app.js        render, contadores, filtros y llamadas externas
 PROYECTO.md   qué es, cómo funciona, tecnologías y valuación

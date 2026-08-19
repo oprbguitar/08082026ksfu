@@ -2,17 +2,38 @@
 <html lang="es-PE" class="no-js">
 <head>
 <meta charset="utf-8">
+<script>
+/* Dominio canonico: gobierno.quest -------------------------------------
+   Con el archivo CNAME, GitHub Pages ya responde 301 desde
+   oprbguitar.github.io/08082026ksfu/* hacia el dominio propio. Este
+   guardia hace lo mismo desde el navegador y se ejecuta antes de que se
+   pinte o se descargue nada, de modo que la URL github.io no llega a
+   verse aunque Pages todavia no haya aplicado el CNAME o el navegador
+   sirva la pagina desde su cache.
+   No toca localhost ni ningun otro host: solo *.github.io.
+   --------------------------------------------------------------------- */
+(function () {
+  var DOMINIO = "gobierno.quest";
+  var host = location.hostname;
+  if (host === DOMINIO || host === "www." + DOMINIO) return;
+  if (!/\.github\.io$/i.test(host)) return;
+  var ruta = location.pathname.replace(/^\/08082026ksfu(\/|$)/, "/");
+  location.replace("https://" + DOMINIO + ruta + location.search + location.hash);
+})();
+</script>
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#005C59">
 <title>GoVisor · Observatorio ciudadano del Gobierno del Perú</title>
 <meta name="description" content="Observatorio ciudadano independiente del Gobierno del Perú 2026-2031: primeros 100 días, promesas vs. realidad, gabinete, normas oficiales y evidencia trazable a la fuente.">
-<link rel="canonical" href="https://oprbguitar.github.io/08082026ksfu/">
+<link rel="canonical" href="https://gobierno.quest/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="GoVisor">
 <meta property="og:title" content="GoVisor · Observatorio ciudadano del Gobierno del Perú">
 <meta property="og:description" content="Datos, evidencia y seguimiento para entender la gestión del Gobierno del Perú. Cada dato enlaza a su fuente oficial.">
-<meta property="og:url" content="https://oprbguitar.github.io/08082026ksfu/">
+<meta property="og:url" content="https://gobierno.quest/">
 <meta property="og:locale" content="es_PE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GoVisor · Observatorio ciudadano del Gobierno del Perú">
@@ -23,7 +44,7 @@
 <link rel="preload" as="image" href="assets/govisor-peru-banner-1600.webp" media="(min-width:1200px) and (max-width:1599px)">
 <link rel="preload" as="image" href="assets/govisor-peru-banner.webp" media="(min-width:1600px)">
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=20260819.2">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23005C59'/><circle cx='16' cy='16' r='9' fill='none' stroke='white' stroke-width='2.4'/><circle cx='16' cy='16' r='3.4' fill='white'/></svg>">
 <script>document.documentElement.className = "js";</script>
 </head>
@@ -404,11 +425,6 @@
     <span data-i18n="pie.legal">Proyecto informativo, independiente.</span>
     <span id="pieAct">—</span>.
   </div>
-  <div class="wrap pie-autor">
-    <span data-i18n="pie.creado">Creado por</span>
-    <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">
-      Andesnova.solutions <span aria-hidden="true">↗</span></a>
-  </div>
 </footer>
 
 <!-- ══════════════════ ACERCA DE ══════════════════ -->
@@ -418,14 +434,8 @@
     <h2 id="acercaTitulo" data-i18n="ac.titulo">Acerca de GoVisor</h2>
     <p data-i18n="ac.p1"></p>
     <p data-i18n="ac.p2"></p>
-    <p class="acerca-autor"><span data-i18n="pie.creado">Creado por</span>
-      <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">
-        Andesnova.solutions <span aria-hidden="true">↗</span></a>
-    </p>
     <div class="acerca-pie">
-      <a class="btn" href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer"
-         data-i18n="ac.visitar">Visitar Andesnova ↗</a>
-      <button class="btn ghost" data-cerrar-acerca data-i18n="v.cerrar">Cerrar</button>
+      <button class="btn" data-cerrar-acerca data-i18n="v.cerrar">Cerrar</button>
     </div>
   </div>
 </div>
@@ -456,8 +466,8 @@
   </div>
 </div>
 
-<script src="i18n.js"></script>
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script src="i18n.js?v=20260819.2"></script>
+<script src="data.js?v=20260819.2"></script>
+<script src="app.js?v=20260819.2"></script>
 </body>
 </html>

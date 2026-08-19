@@ -235,16 +235,17 @@ const I18N = (function () {
     "d.enProceso":   { es:"en proceso", en:"in progress" },
     "d.noIniciadas": { es:"no iniciadas", en:"not started" },
     "d.sinMedidas":  { es:"Sin medidas registradas", en:"No measures on record" },
+    "p.documentacion":{ es:"Documentación que lo respalda ({n})", en:"Supporting documentation ({n})" },
     "d.sinMedidasT": { es:"Sin medidas cargadas", en:"No measures loaded" },
-    "d.sinMedidasTxt":{ es:"Este bloque necesita la lista de medidas efectivamente anunciadas para los primeros 100 días. Cárgalas en <code>medidas100</code> de data.js y el semáforo se calcula solo. El contador de días ya es real.",
-                        en:"This block needs the list of measures actually announced for the first 100 days. Load them into <code>medidas100</code> in data.js and the traffic light computes itself. The day counter is already real." },
     "d.pct":         { es:"{p} % de la etapa transcurrido.", en:"{p}% of the stage elapsed." },
     "d.concluida":   { es:"La etapa de los primeros 100 días concluyó; el Gobierno lleva {n} días.",
                        en:"The first 100 days are over; the government has been in office for {n} days." },
     "d.faltaFecha":  { es:"Falta registrar la fecha de asunción.", en:"The date of assumption of office is missing." },
 
     /* ── Reloj constitucional ──────────────────────────────────────── */
-    "r130.titulo":  { es:"Cuestión de confianza", en:"Vote of confidence" },
+    "r130.titulo":  { es:"Exposición de la política general", en:"Presentation of general policy" },
+    "r130.bicameral":{ es:"Con el Congreso bicameral la cuestión de confianza dejó de ser obligatoria: el Consejo de Ministros expone su política general sin plantearla.",
+                       en:"Under the bicameral Congress the vote of confidence is no longer mandatory: the Council of Ministers presents its general policy without calling one." },
     "r130.base":    { es:"Constitución, art. 130 — plazo de {n} días desde la asunción.",
                       en:"Constitution, art. 130 — {n}-day deadline from assumption of office." },
     "r130.restante":{ es:"día restante", en:"day left" },
@@ -447,7 +448,6 @@ const I18N = (function () {
                      en:"<b>GoVisor is an informational site</b> that tracks the work of the Government of Peru: the cabinet, published regulations, announced promises and constitutional deadlines." },
     "ac.p2":       { es:"No es un sitio oficial del Estado ni está afiliado a organización política alguna. Cada dato que se muestra enlaza a su fuente —El Peruano, el Congreso, el JNE— para que cualquiera pueda comprobarlo. Cuando un dato no está contrastado, el visor lo dice en lugar de rellenarlo.",
                      en:"It is not an official State site and is not affiliated with any political organization. Every datum shown links to its source —El Peruano, Congress, the JNE— so that anyone can verify it. When a datum has not been checked, the tracker says so instead of filling it in." },
-    "ac.visitar":  { es:"Visitar Andesnova ↗", en:"Visit Andesnova ↗" },
 
     /* ── Página de fuentes ─────────────────────────────────────────── */
     "fu.intro":    { es:"Todo dato de GoVisor procede de alguna de estas fuentes. Si algo no puede contrastarse en ellas, el visor lo marca como pendiente en vez de darlo por cierto.",
