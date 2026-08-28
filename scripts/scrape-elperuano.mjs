@@ -21,6 +21,7 @@
    ========================================================================== */
 
 import { writeFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 const BASE = "https://busquedas.elperuano.pe";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) GoVisor/1.0 (+observatorio ciudadano)";
@@ -187,18 +188,11 @@ async function enlaceVivo(url, intentos = 3) {
   return { vivo: true, dudoso: ultimoEstado };
 }
 
-/* ── Programa principal ────────────────────────────────────────────────── */
-async function main() {
-  const args = process.argv.slice(2);
-  const todos = args.includes("--todos");
-  const iSalida = args.indexOf("--salida");
-  const salida = iSalida >= 0 ? args[iSalida + 1] : null;
-
-  const fechas = args.filter((a) => /^\d{8}$/.test(a));
-  const yyyymmdd = (d) => d.toISOString().slice(0, 10).replace(/-/g, "");
-  const desde = fechas[0] || "20260728";                 // asuncion del mandato
-  const hasta = fechas[1] || yyyymmdd(new Date());
-
+/* ── Recoleccion reutilizable ───────────────────────────────────────────
+   Devuelve el arreglo de normas con enlace VIVO (verificado uno por uno).
+   La usan tanto la CLI (main) como scripts/actualizar.mjs (GitHub Action).
+   ------------------------------------------------------------------ */
+export async function recolectar(desde, hasta, todos = false) {
   console.error(`Rango: ${desde} → ${hasta}${todos ? "  (sin filtro de entidad)" : "  (Congreso + Consejo de Ministros)"}`);
 
   // 1) Recorrer las paginas de resultados
@@ -261,12 +255,20 @@ async function main() {
     await dormir(320);          // ritmo prudente: evita el limite de tasa
   }
   console.error(`Enlaces vivos: ${vivos.length} · rotos 404: ${rotos} · dudosos conservados: ${dudosos}`);
+  return vivos;
+}
 
-  // 5) Emitir el fragmento para data.js
-  vivos.sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)));
+/* ── Formato del fragmento para data.js ─────────────────────────────────
+   Orden DETERMINISTA (fecha desc, luego enlace): dos corridas con los
+   mismos datos producen texto identico, para que el Action no genere
+   commits espurios por reordenamiento.
+   ------------------------------------------------------------------ */
+export function formatear(vivos, desde, hasta) {
+  const orden = [...vivos].sort((a, b) =>
+    String(b.fecha).localeCompare(String(a.fecha)) || String(a.href).localeCompare(String(b.href)));
   const esc = (s) => String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 
-  const cuerpo = vivos.map((f) =>
+  const cuerpo = orden.map((f) =>
     `    { tipo:"${esc(f.tipo)}", numero:"${esc(f.numero)}", rango:"${rangoDe(f.tipo)}", sector:"${f.sector || ""}",\n` +
     `      sumilla:"${esc(f.sumilla)}",\n` +
     `      fecha:"${f.fecha}", origen:"${origenDe(f.entidad, f.tipo, f.sumilla)}", accion:"promulgada",\n` +
@@ -275,15 +277,36 @@ async function main() {
     `      verificado:true, evidencia:"oficial" }`
   ).join(",\n\n");
 
-  const texto =
+  return (
 `/* Generado por scripts/scrape-elperuano.mjs
-   Rango ${desde} → ${hasta} · ${vivos.length} normas · enlaces verificados uno por uno
+   Rango ${desde} → ${hasta} · ${orden.length} normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
 ${cuerpo}
-`;
+`);
+}
+
+/* ── CLI ────────────────────────────────────────────────────────────────
+   node scripts/scrape-elperuano.mjs [desde] [hasta] [--todos] [--salida f]
+   ------------------------------------------------------------------ */
+async function main() {
+  const args = process.argv.slice(2);
+  const todos = args.includes("--todos");
+  const iSalida = args.indexOf("--salida");
+  const salida = iSalida >= 0 ? args[iSalida + 1] : null;
+
+  const fechas = args.filter((a) => /^\d{8}$/.test(a));
+  const yyyymmdd = (d) => d.toISOString().slice(0, 10).replace(/-/g, "");
+  const desde = fechas[0] || "20260728";                 // asuncion del mandato
+  const hasta = fechas[1] || yyyymmdd(new Date());
+
+  const vivos = await recolectar(desde, hasta, todos);
+  const texto = formatear(vivos, desde, hasta);
 
   if (salida) { writeFileSync(salida, texto, "utf8"); console.error(`Escrito en ${salida}`); }
   else console.log(texto);
 }
 
-main().catch((e) => { console.error("Error:", e.message); process.exit(1); });
+// Ejecuta la CLI solo si se invoca directamente (no al importar el modulo).
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main().catch((e) => { console.error("Error:", e.message); process.exit(1); });
+}

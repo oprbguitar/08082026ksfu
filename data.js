@@ -140,6 +140,8 @@ const GOVISOR = {
      Fuente diaria: https://diariooficial.elperuano.pe/Normas
      ------------------------------------------------------------------ */
   normas: [
+    /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
+       scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs — 28/07/2026 al 08/08/2026.
        161 dispositivos del Consejo de Ministros y sectores, con cada enlace
        comprobado uno por uno: 0 rotos. Regenerar con:
@@ -1294,6 +1296,7 @@ const GOVISOR = {
       entidad:"SALUD",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2538430-1",
       verificado:true, evidencia:"oficial" }
+    /* NORMAS-GENERADAS-FIN */
   ],
 
   /* 5. PROMESAS vs. REALIDAD --------------------------------------------

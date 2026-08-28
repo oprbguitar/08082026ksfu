@@ -1,0 +1,49 @@
+name: Actualizar normas (El Peruano)
+
+# Refresca automaticamente el bloque `normas` de data.js desde El Peruano y
+# redespliega. Corre en la nube de GitHub, donde El Peruano SI es alcanzable.
+# Para el visitante es invisible: solo ve datos siempre frescos + los contadores
+# y noticias que ya se actualizan en vivo por visita.
+
+on:
+  schedule:
+    # 06:00 y 18:00 hora de Lima (UTC-5, sin horario de verano) = 11:00 y 23:00 UTC.
+    - cron: "0 11,23 * * *"
+  workflow_dispatch: {}   # permite dispararlo a mano desde la pestana Actions
+
+# Evita corridas solapadas si una tarda mas de lo previsto.
+concurrency:
+  group: actualizar-normas
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Scrapear y actualizar data.js
+        run: node scripts/actualizar.mjs
+
+      - name: Commit y push si hubo cambios
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name  "govisor-bot"
+            git config user.email "govisor-bot@users.noreply.github.com"
+            git add -A
+            git commit -m "Actualizacion automatica de normas desde El Peruano"
+            git push
+            echo "Cambios publicados."
+          else
+            echo "Sin cambios: nada que publicar."
+          fi
