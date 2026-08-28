@@ -1,0 +1,11 @@
+# GitHub Pages (Jekyll) — control de lo que se PUBLICA en el dominio.
+# Estos archivos siguen versionados en el repositorio, pero NO se sirven en
+# gobierno.quest: la documentacion interna y el codigo de build quedan fuera
+# del sitio publico, para no exponer el origen tecnico del portal.
+exclude:
+  - README.md
+  - PROYECTO.md
+  - scripts
+  - "*.mjs"
+  - .github
+  - .gitignore
