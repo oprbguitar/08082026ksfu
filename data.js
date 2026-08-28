@@ -12,9 +12,14 @@
    REGLA DE ORO: si no lo comprobaste, no lo inventes. Deja el campo vacio.
    El visor muestra huecos honestos; eso es informacion util, no un defecto.
 
-   Estado al 8 de agosto de 2026:
+   Estado al 28 de agosto de 2026:
    - Presidencia y 19 ministros: CONTRASTADOS con El Peruano, uno por uno.
-   - Promesas, presupuesto, indicadores: SIN registrar (ver notas de cada bloque).
+   - Normas 28/07-08/08: 161, del scraper. Tramo 09/08-28/08: dos decretos de
+     mayor relieve cargados a mano (013-2026-MINEDU, 116-2026-PCM) al no poder
+     correr el scraper (egress a El Peruano bloqueado); nivel "verificado".
+   - Congreso: exposicion del art. 130 (20/08, sin cuestion de confianza por la
+     bicameralidad) y pedido de facultades por 120 dias, ambos registrados.
+   - Promesas, presupuesto, indicadores: ver notas de cada bloque.
    ========================================================================== */
 
 const GOVISOR = {
@@ -23,8 +28,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260819.2",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-08-19",
+    version: "20260828",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-08-28",
     aviso: ""
   },
 
@@ -140,8 +145,30 @@ const GOVISOR = {
        comprobado uno por uno: 0 rotos. Regenerar con:
          node scripts/scrape-elperuano.mjs
        No hay normas de origen "congreso" porque en ese periodo el Congreso
-       no publico leyes en El Peruano. La ausencia es real, no un filtro. */
-{ tipo:"RESOLUCIÓN MINISTERIAL", numero:"267-2026-JUS", rango:"RM", sector:"MINJUSDH",
+       no publico leyes en El Peruano. La ausencia es real, no un filtro.
+
+       ADICIONES MANUALES POST-SCRAPE (09/08 al 28/08/2026). El buscador de
+       El Peruano no es alcanzable desde el entorno de publicacion (egress
+       bloqueado), asi que el scraper no pudo correr para este tramo. Las dos
+       normas de mayor relieve del periodo se cargaron a mano, contrastadas
+       con varias fuentes independientes; su nivel es "verificado" —no
+       "oficial"— porque el enlace apunta a la cobertura y no al dispositivo
+       de El Peruano, que queda pendiente de verificar cuando se libere la red. */
+    { tipo:"DECRETO SUPREMO", numero:"013-2026-MINEDU", rango:"DS", sector:"MINEDU",
+      sumilla:"Declaran en emergencia la infraestructura educativa publica a nivel nacional y encargan al Minedu, en 30 dias habiles, las normas para reformar su gestion",
+      fecha:"2026-08-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"EDUCACION",
+      enlace:"https://www.infobae.com/peru/2026/08/27/el-gobierno-peruano-declara-en-emergencia-la-infraestructura-educativa-publica-en-todo-el-pais/",
+      verificado:true, evidencia:"verificado" },
+
+    { tipo:"DECRETO SUPREMO", numero:"116-2026-PCM", rango:"DS", sector:"PCM",
+      sumilla:"Declaran el Estado de Emergencia en 607 distritos de 16 regiones por peligro inminente ante deficit hidrico durante el periodo de lluvias 2026-2027, por 60 dias",
+      fecha:"2026-08-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+      enlace:"https://www.tvperu.gob.pe/noticias/politica/gobierno-declara-en-emergencia-607-distritos-por-deficit-hidrico-ante-periodo-de-lluvias-2026-2027",
+      verificado:true, evidencia:"verificado" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"267-2026-JUS", rango:"RM", sector:"MINJUSDH",
       sumilla:"Designan Asesora de Alta Dirección del Despacho Viceministerial de Justicia",
       fecha:"2026-08-08", origen:"ejecutivo", accion:"promulgada",
       entidad:"JUSTICIA Y DERECHOS HUMANOS",
@@ -1435,11 +1462,11 @@ const GOVISOR = {
      ------------------------------------------------------------------ */
   medidas100: [
     { titulo:"Exponer la politica general del Gobierno ante la Camara de Diputados",
-      sector:"PCM", estado:"en_proceso",
-      detalle:"Art. 130 de la Constitucion. El premier Galarreta pidio el pleno del 20/08/2026; con el Congreso bicameral la cuestion de confianza ya no es obligatoria.",
-      enlace:"https://www.infobae.com/peru/2026/08/17/luis-galarreta-y-su-gabinete-se-presentan-este-jueves-ante-la-camara-de-diputados-expondran-la-politica-general-del-gobierno/",
+      sector:"PCM", estado:"ejecutada",
+      detalle:"Cumplido: el premier Galarreta y su gabinete expusieron la politica general ante la Camara de Diputados el 20/08/2026. Con el Congreso bicameral (art. 130 reformado por la Ley 31988) la cuestion de confianza ya no es obligatoria, por lo que no hubo votacion.",
+      enlace:"https://elcomercio.pe/politica/gobierno/presidente-de-consejo-de-ministros-luis-galarreta-acudira-al-congreso-este-jueves-para-presentar-politica-general-del-gobierno-ultimas-noticia/",
       evidencia:"verificado", verificado:true,
-      nota:"Plazo constitucional: 30 dias desde la asuncion." },
+      nota:"Plazo constitucional del art. 130 (30 dias desde la asuncion): cumplido dentro del plazo." },
 
     { titulo:"Desplegar a las Fuerzas Armadas en apoyo a la Policia",
       sector:"MINDEF", estado:"en_proceso",
@@ -1544,18 +1571,31 @@ const GOVISOR = {
      El visor calcula solo la cuenta regresiva de ese plazo.
      ------------------------------------------------------------------ */
   congreso: {
-    // Cuando ocurra la investidura, llena esto y el reloj se detiene.
+    // El premier Galarreta concurrio a la Camara de Diputados el 20/08/2026 y
+    // expuso la politica general. Con el Congreso bicameral (art. 130 reformado
+    // por la Ley 31988), la cuestion de confianza ya NO es obligatoria: por eso
+    // no hubo votacion. El reloj del art. 130 se detiene con esta fecha.
     investidura: {
-      fecha: "",            // "AAAA-MM-DD" de la exposicion ante el Pleno
-      resultado: "",        // "confianza_otorgada" | "confianza_rehusada"
+      fecha: "2026-08-20",  // exposicion de la politica general ante la Camara de Diputados
+      resultado: "",        // no aplica votacion: la bicameralidad la volvio no obligatoria
       votos: { si:null, no:null, abstenciones:null },
-      enlace: "", verificado:false, evidencia:""
+      enlace: "https://elcomercio.pe/politica/gobierno/presidente-de-consejo-de-ministros-luis-galarreta-acudira-al-congreso-este-jueves-para-presentar-politica-general-del-gobierno-ultimas-noticia/",
+      verificado:true, evidencia:"verificado"
     },
     interpelaciones: [],    // { ministro, sector, fecha, motivo, resultado, enlace }
     censuras:        [],    // { ministro, sector, fecha, votos, resultado, enlace }
     confianza:       [],    // { materia, fecha, resultado, enlace }
-    facultades:      [],    // { materia, plazo, solicitada, otorgada, enlace }
-    proyectosEjecutivo: []  // { numero, titulo, sector, comision, estado, enlace }
+    facultades:      [
+      { materia:"Facultades para legislar en seguridad ciudadana, modernizacion y simplificacion del Estado, y respuesta a emergencias / Fenomeno El Nino (66 pedidos)",
+        plazo:"120 dias", solicitada:"2026-08-28", otorgada:"",
+        enlace:"https://www.infobae.com/peru/2026/08/27/consejo-de-ministros-aprueba-pedido-de-facultades-legislativas-por-120-dias-y-lo-enviara-este-viernes-al-congreso/",
+        verificado:true, evidencia:"verificado" }
+    ],
+    proyectosEjecutivo: [
+      { numero:"—", titulo:"Proyecto de ley que delega facultades legislativas al Ejecutivo por 120 dias (66 pedidos)", sector:"PCM", comision:"Camara de Diputados", estado:"remitido",
+        enlace:"https://elcomercio.pe/politica/gobierno/la-ruta-que-seguira-la-solicitud-de-facultades-de-keiko-fujimori-en-el-congreso-bicameral-noticia/",
+        verificado:true, evidencia:"verificado" }
+    ]  // { numero, titulo, sector, comision, estado, enlace }
   },
 
   /* 8. PRESUPUESTO ------------------------------------------------------
@@ -1590,6 +1630,30 @@ const GOVISOR = {
       titulo:"El gabinete pide exponer la politica general ante Diputados",
       detalle:"Galarreta solicita el pleno del 20/08/2026. Con el Congreso bicameral la cuestion de confianza ya no es obligatoria.",
       enlace:"https://diariocorreo.pe/politica/galarreta-solicito-a-camara-de-diputados-acudir-al-pleno-este-20-de-agosto-para-exponer-politica-general-del-gobierno-noticia/",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-08-13", tipo:"hito",
+      titulo:"Estado de emergencia por deficit hidrico en 607 distritos",
+      detalle:"El D.S. 116-2026-PCM declara en emergencia 607 distritos de 16 regiones por peligro inminente ante el deficit hidrico del periodo de lluvias 2026-2027, por 60 dias.",
+      enlace:"https://larepublica.pe/economia/2026/08/13/deficit-hidrico-amenaza-al-agro-607-distritos-de-16-regiones-quedan-bajo-estado-de-emergencia-hnews-425347",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-08-20", tipo:"congreso",
+      titulo:"Galarreta expone la politica general ante la Camara de Diputados",
+      detalle:"El premier y su gabinete concurren a la Camara de Diputados en cumplimiento del art. 130. Por primera vez en mas de 30 anos, un gabinete entrante expone la politica general sin cuestion de confianza: la bicameralidad (Ley 31988) la volvio no obligatoria.",
+      enlace:"https://elcomercio.pe/politica/gobierno/presidente-de-consejo-de-ministros-luis-galarreta-acudira-al-congreso-este-jueves-para-presentar-politica-general-del-gobierno-ultimas-noticia/",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-08-27", tipo:"hito",
+      titulo:"Emergencia en la infraestructura educativa publica nacional",
+      detalle:"El D.S. 013-2026-MINEDU declara en emergencia la infraestructura educativa publica a nivel nacional y encarga al Minedu, en 30 dias habiles, las normas para reformar su gestion. Firmado por la presidenta Fujimori y el ministro Chang.",
+      enlace:"https://www.infobae.com/peru/2026/08/27/el-gobierno-peruano-declara-en-emergencia-la-infraestructura-educativa-publica-en-todo-el-pais/",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-08-27", tipo:"congreso",
+      titulo:"El Consejo de Ministros aprueba pedir facultades legislativas por 120 dias",
+      detalle:"El gabinete aprueba un pedido de facultades con 66 solicitudes en seguridad ciudadana, modernizacion del Estado y respuesta a emergencias / El Nino, para remitirlo al Congreso el 28/08/2026.",
+      enlace:"https://www.infobae.com/peru/2026/08/27/consejo-de-ministros-aprueba-pedido-de-facultades-legislativas-por-120-dias-y-lo-enviara-este-viernes-al-congreso/",
       evidencia:"verificado", verificado:true }
   ],
 
