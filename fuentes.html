@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <script>
 /* Dominio canonico: gobierno.quest -------------------------------------
-   Con el archivo CNAME, GitHub Pages ya responde 301 desde
-   oprbguitar.github.io/08082026ksfu/* hacia el dominio propio. Este
-   guardia hace lo mismo desde el navegador y se ejecuta antes de que se
+   Con el archivo CNAME, la publicacion ya responde 301 desde la URL de
+   publicacion hacia el dominio propio. Este guardia hace lo mismo desde
+   el navegador y se ejecuta antes de que se
    pinte o se descargue nada, de modo que la URL github.io no llega a
    verse aunque Pages todavia no haya aplicado el CNAME o el navegador
    sirva la pagina desde su cache.
@@ -17,7 +17,7 @@
   var host = location.hostname;
   if (host === DOMINIO || host === "www." + DOMINIO) return;
   if (!/\.github\.io$/i.test(host)) return;
-  var ruta = location.pathname.replace(/^\/08082026ksfu(\/|$)/, "/");
+  var ruta = location.pathname.replace(/^\/[^/]+(\/|$)/, "/");
   location.replace("https://" + DOMINIO + ruta + location.search + location.hash);
 })();
 </script>
