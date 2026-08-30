@@ -28,7 +28,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260829.1043",          // <- debe coincidir con version.json
+    version: "20260829.2022",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-08-29",
     aviso: ""
   },
@@ -143,7 +143,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260829 · 440 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260830 · 440 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0465-2026-MTC/17.03", rango:"Res", sector:"MTC",
       sumilla:"Autorizan a la empresa CENTRO DE INSPECCIONES TÉCNICAS VEHICULARES SEÑOR DE LOS MILAGROS – APURÍMAC GRUPO CARR para operar como Centro de Inspección Técnica Vehicular Fijo en local ubicado en el distrito y provincia de Abancay, departamento de Apurímac",
