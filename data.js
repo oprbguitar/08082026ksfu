@@ -28,7 +28,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260830.1027",          // <- debe coincidir con version.json
+    version: "20260830.2029",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-08-30",
     aviso: ""
   },
@@ -143,7 +143,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260830 · 450 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260831 · 450 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01019-2026-DE", rango:"RM", sector:"MINDEF",
       sumilla:"Autorizan viaje de oficial de la Marina de Guerra del Perú a Suecia, en misión de estudios",
