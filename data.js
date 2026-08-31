@@ -28,8 +28,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260830.2029",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-08-30",
+    version: "20260831.1309",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-08-31",
     aviso: ""
   },
 
@@ -143,8 +143,85 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260831 · 450 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260831 · 456 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN", numero:"000081-2026-PRE/INDECOPI", rango:"Res", sector:"MINDEF",
+      sumilla:"Formalizan designación de Secretario Técnico de la Sala Especializada en Protección al Consumidor del Tribunal de Defensa de la Competencia y de la Protección de la Propiedad Intelectual del Indecopi",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INSTITUTO NACIONAL DE DEFENSA DE LA COMPETENCIA Y DE LA PROTECCIÓN DE LA PROPIEDAD INTELECTUAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2547768-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000017-2026-INACAL/DN", rango:"Res", sector:"PRODUCE",
+      sumilla:"Aprueban Normas Técnicas Peruanas sobre gestión de proyectos, programas y portafolios, y otras",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548100-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"500-2026-MINEDU", rango:"RM", sector:"MINEDU",
+      sumilla:"Designan Directora de la Dirección de Fortalecimiento de Capacidades de la Dirección General de Gestión Descentralizada",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"EDUCACIÓN",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548827-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"CONVENIO", numero:"Convención del Metro", rango:"Otro", sector:"RREE",
+      sumilla:"Convención del Metro",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"RELACIONES EXTERIORES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548853-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"CONVENIO", numero:"Entrada en vigor de la Convención del Metro", rango:"Otro", sector:"RREE",
+      sumilla:"Entrada en vigor de la Convención del Metro",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"RELACIONES EXTERIORES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548867-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"455-2026-MTC/01.02", rango:"RM", sector:"MTC",
+      sumilla:"Aprueban ejecución de expropiación de área afectada de inmueble para la ejecución de la obra: “Rehabilitación y Mejoramiento de la Carretera Lima – Canta - La Viuda – Unish, Tramo: Lima - Canta”",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548978-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"344-2026-VIVIENDA", rango:"RM", sector:"MVCS",
+      sumilla:"Designan Jefa de Tesorería de la Oficina de Tesorería de la Oficina General de Administración del Ministerio",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"VIVIENDA, CONSTRUCCIÓN Y SANEAMIENTO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548979-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01044-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal militar de la Marina de Guerra del Perú a Colombia, en comisión de servicios",
+      fecha:"2026-08-31", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548980-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"458-2026-MTC/01.02", rango:"RM", sector:"MTC",
+      sumilla:"Aprueban ejecución de expropiación de inmueble afectado por la ejecución de la obra: “Red Vial N° 4: Tramo Pativilca - Santa - Trujillo y Puerto Salaverry - Empalme PN1N”",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548982-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"D000182-2026-MIDIS/PNPDS-DE", rango:"Res", sector:"MIDIS",
+      sumilla:"Designan jefa de la Unidad de Recursos Humanos del Programa Nacional de Entrega de la Pensión no Contributiva a Personas con Discapacidad Severa en Situación de Pobreza – CONTIGO",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO E INCLUSIÓN SOCIAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548985-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"D000183-2026-MIDIS/PNPDS-DE", rango:"Res", sector:"MIDIS",
+      sumilla:"Designan Coordinadora de Tesorería de la Unidad de Administración del Programa Nacional de Entrega de la Pensión no Contributiva a Personas con Discapacidad Severa en Situación de Pobreza – CONTIGO",
+      fecha:"2026-08-31", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO E INCLUSIÓN SOCIAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548986-1",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01019-2026-DE", rango:"RM", sector:"MINDEF",
       sumilla:"Autorizan viaje de oficial de la Marina de Guerra del Perú a Suecia, en misión de estudios",
       fecha:"2026-08-30", origen:"viaje", accion:"promulgada",
@@ -2936,41 +3013,6 @@ const GOVISOR = {
       fecha:"2026-08-16", origen:"viaje", accion:"promulgada",
       entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2544011-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN", numero:"021-2026-PRODUCE/PROINNÓVATE", rango:"Res", sector:"PRODUCE",
-      sumilla:"Aprueban otorgamiento de subvenciones a favor de beneficiarios para cofinanciar proyectos en el marco del “Programa de Innovación, Modernización Tecnológica y Emprendimiento” y del Fondo MIPYME Emprendedor",
-      fecha:"2026-08-15", origen:"ejecutivo", accion:"promulgada",
-      entidad:"PRODUCE",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2543579-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"462-2026-MINEDU", rango:"RM", sector:"MINEDU",
-      sumilla:"Designan Jefe de la Unidad de Planificación y Presupuesto de la Oficina de Planificación Estratégica y Presupuesto",
-      fecha:"2026-08-15", origen:"ejecutivo", accion:"promulgada",
-      entidad:"EDUCACIÓN",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2543601-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN", numero:"D233-2026-MIDIS/PNADP/DE", rango:"Res", sector:"MIDIS",
-      sumilla:"Designan Asesora de la Dirección Ejecutiva del Programa Nacional de Apoyo Directo a los Más Pobres “JUNTOS”",
-      fecha:"2026-08-15", origen:"ejecutivo", accion:"promulgada",
-      entidad:"DESARROLLO E INCLUSIÓN SOCIAL",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2543675-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN", numero:"D000234-2026-MIDIS/PNADP/DE", rango:"Res", sector:"MIDIS",
-      sumilla:"Designan Ejecutiva de Asesoría Jurídica de la Unidad de Asesoría Jurídica del Programa Nacional de Apoyo Directo a los Más Pobres “JUNTOS”",
-      fecha:"2026-08-15", origen:"ejecutivo", accion:"promulgada",
-      entidad:"DESARROLLO E INCLUSIÓN SOCIAL",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2543677-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"695-2026/MINSA", rango:"RM", sector:"MINSA",
-      sumilla:"Designan Directora General de la Dirección General de Personal de la Salud",
-      fecha:"2026-08-15", origen:"ejecutivo", accion:"promulgada",
-      entidad:"SALUD",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2543709-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"696-2026/MINSA", rango:"RM", sector:"MINSA",
