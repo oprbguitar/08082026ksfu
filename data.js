@@ -28,7 +28,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260831.1309",          // <- debe coincidir con version.json
+    version: "20260831.2055",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-08-31",
     aviso: ""
   },
@@ -143,7 +143,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260831 · 456 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260901 · 456 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN", numero:"000081-2026-PRE/INDECOPI", rango:"Res", sector:"MINDEF",
       sumilla:"Formalizan designación de Secretario Técnico de la Sala Especializada en Protección al Consumidor del Tribunal de Defensa de la Competencia y de la Protección de la Propiedad Intelectual del Indecopi",
