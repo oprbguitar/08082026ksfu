@@ -28,7 +28,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260901.1036",          // <- debe coincidir con version.json
+    version: "20260901.2006",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-01",
     aviso: ""
   },
@@ -143,7 +143,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260901 · 430 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260902 · 430 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"364-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Otorgan a favor de la empresa COMPAÑÍA MINERA SANTA LUISA S.A. la concesión temporal de transmisión del proyecto “Línea de Transmisión 33 kV S.E. Huallanca Nueva – S.E. Atalaya – S.E. Pallca”, ubicado en el departamento de Ancash",
