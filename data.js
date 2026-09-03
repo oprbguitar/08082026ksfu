@@ -28,7 +28,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260902.1013",          // <- debe coincidir con version.json
+    version: "20260902.2013",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-02",
     aviso: ""
   },
@@ -143,7 +143,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260902 · 433 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260903 · 433 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0475-2026-MTC/17.03", rango:"Res", sector:"MTC",
       sumilla:"Autorizan a la empresa REVISION TECNICA JUPITER SOCIEDAD ANONIMA CERRADA - REVISION TECNICA JUPITER S.A.C., para operar como Centro de Inspección Técnica Vehicular Fijo, en local ubicado en la Provincia Constitucional del Callao",
