@@ -1,5 +1,5 @@
 {
-  "version": "20260902.2013",
-  "actualizado": "2026-09-02T00:00:00-05:00",
+  "version": "20260903.1006",
+  "actualizado": "2026-09-03T00:00:00-05:00",
   "nota": "Sello de publicacion. Debe coincidir con GOVISOR.meta.version en data.js. Al cambiarlo, cada visor abierto se recarga con los datos nuevos."
 }
