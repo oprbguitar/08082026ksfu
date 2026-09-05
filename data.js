@@ -28,7 +28,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260904.1004",          // <- debe coincidir con version.json
+    version: "20260904.1958",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-04",
     aviso: ""
   },
@@ -143,7 +143,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260904 · 438 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260905 · 438 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"372-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Aprueban solicitud de modificación de la autorización para desarrollar la actividad de generación de energía eléctrica de la “Central Térmica San Miguel Industrias PET” de la que es titular la empresa FLESAN INDUSTRIAL POWER S.A.C., a fin de incrementar su potencia instalada",
