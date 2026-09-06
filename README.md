@@ -19,6 +19,8 @@ viajes oficiales, y un panel de noticias y video.
 | Proclamación — Resolución 1625-2026-JNE | ✅ Verificado | El Peruano / JNE |
 | Los 19 ministros y sus R.S. 223 a 241-2026-PCM | ✅ Verificado | El Peruano, dispositivo por dispositivo |
 | Leyes y decretos del periodo | ⬜ En registro | — |
+| Política General de Gobierno 2026-2031 — D.S. 127-2026-PCM (05/09/2026) | ✅ Verificado | El Peruano / PCM |
+| Implementación del D.S. 127-2026-PCM (alineamiento con el CEPLAN, alcance) | ✅ Verificado | PCM / CEPLAN |
 | Las 17 promesas del Mensaje a la Nación (28/07/2026) | ✅ Contrastadas | El Peruano, TV Perú y prensa nacional |
 | Las 16 medidas de los primeros 100 días, con semáforo | ✅ Contrastadas | El Peruano, TV Perú, plan «Perú con Orden» |
 

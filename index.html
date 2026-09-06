@@ -71,6 +71,7 @@
     </button>
 
     <nav class="nav" id="navPral" aria-label="GoVisor">
+      <a href="#pgg" data-nav="pgg" data-i18n="nav.pgg">Hoja de ruta</a>
       <a href="#d100" data-nav="d100" data-i18n="nav.100">100 días</a>
       <a href="#promesas" data-nav="promesas" data-i18n="nav.promesas">Promesas</a>
       <a href="#linea" data-nav="linea" data-i18n="nav.timeline">Timeline</a>
@@ -189,6 +190,16 @@
 
   <!-- ══════════════════ TABLERO ══════════════════ -->
   <section class="tablero" aria-label="GoVisor">
+    <article class="card anim card-pgg">
+      <header class="card-cab">
+        <div><h2 data-i18n="tab.pgg">Hoja de ruta del gobierno</h2>
+        <p data-i18n="tab.pggSub">Política General de Gobierno 2026-2031</p></div>
+        <a class="card-ver" href="#pgg" data-i18n="tab.verEjes">Ver ejes</a>
+      </header>
+      <div id="pggResumen"></div>
+      <p class="card-pie" id="pggNota"></p>
+    </article>
+
     <article class="card anim">
       <header class="card-cab">
         <div><h2 data-i18n="tab.cambio">¿Qué cambió?</h2><p id="cambiosVentana">—</p></div>
@@ -229,6 +240,15 @@
        Cada bloque se abre y se cierra con su flecha. Arrancan cerrados
        para que la portada entre en pantalla sin desplazamiento largo;
        al usar el menú, el bloque de destino se abre solo. -->
+
+  <details class="bloque" id="pgg" open>
+    <summary><span class="bq-t" data-i18n="sec.pgg">Hoja de ruta · Política General de Gobierno 2026-2031</span>
+      <span class="bq-s" id="pggSub"></span></summary>
+    <div class="bq-in">
+      <div class="card" id="pggBox"></div>
+      <div class="card" id="pggExplica"></div>
+    </div>
+  </details>
 
   <details class="bloque" id="d100">
     <summary><span class="bq-t" data-i18n="sec.100">Primeros 100 días</span>

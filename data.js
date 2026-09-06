@@ -12,13 +12,19 @@
    REGLA DE ORO: si no lo comprobaste, no lo inventes. Deja el campo vacio.
    El visor muestra huecos honestos; eso es informacion util, no un defecto.
 
-   Estado al 28 de agosto de 2026:
+   Estado al 6 de setiembre de 2026:
    - Presidencia y 19 ministros: CONTRASTADOS con El Peruano, uno por uno.
    - Normas 28/07-08/08: 161, del scraper. Tramo 09/08-28/08: dos decretos de
      mayor relieve cargados a mano (013-2026-MINEDU, 116-2026-PCM) al no poder
      correr el scraper (egress a El Peruano bloqueado); nivel "verificado".
    - Congreso: exposicion del art. 130 (20/08, sin cuestion de confianza por la
      bicameralidad) y pedido de facultades por 120 dias, ambos registrados.
+   - Politica General de Gobierno 2026-2031 (D.S. 127-2026-PCM, El Peruano
+     05/09/2026): cargada con sus cinco ejes en el bloque `politicaGeneral`,
+     mas el bloque `explicacion` (que es, a quien obliga, que manda, alcance
+     y la doble lectura del texto).
+   - Facultades legislativas: el pedido (PL 00098-2026-2031-CD) sigue en la
+     Comision de Constitucion de la Camara de Diputados al 06/09/2026.
    - Promesas, presupuesto, indicadores: ver notas de cada bloque.
    ========================================================================== */
 
@@ -28,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260906.0915",          // <- debe coincidir con version.json
+    version: "20260906.2115",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-06",
     aviso: ""
   },
@@ -3687,14 +3693,153 @@ const GOVISOR = {
     facultades:      [
       { materia:"Facultades para legislar en seguridad ciudadana, modernizacion y simplificacion del Estado, y respuesta a emergencias / Fenomeno El Nino (66 pedidos)",
         plazo:"120 dias", solicitada:"2026-08-28", otorgada:"",
+        estado:"En estudio en la Comision de Constitucion de la Camara de Diputados al 06/09/2026",
         enlace:"https://www.infobae.com/peru/2026/08/27/consejo-de-ministros-aprueba-pedido-de-facultades-legislativas-por-120-dias-y-lo-enviara-este-viernes-al-congreso/",
         verificado:true, evidencia:"verificado" }
     ],
     proyectosEjecutivo: [
-      { numero:"—", titulo:"Proyecto de ley que delega facultades legislativas al Ejecutivo por 120 dias (66 pedidos)", sector:"PCM", comision:"Camara de Diputados", estado:"remitido",
+      { numero:"00098-2026-2031-CD", titulo:"Proyecto de ley que delega facultades legislativas al Ejecutivo por 120 dias (66 pedidos)", sector:"PCM", comision:"Comision de Constitucion - Camara de Diputados", estado:"en comision",
         enlace:"https://elcomercio.pe/politica/gobierno/la-ruta-que-seguira-la-solicitud-de-facultades-de-keiko-fujimori-en-el-congreso-bicameral-noticia/",
         verificado:true, evidencia:"verificado" }
     ]  // { numero, titulo, sector, comision, estado, enlace }
+  },
+
+  /* 7-BIS. POLITICA GENERAL DE GOBIERNO 2026-2031 (HOJA DE RUTA) ---------
+     Aprobada por el Consejo de Ministros del 04/09/2026 y oficializada con
+     el D.S. 127-2026-PCM, publicado en El Peruano el 05/09/2026. Es la hoja
+     de ruta que ordena la accion del Ejecutivo durante todo el mandato.
+     Los cinco ejes se transcriben como los enuncia la norma y la nota
+     oficial de la PCM; los lineamientos son resumen, no cita literal.
+     ------------------------------------------------------------------ */
+  politicaGeneral: {
+    titulo: "Politica General de Gobierno 2026-2031",
+    lema: "Ordenar el Estado para recuperar la seguridad, destrabar el crecimiento y convertir las decisiones publicas en resultados",
+    aprobacion: "2026-09-04",     // sesion del Consejo de Ministros
+    publicacion: "2026-09-05",    // El Peruano
+    vigencia: "2026 - 2031",
+    norma: {
+      tipo: "Decreto Supremo", numero: "127-2026-PCM", fecha: "2026-09-05",
+      enlace: "https://busquedas.elperuano.pe/dispositivo/NL/2551404-3",
+      verificado: true
+    },
+    enlace: "https://andina.pe/agencia/noticia-ejecutivo-aprueba-politica-general-gobierno-20262031-bajo-cinco-ejes-prioritarios-1090581.aspx",
+    verificado: true, evidencia: "oficial",
+    ejes: [
+      { n:1, titulo:"Seguridad ciudadana y lucha contra el crimen",
+        detalle:"Reducir la inseguridad que afecta la vida, la integridad y la actividad economica de la poblacion.",
+        lineamientos:[
+          "Mitigar el impacto de los delitos violentos, la extorsion y el crimen organizado",
+          "Optimizar el acceso a la justicia",
+          "Fortalecer la legitimidad de las instituciones responsables",
+          "Recuperar el control de los territorios afectados por economias ilegales"
+        ] },
+      { n:2, titulo:"Gestion del riesgo de desastres y cambio climatico",
+        detalle:"Reducir la vulnerabilidad de la poblacion y de la infraestructura ante desastres y ante el cambio climatico.",
+        lineamientos:[
+          "Prevencion y preparacion ante el Fenomeno El Nino 2026-2027",
+          "Reduccion del riesgo en zonas y poblaciones expuestas",
+          "Respuesta y rehabilitacion oportunas"
+        ] },
+      { n:3, titulo:"Desarrollo integral de las personas",
+        detalle:"Consolidar el desarrollo de las personas y sus oportunidades a lo largo del curso de vida.",
+        lineamientos:[
+          "Optimizar la atencion medica en gestacion, infancia y vejez",
+          "Mejorar la calidad educativa",
+          "Fomentar capacidades laborales",
+          "Fortalecer la seguridad alimentaria",
+          "Facilitar el acceso a servicios basicos y reducir el trabajo infantil"
+        ] },
+      { n:4, titulo:"Productividad, empleo formal e integracion territorial",
+        detalle:"Elevar la productividad del pais con empleo formal e integracion del territorio.",
+        lineamientos:[
+          "Promover la competitividad de las micro y pequenas empresas",
+          "Garantizar seguridad juridica a la inversion con reglas predecibles",
+          "Reducir las brechas de conectividad"
+        ] },
+      { n:5, titulo:"Gobernanza democratica y Estado de derecho",
+        detalle:"Consolidar la gobernanza democratica y el Estado de derecho.",
+        lineamientos:[
+          "Fortalecer las instituciones publicas",
+          "Gestionar los conflictos sociales",
+          "Modernizar y simplificar la gestion del Estado"
+        ] }
+    ],
+    nota: "El decreto fija la hoja de ruta; GoVisor no registra todavia metas ni indicadores con cifras: se cargaran cuando el Ejecutivo publique los planes sectoriales.",
+
+    /* --- El decreto, explicado -------------------------------------------
+       Bloque didactico. Separa tres cosas que suelen mezclarse:
+       (a) lo que la norma DICE, (b) lo que la norma MANDA hacer y a quien,
+       y (c) las lecturas que el texto admite. Las lecturas son lectura de
+       GoVisor sobre el texto publicado, no atribuibles al Ejecutivo, y se
+       presentan en pares para que el lector compare, no para calificar.
+       -------------------------------------------------------------------- */
+    explicacion: {
+      queEs: "Un decreto supremo que aprueba la Politica General de Gobierno (PGG): el documento de planeamiento de mayor jerarquia del Ejecutivo, que fija las prioridades del quinquenio y ordena que planes, politicas e intervenciones del Estado se alineen a ellas. No es un plan de obras ni un presupuesto: es el marco al que los demas instrumentos deben ajustarse.",
+      porQue: "El Reglamento que rige las politicas nacionales obliga a cada gobierno entrante a aprobar su PGG en los primeros dias de gestion. La del periodo 2026-2031 se aprobo dentro de ese plazo, contado desde la asuncion del 28/07/2026.",
+      cuando: [
+        { hito:"Aprobacion en Consejo de Ministros", fecha:"2026-09-04",
+          detalle:"Sesion presidida por la presidenta Fujimori con el premier Galarreta." },
+        { hito:"Publicacion en El Peruano", fecha:"2026-09-05",
+          detalle:"D.S. 127-2026-PCM, refrendado por la presidenta y el Presidente del Consejo de Ministros." },
+        { hito:"Entrada en vigencia", fecha:"2026-09-06",
+          detalle:"Rige desde el dia siguiente de su publicacion y se aplica de inmediato a las entidades alcanzadas." },
+        { hito:"Plazo de alineamiento con el CEPLAN", fecha:"2026-09-21",
+          detalle:"Diez dias habiles desde la vigencia para que cada sector identifique, con el CEPLAN, las acciones estrategicas o servicios priorizados, con sus indicadores y metas, que implementan la PGG. Fecha estimada por GoVisor a partir del plazo, no fijada en el texto." }
+      ],
+      aQuienObliga: [
+        "Ministerios y demas entidades del Poder Ejecutivo, y sus organismos adscritos",
+        "Gobiernos regionales",
+        "Gobiernos locales",
+        "Empresas y entidades vinculadas al ambito de esas entidades"
+      ],
+      acciones: [
+        { orden:1, titulo:"Alinear los planes al marco de la PGG",
+          detalle:"Cada sector identifica en sus politicas y planes nacionales las acciones estrategicas institucionales o servicios priorizados, con indicadores y metas, que hacen operativa la politica.",
+          plazo:"10 dias habiles" },
+        { orden:2, titulo:"Medicion y seguimiento a cargo del CEPLAN",
+          detalle:"El Centro Nacional de Planeamiento Estrategico conduce la medicion y el seguimiento del cumplimiento de la PGG y reporta los avances.",
+          plazo:"permanente" },
+        { orden:3, titulo:"Continuidad de los planes institucionales",
+          detalle:"Segun los comunicados del CEPLAN, la aprobacion de una nueva PGG no obliga por si sola a reformular el Plan Estrategico Institucional mientras se mantengan sus elementos estrategicos: el ajuste es de alineamiento, no de rehacer los planes.",
+          plazo:"—" },
+        { orden:4, titulo:"Orientacion de las decisiones publicas",
+          detalle:"Las prioridades de los cinco ejes deben orientar politicas, planes, programas e intervenciones del Estado durante el periodo 2026-2031.",
+          plazo:"2026-2031" }
+      ],
+      alcanceSi: [
+        "Fija las prioridades a las que deben alinearse los planes de todo el Ejecutivo y de los gobiernos subnacionales",
+        "Crea una obligacion de identificar indicadores y metas verificables, con plazo",
+        "Entrega al CEPLAN el seguimiento del cumplimiento, lo que genera reportes publicos contrastables",
+        "Sirve de parametro para evaluar despues cada norma, plan y presupuesto del periodo"
+      ],
+      alcanceNo: [
+        "No asigna por si misma presupuesto: eso ocurre en la Ley de Presupuesto y en las transferencias de partidas",
+        "No crea derechos, obligaciones ni sanciones para los ciudadanos",
+        "No deroga las politicas nacionales vigentes ni los planes sectoriales en curso",
+        "No contiene, en el decreto, las metas cuantificadas: esas apareceran en los instrumentos que cada sector alinee"
+      ],
+      lecturas: [
+        { tema:"«Ordenar el Estado»",
+          literal:"El titulo enuncia un objetivo de reorganizacion y coordinacion de la gestion publica en torno a cinco prioridades.",
+          margen:"El texto no precisa que reformas de organizacion supone; el contenido concreto queda para las normas de desarrollo, entre ellas las que se dicten si el Congreso delega facultades." },
+        { tema:"«Recuperar el control de territorios afectados por economias ilegales»",
+          literal:"Compromete al Estado a intervenir en zonas donde operan mineria ilegal, tala y trafico de drogas.",
+          margen:"No enumera los instrumentos; en la practica admite tanto interdiccion y formalizacion como estados de emergencia y despliegue de fuerzas armadas, decisiones que se adoptan por normas posteriores." },
+        { tema:"«Seguridad juridica a la inversion con reglas predecibles»",
+          literal:"Compromete estabilidad y previsibilidad normativa para el inversionista.",
+          margen:"Puede leerse tambien como un criterio de contencion frente a nueva regulacion sectorial; el decreto no fija el limite entre una cosa y la otra." },
+        { tema:"«Destrabar el crecimiento»",
+          literal:"Apunta a remover barreras burocraticas y acelerar la ejecucion de proyectos.",
+          margen:"Simplificar plazos y requisitos toca procedimientos de permisos y evaluacion; el alcance depende de las normas que la desarrollen, no del decreto." },
+        { tema:"«Convertir las decisiones publicas en resultados»",
+          literal:"Introduce el enfoque de gestion por resultados con indicadores y metas verificables.",
+          margen:"La verificacion queda condicionada a que los indicadores y metas se publiquen y se reporten: mientras no se publiquen, el compromiso es de metodo, no de cifra." },
+        { tema:"Gobernanza democratica y Estado de derecho",
+          literal:"Declara el fortalecimiento institucional y la gestion de conflictos como eje del quinquenio.",
+          margen:"Es el eje con formulacion mas abierta del decreto: no identifica instituciones ni reformas concretas, de modo que su contenido se definira en los planes que lo desarrollen." }
+      ],
+      advertencia: "Las columnas «lo que dice» y «lo que admite» son lectura de GoVisor sobre el texto publicado, hecha para explicitar el margen de interpretacion que el propio texto deja abierto. No son declaraciones del Ejecutivo, no imputan intenciones y no califican la politica. La fuente primaria es el D.S. 127-2026-PCM en El Peruano, enlazado arriba."
+    }
   },
 
   /* 8. PRESUPUESTO ------------------------------------------------------
@@ -3753,7 +3898,31 @@ const GOVISOR = {
       titulo:"El Consejo de Ministros aprueba pedir facultades legislativas por 120 dias",
       detalle:"El gabinete aprueba un pedido de facultades con 66 solicitudes en seguridad ciudadana, modernizacion del Estado y respuesta a emergencias / El Nino, para remitirlo al Congreso el 28/08/2026.",
       enlace:"https://www.infobae.com/peru/2026/08/27/consejo-de-ministros-aprueba-pedido-de-facultades-legislativas-por-120-dias-y-lo-enviara-este-viernes-al-congreso/",
-      evidencia:"verificado", verificado:true }
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-09-01", tipo:"crisis",
+      titulo:"Emergencia en 893 distritos de 22 regiones y el Callao por El Nino",
+      detalle:"El D.S. 124-2026-PCM declara el estado de emergencia por 60 dias ante el peligro inminente de lluvias intensas asociadas al Fenomeno El Nino 2026-2027. El ENFEN elevo a 62 % la probabilidad de un Nino costero de magnitud extraordinaria entre setiembre de 2026 y enero de 2027.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2549507-1",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-09-04", tipo:"anuncio",
+      titulo:"El Consejo de Ministros aprueba la Politica General de Gobierno 2026-2031",
+      detalle:"En la sesion del 4 de setiembre, presidida por Keiko Fujimori con el premier Galarreta, el gabinete aprueba la hoja de ruta del quinquenio en cinco ejes. Tambien se presento el proyecto de ley de chatarreo vehicular de la PNP y se evaluaron prorrogas de emergencia por sismos.",
+      enlace:"https://andina.pe/agencia/noticia-ejecutivo-aprueba-politica-general-gobierno-20262031-bajo-cinco-ejes-prioritarios-1090581.aspx",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-09-05", tipo:"hito",
+      titulo:"Se publica el D.S. 127-2026-PCM: hoja de ruta del gobierno 2026-2031",
+      detalle:"El Peruano publica la Politica General de Gobierno 2026-2031, «Ordenar el Estado para recuperar la seguridad, destrabar el crecimiento y convertir las decisiones publicas en resultados», con cinco ejes: seguridad, riesgo de desastres y cambio climatico, desarrollo integral de las personas, productividad y empleo formal, y gobernanza democratica.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551404-3",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-09-05", tipo:"crisis",
+      titulo:"Estado de emergencia por 60 dias en cinco penales de alta peligrosidad",
+      detalle:"El D.S. 128-2026-PCM declara en emergencia los penales de Challapalca (Tacna), Cochamarca (Pasco), Miguel Castro Castro y Ancon I (Lima) y Trujillo Varones (La Libertad). La PNP asume el control del orden interno con apoyo de las Fuerzas Armadas y se suspenden derechos de transito, reunion y seguridad personal en un radio de 200 metros del perimetro.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551404-4",
+      evidencia:"oficial", verificado:true }
   ],
 
   /* 10. VIAJES OFICIALES ------------------------------------------------- */
