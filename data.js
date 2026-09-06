@@ -28,7 +28,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260905.0859",          // <- debe coincidir con version.json
+    version: "20260905.1958",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-05",
     aviso: ""
   },
@@ -143,7 +143,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260905 · 451 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260906 · 451 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"368-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Establecen servidumbre de electroducto con carácter permanente a favor de la concesión definitiva de transmisión de energía eléctrica de la que es titular la empresa ORYGEN PERÚ S.A.A., para proyecto de línea de transmisión ubicado en el departamento de Moquegua",
