@@ -1072,6 +1072,66 @@
     }
   }
 
+  /* ── El decreto, explicado (didactico) ─────────────────────────────── */
+  function pintarPGGExplica() {
+    const box = $("pggExplica");
+    if (!box) return;
+    const pg = GOVISOR.politicaGeneral || {};
+    const x = pg.explicacion;
+    if (!x) { box.innerHTML = ""; box.hidden = true; return; }
+    box.hidden = false;
+
+    const lista = (arr) => `<ul class="pgg-ul">${(arr || [])
+      .map((v) => `<li>${esc(v)}</li>`).join("")}</ul>`;
+
+    box.innerHTML =
+      `<p class="rotulo">${t("pgg.explica")}</p>
+
+       <div class="pgg-qa">
+         <h4>${t("pgg.queEs")}</h4><p>${esc(x.queEs || "")}</p>
+         <h4>${t("pgg.porQue")}</h4><p>${esc(x.porQue || "")}</p>
+       </div>
+
+       <h4 class="pgg-h">${t("pgg.cuando")}</h4>
+       <ol class="pgg-ruta">${(x.cuando || []).map((c) => `
+         <li>
+           <span class="pgg-ruta-f">${esc(fechaCorta(c.fecha))}</span>
+           <b>${esc(c.hito)}</b>
+           <span>${esc(c.detalle || "")}</span>
+         </li>`).join("")}</ol>
+
+       <h4 class="pgg-h">${t("pgg.obliga")}</h4>
+       ${lista(x.aQuienObliga)}
+
+       <h4 class="pgg-h">${t("pgg.acciones")}</h4>
+       <ol class="pgg-acc">${(x.acciones || []).map((a) => `
+         <li>
+           <b class="pgg-num">${esc(String(a.orden))}</b>
+           <div><h5>${esc(a.titulo)}</h5>
+             <p>${esc(a.detalle || "")}</p>
+             ${a.plazo ? `<span class="rs-txt">${t("pgg.plazo")}: ${esc(a.plazo)}</span>` : ""}
+           </div>
+         </li>`).join("")}</ol>
+
+       <h4 class="pgg-h">${t("pgg.alcance")}</h4>
+       <div class="pgg-dos">
+         <div class="pgg-si"><h5>${t("pgg.si")}</h5>${lista(x.alcanceSi)}</div>
+         <div class="pgg-no"><h5>${t("pgg.no")}</h5>${lista(x.alcanceNo)}</div>
+       </div>
+
+       <h4 class="pgg-h">${t("pgg.lecturas")}</h4>
+       <p class="fine">${t("pgg.lecturasSub")}</p>
+       <div class="pgg-lect">${(x.lecturas || []).map((l) => `
+         <article>
+           <h5>${esc(l.tema)}</h5>
+           <p><b>${t("pgg.literal")}:</b> ${esc(l.literal)}</p>
+           <p><b>${t("pgg.margen")}:</b> ${esc(l.margen)}</p>
+         </article>`).join("")}</div>
+
+       ${x.advertencia
+         ? `<p class="vac pgg-aviso"><b>${t("pgg.aviso")}</b>${esc(x.advertencia)}</p>` : ""}`;
+  }
+
   /* ── Radar de nombramientos (más allá del gabinete) ────────────────── */
   function pintarCargos() {
     const cargos = GOVISOR.altosCargos || [];
@@ -1320,6 +1380,7 @@
     pintarTimeline();
     pintarEstabilidad();
     pintarPGG();
+    pintarPGGExplica();
     pintarPGGResumen();
     pintarCongreso();
     pintarCargos();
@@ -1583,6 +1644,7 @@
     pintarTimeline();
     pintarEstabilidad();
     pintarPGG();
+    pintarPGGExplica();
     pintarPGGResumen();
     pintarCongreso();
     pintarCargos();

@@ -20,7 +20,9 @@
    - Congreso: exposicion del art. 130 (20/08, sin cuestion de confianza por la
      bicameralidad) y pedido de facultades por 120 dias, ambos registrados.
    - Politica General de Gobierno 2026-2031 (D.S. 127-2026-PCM, El Peruano
-     05/09/2026): cargada con sus cinco ejes en el bloque `politicaGeneral`.
+     05/09/2026): cargada con sus cinco ejes en el bloque `politicaGeneral`,
+     mas el bloque `explicacion` (que es, a quien obliga, que manda, alcance
+     y la doble lectura del texto).
    - Facultades legislativas: el pedido (PL 00098-2026-2031-CD) sigue en la
      Comision de Constitucion de la Camara de Diputados al 06/09/2026.
    - Promesas, presupuesto, indicadores: ver notas de cada bloque.
@@ -32,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260906.1830",          // <- debe coincidir con version.json
+    version: "20260906.2115",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-06",
     aviso: ""
   },
@@ -3762,7 +3764,82 @@ const GOVISOR = {
           "Modernizar y simplificar la gestion del Estado"
         ] }
     ],
-    nota: "El decreto fija la hoja de ruta; GoVisor no registra todavia metas ni indicadores con cifras: se cargaran cuando el Ejecutivo publique los planes sectoriales."
+    nota: "El decreto fija la hoja de ruta; GoVisor no registra todavia metas ni indicadores con cifras: se cargaran cuando el Ejecutivo publique los planes sectoriales.",
+
+    /* --- El decreto, explicado -------------------------------------------
+       Bloque didactico. Separa tres cosas que suelen mezclarse:
+       (a) lo que la norma DICE, (b) lo que la norma MANDA hacer y a quien,
+       y (c) las lecturas que el texto admite. Las lecturas son lectura de
+       GoVisor sobre el texto publicado, no atribuibles al Ejecutivo, y se
+       presentan en pares para que el lector compare, no para calificar.
+       -------------------------------------------------------------------- */
+    explicacion: {
+      queEs: "Un decreto supremo que aprueba la Politica General de Gobierno (PGG): el documento de planeamiento de mayor jerarquia del Ejecutivo, que fija las prioridades del quinquenio y ordena que planes, politicas e intervenciones del Estado se alineen a ellas. No es un plan de obras ni un presupuesto: es el marco al que los demas instrumentos deben ajustarse.",
+      porQue: "El Reglamento que rige las politicas nacionales obliga a cada gobierno entrante a aprobar su PGG en los primeros dias de gestion. La del periodo 2026-2031 se aprobo dentro de ese plazo, contado desde la asuncion del 28/07/2026.",
+      cuando: [
+        { hito:"Aprobacion en Consejo de Ministros", fecha:"2026-09-04",
+          detalle:"Sesion presidida por la presidenta Fujimori con el premier Galarreta." },
+        { hito:"Publicacion en El Peruano", fecha:"2026-09-05",
+          detalle:"D.S. 127-2026-PCM, refrendado por la presidenta y el Presidente del Consejo de Ministros." },
+        { hito:"Entrada en vigencia", fecha:"2026-09-06",
+          detalle:"Rige desde el dia siguiente de su publicacion y se aplica de inmediato a las entidades alcanzadas." },
+        { hito:"Plazo de alineamiento con el CEPLAN", fecha:"2026-09-21",
+          detalle:"Diez dias habiles desde la vigencia para que cada sector identifique, con el CEPLAN, las acciones estrategicas o servicios priorizados, con sus indicadores y metas, que implementan la PGG. Fecha estimada por GoVisor a partir del plazo, no fijada en el texto." }
+      ],
+      aQuienObliga: [
+        "Ministerios y demas entidades del Poder Ejecutivo, y sus organismos adscritos",
+        "Gobiernos regionales",
+        "Gobiernos locales",
+        "Empresas y entidades vinculadas al ambito de esas entidades"
+      ],
+      acciones: [
+        { orden:1, titulo:"Alinear los planes al marco de la PGG",
+          detalle:"Cada sector identifica en sus politicas y planes nacionales las acciones estrategicas institucionales o servicios priorizados, con indicadores y metas, que hacen operativa la politica.",
+          plazo:"10 dias habiles" },
+        { orden:2, titulo:"Medicion y seguimiento a cargo del CEPLAN",
+          detalle:"El Centro Nacional de Planeamiento Estrategico conduce la medicion y el seguimiento del cumplimiento de la PGG y reporta los avances.",
+          plazo:"permanente" },
+        { orden:3, titulo:"Continuidad de los planes institucionales",
+          detalle:"Segun los comunicados del CEPLAN, la aprobacion de una nueva PGG no obliga por si sola a reformular el Plan Estrategico Institucional mientras se mantengan sus elementos estrategicos: el ajuste es de alineamiento, no de rehacer los planes.",
+          plazo:"—" },
+        { orden:4, titulo:"Orientacion de las decisiones publicas",
+          detalle:"Las prioridades de los cinco ejes deben orientar politicas, planes, programas e intervenciones del Estado durante el periodo 2026-2031.",
+          plazo:"2026-2031" }
+      ],
+      alcanceSi: [
+        "Fija las prioridades a las que deben alinearse los planes de todo el Ejecutivo y de los gobiernos subnacionales",
+        "Crea una obligacion de identificar indicadores y metas verificables, con plazo",
+        "Entrega al CEPLAN el seguimiento del cumplimiento, lo que genera reportes publicos contrastables",
+        "Sirve de parametro para evaluar despues cada norma, plan y presupuesto del periodo"
+      ],
+      alcanceNo: [
+        "No asigna por si misma presupuesto: eso ocurre en la Ley de Presupuesto y en las transferencias de partidas",
+        "No crea derechos, obligaciones ni sanciones para los ciudadanos",
+        "No deroga las politicas nacionales vigentes ni los planes sectoriales en curso",
+        "No contiene, en el decreto, las metas cuantificadas: esas apareceran en los instrumentos que cada sector alinee"
+      ],
+      lecturas: [
+        { tema:"«Ordenar el Estado»",
+          literal:"El titulo enuncia un objetivo de reorganizacion y coordinacion de la gestion publica en torno a cinco prioridades.",
+          margen:"El texto no precisa que reformas de organizacion supone; el contenido concreto queda para las normas de desarrollo, entre ellas las que se dicten si el Congreso delega facultades." },
+        { tema:"«Recuperar el control de territorios afectados por economias ilegales»",
+          literal:"Compromete al Estado a intervenir en zonas donde operan mineria ilegal, tala y trafico de drogas.",
+          margen:"No enumera los instrumentos; en la practica admite tanto interdiccion y formalizacion como estados de emergencia y despliegue de fuerzas armadas, decisiones que se adoptan por normas posteriores." },
+        { tema:"«Seguridad juridica a la inversion con reglas predecibles»",
+          literal:"Compromete estabilidad y previsibilidad normativa para el inversionista.",
+          margen:"Puede leerse tambien como un criterio de contencion frente a nueva regulacion sectorial; el decreto no fija el limite entre una cosa y la otra." },
+        { tema:"«Destrabar el crecimiento»",
+          literal:"Apunta a remover barreras burocraticas y acelerar la ejecucion de proyectos.",
+          margen:"Simplificar plazos y requisitos toca procedimientos de permisos y evaluacion; el alcance depende de las normas que la desarrollen, no del decreto." },
+        { tema:"«Convertir las decisiones publicas en resultados»",
+          literal:"Introduce el enfoque de gestion por resultados con indicadores y metas verificables.",
+          margen:"La verificacion queda condicionada a que los indicadores y metas se publiquen y se reporten: mientras no se publiquen, el compromiso es de metodo, no de cifra." },
+        { tema:"Gobernanza democratica y Estado de derecho",
+          literal:"Declara el fortalecimiento institucional y la gestion de conflictos como eje del quinquenio.",
+          margen:"Es el eje con formulacion mas abierta del decreto: no identifica instituciones ni reformas concretas, de modo que su contenido se definira en los planes que lo desarrollen." }
+      ],
+      advertencia: "Las columnas «lo que dice» y «lo que admite» son lectura de GoVisor sobre el texto publicado, hecha para explicitar el margen de interpretacion que el propio texto deja abierto. No son declaraciones del Ejecutivo, no imputan intenciones y no califican la politica. La fuente primaria es el D.S. 127-2026-PCM en El Peruano, enlazado arriba."
+    }
   },
 
   /* 8. PRESUPUESTO ------------------------------------------------------

@@ -908,7 +908,7 @@ body.sin-scroll{ overflow:hidden; }
 
 /* ══════════ Hoja de ruta · Política General de Gobierno ══════════ */
 .pgg-lema{ font-size:1.02rem; line-height:1.4; margin:8px 0 2px; color:var(--ink-900); }
-.pgg-lema-mini{ font-size:.82rem; line-height:1.45; color:var(--ink-600); margin:2px 0 10px; }
+.pgg-lema-mini{ font-size:.82rem; line-height:1.45; color:var(--ink-500); margin:2px 0 10px; }
 .pgg-mini{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
 .pgg-mini li{ font-size:.8rem; line-height:1.35; display:flex; gap:8px; align-items:baseline; }
 .pgg-mini b{
@@ -926,5 +926,39 @@ body.sin-scroll{ overflow:hidden; }
   display:inline-flex; align-items:center; justify-content:center;
 }
 .pgg-eje h4{ font-size:.92rem; margin:2px 0 4px; }
-.pgg-eje p{ font-size:.82rem; color:var(--ink-600); margin:0 0 6px; line-height:1.45; }
+.pgg-eje p{ font-size:.82rem; color:var(--ink-500); margin:0 0 6px; line-height:1.45; }
 .pgg-eje ul{ margin:0; padding-left:18px; font-size:.78rem; color:var(--ink-500); line-height:1.5; }
+
+/* ── El decreto, explicado ── */
+.pgg-qa h4, .pgg-h{ font-size:.86rem; margin:16px 0 6px; color:var(--ink-900); }
+.pgg-qa h4:first-child{ margin-top:10px; }
+.pgg-qa p{ font-size:.83rem; color:var(--ink-500); line-height:1.55; margin:0; }
+.pgg-ul{ margin:0; padding-left:18px; font-size:.8rem; color:var(--ink-500); line-height:1.55; }
+.pgg-ruta{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.pgg-ruta li{
+  display:grid; grid-template-columns:78px 1fr; gap:4px 12px; align-items:baseline;
+  border-left:2px solid var(--brand-700); padding:2px 0 2px 12px;
+}
+.pgg-ruta-f{ font-size:.74rem; font-weight:700; color:var(--brand-700); }
+.pgg-ruta b{ font-size:.84rem; }
+.pgg-ruta span:last-child{ grid-column:2; font-size:.78rem; color:var(--ink-500); line-height:1.5; }
+.pgg-acc{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+.pgg-acc li{ display:flex; gap:12px; align-items:flex-start; }
+.pgg-acc h5{ font-size:.85rem; margin:2px 0 4px; }
+.pgg-acc p{ font-size:.79rem; color:var(--ink-500); line-height:1.5; margin:0 0 6px; }
+.pgg-dos{ display:grid; gap:12px; grid-template-columns:1fr 1fr; }
+.pgg-si, .pgg-no{ border:1px solid var(--border); border-radius:10px; padding:12px; }
+.pgg-si{ border-left:3px solid var(--brand-700); }
+.pgg-no{ border-left:3px solid var(--ink-400); }
+.pgg-si h5, .pgg-no h5{ font-size:.8rem; margin:0 0 8px; }
+.pgg-lect{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:10px; }
+.pgg-lect article{ border:1px solid var(--border); border-radius:10px; padding:12px; }
+.pgg-lect h5{ font-size:.82rem; margin:0 0 6px; }
+.pgg-lect p{ font-size:.78rem; color:var(--ink-500); line-height:1.5; margin:0 0 6px; }
+.pgg-lect p:last-child{ margin-bottom:0; }
+.pgg-aviso{ margin-top:16px; }
+@media (max-width:720px){
+  .pgg-dos{ grid-template-columns:1fr; }
+  .pgg-ruta li{ grid-template-columns:1fr; }
+  .pgg-ruta span:last-child{ grid-column:1; }
+}
