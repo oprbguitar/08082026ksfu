@@ -152,6 +152,18 @@ const I18N = (function () {
     "pgg.margen":     { es:"Lo que admite", en:"What it allows" },
     "pgg.plazo":      { es:"Plazo", en:"Deadline" },
     "pgg.aviso":      { es:"Nota de método", en:"Method note" },
+    "pgg.siglas":     { es:"Siglas de este bloque", en:"Acronyms used here" },
+    "pgg.siglasSub":  { es:"Qué significa cada una y dónde consultarla.",
+                        en:"What each one means and where to look it up." },
+    "pgg.verFuente":  { es:"Fuente", en:"Source" },
+    "pgg.docs":       { es:"Documentos del decreto", en:"Documents of the decree" },
+    "pgg.abrir":      { es:"Abrir", en:"Open" },
+    "pgg.porVerificar":{ es:"POR VERIFICAR", en:"TO BE VERIFIED" },
+    "pgg.entidades":  { es:"¿A qué entidades les corresponde?",
+                        en:"Which entities does it bind?" },
+    "pgg.entSi":      { es:"Sí les corresponde", en:"Bound by it" },
+    "pgg.entNo":      { es:"No les corresponde", en:"Not bound by it" },
+
 
     /* ── Secciones ─────────────────────────────────────────────────── */
     "sec.100":        { es:"Primeros 100 días", en:"First 100 days" },

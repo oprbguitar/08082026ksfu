@@ -1113,6 +1113,38 @@
            </div>
          </li>`).join("")}</ol>
 
+       ${(x.siglas || []).length ? `
+         <h4 class="pgg-h">${t("pgg.siglas")}</h4>
+         <p class="fine">${t("pgg.siglasSub")}</p>
+         <ul class="pgg-siglas">${x.siglas.map((g) => {
+           const u = urlSegura(g.url);
+           return `<li>
+             <abbr title="${esc(g.nombre)}">${esc(g.sigla)}</abbr>
+             <span><b>${esc(g.nombre)}</b> — ${esc(g.que)}</span>
+             ${u ? `<a class="rs" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${t("pgg.verFuente")} &#8599;</a>` : ""}
+           </li>`;
+         }).join("")}</ul>` : ""}
+
+       ${(x.documentos || []).length ? `
+         <h4 class="pgg-h">${t("pgg.docs")}</h4>
+         <ul class="pgg-docs">${x.documentos.map((d) => {
+           const u = urlSegura(d.url);
+           return `<li>
+             <div><b>${esc(d.rotulo)}</b>
+               ${d.verificado ? "" : `<span class="rs-txt">${t("pgg.porVerificar")}</span>`}
+               <p>${esc(d.detalle || "")}</p></div>
+             ${u ? `<a class="rs" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${t("pgg.abrir")} &#8599;</a>` : ""}
+           </li>`;
+         }).join("")}</ul>` : ""}
+
+       ${(x.entidadesSi || []).length ? `
+         <h4 class="pgg-h">${t("pgg.entidades")}</h4>
+         <div class="pgg-dos">
+           <div class="pgg-si"><h5>${t("pgg.entSi")}</h5>${lista(x.entidadesSi)}</div>
+           <div class="pgg-no"><h5>${t("pgg.entNo")}</h5>${lista(x.entidadesNo)}</div>
+         </div>
+         ${x.entidadesNota ? `<p class="fine">${esc(x.entidadesNota)}</p>` : ""}` : ""}
+
        <h4 class="pgg-h">${t("pgg.alcance")}</h4>
        <div class="pgg-dos">
          <div class="pgg-si"><h5>${t("pgg.si")}</h5>${lista(x.alcanceSi)}</div>

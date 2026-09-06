@@ -962,3 +962,53 @@ body.sin-scroll{ overflow:hidden; }
   .pgg-ruta li{ grid-template-columns:1fr; }
   .pgg-ruta span:last-child{ grid-column:1; }
 }
+
+/* ── Siglas, documentos y entidades del bloque explicado ── */
+.pgg-siglas, .pgg-docs{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:8px; }
+.pgg-siglas li, .pgg-docs li{
+  display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  border:1px solid var(--border); border-radius:10px; padding:9px 12px;
+  transition:border-color .18s, background .18s;
+}
+.pgg-siglas li:hover, .pgg-docs li:hover{ border-color:var(--brand-500); background:var(--brand-025); }
+.pgg-siglas abbr{
+  flex:0 0 auto; font-weight:800; font-size:.75rem; letter-spacing:.04em;
+  color:#fff; background:var(--brand-700); border-radius:6px; padding:3px 7px;
+  text-decoration:none; cursor:help;
+}
+.pgg-siglas span{ flex:1 1 260px; font-size:.79rem; color:var(--ink-500); line-height:1.45; }
+.pgg-siglas span b{ color:var(--ink-900); }
+.pgg-docs li > div{ flex:1 1 260px; }
+.pgg-docs b{ font-size:.82rem; }
+.pgg-docs p{ font-size:.76rem; color:var(--ink-500); line-height:1.45; margin:4px 0 0; }
+.pgg-siglas .rs, .pgg-docs .rs{ margin-left:auto; }
+
+/* ── Botón desplegable de cada bloque: verde y con animación ── */
+.bloque > summary{
+  border-left:4px solid transparent;
+  transition:background .18s var(--ease), border-color .18s var(--ease);
+}
+.bloque > summary:hover,
+.bloque > summary:focus-visible{ background:var(--brand-025); border-left-color:var(--brand-500); }
+.bloque[open] > summary{ border-left-color:var(--brand-700); }
+.bloque > summary::after{
+  content:"›"; margin-left:auto; align-self:center;
+  width:30px; height:30px; border-radius:50%;
+  background:var(--brand-700); color:#fff;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:1.25rem; line-height:1; padding-bottom:2px;
+  box-shadow:0 1px 3px rgba(0,125,121,.35);
+  transition:transform .28s var(--ease), background .18s var(--ease), box-shadow .18s var(--ease);
+}
+.bloque > summary:hover::after{
+  background:var(--brand-900); transform:scale(1.14);
+  box-shadow:0 3px 10px rgba(0,125,121,.45);
+}
+.bloque[open] > summary::after{ transform:rotate(90deg); }
+.bloque[open] > summary:hover::after{ transform:rotate(90deg) scale(1.14); }
+@media (prefers-reduced-motion:reduce){
+  .bloque > summary::after,
+  .bloque > summary:hover::after,
+  .bloque[open] > summary:hover::after{ transition:none; transform:none; }
+  .bloque[open] > summary::after{ transform:rotate(90deg); }
+}
