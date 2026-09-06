@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260906.2115",          // <- debe coincidir con version.json
+    version: "20260906.2240",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-06",
     aviso: ""
   },
@@ -3838,6 +3838,67 @@ const GOVISOR = {
           literal:"Declara el fortalecimiento institucional y la gestion de conflictos como eje del quinquenio.",
           margen:"Es el eje con formulacion mas abierta del decreto: no identifica instituciones ni reformas concretas, de modo que su contenido se definira en los planes que lo desarrollen." }
       ],
+      /* Siglas usadas en este bloque, con su significado y donde consultarlas. */
+      siglas: [
+        { sigla:"PGG",    nombre:"Politica General de Gobierno",
+          que:"El instrumento que este decreto aprueba: fija las prioridades del Ejecutivo para 2026-2031.",
+          url:"https://busquedas.elperuano.pe/dispositivo/NL/2551404-3" },
+        { sigla:"D.S.",   nombre:"Decreto Supremo",
+          que:"Norma del Poder Ejecutivo firmada por la Presidenta y refrendada por el ministro del sector.",
+          url:"https://spij.minjus.gob.pe/" },
+        { sigla:"PCM",    nombre:"Presidencia del Consejo de Ministros",
+          que:"Sector que propone la PGG y coordina su cumplimiento con los demas ministerios.",
+          url:"https://www.gob.pe/pcm" },
+        { sigla:"CEPLAN", nombre:"Centro Nacional de Planeamiento Estrategico",
+          que:"Organismo tecnico que conduce la medicion y el seguimiento del cumplimiento de la PGG.",
+          url:"https://www.gob.pe/ceplan" },
+        { sigla:"SINAPLAN", nombre:"Sistema Nacional de Planeamiento Estrategico",
+          que:"El sistema, rectorado por el CEPLAN, al que pertenecen las entidades que deben alinear sus planes.",
+          url:"https://www.gob.pe/institucion/ceplan" },
+        { sigla:"PEI",    nombre:"Plan Estrategico Institucional",
+          que:"Plan de mediano plazo de cada entidad. Es uno de los instrumentos que se alinean a la PGG.",
+          url:"https://www.gob.pe/institucion/ceplan" },
+        { sigla:"POI",    nombre:"Plan Operativo Institucional",
+          que:"Plan anual de cada entidad, con las actividades y el presupuesto que ejecutan el PEI.",
+          url:"https://www.gob.pe/institucion/ceplan" },
+        { sigla:"AEI",    nombre:"Accion Estrategica Institucional",
+          que:"La unidad del PEI que cada sector debe identificar, con indicadores y metas, para implementar la PGG.",
+          url:"https://www.gob.pe/institucion/ceplan" }
+      ],
+
+      /* Documentos de la norma. */
+      documentos: [
+        { rotulo:"D.S. 127-2026-PCM — texto del decreto",
+          detalle:"Publicado en El Peruano el 05/09/2026.",
+          url:"https://busquedas.elperuano.pe/dispositivo/NL/2551404-3",
+          verificado:true },
+        { rotulo:"Anexo — texto integro de la Politica General de Gobierno 2026-2031",
+          detalle:"La politica con sus cinco ejes y lineamientos se publica como anexo del decreto. GoVisor no ha podido confirmar si El Peruano ofrece ademas un archivo descargable aparte; el enlace lleva a la norma que lo contiene.",
+          url:"https://busquedas.elperuano.pe/dispositivo/NL/2551404-3",
+          verificado:false },
+        { rotulo:"Edicion de Normas Legales del 05/09/2026",
+          detalle:"Todas las normas publicadas ese dia, incluidos los D.S. 125, 126, 127 y 128-2026-PCM.",
+          url:"https://diariooficial.elperuano.pe/Normas",
+          verificado:true }
+      ],
+
+      /* A quien alcanza el mandato y a quien no, desde la fecha de vigencia. */
+      entidadesSi: [
+        "Ministerios y sus organismos publicos adscritos",
+        "Gobiernos regionales",
+        "Gobiernos locales (municipalidades provinciales y distritales)",
+        "Empresas y entidades vinculadas al ambito de las anteriores"
+      ],
+      entidadesNo: [
+        "Congreso de la Republica",
+        "Poder Judicial",
+        "Ministerio Publico y Junta Nacional de Justicia",
+        "Tribunal Constitucional y Defensoria del Pueblo",
+        "JNE, ONPE y RENIEC",
+        "BCR, SBS y Contraloria General de la Republica"
+      ],
+      entidadesNota: "Las entidades de la segunda columna son autonomas o pertenecen a otros poderes del Estado: una politica del Poder Ejecutivo no las obliga a alinear sus planes. Pueden coordinar o converger con ella, pero por decision propia. Clasificacion de GoVisor a partir del ambito de aplicacion que declara la norma.",
+
       advertencia: "Las columnas «lo que dice» y «lo que admite» son lectura de GoVisor sobre el texto publicado, hecha para explicitar el margen de interpretacion que el propio texto deja abierto. No son declaraciones del Ejecutivo, no imputan intenciones y no califican la politica. La fuente primaria es el D.S. 127-2026-PCM en El Peruano, enlazado arriba."
     }
   },
