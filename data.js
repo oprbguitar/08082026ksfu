@@ -12,13 +12,17 @@
    REGLA DE ORO: si no lo comprobaste, no lo inventes. Deja el campo vacio.
    El visor muestra huecos honestos; eso es informacion util, no un defecto.
 
-   Estado al 28 de agosto de 2026:
+   Estado al 6 de setiembre de 2026:
    - Presidencia y 19 ministros: CONTRASTADOS con El Peruano, uno por uno.
    - Normas 28/07-08/08: 161, del scraper. Tramo 09/08-28/08: dos decretos de
      mayor relieve cargados a mano (013-2026-MINEDU, 116-2026-PCM) al no poder
      correr el scraper (egress a El Peruano bloqueado); nivel "verificado".
    - Congreso: exposicion del art. 130 (20/08, sin cuestion de confianza por la
      bicameralidad) y pedido de facultades por 120 dias, ambos registrados.
+   - Politica General de Gobierno 2026-2031 (D.S. 127-2026-PCM, El Peruano
+     05/09/2026): cargada con sus cinco ejes en el bloque `politicaGeneral`.
+   - Facultades legislativas: el pedido (PL 00098-2026-2031-CD) sigue en la
+     Comision de Constitucion de la Camara de Diputados al 06/09/2026.
    - Promesas, presupuesto, indicadores: ver notas de cada bloque.
    ========================================================================== */
 
@@ -28,7 +32,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260906.0915",          // <- debe coincidir con version.json
+    version: "20260906.1830",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-06",
     aviso: ""
   },
@@ -3687,14 +3691,78 @@ const GOVISOR = {
     facultades:      [
       { materia:"Facultades para legislar en seguridad ciudadana, modernizacion y simplificacion del Estado, y respuesta a emergencias / Fenomeno El Nino (66 pedidos)",
         plazo:"120 dias", solicitada:"2026-08-28", otorgada:"",
+        estado:"En estudio en la Comision de Constitucion de la Camara de Diputados al 06/09/2026",
         enlace:"https://www.infobae.com/peru/2026/08/27/consejo-de-ministros-aprueba-pedido-de-facultades-legislativas-por-120-dias-y-lo-enviara-este-viernes-al-congreso/",
         verificado:true, evidencia:"verificado" }
     ],
     proyectosEjecutivo: [
-      { numero:"—", titulo:"Proyecto de ley que delega facultades legislativas al Ejecutivo por 120 dias (66 pedidos)", sector:"PCM", comision:"Camara de Diputados", estado:"remitido",
+      { numero:"00098-2026-2031-CD", titulo:"Proyecto de ley que delega facultades legislativas al Ejecutivo por 120 dias (66 pedidos)", sector:"PCM", comision:"Comision de Constitucion - Camara de Diputados", estado:"en comision",
         enlace:"https://elcomercio.pe/politica/gobierno/la-ruta-que-seguira-la-solicitud-de-facultades-de-keiko-fujimori-en-el-congreso-bicameral-noticia/",
         verificado:true, evidencia:"verificado" }
     ]  // { numero, titulo, sector, comision, estado, enlace }
+  },
+
+  /* 7-BIS. POLITICA GENERAL DE GOBIERNO 2026-2031 (HOJA DE RUTA) ---------
+     Aprobada por el Consejo de Ministros del 04/09/2026 y oficializada con
+     el D.S. 127-2026-PCM, publicado en El Peruano el 05/09/2026. Es la hoja
+     de ruta que ordena la accion del Ejecutivo durante todo el mandato.
+     Los cinco ejes se transcriben como los enuncia la norma y la nota
+     oficial de la PCM; los lineamientos son resumen, no cita literal.
+     ------------------------------------------------------------------ */
+  politicaGeneral: {
+    titulo: "Politica General de Gobierno 2026-2031",
+    lema: "Ordenar el Estado para recuperar la seguridad, destrabar el crecimiento y convertir las decisiones publicas en resultados",
+    aprobacion: "2026-09-04",     // sesion del Consejo de Ministros
+    publicacion: "2026-09-05",    // El Peruano
+    vigencia: "2026 - 2031",
+    norma: {
+      tipo: "Decreto Supremo", numero: "127-2026-PCM", fecha: "2026-09-05",
+      enlace: "https://busquedas.elperuano.pe/dispositivo/NL/2551404-3",
+      verificado: true
+    },
+    enlace: "https://andina.pe/agencia/noticia-ejecutivo-aprueba-politica-general-gobierno-20262031-bajo-cinco-ejes-prioritarios-1090581.aspx",
+    verificado: true, evidencia: "oficial",
+    ejes: [
+      { n:1, titulo:"Seguridad ciudadana y lucha contra el crimen",
+        detalle:"Reducir la inseguridad que afecta la vida, la integridad y la actividad economica de la poblacion.",
+        lineamientos:[
+          "Mitigar el impacto de los delitos violentos, la extorsion y el crimen organizado",
+          "Optimizar el acceso a la justicia",
+          "Fortalecer la legitimidad de las instituciones responsables",
+          "Recuperar el control de los territorios afectados por economias ilegales"
+        ] },
+      { n:2, titulo:"Gestion del riesgo de desastres y cambio climatico",
+        detalle:"Reducir la vulnerabilidad de la poblacion y de la infraestructura ante desastres y ante el cambio climatico.",
+        lineamientos:[
+          "Prevencion y preparacion ante el Fenomeno El Nino 2026-2027",
+          "Reduccion del riesgo en zonas y poblaciones expuestas",
+          "Respuesta y rehabilitacion oportunas"
+        ] },
+      { n:3, titulo:"Desarrollo integral de las personas",
+        detalle:"Consolidar el desarrollo de las personas y sus oportunidades a lo largo del curso de vida.",
+        lineamientos:[
+          "Optimizar la atencion medica en gestacion, infancia y vejez",
+          "Mejorar la calidad educativa",
+          "Fomentar capacidades laborales",
+          "Fortalecer la seguridad alimentaria",
+          "Facilitar el acceso a servicios basicos y reducir el trabajo infantil"
+        ] },
+      { n:4, titulo:"Productividad, empleo formal e integracion territorial",
+        detalle:"Elevar la productividad del pais con empleo formal e integracion del territorio.",
+        lineamientos:[
+          "Promover la competitividad de las micro y pequenas empresas",
+          "Garantizar seguridad juridica a la inversion con reglas predecibles",
+          "Reducir las brechas de conectividad"
+        ] },
+      { n:5, titulo:"Gobernanza democratica y Estado de derecho",
+        detalle:"Consolidar la gobernanza democratica y el Estado de derecho.",
+        lineamientos:[
+          "Fortalecer las instituciones publicas",
+          "Gestionar los conflictos sociales",
+          "Modernizar y simplificar la gestion del Estado"
+        ] }
+    ],
+    nota: "El decreto fija la hoja de ruta; GoVisor no registra todavia metas ni indicadores con cifras: se cargaran cuando el Ejecutivo publique los planes sectoriales."
   },
 
   /* 8. PRESUPUESTO ------------------------------------------------------
@@ -3753,7 +3821,31 @@ const GOVISOR = {
       titulo:"El Consejo de Ministros aprueba pedir facultades legislativas por 120 dias",
       detalle:"El gabinete aprueba un pedido de facultades con 66 solicitudes en seguridad ciudadana, modernizacion del Estado y respuesta a emergencias / El Nino, para remitirlo al Congreso el 28/08/2026.",
       enlace:"https://www.infobae.com/peru/2026/08/27/consejo-de-ministros-aprueba-pedido-de-facultades-legislativas-por-120-dias-y-lo-enviara-este-viernes-al-congreso/",
-      evidencia:"verificado", verificado:true }
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-09-01", tipo:"crisis",
+      titulo:"Emergencia en 893 distritos de 22 regiones y el Callao por El Nino",
+      detalle:"El D.S. 124-2026-PCM declara el estado de emergencia por 60 dias ante el peligro inminente de lluvias intensas asociadas al Fenomeno El Nino 2026-2027. El ENFEN elevo a 62 % la probabilidad de un Nino costero de magnitud extraordinaria entre setiembre de 2026 y enero de 2027.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2549507-1",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-09-04", tipo:"anuncio",
+      titulo:"El Consejo de Ministros aprueba la Politica General de Gobierno 2026-2031",
+      detalle:"En la sesion del 4 de setiembre, presidida por Keiko Fujimori con el premier Galarreta, el gabinete aprueba la hoja de ruta del quinquenio en cinco ejes. Tambien se presento el proyecto de ley de chatarreo vehicular de la PNP y se evaluaron prorrogas de emergencia por sismos.",
+      enlace:"https://andina.pe/agencia/noticia-ejecutivo-aprueba-politica-general-gobierno-20262031-bajo-cinco-ejes-prioritarios-1090581.aspx",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-09-05", tipo:"hito",
+      titulo:"Se publica el D.S. 127-2026-PCM: hoja de ruta del gobierno 2026-2031",
+      detalle:"El Peruano publica la Politica General de Gobierno 2026-2031, «Ordenar el Estado para recuperar la seguridad, destrabar el crecimiento y convertir las decisiones publicas en resultados», con cinco ejes: seguridad, riesgo de desastres y cambio climatico, desarrollo integral de las personas, productividad y empleo formal, y gobernanza democratica.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551404-3",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-09-05", tipo:"crisis",
+      titulo:"Estado de emergencia por 60 dias en cinco penales de alta peligrosidad",
+      detalle:"El D.S. 128-2026-PCM declara en emergencia los penales de Challapalca (Tacna), Cochamarca (Pasco), Miguel Castro Castro y Ancon I (Lima) y Trujillo Varones (La Libertad). La PNP asume el control del orden interno con apoyo de las Fuerzas Armadas y se suspenden derechos de transito, reunion y seguridad personal en un radio de 200 metros del perimetro.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551404-4",
+      evidencia:"oficial", verificado:true }
   ],
 
   /* 10. VIAJES OFICIALES ------------------------------------------------- */

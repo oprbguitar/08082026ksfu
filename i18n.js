@@ -114,6 +114,26 @@ const I18N = (function () {
     "tab.sinHitos":   { es:"Sin hitos registrados.", en:"No milestones on record." },
     "tab.sinTitulares":{ es:"Sin titulares registrados.", en:"No office holders on record." },
 
+    /* ── Hoja de ruta · Política General de Gobierno ───────────────── */
+    "nav.pgg":        { es:"Hoja de ruta", en:"Roadmap" },
+    "tab.pgg":        { es:"Hoja de ruta del gobierno", en:"Government roadmap" },
+    "tab.pggSub":     { es:"Política General de Gobierno 2026-2031",
+                        en:"General Government Policy 2026-2031" },
+    "tab.verEjes":    { es:"Ver ejes", en:"View axes" },
+    "sec.pgg":        { es:"Hoja de ruta · Política General de Gobierno 2026-2031",
+                        en:"Roadmap · General Government Policy 2026-2031" },
+    "pgg.sub":        { es:"{n} ejes · publicada el {f}", en:"{n} axes · published on {f}" },
+    "pgg.rotulo":     { es:"Política General de Gobierno 2026-2031",
+                        en:"General Government Policy 2026-2031" },
+    "pgg.aprobada":   { es:"Aprobada en Consejo de Ministros el {f}",
+                        en:"Approved in Cabinet on {f}" },
+    "pgg.publicada":  { es:"Publicada en El Peruano el {f}",
+                        en:"Published in El Peruano on {f}" },
+    "pgg.pie":        { es:"{norma} · publicada el {f}. Los cinco ejes rigen todo el mandato.",
+                        en:"{norma} · published on {f}. The five axes govern the whole term." },
+    "pgg.vacia":      { es:"Aún no hay una política general de gobierno registrada.",
+                        en:"No general government policy on record yet." },
+
     /* ── Secciones ─────────────────────────────────────────────────── */
     "sec.100":        { es:"Primeros 100 días", en:"First 100 days" },
     "sec.100sub":     { es:"Semáforo de las medidas anunciadas", en:"Traffic light of announced measures" },

@@ -905,3 +905,26 @@ body.sin-scroll{ overflow:hidden; }
   .acor-in{ display:block !important; }
   .card,.kpi{ box-shadow:none; break-inside:avoid; }
 }
+
+/* ══════════ Hoja de ruta · Política General de Gobierno ══════════ */
+.pgg-lema{ font-size:1.02rem; line-height:1.4; margin:8px 0 2px; color:var(--ink-900); }
+.pgg-lema-mini{ font-size:.82rem; line-height:1.45; color:var(--ink-600); margin:2px 0 10px; }
+.pgg-mini{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.pgg-mini li{ font-size:.8rem; line-height:1.35; display:flex; gap:8px; align-items:baseline; }
+.pgg-mini b{
+  flex:0 0 auto; min-width:18px; height:18px; border-radius:50%;
+  background:var(--brand-700); color:#fff; font-size:.68rem;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.pgg-ejes{ list-style:none; margin:16px 0 0; padding:0; display:grid; gap:14px; }
+.pgg-eje{ display:flex; gap:12px; align-items:flex-start;
+  border-top:1px solid var(--border); padding-top:14px; }
+.pgg-eje:first-child{ border-top:0; padding-top:0; }
+.pgg-num{
+  flex:0 0 auto; width:26px; height:26px; border-radius:50%;
+  background:var(--brand-700); color:#fff; font-size:.82rem;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.pgg-eje h4{ font-size:.92rem; margin:2px 0 4px; }
+.pgg-eje p{ font-size:.82rem; color:var(--ink-600); margin:0 0 6px; line-height:1.45; }
+.pgg-eje ul{ margin:0; padding-left:18px; font-size:.78rem; color:var(--ink-500); line-height:1.5; }

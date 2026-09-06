@@ -1021,6 +1021,57 @@
         (x) => `<tr><td>${esc(x.numero)}</td><td>${esc(x.titulo)}</td><td>${esc(x.sector)}</td><td>${esc(x.estado || "—")}</td></tr>`);
   }
 
+  /* ── Hoja de ruta · Politica General de Gobierno ───────────────────── */
+  function pintarPGG() {
+    const pg = GOVISOR.politicaGeneral;
+    const box = $("pggBox"), sub = $("pggSub");
+    if (!box) return;
+    if (!pg || !(pg.ejes || []).length) {
+      if (sub) sub.textContent = t("sc.sinRegistros");
+      box.innerHTML = `<p class="vac">${t("pgg.vacia")}</p>`;
+      return;
+    }
+    if (sub) sub.textContent = t("pgg.sub", { n: pg.ejes.length, f: fechaCorta(pg.publicacion) });
+
+    box.innerHTML =
+      `<p class="rotulo">${t("pgg.rotulo")}</p>
+       <h3 class="pgg-lema">«${esc(pg.lema)}»</h3>
+       <div class="chips">${chipNorma(pg.norma)}
+         <span class="rs-txt">${t("pgg.aprobada", { f: fechaCorta(pg.aprobacion) })}</span>
+         <span class="rs-txt">${t("pgg.publicada", { f: fechaCorta(pg.publicacion) })}</span>
+         <span class="rs-txt">${esc(pg.vigencia || "")}</span></div>
+       <ol class="pgg-ejes">${pg.ejes.map((e) => `
+         <li class="pgg-eje">
+           <b class="pgg-num">${esc(String(e.n))}</b>
+           <div>
+             <h4>${esc(e.titulo)}</h4>
+             <p>${esc(e.detalle || "")}</p>
+             <ul>${(e.lineamientos || []).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>
+           </div>
+         </li>`).join("")}</ol>
+       ${pg.nota ? `<p class="fine">${esc(pg.nota)}</p>` : ""}`;
+  }
+
+  function pintarPGGResumen() {
+    const pg = GOVISOR.politicaGeneral, cont = $("pggResumen");
+    if (!cont) return;
+    if (!pg || !(pg.ejes || []).length) {
+      cont.innerHTML = `<p class="vac">${t("pgg.vacia")}</p>`;
+      if ($("pggNota")) $("pggNota").textContent = "";
+      return;
+    }
+    cont.innerHTML =
+      `<p class="pgg-lema-mini">«${esc(pg.lema)}»</p>
+       <ol class="pgg-mini">${pg.ejes.map((e) =>
+         `<li><b>${esc(String(e.n))}</b> ${esc(e.titulo)}</li>`).join("")}</ol>`;
+    if ($("pggNota")) {
+      $("pggNota").textContent = t("pgg.pie", {
+        norma: pg.norma && pg.norma.numero ? pg.norma.numero : "—",
+        f: fechaCorta(pg.publicacion)
+      });
+    }
+  }
+
   /* ── Radar de nombramientos (más allá del gabinete) ────────────────── */
   function pintarCargos() {
     const cargos = GOVISOR.altosCargos || [];
@@ -1268,6 +1319,8 @@
     pintarFiltrosLinea();
     pintarTimeline();
     pintarEstabilidad();
+    pintarPGG();
+    pintarPGGResumen();
     pintarCongreso();
     pintarCargos();
     pintarPpto();
@@ -1529,6 +1582,8 @@
     pintarFiltrosLinea();
     pintarTimeline();
     pintarEstabilidad();
+    pintarPGG();
+    pintarPGGResumen();
     pintarCongreso();
     pintarCargos();
     pintarPpto();
