@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260906.2000",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-09-06",
+    version: "20260907.1133",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-09-07",
     aviso: ""
   },
 
@@ -149,8 +149,85 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260907 · 464 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260907 · 471 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"523-2026-MINEDU", rango:"RM", sector:"MINEDU",
+      sumilla:"Delegan temporalmente en la Unidad de Planificación y Presupuesto de la Oficina de Planificación Estratégica y Presupuesto el ejercicio de la función de otorgar la certificación del crédito presupuestario correspondiente a las Unidades Ejecutoras que se encuentren en el ámbito de competencia atribuida a la Oficina de Contabilidad y Control Previo de la Oficina General de Administración",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"EDUCACIÓN",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551006-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000247-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
+      sumilla:"Declaran Patrimonio Cultural de la Nación el Expediente del Decreto Supremo Nº 022-75-ED, que aprueba el Reglamento del Decreto Ley Nº 19414, Ley de Defensa, Conservación e Incremento del Patrimonio Documental de la Nación (1975), custodiado en el Archivo Central del Ministerio de Educación",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551174-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000249-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
+      sumilla:"Declaran Patrimonio Cultural de la Nación el Primer Libro de Actas de Sesiones del Concejo Distrital de Lince (1945–1953), custodiado por la Municipalidad Distrital de Lince",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551180-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000247-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL",
+      sumilla:"Determinan la Protección Provisional del sitio arqueológico San Juan sector A y B, ubicado en el distrito Nepeña, provincia de Santa, departamento de Áncash",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551273-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"176-2026-VIVIENDA/VMCS/PNSU/DE", rango:"Res", sector:"MVCS",
+      sumilla:"Designan Responsable de la Unidad de Asesoría Legal del Programa Nacional de Saneamiento Urbano",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"VIVIENDA, CONSTRUCCIÓN Y SANEAMIENTO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551285-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000246-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL",
+      sumilla:"Determinan la Protección Provisional del paisaje arqueológico de Huaytará sector 2, ubicado en el distrito y provincia de Huaytará, departamento de Huancavelica",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551312-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"476-2026-MTC/01", rango:"RM", sector:"MTC",
+      sumilla:"Delegan facultades en funcionarios de la Oficina General de Administración y de la Oficina de Abastecimiento de la Oficina General de Administración",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551335-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"318-2026-PCM", rango:"RM", sector:"PCM",
+      sumilla:"Designan Subsecretaria I de la Subsecretaría de Coordinación con Entidades Públicas y Privadas",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551443-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"319-2026-PCM", rango:"RM", sector:"PCM",
+      sumilla:"Designan Subsecretaria I de la Subsecretaría de Administración Pública",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551445-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"478-2026-MTC/01", rango:"RM", sector:"MTC",
+      sumilla:"Designan Asesor II del Despacho Viceministerial de Transportes",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551449-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1328-2026-IN", rango:"RM", sector:"MININTER",
+      sumilla:"Aprueban vacantes para Oficiales Superiores de Armas y de Servicios de la Policía Nacional del Perú, para el proceso de ascenso por concurso del año 2026 - Promoción 2027",
+      fecha:"2026-09-07", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INTERIOR",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551456-1",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"317-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de representante de PROMPERÚ para participar en evento a realizarse en República Popular China y Taiwán",
       fecha:"2026-09-06", origen:"viaje", accion:"promulgada",
@@ -3362,34 +3439,6 @@ const GOVISOR = {
       fecha:"2026-08-23", origen:"ejecutivo", accion:"promulgada",
       entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2546522-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"507-2026-RE", rango:"RM", sector:"RREE",
-      sumilla:"Designan Asesor de Alto Nivel Ad Honorem del Despacho Ministerial para la visita de Su Santidad el Papa León XIV al Perú",
-      fecha:"2026-08-22", origen:"ejecutivo", accion:"promulgada",
-      entidad:"RELACIONES EXTERIORES",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2546350-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN JEFATURAL", numero:"000065-2026-FONDEPES/J", rango:"Res", sector:"PRODUCE",
-      sumilla:"Designan Gerente General del Fondo Nacional de Desarrollo Pesquero - FONDEPES",
-      fecha:"2026-08-22", origen:"ejecutivo", accion:"promulgada",
-      entidad:"PRODUCE",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2546413-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"00990-2026-DE", rango:"RM", sector:"MINDEF",
-      sumilla:"Autorizan viaje de oficial de la Marina de Guerra del Perú a Panamá, en comisión de servicios",
-      fecha:"2026-08-22", origen:"viaje", accion:"promulgada",
-      entidad:"DEFENSA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2546440-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"152-2026-MINEDU", rango:"Res", sector:"MINEDU",
-      sumilla:"Aprueban la Norma Técnica denominada “Norma que regula la Evaluación del desempeño en cargos directivos de instituciones educativas de Educación Básica, en el marco de la Ley N.° 29944, Ley de Reforma Magisterial”",
-      fecha:"2026-08-22", origen:"ejecutivo", accion:"promulgada",
-      entidad:"EDUCACIÓN",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2546462-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"FE DE ERRATA", numero:"R.M. N° 1165-2026-IN", rango:"Otro", sector:"MININTER",
