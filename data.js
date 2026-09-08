@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260907.1133",          // <- debe coincidir con version.json
+    version: "20260907.2015",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-07",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260907 · 471 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260908 · 471 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"523-2026-MINEDU", rango:"RM", sector:"MINEDU",
       sumilla:"Delegan temporalmente en la Unidad de Planificación y Presupuesto de la Oficina de Planificación Estratégica y Presupuesto el ejercicio de la función de otorgar la certificación del crédito presupuestario correspondiente a las Unidades Ejecutoras que se encuentren en el ámbito de competencia atribuida a la Oficina de Contabilidad y Control Previo de la Oficina General de Administración",
