@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260908.1012",          // <- debe coincidir con version.json
+    version: "20260908.2021",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-08",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260908 · 459 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260909 · 459 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"00315-2026-PRODUCE", rango:"RM", sector:"PRODUCE",
       sumilla:"Disponen la publicación del proyecto de “Decreto Supremo que aprueba el Reglamento Técnico sobre los interruptores automáticos contra sobrecorrientes para instalaciones domiciliarias, comerciales y similares” y sus anexos",
