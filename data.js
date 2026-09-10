@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260909.1014",          // <- debe coincidir con version.json
+    version: "20260909.2008",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-09",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260909 · 449 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260910 · 449 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0486-2026-MTC/17.03", rango:"Res", sector:"MTC",
       sumilla:"Autorizan a REVISION TECNICA VEHICULAR NAZCA PERU S.A.C. la modificación de la autorización de funcionamiento como Centro de Inspección Técnica Vehicular Fijo para operar en el departamento de Ica",
