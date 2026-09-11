@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260910.1007",          // <- debe coincidir con version.json
+    version: "20260910.2007",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-10",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260910 · 461 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260911 · 461 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"379-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Otorgan a favor del Consorcio Eléctrico de Villacurí S.A.C. la concesión definitiva para desarrollar la actividad de transmisión de energía eléctrica en el proyecto “LT 220 kV SET Felam – SET Sureños y Nueva SET Sureños 220/60/23 kV, Celda de Línea en SET Felam”, ubicado en el distrito de Olmos, provincia y departamento de Lambayeque",
