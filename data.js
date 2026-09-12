@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260911.1007",          // <- debe coincidir con version.json
+    version: "20260911.2012",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-11",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260911 · 481 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260912 · 481 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN", numero:"000096-2026-CENFOTUR/J", rango:"Res", sector:"MINCETUR",
       sumilla:"Modifican y actualizan el Texto Único de Servicios No Exclusivos (TUSNE) del CENFOTUR",
