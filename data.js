@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260912.1956",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-09-12",
+    version: "20260913.1007",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-09-13",
     aviso: ""
   },
 
@@ -149,8 +149,113 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260913 · 457 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260913 · 466 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"328-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
+      sumilla:"Autorizan viaje de representante de PROMPERÚ para participar en evento a realizarse en la República de la India",
+      fecha:"2026-09-13", origen:"viaje", accion:"promulgada",
+      entidad:"COMERCIO EXTERIOR Y TURISMO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553732-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"487-2026-MTC/01.03", rango:"RM", sector:"MTC",
+      sumilla:"Otorgan a la empresa TIAN TELECOMUNICACIONES S.A.C. Concesión Única para la prestación de servicios públicos de telecomunicaciones en área que comprende todo el territorio de la República",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553887-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01091-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal militar a la República Argentina, en comisión de servicios",
+      fecha:"2026-09-13", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553985-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01112-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal militar de la Marina de Guerra del Perú a la República de Malta, en misión de estudios",
+      fecha:"2026-09-13", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553996-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01104-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal militar de la Marina de Guerra del Perú a España, en comisión de servicios",
+      fecha:"2026-09-13", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554004-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"171-2026-MIDAGRI-DVDAFIR-AGRO RURAL-DE", rango:"Res", sector:"MIDAGRI",
+      sumilla:"Designan Jefe de la Unidad Zonal Ucayali del Programa de Desarrollo Productivo Agrario Rural – AGRO RURAL",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO AGRARIO Y RIEGO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554047-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"550-2026-MINEDU", rango:"RM", sector:"MINEDU",
+      sumilla:"Dejan sin efecto el artículo 1 de la Resolución Ministerial N° 285-2026-MINEDU y su anexo, que dispone la implementación y ejecución de la Evaluación Nacional de Logros de Aprendizaje de Estudiantes 2026 (ENLA 2026)",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"EDUCACIÓN",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554048-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01123-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal de la Fuerza Aérea del Perú a Ecuador, en comisión de servicios",
+      fecha:"2026-09-13", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554052-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1344-2026-IN", rango:"RM", sector:"MININTER",
+      sumilla:"Designan Director General de Orden Público de la Dirección General de Orden Público",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INTERIOR",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554053-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1346-2026-IN", rango:"RM", sector:"MININTER",
+      sumilla:"Designan Director de Control de Drogas y Cultivos Ilegales de la Dirección de Control de Drogas y Cultivos Ilegales de la Dirección General Contra el Crimen Organizado",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INTERIOR",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554054-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1347-2026-IN", rango:"RM", sector:"MININTER",
+      sumilla:"Designan Asesor del Despacho Viceministerial de Orden Interno",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INTERIOR",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554055-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1345-2026-IN", rango:"RM", sector:"MININTER",
+      sumilla:"Designan Director General de Información para la Seguridad de la Dirección General de Información para la Seguridad",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INTERIOR",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554056-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"DECRETO SUPREMO", numero:"188-2026-EF", rango:"DS", sector:"MEF",
+      sumilla:"Decreto Supremo que autoriza Transferencia de Partidas en el Presupuesto del Sector Público para el Año 2026 a favor del Instituto Nacional de Radio y Televisión del Perú",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ECONOMÍA Y FINANZAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554057-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"DECRETO SUPREMO", numero:"189-2026-EF", rango:"DS", sector:"MEF",
+      sumilla:"Decreto Supremo que autoriza Transferencia de Partidas en el Presupuesto del Sector Público para el Año Fiscal 2026 a favor del Organismo Especializado para las Contrataciones Públicas Eficientes (OECE)",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ECONOMÍA Y FINANZAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554057-2",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"038-2026-TR", rango:"RS", sector:"MTPE",
+      sumilla:"Designan representante del Estado ante el Consejo Directivo del Seguro Social de Salud - ESSALUD, quien desempeñará el cargo de Presidenta Ejecutiva",
+      fecha:"2026-09-13", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRABAJO Y PROMOCIÓN DEL EMPLEO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554057-3",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"483-2026-MTC/01.02", rango:"RM", sector:"MTC",
       sumilla:"Autorizan viaje de inspector de la Dirección General de Aeronáutica Civil a los Estados Unidos de América, en comisión de servicios",
       fecha:"2026-09-12", origen:"viaje", accion:"promulgada",
@@ -3131,48 +3236,6 @@ const GOVISOR = {
       fecha:"2026-08-29", origen:"ejecutivo", accion:"promulgada",
       entidad:"JUSTICIA Y DERECHOS HUMANOS",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548953-5",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000300-2026-PRODUCE", rango:"RM", sector:"PRODUCE",
-      sumilla:"Designan representante del Ministro de la Producción ante el Consejo Directivo del Programa Nacional de Innovación y Desarrollo Productivo - PROINNÓVATE",
-      fecha:"2026-08-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"PRODUCE",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548184-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN", numero:"000144-2026-SUSALUD/SUP", rango:"Res", sector:"MINSA",
-      sumilla:"Disponen la publicación de proyecto de norma que aprueba los “Lineamientos para la Fiscalización con Finalidad Orientativa de la Intendencia de Supervisión de Instituciones Prestadoras de Servicios de Salud”",
-      fecha:"2026-08-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"SUPERINTENDENCIA NACIONAL DE SALUD",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548197-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN", numero:"000146-2026-SUSALUD/SUP", rango:"Res", sector:"MINSA",
-      sumilla:"Designan Director General de la Oficina General de Planeamiento y Presupuesto",
-      fecha:"2026-08-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"SUPERINTENDENCIA NACIONAL DE SALUD",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548202-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"309-2026-PCM", rango:"RM", sector:"PCM",
-      sumilla:"Establecen política de comunicación social del Poder Ejecutivo denominada “PERÚ RESPONDE”",
-      fecha:"2026-08-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548214-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN JEFATURAL", numero:"000125-2026-SIS/J", rango:"Res", sector:"MINSA",
-      sumilla:"Designan Gerente de la Gerencia Macro Regional Centro del Seguro Integral de Salud",
-      fecha:"2026-08-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"SEGURO INTEGRAL DE SALUD",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548324-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1263-2026-IN", rango:"RM", sector:"MININTER",
-      sumilla:"Autorizan viaje de personal policial a España, en comisión de servicios",
-      fecha:"2026-08-28", origen:"viaje", accion:"promulgada",
-      entidad:"INTERIOR",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548326-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1264-2026-IN", rango:"RM", sector:"MININTER",
