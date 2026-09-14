@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260913.2006",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-09-13",
+    version: "20260914.1205",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-09-14",
     aviso: ""
   },
 
@@ -149,8 +149,71 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260914 · 466 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260914 · 470 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01100-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal militar de la Fuerza Aérea del Perú a Colombia, en misión de estudios",
+      fecha:"2026-09-14", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554005-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000257-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
+      sumilla:"Declaran Patrimonio Cultural de la Nación al Sitio Arqueológico Cotu Eccana, ubicado en el distrito y provincia de Carhuaz, departamento de Áncash",
+      fecha:"2026-09-14", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554015-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01122-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de cadetes a la República de Chile, en misión de estudios",
+      fecha:"2026-09-14", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554059-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01124-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de alumnos a la República de Chile, en misión de estudios",
+      fecha:"2026-09-14", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554060-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"349-2026-JUS", rango:"RM", sector:"MINJUSDH",
+      sumilla:"Designan Director del Programa Nacional de Bienes Incautados del Ministerio de Justicia y Derechos Humanos",
+      fecha:"2026-09-14", origen:"ejecutivo", accion:"promulgada",
+      entidad:"JUSTICIA Y DERECHOS HUMANOS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554061-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"350-2026-JUS", rango:"RM", sector:"MINJUSDH",
+      sumilla:"Designan Director General de Justicia y Libertad Religiosa del Ministerio de Justicia y Derechos Humanos",
+      fecha:"2026-09-14", origen:"ejecutivo", accion:"promulgada",
+      entidad:"JUSTICIA Y DERECHOS HUMANOS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554062-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"D000185-2026-MIDIS/PNPAIS-DE", rango:"Res", sector:"MIDIS",
+      sumilla:"Dan por concluida designación y designan Ejecutiva de la Unidad de Comunicación e Imagen del Programa Nacional “Plataformas de Acción para la Inclusión Social – PAIS”",
+      fecha:"2026-09-14", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO E INCLUSIÓN SOCIAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554063-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"330-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
+      sumilla:"Autorizan viaje de representante de PROMPERÚ a los Estados Unidos Mexicanos, en comisión de servicios",
+      fecha:"2026-09-14", origen:"viaje", accion:"promulgada",
+      entidad:"COMERCIO EXTERIOR Y TURISMO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554065-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"00093-2026-SANIPES/PE", rango:"Res", sector:"MINCUL",
+      sumilla:"Aceptan renuncia y designan Directora de la Dirección de Sanciones de la Autoridad Nacional de Sanidad e Inocuidad en Pesca y Acuicultura (SANIPES)",
+      fecha:"2026-09-14", origen:"ejecutivo", accion:"promulgada",
+      entidad:"AUTORIDAD NACIONAL DE SANIDAD E INOCUIDAD EN PESCA Y ACUICULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554066-1",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"328-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de representante de PROMPERÚ para participar en evento a realizarse en la República de la India",
       fecha:"2026-09-13", origen:"viaje", accion:"promulgada",
@@ -3236,41 +3299,6 @@ const GOVISOR = {
       fecha:"2026-08-29", origen:"ejecutivo", accion:"promulgada",
       entidad:"JUSTICIA Y DERECHOS HUMANOS",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548953-5",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1264-2026-IN", rango:"RM", sector:"MININTER",
-      sumilla:"Autorizan viaje de personal policial a Colombia, en comisión de servicios",
-      fecha:"2026-08-28", origen:"viaje", accion:"promulgada",
-      entidad:"INTERIOR",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548331-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"380-2026-EF/43", rango:"RM", sector:"MEF",
-      sumilla:"Resolución Ministerial que aprueba la contratación del servicio de acceso a información financiera REFINITIV",
-      fecha:"2026-08-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"ECONOMÍA Y FINANZAS",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548332-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01026-2026-DE", rango:"RM", sector:"MINDEF",
-      sumilla:"Autorizan viaje de personal militar de la Marina de Guerra del Perú a Ecuador, en comisión de servicios",
-      fecha:"2026-08-28", origen:"viaje", accion:"promulgada",
-      entidad:"DEFENSA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548391-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01027-2026-DE", rango:"RM", sector:"MINDEF",
-      sumilla:"Autorizan viaje de personal militar de la Marina de Guerra del Perú Ecuador, en comisión de servicios",
-      fecha:"2026-08-28", origen:"viaje", accion:"promulgada",
-      entidad:"DEFENSA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548394-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000588-2026-IN-VOI-DGIN", rango:"Res", sector:"MININTER",
-      sumilla:"Dejan sin efecto el numeral 2) del artículo 1° de la Resolución Directoral N° 490-2026-IN-VOI-DGIN, que resuelve designar a Subprefecto distrital de José Manuel Quiroz, provincia San Marcos, departamento Cajamarca",
-      fecha:"2026-08-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"INTERIOR",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2548431-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000587-2026-IN-VOI-DGIN", rango:"Res", sector:"MININTER",
