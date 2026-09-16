@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260915.1041",          // <- debe coincidir con version.json
+    version: "20260915.2027",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-15",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260915 · 470 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260916 · 470 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01099-2026-DE", rango:"RM", sector:"MINDEF",
       sumilla:"Autorizan viaje de Jefe Institucional y de Jefe de la Oficina de Cooperación y Relaciones Internacionales de la Comisión Nacional de Investigación y Desarrollo Aeroespacial - CONIDA a la República de Türkiye, en comisión de servicios",
