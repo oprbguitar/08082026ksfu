@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260916.1033",          // <- debe coincidir con version.json
+    version: "20260916.2026",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-16",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260916 · 464 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260917 · 464 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"CONVENIO", numero:"Acuerdo Thola Kollo", rango:"Otro", sector:"RREE",
       sumilla:"Acuerdo por Intercambio de Notas entre la República del Perú y el Estado Plurinacional de Bolivia para la Habilitación Permanente del Paso Fronterizo Thola Kollo – Collpa",
