@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260917.1040",          // <- debe coincidir con version.json
+    version: "20260917.2022",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-17",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260917 · 464 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260918 · 464 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0140-2026-MINEM-DGE", rango:"Res", sector:"MINEM",
       sumilla:"Otorgan a favor de acciona.org Perú, la concesión eléctrica rural para dotación de energía eléctrica mediante generación autónoma con fuentes no convencionales en el “Sistema Eléctrico Rural Fotovoltaico Amazonas, Apurímac, Cajamarca, Cusco y Loreto – Proyecto Luz en Casa 2025”",
