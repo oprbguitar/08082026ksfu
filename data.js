@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260919.0928",          // <- debe coincidir con version.json
+    version: "20260919.2006",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-19",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260919 · 450 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260920 · 450 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"393-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Otorgan a favor de la empresa ORYGEN PERÚ S.A.A., la concesión definitiva para la generación de energía eléctrica con recursos energéticos renovables para proyecto ubicado en el distrito de Santiago, provincia y departamento de Ica",
