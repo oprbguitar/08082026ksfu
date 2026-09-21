@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260920.2009",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-09-20",
+    version: "20260921.1208",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-09-21",
     aviso: ""
   },
 
@@ -149,8 +149,99 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260921 · 468 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260921 · 479 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000261-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
+      sumilla:"Declaran monumento integrante del Patrimonio Cultural de la Nación a la “Casa de los Medallones y su Capilla Posa”, ubicada en el distrito de Andahuaylillas, provincia de Quispicanchi, departamento de Cusco",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2555726-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000059-2026-INACAL/DM", rango:"Res", sector:"PRODUCE",
+      sumilla:"Disponen la publicación del Proyecto de Norma Metrológica Peruana sobre esfigmomanómetros no invasivos no automáticos",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556163-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000018-2026-INACAL/DN", rango:"Res", sector:"PRODUCE",
+      sumilla:"Aprueban Norma Técnica Peruana sobre Sistemas de gestión de la calidad y dejan sin efecto 2 NTP",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556191-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"000123-2026-GEG/INDECOPI", rango:"Res", sector:"MINDEF",
+      sumilla:"Designan Jefa de la Oficina de Recursos Humanos",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INSTITUTO NACIONAL DE DEFENSA DE LA COMPETENCIA Y DE LA PROTECCIÓN DE LA PROPIEDAD INTELECTUAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556281-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"000124-2026-GEG/INDECOPI", rango:"Res", sector:"MINDEF",
+      sumilla:"Designan Director de la Dirección Nacional de Investigación y Promoción de la Libre Competencia",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INSTITUTO NACIONAL DE DEFENSA DE LA COMPETENCIA Y DE LA PROTECCIÓN DE LA PROPIEDAD INTELECTUAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556290-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"358-2026-JUS", rango:"RM", sector:"MINJUSDH",
+      sumilla:"Designan Jefe de la Oficina de Planeamiento y Cooperación, de la Oficina General de Planeamiento, Presupuesto y Modernización del Ministerio de Justicia y Derechos Humanos",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"JUSTICIA Y DERECHOS HUMANOS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556366-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01153-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal de la Marina de Guerra del Perú a la ciudad de Londres, Reino Unido de Gran Bretaña e Irlanda del Norte, en comisión de servicios",
+      fecha:"2026-09-21", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556368-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000344-2026-MC", rango:"RM", sector:"MINCUL",
+      sumilla:"Crean Grupo de Trabajo denominado “Grupo de Trabajo para la actualización de la Política Nacional de Cultura con horizonte temporal al año 2040”",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556369-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"000096-2026-SANIPES/PE", rango:"Res", sector:"MINCUL",
+      sumilla:"Designan Jefe de la Oficina de Administración de la Autoridad Nacional de Sanidad e Inocuidad en Pesca y Acuicultura (SANIPES)",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"AUTORIDAD NACIONAL DE SANIDAD E INOCUIDAD EN PESCA Y ACUICULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556370-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"430-2026-EF/50", rango:"RM", sector:"MEF",
+      sumilla:"Resolución Ministerial que aprueba los índices de distribución de la regalía minera correspondientes al mes de agosto del año 2026",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ECONOMÍA Y FINANZAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556371-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"431-2026-EF/49", rango:"RM", sector:"MEF",
+      sumilla:"Designan Director de la Dirección General de Política de Ingresos Públicos del Ministerio de Economía y Finanzas",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ECONOMÍA Y FINANZAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556372-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"036-2026-EF", rango:"RS", sector:"MEF",
+      sumilla:"Encargan las funciones de Presidente Ejecutivo de la Agencia de Promoción de la Inversión Privada – PROINVERSIÓN",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ECONOMÍA Y FINANZAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556377-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"235-2026-IN", rango:"RS", sector:"MININTER",
+      sumilla:"Aprueban vacantes para el proceso de ascenso por concurso al grado de General de Armas y de Servicios (abogados y médicos) de la Policía Nacional del Perú, del año 2026 – Promoción 2027",
+      fecha:"2026-09-21", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INTERIOR",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556378-1",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"327-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de representante de PROMPERÚ para participar en evento a realizarse en Francia",
       fecha:"2026-09-20", origen:"viaje", accion:"promulgada",
@@ -3215,20 +3306,6 @@ const GOVISOR = {
       fecha:"2026-09-05", origen:"ejecutivo", accion:"promulgada",
       entidad:"RELACIONES EXTERIORES",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2551405-9",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"372-2026-MINEM/DM", rango:"RM", sector:"MINEM",
-      sumilla:"Aprueban solicitud de modificación de la autorización para desarrollar la actividad de generación de energía eléctrica de la “Central Térmica San Miguel Industrias PET” de la que es titular la empresa FLESAN INDUSTRIAL POWER S.A.C., a fin de incrementar su potencia instalada",
-      fecha:"2026-09-04", origen:"ejecutivo", accion:"promulgada",
-      entidad:"ENERGÍA Y MINAS",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2549668-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000053-2026-INACAL/DM", rango:"Res", sector:"PRODUCE",
-      sumilla:"Disponen la publicación del proyecto de resolución que dispone el control metrológico de balanzas utilizadas en las plantas de procesamiento de productos pesqueros industriales para consumo humano directo y consumo humano indirecto",
-      fecha:"2026-09-04", origen:"ejecutivo", accion:"promulgada",
-      entidad:"PRODUCE",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2550244-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000248-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
