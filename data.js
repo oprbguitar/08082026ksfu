@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260921.1208",          // <- debe coincidir con version.json
+    version: "20260921.2043",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-21",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260921 · 479 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260922 · 479 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000261-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
       sumilla:"Declaran monumento integrante del Patrimonio Cultural de la Nación a la “Casa de los Medallones y su Capilla Posa”, ubicada en el distrito de Andahuaylillas, provincia de Quispicanchi, departamento de Cusco",
