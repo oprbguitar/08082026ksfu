@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260922.1040",          // <- debe coincidir con version.json
+    version: "20260922.2034",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-22",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260922 · 471 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260923 · 471 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"331-2026-PCM", rango:"RM", sector:"PCM",
       sumilla:"Conforman el Comité de Selección a cargo del Concurso Público para la selección de postulantes al cargo de integrante del Consejo Directivo de los Organismos Reguladores de la Inversión Privada en los Servicios Públicos",
