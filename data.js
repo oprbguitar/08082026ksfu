@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260923.1034",          // <- debe coincidir con version.json
+    version: "20260923.2027",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-23",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260923 · 459 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260924 · 459 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"397-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Aprueban la segunda modificación de la Concesión Definitiva para desarrollar la actividad de transmisión de energía eléctrica en el proyecto \"Línea de Transmisión 220 kV S.E. Hanaqpampa – Interconexión 220 KV en las nuevas estructuras T68A y T68B de la Línea de Transmisión 220 kV S.E. Ilo 2 – S.E. Moquegua (L-2027)\", ubicado en el departamento de Moquegua",
