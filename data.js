@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260924.1058",          // <- debe coincidir con version.json
+    version: "20260924.2032",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-24",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260924 · 443 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260925 · 447 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN", numero:"224-2026/CDB-INDECOPI", rango:"Res", sector:"MINDEF",
       sumilla:"Disponen mantener por el plazo de cinco años, la vigencia de derechos compensatorios impuestos por Resolución Nº 011-2016/CDB-INDECOPI, prorrogados por Resolución 265-2021/CDB-INDECOPI, sobre importaciones de biodiésel (B100), originario de la República Argentina",
@@ -1801,6 +1801,34 @@ const GOVISOR = {
       fecha:"2026-09-17", origen:"ejecutivo", accion:"promulgada",
       entidad:"DESARROLLO AGRARIO Y RIEGO",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2555485-5",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"CONVENIO", numero:"Acuerdo Thola Kollo", rango:"Otro", sector:"RREE",
+      sumilla:"Acuerdo por Intercambio de Notas entre la República del Perú y el Estado Plurinacional de Bolivia para la Habilitación Permanente del Paso Fronterizo Thola Kollo – Collpa",
+      fecha:"2026-09-16", origen:"ejecutivo", accion:"promulgada",
+      entidad:"RELACIONES EXTERIORES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553831-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"CONVENIO", numero:"Entrada en vigor Acuerdo Thola Kollo", rango:"Otro", sector:"RREE",
+      sumilla:"Entrada en vigor del “Acuerdo por Intercambio de Notas entre la República del Perú y el Estado Plurinacional de Bolivia para la Habilitación Permanente del Paso Fronterizo Thola Kollo – Collpa”",
+      fecha:"2026-09-16", origen:"ejecutivo", accion:"promulgada",
+      entidad:"RELACIONES EXTERIORES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553845-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"000120-2026-GEG/INDECOPI", rango:"Res", sector:"MINDEF",
+      sumilla:"Designan Jefe de la Oficina de Asesoría Jurídica del Indecopi",
+      fecha:"2026-09-16", origen:"ejecutivo", accion:"promulgada",
+      entidad:"INSTITUTO NACIONAL DE DEFENSA DE LA COMPETENCIA Y DE LA PROTECCIÓN DE LA PROPIEDAD INTELECTUAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553941-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"390-2026-MINEM/DM", rango:"RM", sector:"MINEM",
+      sumilla:"Establecen servidumbre de electroducto, telecomunicaciones, paso y tránsito con carácter permanente, a favor de concesión definitiva de la que es titular la empresa ENGIE ENERGÍA PERÚ S.A.A., para proyecto de línea de transmisión ubicada en el departamento de Moquegua",
+      fecha:"2026-09-16", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ENERGÍA Y MINAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2554152-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000335-2026-MC", rango:"RM", sector:"MINCUL",
