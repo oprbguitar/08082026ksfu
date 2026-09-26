@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260925.1057",          // <- debe coincidir con version.json
+    version: "20260925.2035",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-25",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260925 · 450 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260926 · 450 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"515-2026-MTC/01.02", rango:"RM", sector:"MTC",
       sumilla:"Autorizan viaje de inspector de la Dirección General de Aeronáutica Civil a los Estados Unidos de América, en comisión de servicios",
