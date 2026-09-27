@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260926.2027",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-09-26",
+    version: "20260927.1047",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-09-27",
     aviso: ""
   },
 
@@ -149,8 +149,120 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260927 · 467 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260927 · 478 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"D000024-2026-MIDAGRI-SENASA-DSA", rango:"Res", sector:"MIDAGRI",
+      sumilla:"Aprueban requisitos sanitarios para la importación de cueros y pieles de equino frescos o salados, secos, encalados, piquelados o conservados de otro modo, pero sin curtir, incluso depilados o divididos, procedentes de la República Federativa de Brasil",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO AGRARIO Y RIEGO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558599-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"342-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
+      sumilla:"Autorizan viaje de Viceministra de Comercio Exterior y funcionarios a Ecuador, en comisión de servicios",
+      fecha:"2026-09-27", origen:"viaje", accion:"promulgada",
+      entidad:"COMERCIO EXTERIOR Y TURISMO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558665-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"572-2026-RE", rango:"RM", sector:"RREE",
+      sumilla:"Autorizan viaje de Director General para Asuntos Económicos a Ecuador, en comisión de servicios",
+      fecha:"2026-09-27", origen:"viaje", accion:"promulgada",
+      entidad:"RELACIONES EXTERIORES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558697-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"284-2026-PCM", rango:"RS", sector:"PCM",
+      sumilla:"Autorizan viaje de Ministro de Relaciones Exteriores a los Estados Unidos de América y encargan su Despacho al Presidente del Consejo de Ministros",
+      fecha:"2026-09-27", origen:"viaje", accion:"promulgada",
+      entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558718-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"285-2026-PCM", rango:"RS", sector:"PCM",
+      sumilla:"Designan miembro del Consejo Directivo de la Superintendencia Nacional de los Registros Públicos, en representación de la Presidencia del Consejo de Ministros",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558718-2",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"037-2026-EF", rango:"RS", sector:"MEF",
+      sumilla:"Dan por concluida designación de Vocal del Tribunal de Contrataciones Públicas del Organismo Especializado para las Contrataciones Públicas Eficientes",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ECONOMÍA Y FINANZAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558718-3",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"191-2026-JUS", rango:"RS", sector:"MINJUSDH",
+      sumilla:"Acceden a solicitud de extradición pasiva de ciudadano peruano para ser extraditado del Perú y ser procesado en la República de Chile por presunta comisión de delitos",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"JUSTICIA Y DERECHOS HUMANOS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558718-4",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"192-2026-JUS", rango:"RS", sector:"MINJUSDH",
+      sumilla:"Acceden a solicitud de extradición activa de ciudadano alemán para ser extraditado de la República Italiana y ser procesado en el Perú por presunta comisión de delito",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"JUSTICIA Y DERECHOS HUMANOS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558718-5",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"193-2026-JUS", rango:"RS", sector:"MINJUSDH",
+      sumilla:"Acceden a solicitud de extradición activa de ciudadano peruano para ser extraditado de la República Italiana y ser procesado en el Perú por la presunta comisión de delito",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"JUSTICIA Y DERECHOS HUMANOS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558718-6",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"194-2026-JUS", rango:"RS", sector:"MINJUSDH",
+      sumilla:"Acceden a solicitud de extradición pasiva de ciudadano peruano para ser extraditado del Perú y ser procesado en la República Argentina por la presunta comisión de delito",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"JUSTICIA Y DERECHOS HUMANOS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558718-7",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000349-2026-MC", rango:"RM", sector:"MINCUL",
+      sumilla:"Aprueban el Plan de Acción (PACC) del proyecto de inversión denominado “Mejoramiento de los servicios bibliotecarios y culturales y educativos de la Gran Biblioteca Pública de Lima - sede Av. Abancay - distrito de Lima - provincia de Lima - departamento de Lima”",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558723-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"525-2026-MTC/01.02", rango:"RM", sector:"MTC",
+      sumilla:"Prorrogan vigencia de la R.M. N° 168-2026-MTC/01.02, que declara en emergencia el servicio de transporte terrestre en los sectores de las vías costeras correspondientes a los balnearios de Las Delicias, Buenos Aires y Huanchaco, ubicados en la provincia de Trujillo, departamento de La Libertad",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558724-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01185-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de oficial de la Marina de Guerra del Perú a Argentina, en misión de estudios",
+      fecha:"2026-09-27", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558730-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01186-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal de la Fuerza Aérea del Perú a la Federación de Rusia, en misión de estudios",
+      fecha:"2026-09-27", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558731-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000395-2026-MIDAGRI-DM", rango:"RM", sector:"MIDAGRI",
+      sumilla:"Disponen publicación de proyectos de Decreto Supremo que aprueba el Reglamento de Notificación Obligatoria Vía Casilla Electrónica del Servicio Nacional Forestal y de Fauna Silvestre - SERFOR, de su Exposición de Motivos, y del Reglamento de Notificación Obligatoria Vía Casilla Electrónica del Servicio Nacional Forestal y de Fauna Silvestre - SERFOR",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO AGRARIO Y RIEGO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558732-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000398-2026-MIDAGRI-DM", rango:"RM", sector:"MIDAGRI",
+      sumilla:"Designan Asesor del Despacho Viceministerial de Desarrollo de Agricultura Familiar e Infraestructura Agraria y Riego",
+      fecha:"2026-09-27", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO AGRARIO Y RIEGO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558733-1",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"329-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de representante del Ministerio a la República Dominicana, en comisión de servicios",
       fecha:"2026-09-26", origen:"viaje", accion:"promulgada",
@@ -3187,41 +3299,6 @@ const GOVISOR = {
       fecha:"2026-09-11", origen:"ejecutivo", accion:"promulgada",
       entidad:"JUSTICIA Y DERECHOS HUMANOS",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2553495-4",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"285-2026-TR", rango:"RM", sector:"MTPE",
-      sumilla:"Crean la “Comisión Sectorial para promover el fortalecimiento y modernización del Sector Trabajo y Promoción del Empleo”",
-      fecha:"2026-09-10", origen:"ejecutivo", accion:"promulgada",
-      entidad:"TRABAJO Y PROMOCIÓN DEL EMPLEO",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2552496-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000357-2026-MIDAGRI-DM", rango:"RM", sector:"MIDAGRI",
-      sumilla:"Aprueban otorgamiento de subvenciones a favor de diez (10) Organizaciones Agrarias de Mujeres",
-      fecha:"2026-09-10", origen:"ejecutivo", accion:"promulgada",
-      entidad:"DESARROLLO AGRARIO Y RIEGO",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2552505-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000358-2026-MIDAGRI-DM", rango:"RM", sector:"MIDAGRI",
-      sumilla:"Aprueban otorgamiento de subvenciones a favor de diversas Organizaciones Agrarias de Mujeres",
-      fecha:"2026-09-10", origen:"ejecutivo", accion:"promulgada",
-      entidad:"DESARROLLO AGRARIO Y RIEGO",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2552511-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"161-2026-MINEDU", rango:"Res", sector:"MINEDU",
-      sumilla:"Aprueban las Bases del XIV Concurso Nacional de Buenas Prácticas Docentes 2026",
-      fecha:"2026-09-10", origen:"ejecutivo", accion:"promulgada",
-      entidad:"EDUCACIÓN",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2552516-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000359-2026-MIDAGRI-DM", rango:"RM", sector:"MIDAGRI",
-      sumilla:"Modifican la R.M. Nº 0524-2025-MIDAGRI, mediante la cual se delegan facultades a diversos funcionarios del Ministerio durante el Año Fiscal 2026",
-      fecha:"2026-09-10", origen:"ejecutivo", accion:"promulgada",
-      entidad:"DESARROLLO AGRARIO Y RIEGO",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2552524-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000362-2026-MIDAGRI-DM", rango:"RM", sector:"MIDAGRI",
