@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260927.1047",          // <- debe coincidir con version.json
+    version: "20260927.2041",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-27",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260927 · 478 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260928 · 478 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"D000024-2026-MIDAGRI-SENASA-DSA", rango:"Res", sector:"MIDAGRI",
       sumilla:"Aprueban requisitos sanitarios para la importación de cueros y pieles de equino frescos o salados, secos, encalados, piquelados o conservados de otro modo, pero sin curtir, incluso depilados o divididos, procedentes de la República Federativa de Brasil",
