@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260929.1202",          // <- debe coincidir con version.json
+    version: "20260929.2109",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-29",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260929 · 461 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20260930 · 461 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN", numero:"D000199-2026-MIDAGRI-SERFOR-DE", rango:"Res", sector:"MIDAGRI",
       sumilla:"Aprueban la actualización de la “Metodología para la elaboración de la Cartografía Básica con fines de Zonificación Forestal”",
