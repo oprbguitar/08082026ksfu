@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20260930.1156",          // <- debe coincidir con version.json
+    version: "20260930.2108",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-09-30",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20260930 · 461 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261001 · 461 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"584-2026-RE", rango:"RM", sector:"RREE",
       sumilla:"Dan término a la designación de Director de la Dirección Desconcentrada en la ciudad de Tumbes, departamento de Tumbes",
