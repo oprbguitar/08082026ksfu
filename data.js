@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261002.1147",          // <- debe coincidir con version.json
+    version: "20261002.2101",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-02",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261002 · 473 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261003 · 473 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"164-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Aprueban sexta modificación de Concesión Definitiva de Distribución de energía eléctrica, solicitada por la Empresa Regional de Servicio Público de Electricidad del Oriente S.A. - ELECTRO ORIENTE S.A., y de la Adenda N° 6 al Contrato de Concesión N° 031-94",
