@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261004.1055",          // <- debe coincidir con version.json
+    version: "20261004.2058",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-04",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261004 · 482 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261005 · 482 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"389-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Otorgan concesión definitiva a GR LIBLANCA S.A.C. para desarrollar actividad de generación de energía eléctrica con Recursos Energéticos Renovables para el proyecto “Central Solar Fotovoltaica Locumba”, ubicado en el departamento de Tacna",
