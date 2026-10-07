@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261006.1219",          // <- debe coincidir con version.json
+    version: "20261006.2124",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-06",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261006 · 480 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261007 · 480 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN", numero:"244-2026/CDB-INDECOPI", rango:"Res", sector:"MINDEF",
       sumilla:"Imponen derechos antidumping definitivos sobre importaciones de inodoros de cerámica tipo “one piece” originarios de la República Popular China",
