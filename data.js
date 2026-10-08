@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261007.1255",          // <- debe coincidir con version.json
+    version: "20261007.2148",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-07",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261007 · 476 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261008 · 476 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"001285-2026-DE-DDC-CUS/MC", rango:"Res", sector:"MINCUL",
       sumilla:"Determinan la Protección Provisional del Bien Inmueble Prehispánico denominado Sitio Arqueológico Sillkinchani – Sector III; ubicado en el distrito de Saylla, provincia y departamento de Cusco",
