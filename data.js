@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261009.1235",          // <- debe coincidir con version.json
+    version: "20261009.2125",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-09",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261009 · 496 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261010 · 496 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000019-2026-INACAL/DN", rango:"Res", sector:"PRODUCE",
       sumilla:"Aprueban Normas Técnicas Peruanas y Textos afines sobre alimentos irradiados, sistemas de tuberías plásticas para suministro de agua, baldosas cerámicas, turismo y otros",
