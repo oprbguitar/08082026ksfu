@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261011.2124",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-10-11",
+    version: "20261012.1524",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-10-12",
     aviso: ""
   },
 
@@ -149,8 +149,50 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261012 · 487 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261012 · 493 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01238-2026-DE", rango:"RM", sector:"MINDEF",
+      sumilla:"Autorizan viaje de personal de la Fuerza Aérea del Perú a Canadá, en comisión de servicios",
+      fecha:"2026-10-12", origen:"viaje", accion:"promulgada",
+      entidad:"DEFENSA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2563239-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"459-2026-EF/49", rango:"RM", sector:"MEF",
+      sumilla:"Designan Asesor del Despacho Viceministerial de Economía II",
+      fecha:"2026-10-12", origen:"ejecutivo", accion:"promulgada",
+      entidad:"ECONOMÍA Y FINANZAS",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2563341-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"D000210-2026-MIDIS/PNPDS-DE", rango:"Res", sector:"MIDIS",
+      sumilla:"Designan Coordinadora de Presupuesto de la Unidad de Planeamiento, Presupuesto y Modernización del Programa Nacional de entrega de la pensión no contributiva a personas con discapacidad severa en situación de pobreza – CONTIGO",
+      fecha:"2026-10-12", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO E INCLUSIÓN SOCIAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2563362-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000430-2026-MIDAGRI-DM", rango:"RM", sector:"MIDAGRI",
+      sumilla:"Autorizan viaje de servidora a Italia, en comisión de servicios",
+      fecha:"2026-10-12", origen:"viaje", accion:"promulgada",
+      entidad:"DESARROLLO AGRARIO Y RIEGO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2563364-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"400-2026-VIVIENDA", rango:"RM", sector:"MVCS",
+      sumilla:"Designan Jefe de Integridad y Lucha contra la Corrupción de la Oficina de Integridad y Lucha contra la Corrupción de la Secretaría General del Ministerio de Vivienda, Construcción y Saneamiento",
+      fecha:"2026-10-12", origen:"ejecutivo", accion:"promulgada",
+      entidad:"VIVIENDA, CONSTRUCCIÓN Y SANEAMIENTO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2563365-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"377-2026-PRODUCE/PROINNÓVATE", rango:"Res", sector:"PRODUCE",
+      sumilla:"Aprueban el otorgamiento de las subvenciones a favor de los beneficiarios con cargo al Presupuesto Institucional 2026 del Programa Nacional de Innovación para la Competitividad y Productividad",
+      fecha:"2026-10-12", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2563366-1",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0553-2026-MTC/17.03", rango:"Res", sector:"MTC",
       sumilla:"Renuevan a la empresa ADRIKA REVISIONES VEHICULARES SOCIEDAD ANÓNIMA CERRADA la autorización como Centro de Inspección Técnica Vehicular Fijo, en el local ubicado en el distrito de Callería, provincia de Coronel Portillo, departamento de Ucayali",
       fecha:"2026-10-11", origen:"ejecutivo", accion:"promulgada",
