@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261016.1032",          // <- debe coincidir con version.json
+    version: "20261016.2024",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-16",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261016 · 512 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261017 · 512 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"425-2026-MINEM/DM", rango:"RM", sector:"MINEM",
       sumilla:"Aprueban Segunda Modificación al Contrato de Concesión N° 445-2014, otorgado a favor de Minera Bateas S.A.C., para desarrollar actividad de transmisión de energía eléctrica",
