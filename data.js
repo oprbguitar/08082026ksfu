@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261018.2013",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-10-18",
+    version: "20261019.1236",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-10-19",
     aviso: ""
   },
 
@@ -149,8 +149,43 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261019 · 516 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261019 · 518 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000022-2026-INACAL/DN", rango:"Res", sector:"PRODUCE",
+      sumilla:"Aprueban Normas Técnicas Peruanas referentes a cacao y chocolate, acuicultura, granos andinos y otros",
+      fecha:"2026-10-19", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2565325-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000292-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
+      sumilla:"Declaran Patrimonio Cultural de la Nación a las seis (06) unidades bibliográficas (1825-1836) de la producción académica de Benita Paulina Cadeau-Fessel, pertenecientes a la Biblioteca Nacional del Perú",
+      fecha:"2026-10-19", origen:"ejecutivo", accion:"promulgada",
+      entidad:"CULTURA",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2565591-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN", numero:"D000074-2026-OFIS-PE", rango:"Res", sector:"MIDIS",
+      sumilla:"Designan Jefe de la Unidad de Finanzas del Organismo de Focalización e Información Social (OFIS)",
+      fecha:"2026-10-19", origen:"ejecutivo", accion:"promulgada",
+      entidad:"DESARROLLO E INCLUSIÓN SOCIAL",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2565604-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"377-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
+      sumilla:"Autorizan viaje de profesionales del MINCETUR al Reino Unido de Gran Bretaña e Irlanda del Norte, en comisión de servicios",
+      fecha:"2026-10-19", origen:"viaje", accion:"promulgada",
+      entidad:"COMERCIO EXTERIOR Y TURISMO",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2565768-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"577-2026-MTC/01", rango:"RM", sector:"MTC",
+      sumilla:"Designan Asesora II del Despacho Viceministerial de Transportes",
+      fecha:"2026-10-19", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2565770-1",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"360-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de profesional de PROMPERÚ para participar en evento a realizarse en Francia",
       fecha:"2026-10-18", origen:"viaje", accion:"promulgada",
@@ -3740,27 +3775,6 @@ const GOVISOR = {
       fecha:"2026-09-29", origen:"ejecutivo", accion:"promulgada",
       entidad:"VIVIENDA, CONSTRUCCIÓN Y SANEAMIENTO",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2559164-3",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"518-2026-MTC/01.02", rango:"RM", sector:"MTC",
-      sumilla:"Autorizan viaje de inspector de la Dirección General de Aeronáutica Civil al Reino de los Países Bajos, en comisión de servicios",
-      fecha:"2026-09-28", origen:"viaje", accion:"promulgada",
-      entidad:"TRANSPORTES Y COMUNICACIONES",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558273-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01178-2026-DE", rango:"RM", sector:"MINDEF",
-      sumilla:"Autorizan viaje de oficiales del Ejército del Perú a la República Argentina, en comisión de servicios",
-      fecha:"2026-09-28", origen:"viaje", accion:"promulgada",
-      entidad:"DEFENSA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558633-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"343-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
-      sumilla:"Aprueban el “Diagnóstico Situacional para la Identificación de Pasivos Ambientales en el Sector Turismo”",
-      fecha:"2026-09-28", origen:"ejecutivo", accion:"promulgada",
-      entidad:"COMERCIO EXTERIOR Y TURISMO",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2558684-1",
       verificado:true, evidencia:"oficial" }
     /* NORMAS-GENERADAS-FIN */
   ],
