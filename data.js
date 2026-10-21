@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261020.1048",          // <- debe coincidir con version.json
+    version: "20261020.2038",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-20",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261020 · 524 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261021 · 524 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"935-2026/MINSA", rango:"RM", sector:"MINSA",
       sumilla:"Designan Coordinadora General de la Unidad Ejecutora 149. Programa de Inversión \"Creación de Redes Integradas de Salud\"",
