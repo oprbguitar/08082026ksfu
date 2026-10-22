@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261021.1107",          // <- debe coincidir con version.json
+    version: "20261021.2036",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-21",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261021 · 532 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261022 · 532 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0163-2026-MINEM-DGE", rango:"Res", sector:"MINEM",
       sumilla:"Otorgan concesión eléctrica rural a favor de JEMCOR RENOVABLES S.A.C. para desarrollar proyecto de electrificación rural con sistemas fotovoltaicos autónomos en la región San Martín",
