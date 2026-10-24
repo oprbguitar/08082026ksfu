@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261023.1053",          // <- debe coincidir con version.json
+    version: "20261023.2039",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-23",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261023 · 514 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261024 · 514 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000302-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
       sumilla:"Modifican la R.D. Nº 037/INC y aprueban actualización de la información catastral del expediente de delimitación del Paisaje Arqueológico Petroglifos de Toro Muerto, ubicado en el departamento de Arequipa",
