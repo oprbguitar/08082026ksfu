@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261024.0936",          // <- debe coincidir con version.json
+    version: "20261024.2011",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-24",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261024 · 527 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261025 · 527 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"364-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de la Directora General de la Dirección General de Políticas de Desarrollo Turístico para participar en evento a realizarse en la República Francesa",
