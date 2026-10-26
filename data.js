@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261025.1006",          // <- debe coincidir con version.json
+    version: "20261025.2017",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-25",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261025 · 526 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261026 · 526 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"380-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de representantes de PROMPERÚ para participar en evento a realizarse en el Reino Unido de Gran Bretaña e Irlanda del Norte",
