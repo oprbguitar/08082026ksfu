@@ -34,8 +34,8 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261025.2017",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-10-25",
+    version: "20261026.1227",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-10-26",
     aviso: ""
   },
 
@@ -151,6 +151,55 @@ const GOVISOR = {
     /* Generado por scripts/scrape-elperuano.mjs
    Rango 20260728 → 20261026 · 526 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000024-2026-INACAL/DN", rango:"Res", sector:"PRODUCE",
+      sumilla:"Aprueban Normas Técnicas Peruanas y Textos afines sobre leguminosas y productos derivados, granos andinos, fertilizantes y otros",
+      fecha:"2026-10-26", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2567247-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN JEFATURAL", numero:"000081-2026-FONDEPES/J", rango:"Res", sector:"PRODUCE",
+      sumilla:"Designan Coordinador de Ejecución de Proyectos de la Dirección General de Inversión Pesquera Artesanal y Acuícola del Fondo Nacional de Desarrollo Pesquero – FONDEPES",
+      fecha:"2026-10-26", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568129-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"606-2026-MTC/01.03", rango:"RM", sector:"MTC",
+      sumilla:"Otorgan a la empresa NOVANET PERU S.A.C. Concesión Única para la prestación de servicios públicos de telecomunicaciones en área que comprende todo el territorio de la República",
+      fecha:"2026-10-26", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568161-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"607-2026-MTC/01.03", rango:"RM", sector:"MTC",
+      sumilla:"Otorgan a la empresa INVERSIONES Y SERVICIOS GENERALES ORAMITEL S.A.C. Concesión Única para la prestación de servicios públicos de telecomunicaciones en área que comprende todo el territorio de la República",
+      fecha:"2026-10-26", origen:"ejecutivo", accion:"promulgada",
+      entidad:"TRANSPORTES Y COMUNICACIONES",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568162-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"00370-2026-PRODUCE", rango:"RM", sector:"PRODUCE",
+      sumilla:"Designan Directora de Ordenamiento de Productos Industriales y Fiscalizados de la Dirección de Ordenamiento de Productos Industriales y Fiscalizados de la Dirección General de Políticas y Análisis Regulatorio",
+      fecha:"2026-10-26", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568163-1",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"00372-2026-PRODUCE", rango:"RM", sector:"PRODUCE",
+      sumilla:"Designan Directora de Normatividad de la Dirección de Normatividad de la Dirección General de Políticas y Análisis Regulatorio",
+      fecha:"2026-10-26", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568163-2",
+      verificado:true, evidencia:"oficial" },
+
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"00375-2026-PRODUCE", rango:"RM", sector:"PRODUCE",
+      sumilla:"Designan Directora de Políticas de la Dirección de Políticas de la Dirección General de Políticas y Análisis Regulatorio",
+      fecha:"2026-10-26", origen:"ejecutivo", accion:"promulgada",
+      entidad:"PRODUCE",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568163-3",
+      verificado:true, evidencia:"oficial" },
+
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"380-2026-MINCETUR", rango:"RM", sector:"MINCETUR",
       sumilla:"Autorizan viaje de representantes de PROMPERÚ para participar en evento a realizarse en el Reino Unido de Gran Bretaña e Irlanda del Norte",
       fecha:"2026-10-25", origen:"viaje", accion:"promulgada",
@@ -3782,55 +3831,6 @@ const GOVISOR = {
       fecha:"2026-10-05", origen:"ejecutivo", accion:"promulgada",
       entidad:"DESARROLLO AGRARIO Y RIEGO",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561534-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN", numero:"000197-2026-ITP/DE", rango:"Res", sector:"PRODUCE",
-      sumilla:"Designan Asesor de la Dirección Ejecutiva del Instituto Tecnológico de la Producción",
-      fecha:"2026-10-04", origen:"ejecutivo", accion:"promulgada",
-      entidad:"INSTITUTO TECNOLÓGICO DE LA PRODUCCIÓN",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561508-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN", numero:"000198-2026-ITP/DE", rango:"Res", sector:"PRODUCE",
-      sumilla:"Designan Gerente General del Instituto Tecnológico de la Producción",
-      fecha:"2026-10-04", origen:"ejecutivo", accion:"promulgada",
-      entidad:"INSTITUTO TECNOLÓGICO DE LA PRODUCCIÓN",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561509-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN JEFATURAL", numero:"D000150-2026-MIDAGRI-SENASA-JN", rango:"Res", sector:"MIDAGRI",
-      sumilla:"Aprueban modificación del Texto Único de Procedimientos Administrativos (TUPA) del Servicio Nacional de Sanidad Agraria",
-      fecha:"2026-10-04", origen:"ejecutivo", accion:"promulgada",
-      entidad:"DESARROLLO AGRARIO Y RIEGO",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561511-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01211-2026-DE", rango:"RM", sector:"MINDEF",
-      sumilla:"Autorizan viaje de personal de las Fuerzas Armadas a la República Francesa, en comisión de servicios",
-      fecha:"2026-10-04", origen:"viaje", accion:"promulgada",
-      entidad:"DEFENSA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561516-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01216-2026-DE", rango:"RM", sector:"MINDEF",
-      sumilla:"Autorizan viaje de personal de la Marina de Guerra del Perú a EE.UU., en comisión de servicios",
-      fecha:"2026-10-04", origen:"viaje", accion:"promulgada",
-      entidad:"DEFENSA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561517-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01222-2026-DE", rango:"RM", sector:"MINDEF",
-      sumilla:"Autorizan viaje de cadetes de la Escuela Militar de Chorrillos “Coronel Francisco Bolognesi” a Argentina, en misión de estudios",
-      fecha:"2026-10-04", origen:"viaje", accion:"promulgada",
-      entidad:"DEFENSA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561518-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"DECRETO SUPREMO", numero:"211-2026-EF", rango:"DS", sector:"MEF",
-      sumilla:"Decreto Supremo que autoriza Transferencia de Partidas en el Presupuesto del Sector Público para el Año Fiscal 2026 a favor de entidades del gobierno nacional y gobiernos regionales y dicta otra disposición",
-      fecha:"2026-10-04", origen:"ejecutivo", accion:"promulgada",
-      entidad:"ECONOMÍA Y FINANZAS",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561519-1",
       verificado:true, evidencia:"oficial" }
     /* NORMAS-GENERADAS-FIN */
   ],
