@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261026.1227",          // <- debe coincidir con version.json
+    version: "20261026.2110",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-26",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261026 · 526 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261027 · 524 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000024-2026-INACAL/DN", rango:"Res", sector:"PRODUCE",
       sumilla:"Aprueban Normas Técnicas Peruanas y Textos afines sobre leguminosas y productos derivados, granos andinos, fertilizantes y otros",
@@ -3719,20 +3719,6 @@ const GOVISOR = {
       fecha:"2026-10-06", origen:"ejecutivo", accion:"promulgada",
       entidad:"TRANSPORTES Y COMUNICACIONES",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2561944-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000283-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL",
-      sumilla:"Declaran Patrimonio Cultural de la Nación a las nueve (09) unidades bibliográficas (1955-1983) de la producción literaria de Manuel Scorza Torres, pertenecientes a la Biblioteca Nacional del Perú",
-      fecha:"2026-10-05", origen:"ejecutivo", accion:"promulgada",
-      entidad:"CULTURA",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2559652-1",
-      verificado:true, evidencia:"oficial" },
-
-    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000063-2026-INACAL/DM", rango:"Res", sector:"PRODUCE",
-      sumilla:"Disponen el control metrológico de balanzas utilizadas en las plantas de procesamiento de productos pesqueros industriales para consumo humano directo y consumo humano indirecto",
-      fecha:"2026-10-05", origen:"ejecutivo", accion:"promulgada",
-      entidad:"PRODUCE",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2560723-1",
       verificado:true, evidencia:"oficial" },
 
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"314-2026-TR", rango:"RM", sector:"MTPE",
