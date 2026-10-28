@@ -34,7 +34,7 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261027.1134",          // <- debe coincidir con version.json
+    version: "20261027.2118",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-27",
     aviso: ""
   },
@@ -149,7 +149,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (GitHub Action). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Rango 20260728 → 20261027 · 525 normas · enlaces verificados uno por uno
+   Rango 20260728 → 20261028 · 525 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000025-2026-INACAL/DN", rango:"Res", sector:"PRODUCE",
       sumilla:"Aprueban Normas Técnicas Peruanas sobre calidad en la construcción, baldosas cerámicas y otros",
