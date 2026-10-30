@@ -35,6 +35,11 @@ if (!/^\d{8}(\.\d+)?$/.test(sello)) {
   process.exit(1);
 }
 
+// "AAAAMMDD.HHMM" (sello del Action) lleva la hora de Lima; si no, medianoche.
+const dia  = `${sello.slice(0,4)}-${sello.slice(4,6)}-${sello.slice(6,8)}`;
+const hhmm = /^\d{8}\.\d{4}$/.test(sello) ? `${sello.slice(9,11)}:${sello.slice(11,13)}` : "00:00";
+const iso  = `${dia}T${hhmm}:00-05:00`;
+
 const editar = (rel, fn) => {
   const ruta = join(raiz, rel);
   const antes = readFileSync(ruta, "utf8");
@@ -48,13 +53,13 @@ const cambios = [];
 if (editar("version.json", (s) =>
   s.replace(/"version":\s*"[^"]*"/, `"version": "${sello}"`)
    .replace(/"actualizado":\s*"[^"]*"/,
-            `"actualizado": "${sello.slice(0,4)}-${sello.slice(4,6)}-${sello.slice(6,8)}T00:00:00-05:00"`)
+            `"actualizado": "${iso}"`)
 )) cambios.push("version.json");
 
 if (editar("data.js", (s) =>
   s.replace(/version:\s*"[^"]*"/, `version: "${sello}"`)
-   .replace(/ultimaActualizacion:\s*"[^"]*"/,
-            `ultimaActualizacion: "${sello.slice(0,4)}-${sello.slice(4,6)}-${sello.slice(6,8)}"`)
+   .replace(/ultimaActualizacion:\s*"[^"]*"/, `ultimaActualizacion: "${dia}"`)
+   .replace(/actualizadoEn:\s*"[^"]*"/, `actualizadoEn: "${iso}"`)
 )) cambios.push("data.js");
 
 for (const html of ["index.html", "fuentes.html"]) {

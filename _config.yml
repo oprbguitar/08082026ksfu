@@ -4,8 +4,9 @@
 # del sitio publico, para no exponer el origen tecnico del portal.
 exclude:
   - README.md
-  - PROYECTO.md
+  - docs
   - scripts
   - "*.mjs"
+  - assets/README.md
   - .github
   - .gitignore

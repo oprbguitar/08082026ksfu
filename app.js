@@ -268,6 +268,15 @@
 
   /* ══════════ NORMAS ══════════ */
   let filtroNorma = "todos", busqueda = "";
+
+  /* Rangos "de peso": los que cambian reglas para todo el país. El resto
+     (resoluciones ministeriales, directorales…) es gestión interna, útil
+     para fiscalizar pero ruido en la línea de tiempo y en "¿Qué cambió?". */
+  const RANGOS_MAYORES = ["Ley", "DL", "DU", "DS", "RL"];
+  const esMayor = (n) => RANGOS_MAYORES.includes(n.rango);
+
+  /** Quita tildes y pasa a minúsculas, para buscar "pension" y hallar "Pensión". */
+  const plano = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const PASO_NORMAS = 25;              // cuántas normas se añaden por clic
   let normasVisibles = PASO_NORMAS;
   const ORIGEN = {
@@ -286,8 +295,8 @@
 
     const q = busqueda.trim().toLowerCase();
     const lista = GOVISOR.normas
-      .filter((n) => filtroNorma === "todos" || n.origen === filtroNorma)
-      .filter((n) => !q || `${n.tipo} ${n.numero} ${n.sumilla}`.toLowerCase().includes(q))
+      .filter((n) => filtroNorma === "todos" || (filtroNorma === "mayores" ? esMayor(n) : n.origen === filtroNorma))
+      .filter((n) => !q || plano(`${n.tipo} ${n.numero} ${n.sumilla}`).includes(plano(q)))
       .slice()
       .sort((a, b) => String(b.fecha || "").localeCompare(String(a.fecha || "")));
 
@@ -313,7 +322,8 @@
       return `<tr${attrs}>
         <td class="n-fec" data-r="${esc(t("tn.fecha"))}">${esc(fechaCorta(n.fecha) || "—")}</td>
         <td data-r="${esc(t("tn.tipo"))}"><span class="b ${cls}">${esc(txt)}</span></td>
-        <td class="n-num" data-r="${esc(t("tn.numero"))}">${esc(n.numero || "—")}</td>
+        <td class="n-num" data-r="${esc(t("tn.numero"))}">${n.rango && t("gl." + n.rango) !== "gl." + n.rango
+          ? `<abbr class="rango" title="${esc(t("gl." + n.rango))}">${esc(n.rango)}</abbr> ` : ""}${esc(n.numero || "—")}</td>
         <td class="n-sum" data-r="${esc(t("tn.titulo"))}">${esc(n.sumilla || t("n.sinSumilla"))}${der}</td>
         <td class="n-est" data-r="${esc(t("tn.estado"))}">${estado}</td>
       </tr>`;
@@ -427,9 +437,17 @@
       cont.innerHTML = `<p class="vac"><b>${t("sv.sinViajes")}</b>${t("sv.txt")}</p>`;
       return;
     }
-    cont.innerHTML = GOVISOR.viajes.map((v) => `
+    const hoy = hoyLima();
+    const cuando = (v) => {
+      const a = diasEntre(hoy, fecha(v.desde)), b = diasEntre(hoy, fecha(v.hasta || v.desde));
+      if (a != null && a > 0) return `<span class="b b-pro">${t("sv.proximo")}</span>`;
+      if (b != null && b >= 0) return `<span class="b b-cur">${t("sv.enCurso")}</span>`;
+      return "";
+    };
+    cont.innerHTML = GOVISOR.viajes.slice()
+      .sort((a, b) => String(b.desde).localeCompare(String(a.desde))).map((v) => `
       <article class="viaje">
-        <h3>${esc(v.destino || t("sv.destinoSR"))}</h3>
+        <h3>${esc(v.destino || t("sv.destinoSR"))} ${cuando(v)}</h3>
         <p><b>${esc(v.quien || "—")}</b> · ${esc(v.motivo || t("sv.motivoSR"))}</p>
         <p>${esc(fechaCorta(v.desde))}${v.hasta ? t("sv.al") + esc(fechaCorta(v.hasta)) : ""}</p>
         <div class="chips">${chipNorma(v.norma)}${sello(!!v.verificado)}</div>
@@ -652,9 +670,10 @@
         titulo: t("tl.ceseEn", { c: m.cartera }), detalle: m.ministro, ev: m.evidencia
       }));
 
-    // Normas
+    // Normas: solo las de rango mayor. Con más de dos mil dispositivos en
+    // el periodo, las resoluciones de gestión tapaban los hechos de verdad.
     GOVISOR.normas.forEach((n) => {
-      if (!n.fecha) return;
+      if (!n.fecha || !esMayor(n)) return;
       items.push({
         fecha: n.fecha, tipo: "norma",
         titulo: [n.tipo, n.numero].filter(Boolean).join(" N.º "),
@@ -699,13 +718,13 @@
 
     const PIP = {
       nombramiento: "naranja", cese: "rojo", norma: "azul",
-      viaje: "verde", hito: "verde", crisis: "rojo", anuncio: "ambar"
+      viaje: "verde", hito: "verde", crisis: "rojo", anuncio: "ambar", congreso: "azul"
     };
 
     // Icono ademas del color: el estado no se comunica solo con color.
     const ICO = {
       nombramiento:"👤", cese:"⨯", norma:"📄", viaje:"✈",
-      hito:"🏛", crisis:"!", anuncio:"◆", otro:"•"
+      hito:"🏛", crisis:"!", anuncio:"◆", congreso:"⚖", otro:"•"
     };
     const fila = (i) => {
       const d = diasEntre(fecha(i.fecha), hoy);
@@ -876,6 +895,31 @@
         : "";
     };
 
+    /* Detección automática: cada vez que el Action trae normas nuevas, las
+       que mencionan la promesa (campo `claves`) aparecen aquí solas. Es una
+       pista, no una conclusión: el estado de la promesa no cambia sin
+       revisión humana, por eso se rotula como detección automática. */
+    const relacionadas = (p) => {
+      const claves = (p.claves || []).map(plano);
+      if (!claves.length) return "";
+      const propia = p.norma && p.norma.enlace;
+      // Las designaciones de personal mencionan al programa pero no lo mueven.
+      const PERSONAL = /^(designan|dan por concluid|encargan|aceptan renuncia|acceden|autorizan viaje)/;
+      const hall = GOVISOR.normas
+        .filter((n) => n.enlace !== propia && !PERSONAL.test(plano(n.sumilla))
+          && claves.some((c) => plano(n.sumilla).includes(c)))
+        .sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)))
+        .slice(0, 4);
+      if (!hall.length) return "";
+      return `<div class="prom-auto"><b>${t("p.auto", { n: hall.length })}</b><ul>${hall.map((n) => {
+        const u = urlSegura(n.enlace);
+        const tit = [n.tipo, n.numero].filter(Boolean).join(" N.º ");
+        return `<li><time>${esc(fechaCorta(n.fecha))}</time> ${u
+          ? `<a href="${esc(u)}" data-visor="${esc(u)}" data-titulo="${esc(tit)}" data-sumilla="${esc(n.sumilla || "")}">${esc(tit)}</a>`
+          : esc(tit)} — ${esc(n.sumilla)}</li>`;
+      }).join("")}</ul></div>`;
+    };
+
     const eslabon = (rotulo, valor, url) => {
       if (!valor) return `<div class="eslabon vacio"><b>${rotulo}</b><span>${t("p.sinRegistro")}</span></div>`;
       const u = urlSegura(url);
@@ -904,6 +948,7 @@
           ${eslabon(t("p.resultado"), p.resultado)}
         </div>
         ${docFuentes(p.fuentes)}
+        ${relacionadas(p)}
       </article>`;
     }).join("");
     escalonar(cont);
@@ -924,8 +969,10 @@
     const todos = construirLinea();
     $("lineaSub").textContent = t("sec.hitos", { n: todos.length });
 
-    const lista = filtroLinea === "todos"
-      ? todos : todos.filter((i) => i.tipo === filtroLinea);
+    const EVENTOS = ["hito", "crisis", "anuncio", "congreso", "reunion", "otro"];
+    const lista = filtroLinea === "todos" ? todos
+      : filtroLinea === "hito" ? todos.filter((i) => EVENTOS.includes(i.tipo))
+      : todos.filter((i) => i.tipo === filtroLinea);
 
     if (!lista.length) {
       cont.innerHTML = `<li class="vac"><b>${t("tl.sinHitos")}</b>${t("tl.sinTipo")}</li>`;
@@ -1196,8 +1243,16 @@
       ? `<p class="fine">${t("sp.fuente")}<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(p.fuente)} &#8599;</a></p>`
       : "";
 
+    const pr = p.proyecto2027;
+    const proyecto = pr ? `<div class="ppto-proy">
+        <p class="rotulo">${t("sp.proyecto")}</p>
+        <p class="ppto-total">${esc(pr.total)}</p>
+        <p>${esc(pr.variacion)} · ${esc(pr.nino)}</p>
+        ${urlSegura(pr.enlace) ? `<a href="${esc(urlSegura(pr.enlace))}" target="_blank" rel="noopener noreferrer">${t("sp.verFuente")} &#8599;</a>` : ""}
+      </div>` : "";
+
     if (!sec.length) {
-      $("pptoBox").innerHTML = `<p class="vac"><b>${t("sp.sinCifras")}</b>${t("sp.txt")}</p>${fuente}`;
+      $("pptoBox").innerHTML = `${proyecto}<p class="vac"><b>${t("sp.sinCifras")}</b>${t("sp.txt")}</p>${fuente}`;
       return;
     }
 
@@ -1337,7 +1392,11 @@
 
   /* ── Timeline compacto de portada ──────────────────────────────────── */
   function pintarTimelineMini() {
-    const items = construirLinea().slice(0, 4);
+    // Solo lo ya ocurrido: un viaje programado no es todavía un hecho.
+    const hoy = hoyLima();
+    const items = construirLinea()
+      .filter((i) => { const d = diasEntre(fecha(i.fecha), hoy); return d == null || d >= 0; })
+      .slice(0, 4);
     const cont = $("timelineMini");
     if (!items.length) {
       cont.innerHTML = `<li class="t">${t("tab.sinHitos")}</li>`;
@@ -1418,6 +1477,7 @@
     pintarCargos();
     pintarPpto();
     pintarMetodologia();
+    pintarAuto();
     pintarFiltrosNoticias();
     pintarFiltrosYT();
     ultimoDia = "";            // fuerza el refresco de la fecha en el reloj
@@ -1577,6 +1637,16 @@
       abrirVisor(fila.dataset.visor, fila.dataset.titulo, fila.dataset.sumilla);
     });
 
+    // Volver arriba: aparece tras bajar una pantalla.
+    const arriba = $("arriba");
+    window.addEventListener("scroll", () => {
+      arriba.classList.toggle("ver", window.scrollY > window.innerHeight);
+    }, { passive: true });
+    arriba.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: menosMovimiento ? "auto" : "smooth" });
+      $("top").focus({ preventScroll: true });
+    });
+
     // Paginación de la tabla de normas.
     document.addEventListener("click", (ev) => {
       if (!ev.target.closest("#masNormas")) return;
@@ -1644,8 +1714,30 @@
     secciones.forEach((s) => obs.observe(s));
   }
 
+  /* ══════════ ESTADO DE LA ACTUALIZACIÓN AUTOMÁTICA ══════════
+     El Action revisa El Peruano cada 6 horas. Aquí se dice, en lenguaje
+     llano, cuándo fue la última vez que trajo datos nuevos. */
+  function pintarAuto() {
+    const m = GOVISOR.meta;
+    const cuando = m.actualizadoEn ? new Date(m.actualizadoEn) : null;
+    const cont = $("autoEstado");
+    if (!cuando || isNaN(cuando)) { cont.hidden = true; return; }
+    const horas = Math.max(0, Math.round((Date.now() - cuando.getTime()) / 36e5));
+    const hace = horas < 1 ? t("au.recien") : horas < 48 ? t("au.haceH", { n: horas }) : t("au.haceD", { n: Math.round(horas / 24) });
+    const f = new Intl.DateTimeFormat(I18N.idioma === "en" ? "en-GB" : "es-PE", {
+      day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "America/Lima"
+    }).format(cuando);
+    cont.hidden = false;
+    cont.innerHTML = `<span class="punto" aria-hidden="true"></span>
+      ${t("au.txt", { f: esc(f), h: hace, n: GOVISOR.normas.length.toLocaleString("es-PE") })}`;
+  }
+
   /* ══════════ ARRANQUE ══════════ */
   function iniciar() {
+    // Una norma cargada a mano y luego traída por el scraper no se cuenta dos veces.
+    const vistos = new Set();
+    GOVISOR.normas = GOVISOR.normas.filter((n) => !n.enlace || (!vistos.has(n.enlace) && vistos.add(n.enlace)));
+
     I18N.aplicarEstaticos();
 
     const m = GOVISOR.meta;
@@ -1682,6 +1774,7 @@
     pintarCargos();
     pintarPpto();
     pintarMetodologia();
+    pintarAuto();
 
     pintarFiltrosNoticias();
     pintarFiltrosYT();
@@ -1699,7 +1792,7 @@
   }
 
   /* ── Frescura: el visor se refresca al entrar ───────────────────────
-     GitHub Pages sirve los archivos con cache de navegador, asi que una
+     El hosting sirve los archivos con cache de navegador, asi que una
      visita posterior puede quedarse con datos viejos. `version.json` se
      pide siempre con `cache:"no-store"` —nunca sale del cache— y lleva el
      mismo sello que `GOVISOR.meta.version`. Si los dos dejan de coincidir,
