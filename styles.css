@@ -302,7 +302,37 @@ section{ margin:34px 0; scroll-margin-top:86px; }
 .card-mas{ display:inline-block; margin-top:12px; }
 .card-pie{ font-size:.73rem; color:var(--ink-400); margin-top:11px; }
 
-.tablero{ display:grid; grid-template-columns:1fr 1.18fr 1fr .92fr; gap:var(--gap); margin:34px 0; }
+/* Tablero: 3 tarjetas en tercios arriba y 2 en mitades abajo, sobre una
+   rejilla de 6 columnas. Alturas iguales por fila y el enlace de cada
+   tarjeta siempre al pie, alineado con el de sus vecinas. */
+.tablero{ display:grid; grid-template-columns:repeat(6, minmax(0, 1fr)); gap:var(--gap); margin:34px 0; }
+.tablero > .card{ display:flex; flex-direction:column; min-height:300px; grid-column:span 2; }
+.tablero > .card:nth-child(n+4){ grid-column:span 3; }
+.tablero .card-cab{ min-height:40px; }
+.tablero .card-cuerpo{ flex:1 1 auto; }
+.tablero .cadena3{ align-content:start; }
+.tablero .card-mas{ margin-top:auto; padding-top:12px; border-top:1px solid var(--border); align-self:stretch; }
+.tablero .card-pie{ margin:10px 0 0; }
+.tablero .card-pie + .card-mas{ margin-top:12px; }
+
+/* Resumen de una norma en dos líneas, para que ninguna fila se dispare. */
+.cambio-d, .tl-mini-d{
+  display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden;
+  font-size:.78rem; color:var(--ink-500); line-height:1.35; margin-top:1px;
+}
+.tl-mini-d{ margin-top:2px; }
+
+.agenda{ list-style:none; margin:0; padding:0; display:grid; gap:10px; align-content:start; }
+.agenda li{ display:flex; gap:12px; align-items:center; font-size:.85rem; }
+.agenda .ag-f{
+  flex:none; width:64px; text-align:center; padding:6px 4px; border-radius:var(--radius-sm);
+  background:var(--brand-050); color:var(--brand-900); line-height:1.15;
+}
+.agenda .ag-f b{ display:block; font-size:.95rem; }
+.agenda .ag-f small{ display:block; font-size:.68rem; color:var(--ink-500); }
+.agenda .pronto .ag-f{ background:var(--warn-bg); color:var(--warn); }
+.agenda .ag-t a{ color:var(--ink-900); text-decoration:none; }
+.agenda .ag-t a:hover{ color:var(--brand-700); text-decoration:underline; }
 .dos{ display:grid; grid-template-columns:1.5fr 1fr; gap:var(--gap); }
 
 /* ══════════════════ BADGES ══════════════════ */
@@ -796,7 +826,9 @@ body.sin-scroll{ overflow:hidden; }
 /* ══════════════════ RESPONSIVE ══════════════════ */
 @media (max-width:1199px){
   :root{ --pad:22px; --gap:16px; }
-  .tablero{ grid-template-columns:repeat(2,1fr); }
+  .tablero{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .tablero > .card, .tablero > .card:nth-child(n+4){ grid-column:auto; }
+  .tablero > .card:nth-child(5){ grid-column:1 / -1; }
   .lectura{ grid-template-columns:repeat(2,1fr); }
   .seg-grid{ grid-template-columns:1fr; }
   .hitos{ grid-template-columns:repeat(2,1fr); }
@@ -1012,3 +1044,67 @@ body.sin-scroll{ overflow:hidden; }
   .bloque[open] > summary:hover::after{ transition:none; transform:none; }
   .bloque[open] > summary::after{ transform:rotate(90deg); }
 }
+
+/* ══════════ Lectura amable · oct-2026 ══════════════════════════════════
+   Estado de la actualización automática, glosario de normas, normas
+   detectadas para cada promesa, viajes próximos y botón "volver arriba". */
+.auto-estado{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:14px 0 0; padding:10px 14px; border-radius:var(--radius-sm);
+  background:var(--ok-bg); border:1px solid var(--ok-bd); color:var(--ink-700); font-size:.86rem;
+}
+.auto-estado b{ color:var(--ok); }
+.auto-estado .punto{
+  width:9px; height:9px; border-radius:50%; background:var(--ok); flex:none;
+  box-shadow:0 0 0 0 rgba(15,123,63,.45); animation:latido 2.4s infinite;
+}
+@keyframes latido{ 0%{ box-shadow:0 0 0 0 rgba(15,123,63,.45); } 70%{ box-shadow:0 0 0 8px rgba(15,123,63,0); } 100%{ box-shadow:0 0 0 0 rgba(15,123,63,0); } }
+
+.glosario{ margin:12px 0 4px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--brand-025); }
+.glosario summary{ cursor:pointer; padding:10px 14px; font-weight:600; color:var(--brand-900); font-size:.9rem; }
+.glosario dl{ margin:0; padding:2px 14px 12px; display:grid; gap:8px 18px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); }
+.glosario dl div{ display:flex; gap:10px; align-items:baseline; }
+.glosario dt{ flex:none; min-width:34px; font-weight:800; color:var(--brand-900); }
+.glosario dd{ margin:0; font-size:.86rem; color:var(--ink-700); }
+
+abbr.rango{
+  text-decoration:none; cursor:help; font-size:.7rem; font-weight:800; letter-spacing:.02em;
+  padding:1px 5px; border-radius:6px; background:var(--brand-050); color:var(--brand-900); margin-right:4px;
+}
+
+.prom-auto{
+  margin-top:10px; padding:10px 12px; border-radius:var(--radius-sm);
+  background:var(--info-bg); border:1px dashed var(--info-bd); font-size:.84rem;
+}
+.prom-auto b{ color:var(--info); display:block; margin-bottom:4px; }
+.prom-auto ul{ margin:0; padding-left:18px; }
+.prom-auto li{ margin:3px 0; color:var(--ink-700); }
+.prom-auto time{ color:var(--ink-500); font-variant-numeric:tabular-nums; margin-right:4px; }
+.prom-auto a{ color:var(--info); font-weight:600; }
+
+.b-pro{ background:var(--info-bg); color:var(--info); border:1px solid var(--info-bd); margin-left:6px; vertical-align:middle; }
+.b-cur{ background:var(--ok-bg); color:var(--ok); border:1px solid var(--ok-bd); margin-left:6px; vertical-align:middle; }
+
+.ppto-proy{
+  padding:14px 16px; margin-bottom:12px; border-radius:var(--radius-md);
+  background:var(--brand-025); border:1px solid var(--border);
+}
+.ppto-proy p{ margin:2px 0; }
+.ppto-total{ font-size:1.6rem; font-weight:800; color:var(--brand-900); }
+
+.arriba{
+  position:fixed; right:18px; bottom:18px; z-index:40;
+  width:46px; height:46px; border-radius:50%; border:0; cursor:pointer;
+  display:grid; place-items:center; color:#fff; background:var(--brand-900);
+  box-shadow:var(--shadow-pop);
+  opacity:0; transform:translateY(12px); pointer-events:none;
+  transition:opacity .25s var(--ease), transform .25s var(--ease);
+}
+.arriba.ver{ opacity:1; transform:none; pointer-events:auto; }
+.arriba:hover{ background:var(--brand-700); }
+.arriba:focus-visible{ outline:3px solid var(--brand-500); outline-offset:3px; }
+@media (prefers-reduced-motion: reduce){
+  .auto-estado .punto{ animation:none; }
+  .arriba{ transition:none; }
+}
+@media print{ .arriba, .auto-estado, .glosario{ display:none !important; } }

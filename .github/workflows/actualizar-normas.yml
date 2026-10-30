@@ -7,9 +7,19 @@ name: Actualizar normas (El Peruano)
 
 on:
   schedule:
-    # 06:00 y 18:00 hora de Lima (UTC-5, sin horario de verano) = 11:00 y 23:00 UTC.
-    - cron: "0 11,23 * * *"
-  workflow_dispatch: {}   # permite dispararlo a mano desde la pestana Actions
+    # Cada 6 horas: 01:17, 07:17, 13:17 y 19:17 hora de Lima (UTC-5). Minuto
+    # 17 y no 00 para esquivar la congestion de GitHub a la hora en punto.
+    # Revisa los ultimos 14 dias y suma lo nuevo sin borrar nada.
+    - cron: "17 0,6,12,18 * * *"
+    # Domingo 03:41 Lima: barrido completo desde la asuncion, por si algun
+    # dia El Peruano respondio parcial y quedo una norma sin recoger.
+    - cron: "41 8 * * 0"
+  workflow_dispatch:
+    inputs:
+      completo:
+        description: "Barrido completo desde la asuncion (28/07/2026)"
+        type: boolean
+        default: false
 
 # Evita corridas solapadas si una tarda mas de lo previsto.
 concurrency:
@@ -22,7 +32,7 @@ permissions:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 75
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,7 +43,12 @@ jobs:
           node-version: "20"
 
       - name: Scrapear y actualizar data.js
-        run: node scripts/actualizar.mjs
+        run: |
+          if [ "${{ github.event.schedule }}" = "41 8 * * 0" ] || [ "${{ inputs.completo }}" = "true" ]; then
+            node scripts/actualizar.mjs --completo
+          else
+            node scripts/actualizar.mjs
+          fi
 
       - name: Commit y push si hubo cambios
         run: |
@@ -42,7 +57,8 @@ jobs:
             git config user.email "govisor-bot@users.noreply.github.com"
             git add -A
             git commit -m "Actualizacion automatica de normas desde El Peruano"
-            git push
+            # Si entretanto llego otro commit a main, se rebasa y se reintenta.
+            git push || { git pull --rebase origin "${GITHUB_REF_NAME}" && git push; }
             echo "Cambios publicados."
           else
             echo "Sin cambios: nada que publicar."

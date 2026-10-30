@@ -27,7 +27,7 @@ const BASE = "https://busquedas.elperuano.pe";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) GoVisor/1.0 (+observatorio ciudadano)";
 const POR_PAGINA = 20;
 const PAUSA_MS = 350;          // cortesia con el servidor
-const MAX_PAGINAS = 60;
+const MAX_PAGINAS = 60;      // por tramo semanal y edicion: nunca se alcanza
 
 /* ── Entidades de interes ──────────────────────────────────────────────
    Se filtra automaticamente lo del Congreso y lo del Consejo de Ministros.
@@ -192,36 +192,21 @@ async function enlaceVivo(url, intentos = 3) {
    Devuelve el arreglo de normas con enlace VIVO (verificado uno por uno).
    La usan tanto la CLI (main) como scripts/actualizar.mjs (GitHub Action).
    ------------------------------------------------------------------ */
-export async function recolectar(desde, hasta, todos = false) {
+export async function recolectar(desde, hasta, todos = false, conocidos = new Set()) {
   console.error(`Rango: ${desde} → ${hasta}${todos ? "  (sin filtro de entidad)" : "  (Congreso + Consejo de Ministros)"}`);
 
-  // 1) Recorrer las paginas de resultados
-  // Un fallo de red aislado NO debe truncar el recorrido: una version
-  // anterior perdia paginas enteras en silencio por ese motivo. Solo se
-  // detiene tras dos paginas seguidas realmente vacias.
+  // 1) Recorrer el buscador POR TRAMOS de una semana y por edicion.
+  // El buscador corta en MAX_PAGINAS: con un rango de tres meses solo
+  // devolvia el ultimo mes y el resto del periodo se perdia en silencio
+  // (en oct-2026 el bloque quedo con 549 normas, todas de octubre). Con
+  // tramos cortos ninguno se acerca al tope. Cada tramo se pide en la
+  // edicion ordinaria (NL) y en la extraordinaria (EX): ahi salen las
+  // leyes y decretos de mayor relieve (p. ej. el D.S. 015-2026-TR).
   const crudas = [];
-  let vaciasSeguidas = 0;
-  for (let p = 0; p < MAX_PAGINAS; p++) {
-    const url = `${BASE}/?fechaIni=${desde}&fechaFin=${hasta}&tipoPublicacion=NL&ci=ONLY&start=${p * POR_PAGINA}`;
-    let html = null;
-    try { html = await traer(url); }
-    catch (e) { console.error(`\n  fallo en pagina ${p + 1} (${e.message}), se reintenta`); }
-
-    const filas = html ? parsear(html) : [];
-    if (!filas.length) {
-      // Una pagina vacia suele ser limite de tasa, no el final del listado.
-      // Se insiste tres veces con esperas largas antes de dar por terminado.
-      vaciasSeguidas++;
-      if (vaciasSeguidas >= 3) break;
-      console.error(`\n  pagina ${p + 1} vacia (intento ${vaciasSeguidas}/3), esperando…`);
-      await dormir(5000 * vaciasSeguidas);
-      p--;                       // se reintenta la MISMA pagina
-      continue;
+  for (const [ini, fin] of tramos(desde, hasta, 7)) {
+    for (const edicion of EDICIONES) {
+      crudas.push(...await recorrerTramo(ini, fin, edicion));
     }
-    vaciasSeguidas = 0;
-    crudas.push(...filas);
-    process.stderr.write(`\r  pagina ${p + 1} · ${crudas.length} dispositivos`);
-    await dormir(PAUSA_MS);
   }
   console.error("");
 
@@ -238,12 +223,15 @@ export async function recolectar(desde, hasta, todos = false) {
     vistos.add(f.href); return true;
   });
 
-  // 4) Verificar que cada enlace abre
-  console.error(`Verificando ${unicos.length} enlaces…`);
-  const vivos = [];
+  // 4) Verificar que cada enlace abre. Los ya verificados en una corrida
+  // anterior (`conocidos`) no se vuelven a pedir: asi la corrida diaria
+  // tarda minutos y no media hora.
+  const nuevos = unicos.filter((f) => !conocidos.has(f.href));
+  console.error(`Verificando ${nuevos.length} enlaces nuevos (${unicos.length - nuevos.length} ya conocidos)…`);
+  const vivos = unicos.filter((f) => conocidos.has(f.href));
   let rotos = 0, dudosos = 0;
-  for (let i = 0; i < unicos.length; i++) {
-    const f = unicos[i];
+  for (let i = 0; i < nuevos.length; i++) {
+    const f = nuevos[i];
     const r = await enlaceVivo(f.href);
     if (r.vivo) {
       vivos.push(f);
@@ -251,11 +239,65 @@ export async function recolectar(desde, hasta, todos = false) {
     } else {
       rotos++; console.error(`  ROTO 404 (descartado): ${f.href}`);
     }
-    if (i % 20 === 19) process.stderr.write(`\r  verificados ${i + 1}/${unicos.length}\n`);
+    if (i % 20 === 19) process.stderr.write(`\r  verificados ${i + 1}/${nuevos.length}\n`);
     await dormir(320);          // ritmo prudente: evita el limite de tasa
   }
   console.error(`Enlaces vivos: ${vivos.length} · rotos 404: ${rotos} · dudosos conservados: ${dudosos}`);
   return vivos;
+}
+
+const EDICIONES = ["NL", "EX"];
+
+/** Parte [desde, hasta] (AAAAMMDD) en tramos de `dias` dias. */
+function tramos(desde, hasta, dias) {
+  const aFecha = (s) => new Date(Date.UTC(+s.slice(0, 4), +s.slice(4, 6) - 1, +s.slice(6, 8)));
+  const aTexto = (d) => d.toISOString().slice(0, 10).replace(/-/g, "");
+  const fin = aFecha(hasta);
+  const salida = [];
+  for (let d = aFecha(desde); d <= fin; d = new Date(d.getTime() + dias * 864e5)) {
+    const f = new Date(Math.min(fin.getTime(), d.getTime() + (dias - 1) * 864e5));
+    salida.push([aTexto(d), aTexto(f)]);
+  }
+  return salida;
+}
+
+/** Todas las paginas de un tramo en una edicion.
+ *  Un fallo de red aislado NO debe truncar el recorrido: una version
+ *  anterior perdia paginas enteras en silencio por ese motivo. Solo se
+ *  detiene tras tres paginas seguidas realmente vacias. */
+async function recorrerTramo(desde, hasta, edicion) {
+  const filas = [];
+  let vaciasSeguidas = 0;
+  for (let p = 0; p < MAX_PAGINAS; p++) {
+    const url = `${BASE}/?fechaIni=${desde}&fechaFin=${hasta}&tipoPublicacion=${edicion}&ci=ONLY&start=${p * POR_PAGINA}`;
+    let html = null;
+    try { html = await traer(url); }
+    catch (e) { console.error(`\n  fallo en ${edicion} ${desde} pagina ${p + 1} (${e.message}), se reintenta`); }
+
+    const pagina = html ? parsear(html) : [];
+    if (!pagina.length) {
+      // Una pagina vacia suele ser limite de tasa, no el final del listado.
+      // En la edicion extraordinaria, en cambio, un tramo sin nada es normal:
+      // se insiste menos para no alargar la corrida.
+      vaciasSeguidas++;
+      if (vaciasSeguidas >= (edicion === "EX" ? 2 : 3)) break;
+      await dormir(4000 * vaciasSeguidas);
+      p--;                       // se reintenta la MISMA pagina
+      continue;
+    }
+    vaciasSeguidas = 0;
+    filas.push(...pagina);
+    // Menos tarjetas que una pagina completa: era la ultima del tramo.
+    // Se cuentan las tarjetas crudas, no las parseadas, para que una
+    // tarjeta malformada no corte el recorrido antes de tiempo.
+    if (html.split('class="rounded-xl border bg-card').length - 1 < POR_PAGINA) break;
+    await dormir(PAUSA_MS);
+  }
+  if (filas.length >= MAX_PAGINAS * POR_PAGINA) {
+    console.error(`\n  AVISO: el tramo ${desde}-${hasta} (${edicion}) llego al tope de paginas; puede estar incompleto.`);
+  }
+  process.stderr.write(`\r  ${edicion} ${desde}→${hasta}: ${filas.length} dispositivos            `);
+  return filas;
 }
 
 /* ── Formato del fragmento para data.js ─────────────────────────────────
@@ -268,18 +310,17 @@ export function formatear(vivos, desde, hasta) {
     String(b.fecha).localeCompare(String(a.fecha)) || String(a.href).localeCompare(String(b.href)));
   const esc = (s) => String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 
+  // Una linea por norma: el periodo ya pasa de dos mil dispositivos y el
+  // formato multilinea inflaba data.js sin aportar nada al visitante.
   const cuerpo = orden.map((f) =>
-    `    { tipo:"${esc(f.tipo)}", numero:"${esc(f.numero)}", rango:"${rangoDe(f.tipo)}", sector:"${f.sector || ""}",\n` +
-    `      sumilla:"${esc(f.sumilla)}",\n` +
-    `      fecha:"${f.fecha}", origen:"${origenDe(f.entidad, f.tipo, f.sumilla)}", accion:"promulgada",\n` +
-    `      entidad:"${esc(f.entidad)}",\n` +
-    `      enlace:"${esc(f.href)}",\n` +
-    `      verificado:true, evidencia:"oficial" }`
-  ).join(",\n\n");
+    `    { tipo:"${esc(f.tipo)}", numero:"${esc(f.numero)}", rango:"${f.rango || rangoDe(f.tipo)}", sector:"${f.sector || ""}", ` +
+    `fecha:"${f.fecha}", origen:"${f.origen || origenDe(f.entidad, f.tipo, f.sumilla)}", accion:"${f.accion || "promulgada"}", ` +
+    `sumilla:"${esc(f.sumilla)}", entidad:"${esc(f.entidad || "")}", enlace:"${esc(f.href)}", verificado:true, evidencia:"oficial" }`
+  ).join(",\n");
 
   return (
 `/* Generado por scripts/scrape-elperuano.mjs
-   Rango ${desde} → ${hasta} · ${orden.length} normas · enlaces verificados uno por uno
+   Desde ${desde} · ${orden.length} normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
 ${cuerpo}
 `);

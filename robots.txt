@@ -1,8 +1,4 @@
-# El portal es publico para la ciudadania; su documentacion interna y su
-# codigo de build no deben indexarse ni rastrearse.
 User-agent: *
 Allow: /
-Disallow: /README.md
-Disallow: /PROYECTO.md
-Disallow: /scripts/
-Disallow: /404.html
+
+Sitemap: https://gobierno.quest/sitemap.xml

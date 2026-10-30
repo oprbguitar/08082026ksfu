@@ -7,11 +7,11 @@
 |---|---|
 | **Nombre** | GoVisor |
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
-| **Estado** | v0.7 — promesas contrastadas, semáforo de los 100 días y refresco automático |
-| **Repositorio** | https://github.com/oprbguitar/08082026ksfu |
+| **Estado** | v0.8 — autoactualización cada 6 h sin pérdidas, lectura amable y hechos de set.–oct. 2026 |
+| **Código fuente** | Repositorio privado de documentación; no se enlaza desde el sitio público |
 | **Dominio** | https://gobierno.quest — registrado en Porkbun, servido por GitHub Pages (`CNAME`). La URL `github.io` redirige al dominio propio: 301 de Pages, guardia inline en el `<head>` y `404.html` |
 | **Inicio** | 8 de agosto de 2026 |
-| **Última actualización de este documento** | 19 de agosto de 2026 |
+| **Última actualización de este documento** | 30 de octubre de 2026 |
 
 ---
 
@@ -44,6 +44,9 @@ inventado.
 | **Fuentes oficiales** | Bloque de enlaces a El Peruano, Congreso, SPIJ, PCM, gob.pe y JNE para verificar cada dato. |
 | **Promesas contrastadas** | Las 17 promesas del Mensaje a la Nación, cada una con su nivel de evidencia y la lista de enlaces que la respaldan, visible bajo la promesa. |
 | **Semáforo de los 100 días** | Las 16 medidas anunciadas para el arranque, clasificadas en verde / ámbar / rojo según haya acto consumado, trámite verificable o solo anuncio. |
+| **Autoactualización** | Tarea programada cada 6 h (barrido completo los domingos): trae normas nuevas de El Peruano, ediciones ordinaria y extraordinaria, y las **suma** sin borrar lo publicado. La sección Normas dice cuándo fue la última carga. |
+| **Detección automática en promesas** | Bajo cada promesa aparecen las normas cuya sumilla la menciona (campo `claves`). Pista para el revisor, no veredicto. |
+| **Lectura amable** | Filtro «Decretos y leyes», glosario de tipos de norma, búsqueda sin tildes, viajes «Próximo / En curso», botón «volver arriba»; la línea de tiempo muestra solo normas de rango mayor. |
 | **Refresco automático** | `version.json` se pide sin caché al entrar a la sesión, al volver a la pestaña y cada 5 minutos; si el sello cambió, el visor se recarga con datos frescos. |
 
 ## 3. Cómo funciona
@@ -129,18 +132,19 @@ documentación, entregadas y funcionales.
 | Contraste documental de las 17 promesas en fuentes publicadas | 9 |
 | Semáforo de los primeros 100 días: 16 medidas con evidencia | 7 |
 | Refresco automático por sello de versión y publicador | 5 |
-| **Total** | **131 h** |
+| Petición 8: recuperación de 2 162 normas, autoactualización sin pérdidas, hechos de set.–oct., lectura amable, privacidad del repo | 12 |
+| **Total** | **143 h** |
 
 ### 5.2 Valuación por estándar de mercado
 
 | Estándar | Tarifa/hora | Valuación |
 |---|---:|---:|
-| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$2.550 – $4.590** |
-| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$6.120 – $9.690** |
-| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$11.220 – $16.320** |
-| Precio por producto (fixed-bid, entregable cerrado) | — | **$8.000 – $11.500** |
+| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$3.575 – $6.435** |
+| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$8.580 – $13.585** |
+| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$15.730 – $22.880** |
+| Precio por producto (fixed-bid, entregable cerrado) | — | **$10.000 – $14.000** |
 
-**Valuación de referencia recomendada: $10.400 USD.** Punto medio del rango
+**Valuación de referencia recomendada: $12.000 USD.** Punto medio del rango
 fixed-bid internacional. Refleja un producto funcional, accesible, documentado,
 sin deuda técnica de dependencias y —lo que más pesa— **con sus datos
 contrastados contra fuente primaria**, no copiados de segunda mano.
@@ -205,7 +209,41 @@ valor más grande disponible, y su costo de infraestructura sigue siendo cero.
 | 4 | 2026-08-08 | Convertirlo en observatorio: 30 módulos propuestos, priorizando promesas, 100 días, timeline, nombramientos/estabilidad y presupuesto | 6 módulos calculados en vivo + 5 con esquema y estado vacío honesto; niveles de evidencia; metodología publicada; 1 defecto corregido | 18 | $6.200 |
 | 5 | 2026-08-08 | Cargar promesas del Mensaje a la Nación; scraping de El Peruano con filtro Congreso/Consejo de Ministros; visor de resoluciones dentro de la app; arreglar enlaces rotos | Scraper de 161 normas con 0 enlaces rotos; 17 promesas; visor incrustado; 3 URLs 404 corregidas; 3 defectos del scraper corregidos | 16 | $7.800 |
 | 6 | 2026-08-08 | Rediseño institucional siguiendo referencia visual, preservando funcionalidad, IDs y datos | Identidad teal; héroe panorámico; 4 KPI derivados; tablero de 4 columnas; tabla de normas; cabecera con «Más»; accesibilidad y responsive verificados; 1 defecto corregido | 20 | $9.600 |
-| 7 | 2026-08-08 | Banner del Perú; encaje tipográfico; cabecera verde y compacta; iniciales centradas con colores alternos; autoría y diálogo «Acerca de» con enlace a Andesnova | 4 variantes WebP (61–242 KB); 4 defectos de CSS corregidos; diálogo accesible; contraste AAA verificado | 8 | **$10.400** |
+| 7 | 2026-08-08 | Banner del Perú; encaje tipográfico; cabecera verde y compacta; iniciales centradas con colores alternos; autoría y diálogo «Acerca de» con enlace a Andesnova | 4 variantes WebP (61–242 KB); 4 defectos de CSS corregidos; diálogo accesible; contraste AAA verificado | 8 | $10.400 |
+| 8 | 2026-10-30 | Actualizar todo lo acontecido y las nuevas políticas; web más amable; avanzar en la autoactualización; ocultar el repositorio; mantener la portada | 2 162 normas recuperadas (el scraper perdía todo lo anterior a octubre); scraper por tramos semanales + edición extraordinaria + fusión sin borrar; Action cada 6 h y barrido dominical; RMV (D.S. 015-2026-TR), Ley 32743, Presupuesto 2027, «Perú en Orden», emergencia Lima/Callao, viajes a El Salvador y Madrid; detección automática en promesas; glosario, filtro y estado de actualización; repo desligado del sitio | 12 | **$12.000** |
+
+### Detalle de la petición 8
+
+**Defecto grave encontrado: el visor había perdido tres meses de normas.**
+`scripts/actualizar.mjs` reemplazaba el bloque de normas con lo que devolvía
+el buscador de El Peruano, y el buscador se recorre hasta 60 páginas. Con un
+periodo de tres meses solo cabía octubre: el bloque tenía 549 normas, **todas
+de octubre**, y nada lo advertía porque superaba el piso de seguridad de 120.
+Se reconstruyó desde todas las versiones de `data.js` en el historial:
+**2 162 normas únicas** (jul 16 · ago 644 · set 799 · oct 703), cada una ya
+verificada en su día.
+
+| Cambio | Detalle |
+|---|---|
+| Recorrido | Por tramos de 7 días y por edición: ordinaria (`NL`) y **extraordinaria** (`EX`) |
+| Fusión | Lo publicado no se borra; clave = enlace del dispositivo |
+| Verificación | Solo los enlaces nuevos: la corrida diaria pasa de ~30 min a minutos |
+| Frecuencia | Cada 6 h (minuto 17) + barrido completo dominical; `git pull --rebase` si hay carrera |
+| Sello | Con hora de Lima; el visor muestra «última carga … (hace N h)» |
+
+**Hechos cargados** (todos con enlace a la fuente): D.S. 015-2026-TR (RMV
+S/ 1 230 desde el 01/10, segundo tramo en 2027), Ley 32743 (facultades por 90
+días, 27 materias; votos de Diputados y Senado), proyecto de Presupuesto 2027
+(S/ 266 506 millones), D.S. 141-2026-PCM («Perú en Orden»), D.S. 142-2026-PCM
+(emergencia Lima/Callao), viajes a El Salvador y a la Cumbre Iberoamericana.
+Semáforo: RMV, El Niño y orden interno pasan a ámbar; Promype sigue en rojo a
+6 días de su plazo (05/11/2026). Pensión 65 sigue sin norma de S/ 700.
+
+**Lo que no se pudo verificar desde este entorno:** el buscador de El Peruano
+no es alcanzable aquí (el Action sí lo alcanza), así que el enlace del D.S.
+015-2026-TR se tomó de su ficha indexada y la Ley 32743 enlaza a la nota de
+prensa; el próximo barrido del Action traerá sus fichas oficiales y el visor
+descarta el duplicado.
 
 ### Detalle de la petición 6
 
