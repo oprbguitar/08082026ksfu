@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261030.0417",          // <- debe coincidir con version.json
+    version: "20261030.0424",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-10-30",
-    actualizadoEn: "2026-10-30T04:17:00-05:00",   // lo reescribe scripts/publicar.mjs
+    actualizadoEn: "2026-10-30T04:24:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -2990,6 +2990,21 @@ const GOVISOR = {
       detalle:"El D.S. 142-2026-PCM extiende desde el 28/10/2026 el estado de emergencia: la Policia mantiene el control del orden interno con apoyo de las Fuerzas Armadas.",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568123-1",
       evidencia:"oficial", verificado:true }
+  ],
+
+  /* 9-BIS. AGENDA: FECHAS FUTURAS CON BASE DOCUMENTAL ---------------------
+     La tarjeta "Proximas fechas" ya calcula sola el dia 100, los viajes
+     futuros y el vencimiento de las facultades. Aqui van solo los plazos
+     que no salen de otros datos. Al pasar la fecha, desaparecen solos.
+     { fecha:"AAAA-MM-DD", titulo:"...", enlace:"" }
+     ------------------------------------------------------------------ */
+  agenda: [
+    { fecha:"2026-11-05", titulo:"Vence el plazo de cien dias para reactivar Promype",
+      enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
+    { fecha:"2026-11-30", titulo:"Plazo constitucional para que el Congreso apruebe el Presupuesto 2027 (art. 80)",
+      enlace:"https://canaln.pe/actualidad/elmer-cuba-sustenta-presupuesto-2027-s266506-millones-y-destaca-crecimiento-35-peru-n494750" },
+    { fecha:"2026-12-26", titulo:"Termina la prorroga del estado de emergencia en Lima y Callao (D.S. 142-2026-PCM)",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568123-1" }
   ],
 
   /* 10. VIAJES OFICIALES ------------------------------------------------- */

@@ -274,6 +274,7 @@
      para fiscalizar pero ruido en la línea de tiempo y en "¿Qué cambió?". */
   const RANGOS_MAYORES = ["Ley", "DL", "DU", "DS", "RL"];
   const esMayor = (n) => RANGOS_MAYORES.includes(n.rango);
+  const ABREV = { Ley:"Ley", DL:"D. Leg.", DU:"D.U.", DS:"D.S.", RL:"R. Leg.", RS:"R.S.", RM:"R.M." };
 
   /** Quita tildes y pasa a minúsculas, para buscar "pension" y hallar "Pensión". */
   const plano = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -677,6 +678,7 @@
       items.push({
         fecha: n.fecha, tipo: "norma",
         titulo: [n.tipo, n.numero].filter(Boolean).join(" N.º "),
+        corto: [ABREV[n.rango] || n.tipo, n.numero].filter(Boolean).join(" "),
         detalle: n.sumilla, enlace: n.enlace, ev: n.evidencia
       });
     });
@@ -730,12 +732,14 @@
       const d = diasEntre(fecha(i.fecha), hoy);
       const cuando = d === 0 ? t("t.hoy") : d === 1 ? t("t.ayer") : t("t.haceN", { n: d });
       const url = urlSegura(i.enlace);
+      const corto = i.corto || i.titulo;
       const tit = url
-        ? `<a href="${esc(url)}" data-visor="${esc(url)}" data-titulo="${esc(i.titulo)}" data-sumilla="${esc(i.detalle || "")}">${esc(i.titulo)}</a>`
-        : esc(i.titulo);
+        ? `<a href="${esc(url)}" data-visor="${esc(url)}" data-titulo="${esc(i.titulo)}" data-sumilla="${esc(i.detalle || "")}">${esc(corto)}</a>`
+        : esc(corto);
+      const resumen = i.corto && i.detalle ? `<span class="cambio-d">${esc(i.detalle)}</span>` : "";
       return `<li>
         <span class="pip pip-${PIP[i.tipo] || "naranja"}" aria-hidden="true">${ICO[i.tipo] || "•"}</span>
-        <span class="cambio-t"><b>${tit}</b>
+        <span class="cambio-t"><b>${tit}</b>${resumen}
         <time>${cuando} · ${esc(fechaCorta(i.fecha))}</time></span>
         ${sellEv(i.ev)}
       </li>`;
@@ -743,7 +747,7 @@
 
     if (recientes.length) {
       $("cambiosVentana").textContent = t("c.ventana", { n: VENTANA_DIAS });
-      cont.innerHTML = recientes.slice(0, 6).map(fila).join("");
+      cont.innerHTML = recientes.slice(0, 4).map(fila).join("");
     } else {
       // Sin movimientos en la ventana: se dice, y se muestra lo último real.
       $("cambiosVentana").textContent = t("c.sinMov");
@@ -1404,7 +1408,8 @@
     }
     const filas = items.map((i) =>
       `<li><span class="f">${esc(fechaCorta(i.fecha))}</span>
-       <span class="t">${esc(i.titulo)}</span></li>`).join("");
+       <span class="t">${esc(i.corto || i.titulo)}</span>
+       ${i.corto && i.detalle ? `<span class="tl-mini-d">${esc(i.detalle)}</span>` : ""}</li>`).join("");
 
     // Estado en curso: solo si los 100 días siguen corriendo (dato real).
     const d = sel.diaGobierno();
@@ -1412,6 +1417,48 @@
       ? `<li class="curso"><span class="f">${t("tab.enCurso")}</span>
          <span class="t">${t("tab.primeros100")}</span></li>` : "";
     cont.innerHTML = filas + curso;
+  }
+
+  /* ── Próximas fechas ───────────────────────────────────────────────
+     Derivadas: día 100, viajes futuros y vencimiento de las facultades
+     (otorgada + 90 días). Manuales: GOVISOR.agenda. Lo vencido se cae solo. */
+  function pintarAgenda() {
+    const cont = $("agenda");
+    const hoy = hoyLima();
+    const mas = (iso, n) => {
+      const f = fecha(iso);
+      return f ? new Date(f.getTime() + n * 864e5).toISOString().slice(0, 10) : "";
+    };
+    const items = [];
+    const p = GOVISOR.presidencia;
+    if (p.fechaAsuncion) items.push({ fecha: mas(p.fechaAsuncion, 100), titulo: t("ag.dia100"), ico: "◷" });
+    (GOVISOR.viajes || []).forEach((v) => items.push({
+      fecha: v.desde, titulo: t("ag.viaje", { d: v.destino || "—" }), ico: "✈",
+      enlace: v.norma && v.norma.enlace }));
+    ((GOVISOR.congreso || {}).facultades || []).forEach((f) => {
+      const dias = parseInt(f.plazo, 10);
+      if (!f.otorgada || !dias) return;
+      const ley = (String(f.estado).match(/Ley \d+/) || [""])[0];
+      items.push({ fecha: mas(f.otorgada, dias), titulo: t("ag.facultades", { n: ley || f.plazo }),
+        ico: "⚖", enlace: f.enlace });
+    });
+    (GOVISOR.agenda || []).forEach((a) => items.push(Object.assign({ ico: "◆" }, a)));
+
+    const prox = items
+      .map((i) => Object.assign(i, { d: diasEntre(hoy, fecha(i.fecha)) }))
+      .filter((i) => i.d != null && i.d >= 0)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 4);
+
+    if (!prox.length) { cont.innerHTML = `<li class="vac">${t("ag.vacio")}</li>`; return; }
+    cont.innerHTML = prox.map((i) => {
+      const cuenta = i.d === 0 ? t("ag.hoy") : i.d === 1 ? t("ag.manana") : t("ag.enN", { n: i.d });
+      const u = urlSegura(i.enlace);
+      const tit = u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(i.titulo)}</a>` : esc(i.titulo);
+      return `<li class="${i.d <= 7 ? "pronto" : ""}">
+        <span class="ag-f"><b>${esc(fechaCorta(i.fecha).slice(0, 5))}</b><small>${cuenta}</small></span>
+        <span class="ag-t">${tit}</span></li>`;
+    }).join("");
   }
 
   /* ── Consejo de Ministros: 3 representativos ───────────────────────── */
@@ -1462,6 +1509,7 @@
     pintarPromesasResumen();
     pintarTimelineMini();
     pintarGabineteResumen();
+    pintarAgenda();
     pintarCambios();
     pintarReloj130();
     pintar100();
@@ -1757,6 +1805,7 @@
     pintarPromesasResumen();
     pintarTimelineMini();
     pintarGabineteResumen();
+    pintarAgenda();
 
     // Módulos del observatorio
     pintarCambios();
