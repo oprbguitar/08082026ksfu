@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261030.1302",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-10-30",
-    actualizadoEn: "2026-10-30T13:02:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261031.2440",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-10-31",
+    actualizadoEn: "2026-10-31T24:40:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,9 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 2248 normas · enlaces verificados uno por uno
+   Desde 20260728 · 2249 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN", numero:"D000224-2026-MIDAGRI-SERFOR-DE", rango:"Res", sector:"MIDAGRI", fecha:"2026-10-30", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban otorgamiento de subvenciones a favor de dos Entidades Ejecutoras que ejecutarán sus respectivos Planes de Negocio Forestal (para el hito 1)", entidad:"DESARROLLO AGRARIO Y RIEGO", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2570202-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"413-2026-VIVIENDA", rango:"RM", sector:"MVCS", fecha:"2026-10-30", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban los Valores Unitarios Oficiales de Edificación para Lima Metropolitana y la Provincia Constitucional del Callao, la Costa, la Sierra y la Selva, vigentes para el Ejercicio Fiscal 2027", entidad:"VIVIENDA, CONSTRUCCIÓN Y SANEAMIENTO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568228-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"459-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-10-30", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban segunda modificación de la concesión definitiva para generación de energía eléctrica con recursos hídricos en el proyecto “Centrales Hidroeléctricas Anto Ruiz III y Anto Ruiz IV”, ubicado en los distritos de Ayapata e Ituata, provincia de Carabaya, departamento de Puno", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568346-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0177-2026-MINEM-DGE", rango:"Res", sector:"MINEM", fecha:"2026-10-30", origen:"ejecutivo", accion:"promulgada", sumilla:"Otorgan a favor de Solartia Distribución Perú S.A.C. la concesión eléctrica rural para desarrollar la actividad de distribución de energía eléctrica en el proyecto “Sistema Eléctrico Rural Líneas y Redes Primarias en 22,9 kV y Redes Secundarias en 0,38-0,22 kV para la localidad de Sepahua – distrito de Sepahua, provincia de Atalaya, departamento de Ucayali”", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568681-1", verificado:true, evidencia:"oficial" },
