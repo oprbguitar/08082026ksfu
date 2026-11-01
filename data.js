@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261031.0729",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-10-31",
-    actualizadoEn: "2026-10-31T07:29:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261101.0103",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-01",
+    actualizadoEn: "2026-11-01T01:03:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,11 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 2286 normas · enlaces verificados uno por uno
+   Desde 20260728 · 2289 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01343-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-10-31", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de personal de la Fuerza Aérea del Perú a Chile, en comisión de servicios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2570402-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"419-2026-VIVIENDA", rango:"RM", sector:"MVCS", fecha:"2026-10-31", origen:"ejecutivo", accion:"promulgada", sumilla:"Modifican la R.M. Nº 383-2026-VIVIENDA que delegó facultades y atribuciones en funcionarios y servidores del Ministerio", entidad:"VIVIENDA, CONSTRUCCIÓN Y SANEAMIENTO", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2570404-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"00389-2026-PRODUCE", rango:"RM", sector:"PRODUCE", fecha:"2026-10-31", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban el Plan para la Reactivación del Sector Textil y Confecciones", entidad:"PRODUCE", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2570405-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"374-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-10-31", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesional de PROMPERÚ para participar en feria a realizarse en España", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2565564-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"456-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-10-31", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban texto de la Sexta Modificación al Contrato de Concesión N° 028-94, a suscribirse entre el Ministerio de Energía y Minas y la empresa ELECTRO DUNAS S.A.A., a fin de modificar anexos, y dictan otras disposiciones", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2567254-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"384-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-10-31", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de representantes de PROMPERÚ para participar en evento a realizarse en los Estados Unidos Mexicanos", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2567428-1", verificado:true, evidencia:"oficial" },
