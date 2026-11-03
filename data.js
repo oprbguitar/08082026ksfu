@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261102.0101",          // <- debe coincidir con version.json
+    version: "20261102.1958",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-11-02",
-    actualizadoEn: "2026-11-02T01:01:00-05:00",   // lo reescribe scripts/publicar.mjs
+    actualizadoEn: "2026-11-02T19:58:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,9 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 2944 normas · enlaces verificados uno por uno
+   Desde 20260728 · 2945 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000406-2026-MC", rango:"RM", sector:"MINCUL", fecha:"2026-11-02", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Asesora II del Despacho Ministerial del Ministerio de Cultura", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2570497-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"390-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-02", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesional del MINCETUR a la Confederación Suiza, en comisión de servicios", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568402-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000311-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-02", origen:"ejecutivo", accion:"promulgada", sumilla:"Declaran Patrimonio Cultural de la Nación la serie documental “Resoluciones Supremas del Ministerio de Justicia, Instrucción, Culto y Beneficencia (1912-1935)”, custodiadas en el Archivo Central del Ministerio de Justicia y Derechos Humanos", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2569503-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1581-2026-IN", rango:"RM", sector:"MININTER", fecha:"2026-11-02", origen:"ejecutivo", accion:"promulgada", sumilla:"Modifican la Resolución Ministerial N° 0028-2026-IN referida a delegación de facultades en responsables de unidades ejecutoras", entidad:"INTERIOR", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2569939-1", verificado:true, evidencia:"oficial" },
