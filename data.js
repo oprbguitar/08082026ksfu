@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261103.0914",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-03",
-    actualizadoEn: "2026-11-03T09:14:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261104.0122",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-04",
+    actualizadoEn: "2026-11-04T01:22:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,10 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 2964 normas · enlaces verificados uno por uno
+   Desde 20260728 · 2966 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000041-2026-DSFL-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-03", origen:"ejecutivo", accion:"promulgada", sumilla:"Disponen el inicio del procedimiento de saneamiento físico legal del bien inmueble prehispánico denominado “Cementerio Chaviña”, ubicado en el distrito de Bella Unión, provincia de Caravelí, departamento de Arequipa", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2571128-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000409-2026-MC", rango:"RM", sector:"MINCUL", fecha:"2026-11-03", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesionales del Instituto Nacional de Radio y Televisión del Perú, a la República Italiana, a la República Oriental del Uruguay y a la República Argentina, en comisión de servicios", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2571237-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000313-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-03", origen:"ejecutivo", accion:"promulgada", sumilla:"Declaran Patrimonio Cultural de la Nación el Carnaval T’ika Orqo Sillarumi, vigente en el ámbito de las comunidades campesinas de Huancuire, Anta Anta, Patario, Huaraccoyo, Queuña, Chontahuillque, Choccoyo, Llamahuire, Cuchuhuacho, Tambulla, Lahuani y Pararani, ubicadas en el distrito de Challhuahuacho, provincia de Cotabambas, departamento de Apurímac", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2570359-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"466-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-11-03", origen:"ejecutivo", accion:"promulgada", sumilla:"Formalizan transferencia a título gratuito de bienes que conforman Proyectos de Electrificación Rural a favor de Electro Sur Este S.A.A.", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2570466-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"467-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-11-03", origen:"ejecutivo", accion:"promulgada", sumilla:"Formalizan transferencia a título gratuito de bienes del Proyecto de Electrificación Rural a favor de Electro Oriente S.A.", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2570498-1", verificado:true, evidencia:"oficial" },
