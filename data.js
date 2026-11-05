@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261104.1446",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-04",
-    actualizadoEn: "2026-11-04T14:46:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261105.0146",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-05",
+    actualizadoEn: "2026-11-05T01:46:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,10 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3006 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3008 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"406-2026-JUS", rango:"RM", sector:"MINJUSDH", fecha:"2026-11-04", origen:"ejecutivo", accion:"promulgada", sumilla:"Delegan facultades en el marco de la Ley N° 30225 y su Reglamento y en el ámbito del PRONAPRES, y modifican la R.M. N° 0475-2025-JUS", entidad:"JUSTICIA Y DERECHOS HUMANOS", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2571536-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01358-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-04", origen:"ejecutivo", accion:"promulgada", sumilla:"Amplían plazo de vigencia del Grupo de Trabajo Multisectorial creado mediante la R.M. N° 01102-2026-DE", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2571981-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0609-2026-MTC/17.03", rango:"Res", sector:"MTC", fecha:"2026-11-04", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan a la empresa CENTRO DE INSPECCION TECNICA VEHICULAR SAN JOSE S.A.C. - C.I.T.V. SAN JOSE S.A.C., para operar como Centro de Inspección Técnica Vehicular Fijo en local ubicado en el departamento de Arequipa", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2569249-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"001658-2026-DE-DDC-CUS/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-04", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan la Protección Provisional del Bien Inmueble Prehispánico denominado “Paisaje Arqueológico Llaqtapukara-Ayapukara-Tambopukara”, ubicado en el distrito de Acos, provincia de Acomayo, departamento de Cusco", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2569504-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"404-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-04", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesional del MINCETUR a España, en comisión de servicios", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2570338-1", verificado:true, evidencia:"oficial" },
