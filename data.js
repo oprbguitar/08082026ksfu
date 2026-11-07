@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261106.0144",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-06",
-    actualizadoEn: "2026-11-06T01:44:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261107.2458",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-07",
+    actualizadoEn: "2026-11-07T24:58:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,14 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3062 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3068 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D00287-2026-MIDIS", rango:"RM", sector:"MIDIS", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Asesor del Despacho Ministerial del Ministerio de Desarrollo e Inclusión Social", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572395-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000410-2026-MC", rango:"RM", sector:"MINCUL", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Modifican el artículo 2 de la Resolución Ministerial N° 000409-2026-MC, sobre gastos de viaje de profesionales del IRTP a Italia, Uruguay, Argentina y Perú", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572648-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN", numero:"000162-2026-SG/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban inclusión de cuatro (04) cargos estructurales en el Manual de Clasificador de Cargos del Ministerio de Cultura", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572663-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"989-2026/MINSA", rango:"RM", sector:"MINSA", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan la ejecución del \"Piloto de Interoperabilidad y Seguridad Digital de los Sistemas de Información de Historias Clínicas Electrónicas para su Incorporación al RENHICE\"", entidad:"SALUD", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572671-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01363-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan transferencia financiera de recursos a favor de la Caja de Pensiones Militar Policial", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572698-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1617-2026-IN", rango:"RM", sector:"MININTER", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan transferencia financiera de recursos a favor de la Caja de Pensiones Militar Policial", entidad:"INTERIOR", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572723-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"391-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-06", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesionales del Viceministerio de Comercio Exterior para participar en evento a realizarse en China", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568405-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0618-2026-MTC/17.03", rango:"Res", sector:"MTC", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Renuevan autorización a la empresa CORPORACION CORTEC S.A.C. para operar como Centro de Inspección Técnica Vehicular Fijo en local ubicado en el departamento de Moquegua", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2570645-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0620-2026-MTC/17.03", rango:"Res", sector:"MTC", fecha:"2026-11-06", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan a la empresa SISTEMA DE INSPECCION TECNICA CONTINENTAL S.A.C. - SITCON S.A.C. para operar como Centro de Inspección Técnica Vehicular Fijo en el local ubicado en el departamento de Cajamarca", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2570677-1", verificado:true, evidencia:"oficial" },
