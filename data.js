@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261107.0800",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-07",
-    actualizadoEn: "2026-11-07T08:00:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261108.0100",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-08",
+    actualizadoEn: "2026-11-08T01:00:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,11 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3090 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3093 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"679-2026-MINEDU", rango:"RM", sector:"MINEDU", fecha:"2026-11-07", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban la Norma Técnica denominada “Disposiciones para el desarrollo de la Hora de la Lectura en las instituciones y programas educativos públicos y privados de la educación básica”", entidad:"EDUCACIÓN", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572829-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"680-2026-MINEDU", rango:"RM", sector:"MINEDU", fecha:"2026-11-07", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban la Norma Técnica denominada “Disposiciones para la organización e implementación del Plan Lector durante el período lectivo y vacacional en las instituciones y programas educativos públicos y privados de la Educación Básica\"", entidad:"EDUCACIÓN", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572830-1", verificado:true, evidencia:"oficial" },
+    { tipo:"DECRETO SUPREMO", numero:"021-2026-MINEDU", rango:"DS", sector:"MINEDU", fecha:"2026-11-07", origen:"ejecutivo", accion:"promulgada", sumilla:"Decreto Supremo que aprueba los \"Lineamientos para la gestión de la disciplina escolar en la Educación Básica\"", entidad:"EDUCACIÓN", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572850-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"396-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-07", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de personal de la Dirección General de Negociaciones Comerciales Internacionales a la República Socialista de Vietnam, en comisión de servicios", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2569032-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"637-2026-MTC/01.03", rango:"RM", sector:"MTC", fecha:"2026-11-07", origen:"ejecutivo", accion:"promulgada", sumilla:"Otorgan a la empresa VILARIX S.A.C. Concesión Única para la prestación de servicios públicos de telecomunicaciones en área que comprende todo el territorio de la República", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572204-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"638-2026-MTC/01.03", rango:"RM", sector:"MTC", fecha:"2026-11-07", origen:"ejecutivo", accion:"promulgada", sumilla:"Otorgan a la empresa AMERICANET WORLDWIDE S.A.C. Concesión Única para la prestación de servicios públicos de telecomunicaciones en área que comprende todo el territorio de la República", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572208-1", verificado:true, evidencia:"oficial" },
