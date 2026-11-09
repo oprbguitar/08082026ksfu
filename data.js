@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261108.0824",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-08",
-    actualizadoEn: "2026-11-08T08:24:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261109.0127",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-09",
+    actualizadoEn: "2026-11-09T01:27:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,17 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3119 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3128 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"407-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-09", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de Viceministra de Turismo y profesional del MINCETUR a Emiratos Árabes Unidos, en comisión de servicios", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572074-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"413-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-09", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesional de PROMPERÚ para participar en evento que se realizará en Argentina", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572572-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"416-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-09", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Directora de Desarrollo Artesanal de la Dirección General de Artesanía", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572814-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01373-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-09", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de oficial de la Fuerza Aérea del Perú a Brasil, en comisión de servicios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572853-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01374-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-09", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de oficiales de la Fuerza Aérea del Perú a Chile, en comisión de servicios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572854-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000289-2026-MIDIS", rango:"RM", sector:"MIDIS", fecha:"2026-11-09", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Directora de la Dirección de Investigación y Proyección Macro Social de la Dirección General de Políticas y Estrategias", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572855-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN", numero:"000243-2026-MIDIS-FONCODES-DE", rango:"Res", sector:"MIDIS", fecha:"2026-11-09", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Ejecutiva y Especialista de Modernización de la Gestión Pública de la Unidad de Planeamiento, Presupuesto y Modernización del FONCODES", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572856-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN JEFATURAL", numero:"000174-2026-SIS/J", rango:"Res", sector:"MINSA", fecha:"2026-11-09", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban Transferencia Financiera del SIS a favor del Ministerio de Defensa, Fuerza Aérea del Perú, para el financiamiento de las prestaciones administrativas brindadas a los asegurados", entidad:"SEGURO INTEGRAL DE SALUD", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572857-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"509-2026-EF/52", rango:"RM", sector:"MEF", fecha:"2026-11-08", origen:"ejecutivo", accion:"promulgada", sumilla:"Resolución Ministerial que dicta disposiciones para la implementación de emisión externa de bonos, de operación de endeudamiento y de operación de administración de deuda, así como se aprueba otras disposiciones", entidad:"ECONOMÍA Y FINANZAS", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572859-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"406-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-08", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de representantes de PROMPERÚ para participar en evento a realizarse en la República de Panamá", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2571309-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000292-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-08", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan la Protección Provisional del sitio arqueológico Qocha Orqo, ubicado entre los distritos de Los Morochucos y Cangallo, provincia de Cangallo, departamento de Ayacucho", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572401-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000293-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-08", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan Protección Provisional del Paisaje Arqueológico “Camino Prehispánico de Pillcosay – Sachaorcco”, ubicado en el distrito de Acobamba, provincia de Acobamba, departamento de Huancavelica", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572412-1", verificado:true, evidencia:"oficial" },
