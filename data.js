@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261111.0119",          // <- debe coincidir con version.json
+    version: "20261111.1436",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-11-11",
-    actualizadoEn: "2026-11-11T01:19:00-05:00",   // lo reescribe scripts/publicar.mjs
+    actualizadoEn: "2026-11-11T14:36:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,9 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3181 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3182 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000317-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-11", origen:"ejecutivo", accion:"promulgada", sumilla:"Declaran como Patrimonio Cultural de la Nación el documento que contiene el título de nacionalización y el manuscrito de la solicitud de nacionalización de Robert Francis Prevost - Papa León XIV", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2573683-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000295-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-11", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan Protección Provisional del sitio arqueológico y Paisaje Arqueológico Camino Real Maraycalla, ubicado entre los distritos de San Luis y Yauya, provincia de Carlos Fermín Fitzcarrald, departamento de Áncash", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572867-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0628-2026-MTC/17.03", rango:"Res", sector:"MTC", fecha:"2026-11-11", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan a la empresa REVISIONES TECNICAS L & J S.A.C. - RT L & J S.A.C., la modificación de la autorización de funcionamiento como Centro de Inspección Técnica Vehicular Fijo en local ubicado en el distrito de Lurín, provincia y departamento de Lima", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572922-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"644-2026-MTC/01.02", rango:"RM", sector:"MTC", fecha:"2026-11-11", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de inspector de la Dirección General de Aeronáutica Civil a los Estados Unidos de América, en comisión de servicios", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2573022-1", verificado:true, evidencia:"oficial" },
