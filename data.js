@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261112.0210",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-12",
-    actualizadoEn: "2026-11-12T02:10:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261113.0145",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-13",
+    actualizadoEn: "2026-11-13T01:45:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,13 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3201 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3206 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"479-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-11-12", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Director General de la Dirección General de Hidrocarburos", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2574168-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01390-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-12", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de alumnas de la Fuerza Aérea del Perú a Brasil, en misión de estudios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2574483-1", verificado:true, evidencia:"oficial" },
+    { tipo:"DECRETO SUPREMO", numero:"019-2026-SA", rango:"DS", sector:"MINSA", fecha:"2026-11-12", origen:"ejecutivo", accion:"promulgada", sumilla:"Decreto Supremo que prorroga la Emergencia Sanitaria por brote de sarampión con transmisión local confirmada en el departamento de Puno y riesgo elevado de diseminación en Lima Metropolitana, en los departamentos de Arequipa, Cusco, Huancavelica, Moquegua, Amazonas, Loreto, Tacna, Tumbes, Ucayali, Madre de Dios y Apurímac, y en la Provincia Constitucional del Callao, declarada por Decreto Supremo N° 008-2026-SA, y modifica el Anexo II", entidad:"SALUD", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2574517-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"222-2026-JUS", rango:"RS", sector:"MINJUSDH", fecha:"2026-11-12", origen:"ejecutivo", accion:"promulgada", sumilla:"Acceden a solicitud de extradición activa de ciudadano peruano para ser extraditado de la República Italiana y cumplir en la República del Perú la condena impuesta", entidad:"JUSTICIA Y DERECHOS HUMANOS", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2574517-2", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"223-2026-JUS", rango:"RS", sector:"MINJUSDH", fecha:"2026-11-12", origen:"ejecutivo", accion:"promulgada", sumilla:"Acceden a solicitud de extradición activa de ciudadano peruano para ser extraditado del Reino de España y cumplir en la República del Perú la condena impuesta", entidad:"JUSTICIA Y DERECHOS HUMANOS", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2574517-3", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"475-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-11-12", origen:"ejecutivo", accion:"promulgada", sumilla:"Otorgan a favor de la empresa GR MITOCONGA S.A.C., la concesión temporal de transmisión del proyecto “Línea de Transmisión en 220 kV SE Montalvo – SE Ubinas”, ubicado en el departamento de Moquegua", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2572987-1", verificado:true, evidencia:"oficial" },
     { tipo:"CONVENIO", numero:"Acuerdo entre la República del Perú y la República de Honduras", rango:"Otro", sector:"RREE", fecha:"2026-11-12", origen:"ejecutivo", accion:"promulgada", sumilla:"Acuerdo sobre Cooperación en Materia de Producción, Prevención del Consumo, Rehabilitación, Control del Tráfico Ilícito de Drogas y Sustancias Psicotrópicas y Delitos Conexos entre la República del Perú y la República de Honduras", entidad:"RELACIONES EXTERIORES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2573310-1", verificado:true, evidencia:"oficial" },
     { tipo:"CONVENIO", numero:"Acuerdo entre la República del Perú y la República de Honduras", rango:"Otro", sector:"RREE", fecha:"2026-11-12", origen:"ejecutivo", accion:"promulgada", sumilla:"Entrada en vigor del “Acuerdo sobre Cooperación en Materia de Producción, Prevención del Consumo, Rehabilitación, Control del Tráfico Ilícito de Drogas y Sustancias Psicotrópicas y Delitos Conexos entre la República del Perú y la República de Honduras”", entidad:"RELACIONES EXTERIORES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2573314-1", verificado:true, evidencia:"oficial" },
