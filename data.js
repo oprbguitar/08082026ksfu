@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261114.1301",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-14",
-    actualizadoEn: "2026-11-14T13:01:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261115.0131",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-15",
+    actualizadoEn: "2026-11-15T01:31:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,9 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3274 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3275 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN", numero:"D000117-2026-MIDIS/P65-DE", rango:"Res", sector:"MIDIS", fecha:"2026-11-14", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Jefa de la Unidad de Tecnologías de la Información del Programa Nacional de Asistencia Solidaria “Pensión 65”", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2575001-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"0635-2026-MTC/17.03", rango:"Res", sector:"MTC", fecha:"2026-11-14", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan a la empresa CITV FIANZA E.I.R.L. para operar como Centro de Inspección Técnica Vehicular Fijo, en local ubicado en el departamento de Lima", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2573424-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000302-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-14", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan la Protección Provisional del Paisaje Arqueológico Lomas de Pativilca Upaca, ubicado en el distrito de Pativilca, provincia de Barranca, departamento de Lima", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574188-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"480-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-11-14", origen:"ejecutivo", accion:"promulgada", sumilla:"Califican como fuerza mayor el evento denominado: “Demora en el establecimiento de la servidumbre”, el cual afectó la ruta crítica del Calendario de Ejecución de Obras de la concesión definitiva para desarrollar la actividad de transmisión de energía eléctrica en el proyecto “Línea de Transmisión en 220 kV S.E. Solimana – S.E. Ocoña”", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574467-1", verificado:true, evidencia:"oficial" },
