@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261115.1100",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-15",
-    actualizadoEn: "2026-11-15T11:00:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261116.0128",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-16",
+    actualizadoEn: "2026-11-16T01:28:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,15 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3296 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3303 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1634-2026-IN", rango:"RM", sector:"MININTER", fecha:"2026-11-16", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Jefa de Atención al Ciudadano y Gestión Documental", entidad:"INTERIOR", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574538-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000026-2026-INACAL/DN", rango:"Res", sector:"PRODUCE", fecha:"2026-11-16", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban Normas Técnicas Peruanas referentes a ensayos de concreto proyectado, actividades relacionadas con los servicios de agua potable y aguas residuales, carne y otros", entidad:"PRODUCE", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574573-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01568-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-16", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de oficiales de la Marina de Guerra del Perú a Colombia, en misión de estudios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575009-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01569-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-16", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de personal militar del Ejército del Perú a Colombia, en misión de estudios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575010-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"659 -2026-MTC/01", rango:"RM", sector:"MTC", fecha:"2026-11-16", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Director de la Dirección de Circulación Vial de la Dirección General de Autorizaciones en Transportes", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575011-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN JEFATURAL", numero:"000177-2026-SIS/J", rango:"Res", sector:"MINSA", fecha:"2026-11-16", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban transferencia financiera a favor de unidades ejecutoras, para el financiamiento de prestaciones de salud brindadas a los asegurados del SIS", entidad:"SEGURO INTEGRAL DE SALUD", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575012-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"425-2026-MINCETUR", rango:"RM", sector:"MINCETUR", fecha:"2026-11-16", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de representantes de PROMPERÚ para participar en evento a realizarse en Brasil", entidad:"COMERCIO EXTERIOR Y TURISMO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575021-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000303-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-15", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan Protección Provisional del Sitio Arqueológico Mata Gutosh, ubicado en el distrito de Huántar, provincia de Huari, departamento de Áncash", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574527-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000305-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-15", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan Protección Provisional del Sitio Arqueológico Cerro Blanco, ubicado en el distrito Comandante Noel, provincia de Casma, departamento de Áncash", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574531-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000306-2026-DGPA-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-15", origen:"ejecutivo", accion:"promulgada", sumilla:"Determinan la Protección Provisional del sitio arqueológico Pircullama, ubicado en el distrito de Mantaro, provincia de Jauja, departamento de Junín", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574533-1", verificado:true, evidencia:"oficial" },
