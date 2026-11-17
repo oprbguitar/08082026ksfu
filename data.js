@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261116.0128",          // <- debe coincidir con version.json
-    ultimaActualizacion: "2026-11-16",
-    actualizadoEn: "2026-11-16T01:28:00-05:00",   // lo reescribe scripts/publicar.mjs
+    version: "20261117.0255",          // <- debe coincidir con version.json
+    ultimaActualizacion: "2026-11-17",
+    actualizadoEn: "2026-11-17T02:55:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,13 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3303 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3308 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN", numero:"002436-2026-MIDIS/PNCM-DE", rango:"Res", sector:"MIDIS", fecha:"2026-11-17", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Coordinador de Abastecimiento y Servicios Generales de la Unidad de Administración del Programa Nacional Cuna Más", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575332-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN", numero:"002437-2026-MIDIS/PNCM-DE", rango:"Res", sector:"MIDIS", fecha:"2026-11-17", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Ejecutivo de Gestión del Talento Humano de la Unidad de Gestión del Talento Humano del Programa Nacional Cuna Más", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575333-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN", numero:"002438-2026-MIDIS/PNCM-DE", rango:"Res", sector:"MIDIS", fecha:"2026-11-17", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Ejecutivo de Administración de la Unidad de Administración del Programa Nacional Cuna Más", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575334-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN", numero:"002439-2026-MIDIS/PNCM-DE", rango:"Res", sector:"MIDIS", fecha:"2026-11-17", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Ejecutiva de Atención Integral de la Unidad Técnica de Atención Integral del Programa Nacional Cuna Más", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575335-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN DIRECTORAL", numero:"D000047-2026-MIDAGRI-SENASA-DSV", rango:"Res", sector:"MIDAGRI", fecha:"2026-11-16", origen:"ejecutivo", accion:"promulgada", sumilla:"Modifican las Resoluciones Directorales N° D000030-2026-MIDAGRI-SENASA-DSV y N° D000031-2026-MIDAGRI-SENASA-DSV en lo referido a su entrada en vigencia, y dictan otras disposiciones", entidad:"DESARROLLO AGRARIO Y RIEGO", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2575151-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1634-2026-IN", rango:"RM", sector:"MININTER", fecha:"2026-11-16", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Jefa de Atención al Ciudadano y Gestión Documental", entidad:"INTERIOR", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574538-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"000026-2026-INACAL/DN", rango:"Res", sector:"PRODUCE", fecha:"2026-11-16", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban Normas Técnicas Peruanas referentes a ensayos de concreto proyectado, actividades relacionadas con los servicios de agua potable y aguas residuales, carne y otros", entidad:"PRODUCE", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574573-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"01568-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-11-16", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de oficiales de la Marina de Guerra del Perú a Colombia, en misión de estudios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575009-1", verificado:true, evidencia:"oficial" },
