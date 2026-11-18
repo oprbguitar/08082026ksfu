@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261118.0229",          // <- debe coincidir con version.json
+    version: "20261118.1531",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-11-18",
-    actualizadoEn: "2026-11-18T02:29:00-05:00",   // lo reescribe scripts/publicar.mjs
+    actualizadoEn: "2026-11-18T15:31:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,7 +166,7 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3328 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3330 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"411-2026-JUS", rango:"RM", sector:"MINJUSDH", fecha:"2026-11-18", origen:"ejecutivo", accion:"promulgada", sumilla:"Cancelan, por causal de muerte, el título de Notario del distrito de Tarapoto, provincia y departamento de San Martín, perteneciente al Distrito Notarial de San Martín", entidad:"JUSTICIA Y DERECHOS HUMANOS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575447-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"1030-2026-MTC/20", rango:"Res", sector:"MTC", fecha:"2026-11-18", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Jefe de la Unidad Zonal XV – Arequipa del Proyecto Especial de Infraestructura de Transporte Nacional – PROVÍAS NACIONAL", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575614-1", verificado:true, evidencia:"oficial" },
@@ -182,6 +182,8 @@ const GOVISOR = {
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"694-2026-MINEDU", rango:"RM", sector:"MINEDU", fecha:"2026-11-18", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Secretario Nacional de la Juventud", entidad:"EDUCACIÓN", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575809-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"660-2026-MTC/01.03", rango:"RM", sector:"MTC", fecha:"2026-11-18", origen:"ejecutivo", accion:"promulgada", sumilla:"Otorgan a la empresa A.L TELECOM S.A.C. Concesión Única para la prestación de los servicios públicos de telecomunicaciones", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575810-1", verificado:true, evidencia:"oficial" },
     { tipo:"DECRETO SUPREMO", numero:"258-2026-EF", rango:"DS", sector:"MEF", fecha:"2026-11-18", origen:"ejecutivo", accion:"promulgada", sumilla:"Decreto Supremo que autoriza Transferencia de Partidas en el Presupuesto del Sector Público para el Año Fiscal 2026 a favor de diversos gobiernos locales", entidad:"ECONOMÍA Y FINANZAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575820-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN SUPREMA", numero:"118-2026-DE", rango:"RS", sector:"MINDEF", fecha:"2026-11-18", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Director y Presidente del Consejo Directivo de la Caja de Pensiones Militar - Policial", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575820-3", verificado:true, evidencia:"oficial" },
+    { tipo:"DECRETO SUPREMO", numero:"022-2026-MINEDU", rango:"DS", sector:"MINEDU", fecha:"2026-11-18", origen:"ejecutivo", accion:"promulgada", sumilla:"Decreto Supremo que declara de interés nacional la realización del evento deportivo internacional “XV Campeonato de Tiro de las Américas – Lima 2026”", entidad:"EDUCACIÓN", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575821-3", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN", numero:"D000119-2026-MIDIS/P65-DE", rango:"Res", sector:"MIDIS", fecha:"2026-11-17", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Jefe de la Unidad de Comunicación e Imagen del Programa Nacional de Asistencia Solidaria “Pensión 65”", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2575385-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"000419-2026-MC", rango:"RM", sector:"MINCUL", fecha:"2026-11-17", origen:"ejecutivo", accion:"promulgada", sumilla:"Otorgan distinción de Medalla de Honor de la Cultura", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2575534-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"718-2026-RE", rango:"RM", sector:"RREE", fecha:"2026-11-17", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de funcionaria diplomática a los Estados Unidos de América, en comisión de servicios", entidad:"RELACIONES EXTERIORES", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2575701-1", verificado:true, evidencia:"oficial" },
