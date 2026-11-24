@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261124.0454",          // <- debe coincidir con version.json
+    version: "20261124.1726",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-11-24",
-    actualizadoEn: "2026-11-24T04:54:00-05:00",   // lo reescribe scripts/publicar.mjs
+    actualizadoEn: "2026-11-24T17:26:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,10 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3470 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3472 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"1039-2026/MINSA", rango:"RM", sector:"MINSA", fecha:"2026-11-24", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesionales de la Dirección General de Medicamentos, Insumos y Drogas a la República de la India, en comisión de servicios", entidad:"SALUD", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2577755-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"433-2026-VIVIENDA", rango:"RM", sector:"MVCS", fecha:"2026-11-24", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan Transferencia Financiera a favor del Fondo MIVIVIENDA S.A.", entidad:"VIVIENDA, CONSTRUCCIÓN Y SANEAMIENTO", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2577786-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"494-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-11-24", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Líder de Gobierno y Transformación Digital del Ministerio de Energía y Minas", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2577537-1", verificado:true, evidencia:"oficial" },
     { tipo:"CONVENIO", numero:"Acuerdo entre el Gobierno de la República Tunecina y el Gobierno de la República del Perú", rango:"Otro", sector:"RREE", fecha:"2026-11-24", origen:"ejecutivo", accion:"promulgada", sumilla:"Entrada en vigor del «Acuerdo entre el Gobierno de la República Tunecina y el Gobierno de la República del Perú sobre Supresión de Visas para Titulares de Pasaportes Diplomáticos, Especiales o de Servicio»", entidad:"RELACIONES EXTERIORES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2577538-1", verificado:true, evidencia:"oficial" },
     { tipo:"CONVENIO", numero:"Acuerdo entre el Gobierno de la República Tunecina y el Gobierno de la República del Perú", rango:"Otro", sector:"RREE", fecha:"2026-11-24", origen:"ejecutivo", accion:"promulgada", sumilla:"Acuerdo entre el Gobierno de la República Tunecina y el Gobierno de la República del Perú sobre Supresión de Visas para Titulares de Pasaportes Diplomáticos, Especiales o de Servicio", entidad:"RELACIONES EXTERIORES", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2577545-1", verificado:true, evidencia:"oficial" },
