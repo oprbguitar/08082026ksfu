@@ -129,6 +129,14 @@ Además, en el navegador:
   `data.js`; las normas cuya sumilla las mencione aparecen bajo la promesa
   como «detección automática». Es una pista, no un veredicto: el estado de
   la promesa solo cambia con revisión humana.
+- **Radar del gabinete.** Si una resolución suprema posterior a la asunción
+  dice «Aceptan renuncia de Ministro de X» o «Nombran Ministro de X» y el
+  arreglo `ministerios` no muestra un cese o un nombramiento en esa cartera
+  (±5 días), aparece un aviso arriba con el enlace a la norma. Para
+  apagarlo, registrar el cambio en `data.js`: el saliente con
+  `estado:"cesado"` y `fechaCese`, y el entrante como objeto nuevo.
+- **Leyes, decretos legislativos, de urgencia y resoluciones legislativas**
+  se conservan siempre, firme quien firme (los DL salen como «PODER EJECUTIVO»).
 - **Línea de tiempo y «¿Qué cambió?»** solo toman normas de rango mayor
   (Ley, DL, DU, DS, RL); la tabla de Normas conserva todas.
 

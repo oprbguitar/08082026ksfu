@@ -58,8 +58,15 @@ const SECTORES = {
   "DESARROLLO E INCLUSION SOCIAL": "MIDIS",
   "CONGRESO DE LA REPUBLICA": "CONGRESO",
   "PODER LEGISLATIVO": "CONGRESO",
-  "PRESIDENCIA DE LA REPUBLICA": "PRESIDENCIA"
+  "PRESIDENCIA DE LA REPUBLICA": "PRESIDENCIA",
+  // Decretos legislativos y de urgencia salen bajo "PODER EJECUTIVO", no
+  // bajo un ministerio: sin esta entrada se perdian (DL 1742-1748, nov-2026).
+  "PODER EJECUTIVO": "PCM"
 };
+
+/** Rangos que se conservan SIEMPRE, sea cual sea la entidad que los firma:
+ *  cambian reglas para todo el pais y son lo primero que busca el lector. */
+const RANGOS_SIEMPRE = ["Ley", "DL", "DU", "RL"];
 
 /* ── Utilidades ───────────────────────────────────────────────────────── */
 
@@ -212,7 +219,12 @@ export async function recolectar(desde, hasta, todos = false, conocidos = new Se
 
   // 2) Filtrar por entidad de interes
   const conSector = crudas
-    .map((f) => Object.assign({}, f, { sector: sectorDe(f.entidad) }))
+    .map((f) => {
+      const rango = rangoDe(f.tipo);
+      const porRango = RANGOS_SIEMPRE.includes(rango)
+        ? (rango === "Ley" || rango === "RL" ? "CONGRESO" : "PCM") : "";
+      return Object.assign({}, f, { sector: sectorDe(f.entidad) || porRango });
+    })
     .filter((f) => todos || f.sector);
   console.error(`Filtrados: ${conSector.length} de ${crudas.length}`);
 
