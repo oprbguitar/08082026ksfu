@@ -440,6 +440,7 @@
     }
     const hoy = hoyLima();
     const cuando = (v) => {
+      if (v.cancelado) return `<span class="b b-can">${t("sv.cancelado")}</span>`;
       const a = diasEntre(hoy, fecha(v.desde)), b = diasEntre(hoy, fecha(v.hasta || v.desde));
       if (a != null && a > 0) return `<span class="b b-pro">${t("sv.proximo")}</span>`;
       if (b != null && b >= 0) return `<span class="b b-cur">${t("sv.enCurso")}</span>`;
@@ -688,7 +689,7 @@
       if (!v.desde) return;
       items.push({
         fecha: v.desde, tipo: "viaje",
-        titulo: t("tl.viajeA", { d: v.destino || t("tl.destinoSR") }),
+        titulo: t("tl.viajeA", { d: v.destino || t("tl.destinoSR") }) + (v.cancelado ? ` (${t("sv.cancelado").toLowerCase()})` : ""),
         detalle: v.motivo, ev: v.evidencia
       });
     });
@@ -1318,11 +1319,14 @@
     // 1) Día del Gobierno y 2) 100 días los pinta pintarMandato()/pintar100().
 
     // 3) Consejo de Ministros — con el rango real de R.S. de nombramiento.
-    const act = sel.ministrosActivos().length;
-    const ver = sel.ministrosVerificados();
+    // Solo titulares en funciones: un relevo no debe sumar ni estirar el rango.
+    const activos = sel.ministrosActivos();
+    const act = activos.length;
+    const ver = activos.filter((m) => m.verificado).length;
+    const relevos = GOVISOR.ministerios.filter((m) => m.estado === "cesado").length;
     $("kpiGab").textContent = act || "—";
 
-    const nums = GOVISOR.ministerios
+    const nums = activos
       .map((m) => m.norma && m.norma.numero)
       .filter(Boolean)
       .map((s) => ({ n: parseInt(s, 10), s }))
@@ -1334,8 +1338,11 @@
           : `R.S. ${nums[0].s}`)
       : "";
 
+    const segunda = relevos
+      ? t(relevos === 1 ? "kpi.relevo1" : "kpi.relevosN", { n: relevos })
+      : esc(rango);
     $("kpiGabSub").innerHTML = act
-      ? `${t("kpi.verificados", { n: ver })}${rango ? `<br>${esc(rango)}` : ""}`
+      ? `${t("kpi.verificados", { n: ver })}${segunda ? `<br>${segunda}` : ""}`
       : t("kpi.sinTitulares");
 
     // 4) Normas del periodo — nunca se inventa una cifra.
@@ -1432,7 +1439,7 @@
     const items = [];
     const p = GOVISOR.presidencia;
     if (p.fechaAsuncion) items.push({ fecha: mas(p.fechaAsuncion, 100), titulo: t("ag.dia100"), ico: "◷" });
-    (GOVISOR.viajes || []).forEach((v) => items.push({
+    (GOVISOR.viajes || []).filter((v) => !v.cancelado).forEach((v) => items.push({
       fecha: v.desde, titulo: t("ag.viaje", { d: v.destino || "—" }), ico: "✈",
       enlace: v.norma && v.norma.enlace }));
     ((GOVISOR.congreso || {}).facultades || []).forEach((f) => {
@@ -1526,6 +1533,7 @@
     pintarPpto();
     pintarMetodologia();
     pintarAuto();
+    pintarRadar();
     pintarFiltrosNoticias();
     pintarFiltrosYT();
     ultimoDia = "";            // fuerza el refresco de la fecha en el reloj
@@ -1762,6 +1770,51 @@
     secciones.forEach((s) => obs.observe(s));
   }
 
+  /* ══════════ RADAR DEL GABINETE ══════════════════════════════════════
+     El Action trae todas las resoluciones supremas. Si una dice «Aceptan
+     renuncia de Ministro de X» o «Nombran Ministra de X» y el registro del
+     gabinete no muestra un cese o un nombramiento en esa cartera por esas
+     fechas, el visor lo avisa arriba: así un relevo no pasa inadvertido
+     (el del MTC de setiembre estuvo semanas sin registrar). El nombre del
+     nuevo titular no viene en la sumilla: lo carga una persona. */
+  function radarGabinete() {
+    const RE = /^(aceptan (la )?renuncia (de|del|de la) ministr[oa]|nombran ministr[oa]|designan ministr[oa])\s+(de|del|de la)\s+(.+)$/;
+    const ms = GOVISOR.ministerios;
+    const cerca = (a, b) => { const d = diasEntre(fecha(a), fecha(b)); return d != null && Math.abs(d) <= 5; };
+    // Lo firmado hasta el día de la asunción es el relevo del gobierno saliente.
+    const inicio = GOVISOR.presidencia.fechaAsuncion || "";
+    const pendientes = GOVISOR.normas.filter((n) => n.rango === "RS" && n.fecha > inicio).map((n) => {
+      const m = plano(n.sumilla).replace(/[.\s]+$/, "").match(RE);
+      if (!m) return null;
+      const cartera = m[5];
+      const esRenuncia = m[1].startsWith("aceptan");
+      const dePortafolio = ms.filter((x) => cartera.includes(plano(x.cartera)) || plano(x.cartera).includes(cartera));
+      if (!dePortafolio.length) return null;
+      const registrado = dePortafolio.some((x) => esRenuncia
+        ? x.estado === "cesado" && cerca(x.fechaCese, n.fecha)
+        : cerca(x.fechaNombramiento, n.fecha));
+      return registrado ? null : { n, cartera: dePortafolio[0].cartera, esRenuncia };
+    }).filter(Boolean);
+    return pendientes;
+  }
+
+  function pintarRadar() {
+    const p = radarGabinete();
+    const m = GOVISOR.meta;
+    const bar = $("avisoBar"), txt = $("avisoTxt");
+    if (!p.length) {
+      if (!m.aviso) bar.hidden = true;
+      return;
+    }
+    const x = p[0];
+    const u = urlSegura(x.n.enlace);
+    const tit = [x.n.tipo, x.n.numero].filter(Boolean).join(" N.º ");
+    txt.innerHTML = t(x.esRenuncia ? "rg.renuncia" : "rg.nombra", { c: esc(x.cartera), f: esc(fechaCorta(x.n.fecha)) }) +
+      (u ? ` <a href="${esc(u)}" data-visor="${esc(u)}" data-titulo="${esc(tit)}" data-sumilla="${esc(x.n.sumilla)}">${esc(tit)}</a>` : "") +
+      (p.length > 1 ? ` · ${t("rg.mas", { n: p.length - 1 })}` : "") + ` · ${t("rg.pendiente")}`;
+    bar.hidden = false;
+  }
+
   /* ══════════ ESTADO DE LA ACTUALIZACIÓN AUTOMÁTICA ══════════
      El Action revisa El Peruano cada 6 horas. Aquí se dice, en lenguaje
      llano, cuándo fue la última vez que trajo datos nuevos. */
@@ -1824,6 +1877,7 @@
     pintarPpto();
     pintarMetodologia();
     pintarAuto();
+    pintarRadar();
 
     pintarFiltrosNoticias();
     pintarFiltrosYT();

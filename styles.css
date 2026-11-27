@@ -110,6 +110,15 @@ img{ max-width:100%; }
 }
 .nav .cta:hover{ background:var(--brand-050); color:var(--brand-900); }
 .nav .cta.activo::after{ display:none; }
+/* Ningún rótulo del menú se parte en dos líneas. Entre 1024 y 1365 px el
+   descriptor de la marca cede su espacio al menú. */
+.nav > a, .nav .cta, .mas-btn{ white-space:nowrap; }
+@media (min-width:1024px) and (max-width:1365px){
+  .marca-txt small{ display:none; }
+  .nav > a, .mas-btn{ padding:7px 8px; }
+  .nav .cta{ padding:9px 12px; margin-left:6px; }
+  .idioma{ margin-left:6px; }
+}
 
 .icono-btn{
   width:36px; height:36px; display:grid; place-items:center; margin-left:5px;
@@ -1083,6 +1092,7 @@ abbr.rango{
 .prom-auto a{ color:var(--info); font-weight:600; }
 
 .b-pro{ background:var(--info-bg); color:var(--info); border:1px solid var(--info-bd); margin-left:6px; vertical-align:middle; }
+.b-can{ background:var(--none-bg); color:var(--none); border:1px solid var(--none-bd); margin-left:6px; vertical-align:middle; text-decoration:none; }
 .b-cur{ background:var(--ok-bg); color:var(--ok); border:1px solid var(--ok-bd); margin-left:6px; vertical-align:middle; }
 
 .ppto-proy{

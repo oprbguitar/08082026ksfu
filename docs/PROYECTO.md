@@ -7,11 +7,11 @@
 |---|---|
 | **Nombre** | GoVisor |
 | **Tipo** | Portal web de fiscalización ciudadana / visor de datos gubernamentales |
-| **Estado** | v0.8 — autoactualización cada 6 h sin pérdidas, lectura amable y hechos de set.–oct. 2026 |
+| **Estado** | v0.9 — radar automático del gabinete, decretos legislativos en el scraper y hechos de noviembre de 2026 |
 | **Código fuente** | Repositorio privado de documentación; no se enlaza desde el sitio público |
 | **Dominio** | https://gobierno.quest — registrado en Porkbun, servido por GitHub Pages (`CNAME`). La URL `github.io` redirige al dominio propio: 301 de Pages, guardia inline en el `<head>` y `404.html` |
 | **Inicio** | 8 de agosto de 2026 |
-| **Última actualización de este documento** | 30 de octubre de 2026 |
+| **Última actualización de este documento** | 27 de noviembre de 2026 |
 
 ---
 
@@ -45,6 +45,8 @@ inventado.
 | **Promesas contrastadas** | Las 17 promesas del Mensaje a la Nación, cada una con su nivel de evidencia y la lista de enlaces que la respaldan, visible bajo la promesa. |
 | **Semáforo de los 100 días** | Las 16 medidas anunciadas para el arranque, clasificadas en verde / ámbar / rojo según haya acto consumado, trámite verificable o solo anuncio. |
 | **Autoactualización** | Tarea programada cada 6 h (barrido completo los domingos): trae normas nuevas de El Peruano, ediciones ordinaria y extraordinaria, y las **suma** sin borrar lo publicado. La sección Normas dice cuándo fue la última carga. |
+| **Radar del gabinete** | Si una resolución suprema dice «Aceptan renuncia de Ministro de X» o «Nombran Ministro de X» y el registro del gabinete no lo refleja, aparece un aviso arriba con el enlace a la norma. |
+| **Próximas fechas** | Tarjeta de portada con cuenta regresiva: día 100, viajes, vencimiento de facultades y plazos cargados en `agenda`. |
 | **Detección automática en promesas** | Bajo cada promesa aparecen las normas cuya sumilla la menciona (campo `claves`). Pista para el revisor, no veredicto. |
 | **Lectura amable** | Filtro «Decretos y leyes», glosario de tipos de norma, búsqueda sin tildes, viajes «Próximo / En curso», botón «volver arriba»; la línea de tiempo muestra solo normas de rango mayor. |
 | **Refresco automático** | `version.json` se pide sin caché al entrar a la sesión, al volver a la pestaña y cada 5 minutos; si el sello cambió, el visor se recarga con datos frescos. |
@@ -133,18 +135,19 @@ documentación, entregadas y funcionales.
 | Semáforo de los primeros 100 días: 16 medidas con evidencia | 7 |
 | Refresco automático por sello de versión y publicador | 5 |
 | Petición 8: recuperación de 2 162 normas, autoactualización sin pérdidas, hechos de set.–oct., lectura amable, privacidad del repo | 12 |
-| **Total** | **143 h** |
+| Petición 9: radar del gabinete, decretos legislativos en el scraper, relevo del MTC, hechos de noviembre, tablero 3+2, menú sin cortes | 10 |
+| **Total** | **153 h** |
 
 ### 5.2 Valuación por estándar de mercado
 
 | Estándar | Tarifa/hora | Valuación |
 |---|---:|---:|
-| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$3.575 – $6.435** |
-| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$8.580 – $13.585** |
-| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$15.730 – $22.880** |
-| Precio por producto (fixed-bid, entregable cerrado) | — | **$10.000 – $14.000** |
+| Freelance LatAm (Perú, Colombia, México) | $25 – $45 | **$3.825 – $6.885** |
+| Freelance internacional (Upwork/Toptal, perfil senior) | $60 – $95 | **$9.180 – $14.535** |
+| Agencia digital EE. UU. / Europa Occidental | $110 – $160 | **$16.830 – $24.480** |
+| Precio por producto (fixed-bid, entregable cerrado) | — | **$10.800 – $15.000** |
 
-**Valuación de referencia recomendada: $12.000 USD.** Punto medio del rango
+**Valuación de referencia recomendada: $12.900 USD.** Punto medio del rango
 fixed-bid internacional. Refleja un producto funcional, accesible, documentado,
 sin deuda técnica de dependencias y —lo que más pesa— **con sus datos
 contrastados contra fuente primaria**, no copiados de segunda mano.
@@ -210,7 +213,24 @@ valor más grande disponible, y su costo de infraestructura sigue siendo cero.
 | 5 | 2026-08-08 | Cargar promesas del Mensaje a la Nación; scraping de El Peruano con filtro Congreso/Consejo de Ministros; visor de resoluciones dentro de la app; arreglar enlaces rotos | Scraper de 161 normas con 0 enlaces rotos; 17 promesas; visor incrustado; 3 URLs 404 corregidas; 3 defectos del scraper corregidos | 16 | $7.800 |
 | 6 | 2026-08-08 | Rediseño institucional siguiendo referencia visual, preservando funcionalidad, IDs y datos | Identidad teal; héroe panorámico; 4 KPI derivados; tablero de 4 columnas; tabla de normas; cabecera con «Más»; accesibilidad y responsive verificados; 1 defecto corregido | 20 | $9.600 |
 | 7 | 2026-08-08 | Banner del Perú; encaje tipográfico; cabecera verde y compacta; iniciales centradas con colores alternos; autoría y diálogo «Acerca de» con enlace a Andesnova | 4 variantes WebP (61–242 KB); 4 defectos de CSS corregidos; diálogo accesible; contraste AAA verificado | 8 | $10.400 |
-| 8 | 2026-10-30 | Actualizar todo lo acontecido y las nuevas políticas; web más amable; avanzar en la autoactualización; ocultar el repositorio; mantener la portada | 2 162 normas recuperadas (el scraper perdía todo lo anterior a octubre); scraper por tramos semanales + edición extraordinaria + fusión sin borrar; Action cada 6 h y barrido dominical; RMV (D.S. 015-2026-TR), Ley 32743, Presupuesto 2027, «Perú en Orden», emergencia Lima/Callao, viajes a El Salvador y Madrid; detección automática en promesas; glosario, filtro y estado de actualización; repo desligado del sitio | 12 | **$12.000** |
+| 8 | 2026-10-30 | Actualizar todo lo acontecido y las nuevas políticas; web más amable; avanzar en la autoactualización; ocultar el repositorio; mantener la portada | 2 162 normas recuperadas (el scraper perdía todo lo anterior a octubre); scraper por tramos semanales + edición extraordinaria + fusión sin borrar; Action cada 6 h y barrido dominical; RMV (D.S. 015-2026-TR), Ley 32743, Presupuesto 2027, «Perú en Orden», emergencia Lima/Callao, viajes a El Salvador y Madrid; detección automática en promesas; glosario, filtro y estado de actualización; repo desligado del sitio | 12 | $12.000 |
+| 9 | 2026-11-27 | Misma petición un mes después: actualizar lo acontecido y las políticas, web amable, autoactualización, repo oculto, portada intacta (incluye el reordenamiento del tablero pedido el 30/10) | Relevo del MTC registrado (estaba en las normas desde setiembre, faltaba en el gabinete); radar automático de cambios de gabinete; scraper conserva leyes, DL, DU y R.L. de cualquier entidad (se perdían los DL 1742–1748); hechos de noviembre: 100 días, DL de seguridad y cárceles, Ley 32744, disciplina escolar, viaje a Madrid cancelado, APEC y Japón, visita de León XIV, Presupuesto 2027 en el Pleno; Promype incumplida; tablero 3+2 con «Próximas fechas»; menú sin cortes entre 1024 y 1365 px | 10 | **$12.900** |
+
+### Detalle de la petición 9
+
+**Dos errores encontrados, ambos del tipo "el dato estaba, pero no se veía":**
+
+| Error | Causa | Corrección |
+|---|---|---|
+| El gabinete mostraba a Rafael Rey en el MTC dos meses después de su renuncia | El relevo (R.S. 275 y 276-2026-PCM, 19/09) entró al visor como norma, pero el gabinete es un registro manual y nadie lo conectó. En la petición 8 se afirmó "sin relevos" sin comprobarlo en las propias normas. | Registro corregido y **radar del gabinete**: el visor compara las R.S. de renuncia y nombramiento con el registro y avisa si no coinciden. Ignora las firmadas hasta el día de la asunción (relevo del gobierno saliente). |
+| Ningún decreto legislativo en el visor pese a siete publicados | El Peruano los firma como «PODER EJECUTIVO», entidad que el filtro no conocía | Leyes, DL, DU y R.L. se conservan siempre, firme quien firme |
+
+**Autoactualización: balance del primer mes.** El Action corrió cada 6 horas
+sin intervención: de 2 164 normas (30/10) se pasó a 3 547 (27/11). El barrido
+dominical recuperó además normas de agosto y setiembre que el buscador no
+había devuelto en su día. Las fichas oficiales de la Ley 32743 y del D.S.
+015-2026-TR entraron solas por la edición extraordinaria, así que se retiraron
+las dos entradas manuales.
 
 ### Detalle de la petición 8
 

@@ -41,7 +41,22 @@
      prorroga de la emergencia en Lima y Callao (D.S. 142-2026-PCM, 25/10).
    - Viajes: El Salvador (28-31/10) y Cumbre Iberoamericana en Madrid (2-6/11),
      autorizados por el Senado el 07/10/2026.
-   - Gabinete: sin relevos registrados al 30/10/2026.
+   - Gabinete: (corregido el 27/11) hubo un relevo, ver abajo.
+
+   Actualizacion del 27 de noviembre de 2026 (dia 122 de gobierno):
+   - Gabinete: Rafael Rey renuncio al MTC el 18/09/2026 (R.S. 275-2026-PCM) y
+     lo reemplazo Jose Tangherlini (R.S. 276-2026-PCM). Ambas normas estaban en
+     el visor desde setiembre; ahora el visor ademas detecta solo las renuncias
+     y nombramientos de ministros y avisa si el gabinete quedo desfasado.
+   - Facultades: siete decretos legislativos (DL 1742 a 1748, 07-25/11) en
+     seguridad y sistema penitenciario. El scraper los descartaba porque salen
+     bajo "PODER EJECUTIVO"; corregido.
+   - 100 dias (05/11): balance presidencial. Promype vencio sin norma.
+   - Viajes: Madrid cancelado (01/11, emergencia por lluvias); APEC en China
+     y visita oficial a Japon (15-21/11, R.L. 32747).
+   - Otras: Ley 32744 (creditos para El Nino), D.S. 021-2026-MINEDU (disciplina
+     escolar), reorganizacion del MINJUS (D.S. 018-2026-JUS), visita del papa
+     Leon XIV (11-16/11), Presupuesto 2027 en el Pleno desde el 17/11.
    ========================================================================== */
 
 const GOVISOR = {
@@ -50,9 +65,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261127.1617",          // <- debe coincidir con version.json
+    version: "20261127.1838",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-11-27",
-    actualizadoEn: "2026-11-27T16:17:00-05:00",   // lo reescribe scripts/publicar.mjs
+    actualizadoEn: "2026-11-27T18:38:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -135,8 +150,11 @@ const GOVISOR = {
     { sigla:"MINEM", cartera:"Energia y Minas", ministro:"Guillermo Shinno Huamani", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true, evidencia:"oficial",
       norma:{ tipo:"Resolucion Suprema", numero:"235-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-13" } },
 
-    { sigla:"MTC", cartera:"Transportes y Comunicaciones", ministro:"Rafael Rey Rey", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true, evidencia:"oficial",
+    { sigla:"MTC", cartera:"Transportes y Comunicaciones", ministro:"Rafael Rey Rey", estado:"cesado", fechaNombramiento:"2026-07-28", fechaCese:"2026-09-18", verificado:true, evidencia:"oficial",
       norma:{ tipo:"Resolucion Suprema", numero:"236-2026-PCM", fecha:"2026-07-28", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2538529-14" } },
+    { sigla:"MTC", cartera:"Transportes y Comunicaciones", ministro:"Jose Angello Tangherlini Casal", estado:"activo", fechaNombramiento:"2026-09-18", fechaCese:"", verificado:true, evidencia:"oficial",
+      nota:"Reemplaza a Rafael Rey, que renuncio por motivos de salud (R.S. 275-2026-PCM).",
+      norma:{ tipo:"Resolucion Suprema", numero:"276-2026-PCM", fecha:"2026-09-19", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2556351-2" } },
 
     // El Peruano consigna "Gonzales" (con s) en la relacion oficial.
     { sigla:"MVCS", cartera:"Vivienda, Construccion y Saneamiento", ministro:"Mauricio Fernando Arnillas Gonzales", estado:"activo", fechaNombramiento:"2026-07-28", fechaCese:"", verificado:true, evidencia:"oficial",
@@ -3715,21 +3733,7 @@ const GOVISOR = {
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"654-2026/MINSA", rango:"RM", sector:"MINSA", fecha:"2026-07-28", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de profesionales de la Dirección General de Medicamentos, Insumos y Drogas, a la República Popular China, en comisión de servicios", entidad:"SALUD", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2538430-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"00907-2026-DE", rango:"RM", sector:"MINDEF", fecha:"2026-07-28", origen:"viaje", accion:"promulgada", sumilla:"Autorizan viaje de personal militar a la República de Corea, en comisión de servicios", entidad:"DEFENSA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2538467-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN SUPREMA", numero:"242-2026-PCM", rango:"RS", sector:"PCM", fecha:"2026-07-28", origen:"ejecutivo", accion:"promulgada", sumilla:"Encargan temporalmente Despacho de Justicia y Derechos Humanos al Ministro de Desarrollo Agrario y Riego", entidad:"PRESIDENCIA DEL CONSEJO DE MINISTROS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2538530-1", verificado:true, evidencia:"oficial" }
-    /* NORMAS-GENERADAS-FIN */,
-
-    /* Cargadas a mano: salieron en edicion extraordinaria, que el scraper
-       no leia hasta el 30/10/2026. Si el scraper ya las trae, el visor
-       descarta el duplicado por enlace. */
-    { tipo:"LEY", numero:"32743", rango:"Ley", sector:"CONGRESO", fecha:"2026-10-22", origen:"congreso", accion:"promulgada",
-      sumilla:"Ley que delega en el Poder Ejecutivo la facultad de legislar en materia de seguridad ciudadana y de respuesta al Fenomeno El Nino por un plazo de 90 dias calendario",
-      entidad:"CONGRESO DE LA REPUBLICA",
-      enlace:"https://canaln.pe/actualidad/publican-ley-que-delega-facultades-al-ejecutivo-90-dias-n495806",
-      verificado:true, evidencia:"verificado" },
-    { tipo:"DECRETO SUPREMO", numero:"015-2026-TR", rango:"DS", sector:"MTPE", fecha:"2026-09-28", origen:"ejecutivo", accion:"promulgada",
-      sumilla:"Decreto Supremo que incrementa la Remuneracion Minima Vital de los trabajadores sujetos al regimen laboral de la actividad privada: S/ 1 230 desde el 1 de octubre de 2026",
-      entidad:"TRABAJO Y PROMOCION DEL EMPLEO",
-      enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2559163-1",
-      verificado:true, evidencia:"oficial" }
+    /* NORMAS-GENERADAS-FIN */
   ],
 
   /* 5. PROMESAS vs. REALIDAD --------------------------------------------
@@ -3796,8 +3800,8 @@ const GOVISOR = {
       nivel:"verificado", verificado:true },
     { id:"emp-02", claves:["promype", "cofide"], promesa:"Reactivar Promype via Cofide dentro de los primeros cien dias", sector:"PRODUCE",
       origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
-      resultado:"Compromiso con plazo explicito: primeros cien dias (vence el 05/11/2026). Al 30/10/2026 no hay norma publicada que lo reactive.",
+      estado:"incumplida", evidencia:[], norma:{}, presupuesto:"",
+      resultado:"Plazo vencido: los cien dias terminaron el 05/11/2026 sin norma publicada que reactive Promype. Si se publica despues, se registrara como cumplida con retraso.",
       fuentes:[ { n:"El Peruano", u:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" }, { n:"PQS", u:"https://pqs.pe/actualidad/keiko-fujimori-los-principales-anuncios-de-su-primer-mensaje-a-la-nacion/" }, { n:"Diario El Pueblo", u:"https://diarioelpueblo.com.pe/2026/07/29/mensaje-a-la-nacion-de-la-presidenta-keiko-fujimori/" } ],
       nivel:"oficial", verificado:true },
     { id:"emp-03", claves:["bono compensatorio", "bono para las mype", "bono mype"], promesa:"Bono compensatorio por unica vez para micro y pequenas empresas", sector:"PRODUCE",
@@ -3862,7 +3866,7 @@ const GOVISOR = {
       nivel:"preliminar", verificado:false },
     { id:"seg-03", claves:["sistema penitenciario", "establecimientos penitenciarios", "reforma penitenciaria"], promesa:"Reforma penitenciaria para evitar que las carceles operen como centros del crimen", sector:"MINJUSDH",
       origen:{ tipo:"Mensaje a la Nacion", fecha:"2026-07-28", enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
-      estado:"no_iniciada", evidencia:[], norma:{}, presupuesto:"",
+      estado:"en_proceso", evidencia:[ { fecha:"2026-11-25", que:"DL 1747 moderniza el INPE y DL 1748 reforma el Sistema Penitenciario Nacional (seguridad, inteligencia y reinsercion), al amparo de la Ley 32743. Antes, DL 1742 (FF.AA. en el perimetro de penales) y DL 1745 (Mindef en infraestructura penitenciaria).", enlace:"https://www.radionacional.gob.pe/noticias/politica/consulta-las-normas-legales-mas-importantes-de-hoy-miercoles-25-de-noviembre-de-2026" } ], norma:{ tipo:"Decreto Legislativo", numero:"1748", enlace:"https://www.radionacional.gob.pe/noticias/politica/consulta-las-normas-legales-mas-importantes-de-hoy-miercoles-25-de-noviembre-de-2026" }, presupuesto:"",
       resultado:"",
       fuentes:[ { n:"El Comercio", u:"https://elcomercio.pe/peru/seguridad-bajo-el-gobierno-de-keiko-fujimori-las-medidas-contra-el-crimen-organizado-y-los-vacios-de-su-primer-mensaje-noticia/" }, { n:"Infobae", u:"https://www.infobae.com/peru/2026/07/28/keiko-fujimori-anuncia-que-las-fuerzas-armadas-lideraran-operativos-durante-estados-de-emergencia/" } ],
       nivel:"preliminar", verificado:false },
@@ -3896,6 +3900,10 @@ const GOVISOR = {
 
      REGLA: ninguna medida sube de rojo sin enlace que lo pruebe. Si la
      fuente es una sola nota de prensa, el sello queda en "preliminar".
+
+     CIERRE (05/11/2026): los cien dias terminaron. El semaforo queda como
+     balance de esa etapa; se sigue actualizando si una medida se cumple
+     despues, con la fecha real, para que el retraso quede a la vista.
      ------------------------------------------------------------------ */
   medidas100: [
     { titulo:"Exponer la politica general del Gobierno ante la Camara de Diputados",
@@ -3910,7 +3918,7 @@ const GOVISOR = {
       detalle:"Anunciado el 03/08/2026: personal militar a las calles para reforzar el control policial durante los estados de emergencia.",
       enlace:"https://www.diariolasamericas.com/america-latina/keiko-fujimori-ordena-el-despliegue-militares-enfrentar-la-inseguridad-n5399920",
       evidencia:"preliminar", verificado:false,
-      nota:"Sin decreto supremo propio del nuevo Gobierno publicado al 19/08/2026." },
+      nota:"Avance: el DL 1742 (07/11/2026) permite a las FF.AA. resguardar el perimetro de los penales en emergencia. El despliegue en calles sigue bajo los estados de emergencia." },
 
     { titulo:"Elevar la remuneracion minima vital a S/ 1 300",
       sector:"MTPE", estado:"en_proceso",
@@ -3927,7 +3935,7 @@ const GOVISOR = {
 
     { titulo:"Reactivar Promype: creditos para la micro y pequena empresa via Cofide",
       sector:"PRODUCE", estado:"no_iniciada",
-      detalle:"Unica medida del mensaje con plazo explicito de cien dias. Vence el 05/11/2026 y al 30/10/2026 no hay norma publicada.",
+      detalle:"Unica medida del mensaje con plazo explicito de cien dias. El plazo vencio el 05/11/2026 sin norma publicada.",
       enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso",
       evidencia:"oficial", verificado:true },
 
@@ -4025,15 +4033,15 @@ const GOVISOR = {
     facultades:      [
       { materia:"Facultades para legislar en seguridad ciudadana y respuesta al Fenomeno El Nino (27 materias; se pidieron 66 y 120 dias)",
         plazo:"90 dias", solicitada:"2026-08-28", otorgada:"2026-10-22",
-        estado:"Otorgadas: Ley 32743. Diputados 06/10 (66-34-24) · Senado 21/10 (35-18-6). Quedan fuera lo tributario, aduanero, laboral y societario.",
-        enlace:"https://canaln.pe/actualidad/publican-ley-que-delega-facultades-al-ejecutivo-90-dias-n495806",
+        estado:"Otorgadas: Ley 32743. Diputados 06/10 (66-34-24) · Senado 21/10 (35-18-6). Al 27/11 van 7 decretos legislativos (DL 1742 a 1748), todos de seguridad y carceles; ninguno aun sobre El Nino. Vencen el 20/01/2027.",
+        enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2567343-1",
         verificado:true, evidencia:"verificado" }
     ],
     proyectosEjecutivo: [
       { numero:"00098-2026-2031-CD", titulo:"Proyecto de ley que delega facultades legislativas al Ejecutivo (pedido: 120 dias, 66 materias)", sector:"PCM", comision:"Camara de Diputados y Senado", estado:"aprobado · Ley 32743 (90 dias, 27 materias)",
         enlace:"https://elperuano.pe/noticia/307132-constitucion-del-senado-aprueba-delegar-facultades-al-ejecutivo-por-90-dias-en-27-puntos",
         verificado:true, evidencia:"verificado" },
-      { numero:"002-2026-2031-CR", titulo:"Ley de Presupuesto del Sector Publico 2027 (S/ 266 506 millones)", sector:"MEF", comision:"Comision de Presupuesto", estado:"en debate · sustentado ante el Pleno el 03/09/2026",
+      { numero:"002-2026-2031-CR", titulo:"Ley de Presupuesto del Sector Publico 2027 (S/ 266 506 millones)", sector:"MEF", comision:"Comision de Presupuesto", estado:"en el Pleno desde el 17/11/2026 · plazo constitucional: 30/11/2026",
         enlace:"https://canaln.pe/actualidad/elmer-cuba-sustenta-presupuesto-2027-s266506-millones-y-destaca-crecimiento-35-peru-n494750",
         verificado:true, evidencia:"verificado" },
       { numero:"003-2026-2031-CR", titulo:"Ley de Equilibrio Financiero del Presupuesto 2027", sector:"MEF", comision:"Comision de Presupuesto", estado:"en debate",
@@ -4367,14 +4375,74 @@ const GOVISOR = {
     { fecha:"2026-10-22", tipo:"hito",
       titulo:"Se publica la Ley 32743: el Ejecutivo ya puede legislar 90 dias",
       detalle:"Edicion extraordinaria de El Peruano. El premier Galarreta anuncia los primeros decretos legislativos en unos diez dias. El 24/10 una fe de erratas corrigio la formula de promulgacion; un abogado presento denuncia penal por las firmas (sin pronunciamiento fiscal).",
-      enlace:"https://canaln.pe/actualidad/publican-ley-que-delega-facultades-al-ejecutivo-90-dias-n495806",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2567343-1",
       evidencia:"verificado", verificado:true },
 
     { fecha:"2026-10-25", tipo:"crisis",
       titulo:"Se prorroga 60 dias la emergencia en Lima y Callao",
       detalle:"El D.S. 142-2026-PCM extiende desde el 28/10/2026 el estado de emergencia: la Policia mantiene el control del orden interno con apoyo de las Fuerzas Armadas.",
       enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2568123-1",
-      evidencia:"oficial", verificado:true }
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-11-01", tipo:"crisis",
+      titulo:"La presidenta cancela su viaje a Madrid por las lluvias en el norte",
+      detalle:"No asiste a la XXX Cumbre Iberoamericana para atender la emergencia en Tumbes, Piura y la costa norte. Representa al Peru el canciller Carlos Espa.",
+      enlace:"https://www.americatv.com.pe/noticias/amp/actualidad/keiko-fujimori-cancela-viaje-espana-lluvias-peru-n524032",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-11-02", tipo:"hito",
+      titulo:"Ley 32744: creditos suplementarios para el Fenomeno El Nino",
+      detalle:"Financia acciones frente a El Nino 2026-2027 e impulsa la infraestructura. Edicion extraordinaria de El Peruano.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2571013-1",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-11-05", tipo:"anuncio",
+      titulo:"Dia 100: la presidenta presenta su balance",
+      detalle:"Mensaje grabado: destaca la baja de homicidios diarios, el Comando Unificado PNP-FF.AA. y el alza del sueldo minimo. \"No hemos vencido al crimen aun\". La prensa critica la falta de avance en promesas iniciales; Promype vence sin norma.",
+      enlace:"https://canaln.pe/actualidad/presidenta-keiko-fujimori-no-hemos-vencido-al-crimen-aun-n496104",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-11-07", tipo:"hito",
+      titulo:"Primer decreto legislativo: FF.AA. en el perimetro de los penales",
+      detalle:"El DL 1742 inaugura el uso de las facultades de la Ley 32743. Le siguen el DL 1743 (legitima defensa y uso de la fuerza) y el DL 1744 (Codigo Penal, delitos informaticos y datos de telecomunicaciones).",
+      enlace:"https://tudiariohuanuco.pe/especiales/decreto-legislativo-1742-fuerzas-armadas-seguridad-externa-penales-emergencia/",
+      evidencia:"verificado", verificado:true },
+
+    { fecha:"2026-11-07", tipo:"anuncio",
+      titulo:"Nuevas reglas de disciplina escolar: faltas graves pueden llevar a la expulsion",
+      detalle:"El D.S. 021-2026-MINEDU clasifica las faltas en leves, graves y muy graves, prohibe el castigo fisico y encarga a los directores las sanciones. Acoso, extorsion, violencia y armas pueden causar expulsion.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2572850-1",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-11-11", tipo:"anuncio",
+      titulo:"Llega el papa Leon XIV: visita al Peru hasta el 16 de noviembre",
+      detalle:"Primera visita del pontifice, exobispo de Chiclayo: Lima, Chiclayo (13/11), Cusco (15/11) y Pucallpa. El D.S. 017-2026-JUS declara al Peru \"Tierra del Papa Leon XIV\".",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2574994-1",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-11-11", tipo:"hito",
+      titulo:"Se convoca la segunda vuelta de las Elecciones Regionales 2026",
+      detalle:"El D.S. 150-2026-PCM convoca la Segunda Eleccion en las regiones donde ninguna formula alcanzo el porcentaje requerido.",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2573674-1",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-11-15", tipo:"hito",
+      titulo:"Declaran en reorganizacion el Ministerio de Justicia y el OECE",
+      detalle:"D.S. 018-2026-JUS (Ministerio de Justicia y Derechos Humanos) y D.S. 256-2026-EF (Organismo Especializado para las Contrataciones Publicas Eficientes).",
+      enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2575007-6",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-11-17", tipo:"congreso",
+      titulo:"El Presupuesto 2027 llega al Pleno: S/ 266 506 millones",
+      detalle:"La Comision Bicameral sustenta el dictamen; el 18/11 los ministros defienden sus pliegos. El Congreso no puede subir el gasto total. Plazo para aprobarlo: 30/11/2026.",
+      enlace:"https://comunicaciones.congreso.gob.pe/noticias/sustentan-dictamen-de-proyecto-de-ley-de-presupuesto-2027-que-asciende-a-mas-de-s-266-mil-millones/",
+      evidencia:"oficial", verificado:true },
+
+    { fecha:"2026-11-25", tipo:"hito",
+      titulo:"Reforma penitenciaria por decreto: DL 1747 (INPE) y DL 1748",
+      detalle:"Moderniza el INPE y reforma el Sistema Penitenciario Nacional en seguridad, inteligencia y reinsercion. Antes salieron el DL 1745 (Mindef en infraestructura penitenciaria) y el DL 1746 (registro de organizaciones criminales con practicas terroristas).",
+      enlace:"https://www.radionacional.gob.pe/noticias/politica/consulta-las-normas-legales-mas-importantes-de-hoy-miercoles-25-de-noviembre-de-2026",
+      evidencia:"verificado", verificado:true }
   ],
 
   /* 9-BIS. AGENDA: FECHAS FUTURAS CON BASE DOCUMENTAL ---------------------
@@ -4384,8 +4452,6 @@ const GOVISOR = {
      { fecha:"AAAA-MM-DD", titulo:"...", enlace:"" }
      ------------------------------------------------------------------ */
   agenda: [
-    { fecha:"2026-11-05", titulo:"Vence el plazo de cien dias para reactivar Promype",
-      enlace:"https://elperuano.pe/noticia/301279-sueldo-minimo-pension-65-y-pronaa-todos-los-anuncios-de-la-presidenta-fujimori-en-su-mensaje-al-congreso" },
     { fecha:"2026-11-30", titulo:"Plazo constitucional para que el Congreso apruebe el Presupuesto 2027 (art. 80)",
       enlace:"https://canaln.pe/actualidad/elmer-cuba-sustenta-presupuesto-2027-s266506-millones-y-destaca-crecimiento-35-peru-n494750" },
     { fecha:"2026-12-26", titulo:"Termina la prorroga del estado de emergencia en Lima y Callao (D.S. 142-2026-PCM)",
@@ -4399,11 +4465,16 @@ const GOVISOR = {
       desde:"2026-10-28", hasta:"2026-10-31",
       norma:{ tipo:"Resolucion Legislativa", numero:"Senado 07/10/2026", enlace:"https://www.elperuano.pe/noticia/307847-presidenta-keiko-fujimori-viajo-a-el-salvador-en-visita-oficial" },
       verificado:true, evidencia:"oficial" },
-    { destino:"Madrid, España", quien:"Keiko Fujimori Higuchi, presidenta de la Republica",
-      motivo:"XXX Cumbre Iberoamericana de Jefes de Estado y de Gobierno",
+    { destino:"Madrid, España", quien:"Keiko Fujimori Higuchi, presidenta de la Republica", cancelado:true,
+      motivo:"XXX Cumbre Iberoamericana. Cancelado el 01/11/2026 para atender la emergencia por lluvias en el norte; asistio el canciller Carlos Espa",
       desde:"2026-11-02", hasta:"2026-11-06",
-      norma:{ tipo:"Resolucion Legislativa", numero:"Senado 07/10/2026", enlace:"https://gestion.pe/peru/pleno-del-senado-autoriza-viajes-de-keiko-fujimori-a-el-salvador-y-espana-noticia/" },
-      verificado:true, evidencia:"verificado" }
+      norma:{ tipo:"Resolucion Legislativa", numero:"Senado 07/10/2026", enlace:"https://www.americatv.com.pe/noticias/amp/actualidad/keiko-fujimori-cancela-viaje-espana-lluvias-peru-n524032" },
+      verificado:true, evidencia:"verificado" },
+    { destino:"Shenzhen (China) y Tokio (Japon)", quien:"Keiko Fujimori Higuchi, presidenta de la Republica",
+      motivo:"Cumbre de lideres APEC en Shenzhen y visita oficial a Japon (10 anos de la Asociacion Estrategica); cooperacion frente a El Nino",
+      desde:"2026-11-15", hasta:"2026-11-21",
+      norma:{ tipo:"Resolucion Legislativa", numero:"32747", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2574129-1" },
+      verificado:true, evidencia:"oficial" }
   ],
 
   /* 11. ALTOS CARGOS (mas alla del gabinete) -----------------------------
