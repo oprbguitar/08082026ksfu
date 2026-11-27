@@ -50,9 +50,9 @@ const GOVISOR = {
   meta: {
     titulo: "GoVisor",
     subtitulo: "Observatorio del Gobierno · Perú 2026-2031",
-    version: "20261127.0331",          // <- debe coincidir con version.json
+    version: "20261127.1617",          // <- debe coincidir con version.json
     ultimaActualizacion: "2026-11-27",
-    actualizadoEn: "2026-11-27T03:31:00-05:00",   // lo reescribe scripts/publicar.mjs
+    actualizadoEn: "2026-11-27T16:17:00-05:00",   // lo reescribe scripts/publicar.mjs
     aviso: ""
   },
 
@@ -166,8 +166,11 @@ const GOVISOR = {
     /* NORMAS-GENERADAS-INICIO — bloque reescrito automaticamente por
        scripts/actualizar.mjs (tarea programada). No editar a mano entre marcadores. */
     /* Generado por scripts/scrape-elperuano.mjs
-   Desde 20260728 · 3544 normas · enlaces verificados uno por uno
+   Desde 20260728 · 3547 normas · enlaces verificados uno por uno
    Regenerar con: node scripts/scrape-elperuano.mjs */
+    { tipo:"RESOLUCIÓN JEFATURAL", numero:"000179-2026-SIS/J", rango:"Res", sector:"MINSA", fecha:"2026-11-27", origen:"ejecutivo", accion:"promulgada", sumilla:"Aprueban transferencia financiera a favor de unidades ejecutoras para el financiamiento de las prestaciones de salud brindadas a los asegurados del Seguro Integral de Salud", entidad:"SEGURO INTEGRAL DE SALUD", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2578997-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"D000301-2026-MIDIS", rango:"RM", sector:"MIDIS", fecha:"2026-11-27", origen:"ejecutivo", accion:"promulgada", sumilla:"Designan Asesor del Despacho Ministerial", entidad:"DESARROLLO E INCLUSIÓN SOCIAL", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2579010-1", verificado:true, evidencia:"oficial" },
+    { tipo:"RESOLUCIÓN MINISTERIAL", numero:"678-2026-MTC/01.02", rango:"RM", sector:"MTC", fecha:"2026-11-27", origen:"ejecutivo", accion:"promulgada", sumilla:"Declaran en emergencia sectorial por situación de peligro inminente en la infraestructura vial del sector comprendido entre las progresivas del km 101+187 al km 102+370 del sub tramo “Vía Macusani - Nuñoa” de la vía nacional", entidad:"TRANSPORTES Y COMUNICACIONES", enlace:"https://busquedas.elperuano.pe/dispositivo/EX/2579030-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN MINISTERIAL", numero:"495-2026-MINEM/DM", rango:"RM", sector:"MINEM", fecha:"2026-11-27", origen:"ejecutivo", accion:"promulgada", sumilla:"Establecen con carácter temporal servidumbre de ocupación para estudios de factibilidad relacionados a la generación de energía eléctrica del proyecto “Central Solar Fotovoltaica Montalvo”, a favor de la concesión temporal de la que es titular ATN S.A., ubicado en el departamento de Moquegua", entidad:"ENERGÍA Y MINAS", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2577567-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN VICE MINISTERIAL", numero:"000325-2026-VMPCIC/MC", rango:"Res", sector:"MINCUL", fecha:"2026-11-27", origen:"ejecutivo", accion:"promulgada", sumilla:"Disponen retirar parcialmente la condición de bien integrante del Patrimonio Cultural de la Nación a área del bien inmueble prehispánico Paredones de Asia, Sector A, ubicado en el distrito de Asia, provincia de Cañete, departamento de Lima", entidad:"CULTURA", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2578299-1", verificado:true, evidencia:"oficial" },
     { tipo:"RESOLUCIÓN DIRECTORAL", numero:"D000048-2026-MIDAGRI-SENASA-DSV", rango:"Res", sector:"MIDAGRI", fecha:"2026-11-27", origen:"ejecutivo", accion:"promulgada", sumilla:"Autorizan a la empresa Allpa Farms Perú S.A.C. el ingreso al país de plantas de arándano de origen y procedencia de la República de Chile, a través del Complejo Fronterizo Santa Rosa", entidad:"DESARROLLO AGRARIO Y RIEGO", enlace:"https://busquedas.elperuano.pe/dispositivo/NL/2578437-1", verificado:true, evidencia:"oficial" },
